@@ -108,6 +108,13 @@ nav{
   -webkit-overflow-scrolling: touch;
   position: relative;
   direction: rtl;
+  padding-inline: 0 50;
+}
+#todayActivity::before,
+#todayActivity::after {
+    content: '';
+    flex: 0 0 calc(50% - 150px); 
+    scroll-snap-align: none; 
 }
 #todayActivity>div{
   flex-shrink: 0;
