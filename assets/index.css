@@ -1,0 +1,154 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  color: whitesmoke;
+  background-color: transparent;
+  border: none;
+}
+body{
+  background-color: rgb(5, 1, 36);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+}
+.icon-bell{
+  font-size: 20px;
+  position: relative;
+}
+.unreadedNotifications::after{
+  content:"";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  top: -2px;
+  right: -2px;
+}
+.logoTitle{
+  height: 30px;
+  display: flex;
+  align-items: center;;
+  gap: 5px;
+}
+.logoTitle div{
+  height: 100%;
+}
+.logoTitle img{
+  object-fit: contain;
+  height: 100%;
+}
+.logoTitleName{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.profilePicture{
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+.profilePicture span{
+  height: 100%;
+  font-size: 18px;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#pointsSection{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+#pointsNO{
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgb(255, 238, 0);
+}
+#pointsSection h3{
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+#rank{
+  color: red;
+  font-size: 1rem;
+}
+
+#todayActivity{
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  overflow: scroll;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  direction: rtl;
+}
+#todayActivity>div{
+  flex-shrink: 0;
+  width: 75%;
+  max-width: 300px;
+  border-radius: 15px;
+  background-color: rgba(96, 145, 168, 0.692);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  scroll-snap-align: center;
+  direction: ltr;
+}
+.activityInfo{
+  direction: rtl;
+
+}
+#todayActivity>div.activeTask{
+  background: linear-gradient(to right, rgba(2, 42, 61, 0.692), rgba(1, 100, 146, 0.692));
+}
+.activityIcon{
+  font-size: 3rem;
+}
+#todayActivity #tempActivity{
+  width: 100%;
+  max-width: none;
+}
+#activityState{
+  color: rgb(197, 197, 206);
+  font-size: 1.2rem;
+}
+#activityTitle{
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 3px 0 5px 0;
+}
+#activityTiming , #activityPlace{
+  color: rgb(197, 197, 206);
+  font-size: 1rem;
+}
+#tempActivity{
+  opacity: 0;
+}
