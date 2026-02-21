@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Main Page</title>
   <link rel="stylesheet" href="assets/index.css">
   <link rel="stylesheet" href="assets/fonts & icons/icons/style.css">
-  <script src="assets/index.js" defer></script>
+  <script src="assets/js/index.js" defer></script>
+  <script src="assets/js/timing.js"></script>
   <meta lang="ar">
   <meta dir="rtl">
 </head>
+
 <body>
   <nav>
     <button class="notificationIcon">
@@ -30,32 +33,41 @@
     <h5 id="rank">#1</h5>
   </section>
   <section id="todayActivity">
-    <div class="activity1">
-      <div><span class="icon-pause activityIcon"></span></div>
-      <div class="activityInfo">
-        <h3 id="activityState">الفقرة الحالية</h3>
-        <h2 id="activityTitle">الاجتماع الصباحى</h2>
-        <p id="activityTiming">من 1:30 الى 3:30</p>
-        <p id="nextActivity">المكان: قاعة الاجتماعات</p>
+    <div class="activity1 ">
+      <div class="activityDataContainer">
+        <div><span class="icon-pause activityIcon"></span></div>
+        <div class="activityInfo">
+          <h3 id="activityState">الفقرة الحالية</h3>
+          <h2 id="activityTitle">الاجتماع الصباحى</h2>
+          <p id="activityTiming">من 1:30 الى 3:30</p>
+          <p id="activityPlace">قاعة الاجتماعات</p>
+        </div>
       </div>
+      <div class="currentActivityProgress"><div style="width: 100%;"></div></div>
     </div>
     <div class="activity1 activeTask">
-      <div><span class="icon-play activityIcon"></span></div>
-      <div class="activityInfo">
-        <h3 id="activityState">الفقرة الحالية</h3>
-        <h2 id="activityTitle">الاجتماع الصباحى</h2>
-        <p id="activityTiming">من 1:30 الى 3:30</p>
-        <p id="activityPlace">قاعة الاجتماعات</p>
+      <div class="activityDataContainer">
+        <div><span class="icon-play activityIcon"></span></div>
+        <div class="activityInfo">
+          <h3 id="activityState">الفقرة الحالية</h3>
+          <h2 id="activityTitle">الاجتماع الصباحى</h2>
+          <p id="activityTiming">من 1:30 الى 3:30</p>
+          <p id="activityPlace">قاعة الاجتماعات</p>
+        </div>
       </div>
+      <div class="currentActivityProgress"><div style="width: 50%;"></div></div>
     </div>
     <div class="activity1">
-      <div><span class="icon-pause activityIcon"></span></div>
-      <div class="activityInfo">
-        <h3 id="activityState">الفقرة الحالية</h3>
-        <h2 id="activityTitle">الاجتماع الصباحى</h2>
-        <p id="activityTiming">من 1:30 الى 3:30</p>
-        <p id="nextActivity">قاعة الاجتماعات</p>
+      <div class="activityDataContainer">
+        <div><span class="icon-pause activityIcon"></span></div>
+        <div class="activityInfo">
+          <h3 id="activityState">الفقرة الحالية</h3>
+          <h2 id="activityTitle">الاجتماع الصباحى</h2>
+          <p id="activityTiming">من 1:30 الى 3:30</p>
+          <p id="activityPlace">قاعة الاجتماعات</p>
+        </div>
       </div>
+      <div class="currentActivityProgress"><div></div></div>
     </div>
   </section>
   <section id="todayTasks"></section>
@@ -65,4 +77,5 @@
     <div><span class="icon-user"></span></div>
   </footer>
 </body>
+
 </html>
