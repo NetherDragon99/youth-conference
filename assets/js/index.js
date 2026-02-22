@@ -1,4 +1,4 @@
-import { getData } from "./api.js";
+import { getData ,newData} from "./api.js";
 
 
 const todayActivity = document.querySelector("#todayActivity");
@@ -27,11 +27,10 @@ function autoScroll(){
   }
   },1000)
 }
+async function gettingData() {
+  await getData('conferenceActivitys');
+  console.log(newData);
 
-let data;
-async function name() {
-  data = await getData('conferenceActivitys');
-  console.log(data);
   
 }
-name();
+gettingData();

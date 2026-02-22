@@ -16,23 +16,23 @@ export async function fetchData(target) {
         return [];
     }
 }
-export let data;
+export let newData;
 export async function getData(target){
   try{
     await fetchData(target);
     console.log(rawdata);
     function organiseData(){
       let tempData;
-      data = {};
+      newData = {}; // the data
 
       rawdata.forEach((v) => {
-        tempData = v.activityDateName;
+        tempData = v.activityDateDate;
         if (!newData[tempData]) {
+          
           newData[tempData] = [];
         }
         newData[tempData].push(v);
       })
-      console.log(newData);
       
     };
     
