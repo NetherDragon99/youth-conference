@@ -1,3 +1,6 @@
+import { getData } from "./api.js";
+
+
 const todayActivity = document.querySelector("#todayActivity");
 
 todayActivity.addEventListener("wheel", (x) => {
@@ -22,5 +25,13 @@ function autoScroll(){
       behavior: "smooth"
     });
   }
-  }, 3000)
+  },1000)
 }
+
+let data;
+async function name() {
+  data = await getData('conferenceActivitys');
+  console.log(data);
+  
+}
+name();
