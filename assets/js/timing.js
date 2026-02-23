@@ -9,15 +9,26 @@ console.log(getCurrentDate());
 
 let currentTime, startTime, endTime, timeProgress, enteredStartTime, enteredendTime;
 
-enteredStartTime = (`${getCurrentDate()} 17:00:00`);
-enteredendTime = (`${getCurrentDate()} 18:13:00`);
-
 export const getTimeProgress = (enteredStartTime, enteredendTime) => {
-  startTime = new Date(enteredStartTime).getTime();
-  endTime = new Date(enteredendTime).getTime();
+  let tempenteredStartTime = (`${getCurrentDate()} ${enteredStartTime}`);
+  let tempenteredendTime = (`${getCurrentDate()} ${enteredendTime}`);
+  //console.log(tempenteredStartTime, tempenteredendTime);
+
+  startTime = `${new Date(tempenteredStartTime).getTime()}`;
+  endTime = new Date(tempenteredendTime).getTime();
+  //console.log(startTime, endTime);
+
   currentTime = new Date(`${getCurrentDate()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`).getTime();
+  //console.log(currentTime);
+
   timeProgress = ((currentTime - startTime) / (endTime - startTime) * 100).toFixed();
+  if (timeProgress >= 100) {
+    timeProgress = 100;
+  }else if(timeProgress <= 0){
+    timeProgress = 0;
+  }
+  return timeProgress;
 }
+console.log(getTimeProgress("00:00:00", "00:05:00"));
 
 getTimeProgress();
-console.log(timeProgress);
