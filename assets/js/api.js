@@ -24,7 +24,7 @@ export async function getData(target){
       newData = {}; // the data
 
       rawdata.forEach((v) => {
-        tempData = v.activityDateDate;
+        tempData = v.activityDate;
         if (!newData[tempData]) {
           
           newData[tempData] = [];

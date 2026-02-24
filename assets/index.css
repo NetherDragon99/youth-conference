@@ -164,6 +164,12 @@ nav {
 #todayActivity {
   width: 100%;
   max-width: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+#todayActivity>div {
+  scroll-snap-align: center;
 }
 
 #activityState {
