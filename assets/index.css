@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: rgb(5, 1, 36);
+  background-color: rgb(6, 2, 32);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,6 +137,7 @@ nav {
   justify-content: space-between;
   padding: 10px;
   direction: ltr;
+  height: 100%;
 }
 
 #todayActivity>div {
@@ -147,10 +148,14 @@ nav {
   background-color: rgba(96, 145, 168, 0.692);
   display: flex;
   flex-direction: column;
+  position: relative;
+  height: 100%;
 }
 
 .activityInfo {
-  direction: rtl
+  direction: rtl;
+  height: 100%;
+  min-width: 50%;
 }
 
 #todayActivity>.activeTask {
@@ -201,4 +206,78 @@ nav {
   width: 0;
   height: 100%;
   background-color: rgb(192, 206, 231);
+}
+.notice{
+  position: absolute;
+  border: rgba(255, 0, 0, 0.651) solid;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: rgba(255, 0, 0, 0.253);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.notice> span{
+  font-size: 3rem;
+}
+
+/*loading skelaton animation*/
+.loading{
+  background: linear-gradient(to right ,rgb(121, 133, 163), rgb(192, 206, 231),rgb(121, 133, 163));
+  border-radius: 15px;
+  background-size: 500%;
+  animation: loading 2s infinite forwards;
+}
+
+#activityState.loading{
+  width: 50%;
+  height: 1rem;
+}
+#activityTitle.loading{
+  width: 80%;
+  height: 1.2rem;
+  margin-top: 10px;
+}
+#activityTiming.loading{
+  width: 70%;
+  height: 1rem;
+  margin-top: 10px;
+}
+#activityPlace.loading{
+  width: 40%;
+  height: .8rem;
+  margin-top: 3px;
+}
+.loadingC.activityIcon{
+  width: 3rem;
+  height: 3rem;
+  display: block;
+  background: linear-gradient(to right ,rgb(121, 133, 163), rgb(192, 206, 231),rgb(121, 133, 163));
+  border-radius: 15px;
+  background-size: 500%;
+  animation: loadingC 2s infinite forwards;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 0%;
+    border-radius: 10px;
+  }
+  100% {
+    border-radius: 10px;
+    background-position: -120%;
+  }
+}
+@keyframes loadingC {
+  0% {
+    background-position: 0%;
+    border-radius: 50%;
+  }
+  100% {
+    border-radius: 50%;
+    background-position: -120%;
+  }
 }

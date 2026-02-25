@@ -1,5 +1,5 @@
 import { getData, newData } from "./api.js";
-import { putData, autoRefresh, scrollFunction, autoScroll} from "./functions.js";
+import { putData, autoRefresh, scrollFunction, autoScroll, activitySession} from "./functions.js";
 
 
 async function todaysActivity() {
@@ -11,5 +11,7 @@ async function todaysActivity() {
   autoRefresh(newData)
   autoScroll()
   scrollFunction();
+  activitySession()
 }
 todaysActivity();
+

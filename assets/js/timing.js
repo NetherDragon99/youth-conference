@@ -35,10 +35,23 @@ getTimeProgress();
 
 // make time from 00:00:00 to 0:00
 export const cleanTime = (time) => {
-  if (time.charAt(0) == 0) {
-    time = time.slice(1, 5);
+
+  if (time.slice(0, 2) == '00' || time.slice(0, 2) == '24') {
+    time = `12:${time.slice(3, 8)}am`;
+
+  } else if (Number(time.slice(0, 2)) > 12) {
+    time = `${Number(time.slice(0, 2)) - 12}:${time.slice(3, 8)}pm`
   } else {
-    time = time.slice(0, 5);
+    time = `${time}am`
   }
+
+  if (time.charAt(0) == 0) {
+    time = `${time.slice(1, 5)}${time.slice(-2)}`;
+  } else if (time.slice(0, 2) == '12') {
+    time = `${time.slice(0, 5)}${time.slice(-2)}`;
+  } else {
+    time = `${time.slice(0, 4)}${time.slice(-2)}`;
+  }
+
   return time;
 }

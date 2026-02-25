@@ -29,8 +29,8 @@ export const scrollFunction = () => {
   window.addEventListener('load', () => {
     autoScroll();
   })
-  todayActivity.addEventListener("mouseleave", () => { autoScroll(); userScroll = 5; })
-  todayActivity.addEventListener("touchend", () => { autoScroll(); userScroll = 5; })
+  todayActivity.addEventListener("mousemove", () => { autoScroll(); userScroll = 5; })
+  todayActivity.addEventListener("touchmove", () => { autoScroll(); userScroll = 5; })
 }
 export const autoScroll = () => {
   const activeTask = document.querySelector(".activeTask");
@@ -50,7 +50,7 @@ export const putData = (data) => {
   let activitys = data[tempDate];
   let tempEndingTime, tempStartingTime;
 
-  console.log(activitys, tempDate);
+  //console.log(activitys, tempDate);
   activitys.forEach(act => {
     tempStartingTime = cleanTime(act.startingTime.toString());
     tempEndingTime = cleanTime(act.endingTime.toString());
@@ -72,16 +72,7 @@ export const putData = (data) => {
     // console.log(act.activityDate);
   });
   document.querySelector("#todayActivity").innerHTML = htmlActivitys;
-  
-  /*document.querySelectorAll('#todayActivity>div').forEach((v)=>{
-    if (!v.classList.contains('activeTask')) {
-      
-      console.log(v);
-      
-      document.querySelector(`${v.toString()} .activityState`).innerHTML = 'متوقفة حاليآ';
-      
-    }
-  })*/
+
   setCurrentActivity(data);
 }
 
@@ -92,6 +83,7 @@ export const setCurrentActivity = (data) => {
   //console.log(data);
   //console.log(currentData);
 
+  //remove all play and add pause icon
   document.querySelectorAll(".activityIcon").forEach(span => span.classList.remove("icon-play"))
   document.querySelectorAll(".activityIcon").forEach(span => span.classList.add("icon-pause"))
 
@@ -99,7 +91,6 @@ export const setCurrentActivity = (data) => {
   currentData.forEach((v, i) => {
 
     if (document.querySelector(`#todayActivity>div:nth-child(${i + 1}) .currentActivityProgress > div`).style.width = "100%") {
-      console.log('removed');
       document.querySelector(`#todayActivity>div:nth-child(${i + 1})`).classList.remove("activeTask");
     }
 
@@ -114,7 +105,6 @@ export const setCurrentActivity = (data) => {
 
 
     if (tempstart <= currentTime && currentTime <= tempend) {
-      console.log('pass here');
 
       if (activediv) {
         activediv.classList.add("activeTask")
@@ -134,11 +124,31 @@ export const setCurrentActivity = (data) => {
 // auto refreshing activities
 export const autoRefresh = (data) => {
   setInterval(() => {
-    setCurrentActivity(data)
-
-
-
-    console.log('refresh');
-
+    setCurrentActivity(data);
+    activitySession();
   }, 5000)
+}
+
+export const activitySession = () => {
+  let activitiesLength = document.querySelectorAll("#todayActivity>div").length;
+  let activeItemIndex, temp1;
+
+  Array.from(document.getElementById('todayActivity').children).forEach((v, i) => {
+    if (v.classList.contains('activeTask')) {
+      activeItemIndex = i;
+    }
+  })
+
+  if (activeItemIndex) {
+    Array.from(document.getElementById('todayActivity').children).forEach((v, i) => {
+
+      if (i < activeItemIndex) {
+        document.querySelector(`#todayActivity>div:nth-child(${i + 1}) #activityState`).innerHTML = 'فقرة سابقة';
+      } else if (i == activeItemIndex) {
+        document.querySelector(`#todayActivity>div:nth-child(${i + 1}) #activityState`).innerHTML = 'الفقرة الحالية';
+      } else if (i > activeItemIndex && i <= (activitiesLength + 1)) {
+        document.querySelector(`#todayActivity>div:nth-child(${i + 1}) #activityState`).innerHTML = 'فقرة قادمة';
+      }
+    })
+  }
 }
