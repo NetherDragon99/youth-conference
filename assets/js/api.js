@@ -37,6 +37,9 @@ export async function getData(target) {
 
   } catch (err) {
     console.log(err);
+    Array.from(document.getElementsByClassName('notice')).forEach((v,i)=>{
+      document.getElementsByClassName('notice')[i].style.display = 'flex';
+    })
     newData = [];
   }
 }

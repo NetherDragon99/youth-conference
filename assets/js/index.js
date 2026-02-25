@@ -4,7 +4,6 @@ import { putData, autoRefresh, scrollFunction, autoScroll, activitySession} from
 
 async function todaysActivity() {
   await getData('conferenceActivitys');
-  console.log(newData);
   await putData(newData);
   //console.log(htmlActivitys);
   //await setCurrentActivity(newData);
@@ -14,4 +13,3 @@ async function todaysActivity() {
   activitySession()
 }
 todaysActivity();
-
