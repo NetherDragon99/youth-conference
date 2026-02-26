@@ -6,8 +6,6 @@ let userScroll = 0;
 setInterval(() => {
   if (userScroll > 0) {
     userScroll -= 1;
-    console.log(userScroll);
-
   } else if (userScroll == 0) {
     setTimeout(() => {
       autoScroll();

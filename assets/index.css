@@ -13,27 +13,29 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100dvw;
+  height: 100dvh
 }
 
 nav {
-  padding: 10px;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
-  width: 100%;
+  height: 70px;
+  width: 100dvw;
 }
 
 .icon-bell {
-  font-size: 20px;
+  font-size: 2rem;
   position: relative;
 }
 
 .unreadedNotifications::after {
   content: "";
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  aspect-ratio: 1/1;
   background-color: red;
   border-radius: 50%;
   top: -2px;
@@ -41,10 +43,9 @@ nav {
 }
 
 .logoTitle {
-  height: 30px;
+  height: 100%;
   display: flex;
   align-items: center;
-  ;
   gap: 5px;
 }
 
@@ -70,15 +71,17 @@ nav {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
+  background-color: aliceblue;
 }
 
 .profilePicture span {
   height: 100%;
-  font-size: 18px;
+  font-size: 2.7rem;
   position: absolute;
   bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
+  color: rgb(122, 121, 121);
 }
 
 #pointsSection {
@@ -87,29 +90,33 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 5dvh;
+  margin: 2dvh 0 0 0;
 }
 
 #pointsNO {
-  font-size: 4rem;
+  font-size: 6rem;
   font-weight: 900;
   color: rgb(255, 238, 0);
 }
 
 #pointsSection h3 {
-  font-size: 1.5rem;
+  font-size: 3rem;
   margin-bottom: 5px;
 }
 
 #rank {
   color: red;
-  font-size: 1rem;
+  font-size: 3rem;
 }
 
+
+/* activities */
 #todayActivity {
   margin-bottom: 10px;
   margin-top: 10px;
   width: 100%;
+  height: max-content;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -280,4 +287,170 @@ nav {
     border-radius: 50%;
     background-position: -120%;
   }
+}
+
+
+/* tasks section */
+
+#todayTasks{
+  width: 95%;
+  max-width: 800px;
+  border-radius: 10px;
+  flex: 1;
+  direction: rtl;
+  margin-top: 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#todayTasks header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#todayTasks header h3{
+  font-size: 2rem;
+  font-weight: 900;
+}
+#todayTasksProgress{
+  width: 40%;
+  height: 1rem;
+  border-radius: 15px;
+  background-color: rgb(51, 78, 104);
+  position: relative;
+}
+#todayTasksProgress>div:first-child{
+  height: 100%;
+  width: 50%;
+  background-color: rgb(192, 206, 231);
+  border-radius: 15px;
+}
+.tasksProgressNumber{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  color: rgb(48, 148, 230);
+  font-weight: 700;
+}
+
+#tasks{
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 15px;
+  padding: 10px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
+}
+.task{
+  border-radius: 10px;
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(25, 34, 53);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.task.completedTask{
+  background: linear-gradient(to right, rgb(66, 145, 66), rgb(3, 80, 3));
+}
+.task.completedTask .taskProgress{
+  display: none;
+}
+.task.inprogressTask .taskProgress>div:first-child{
+  background-color: rgb(82, 149, 211);
+}
+.task.inprogressTask .taskIcon>div{
+  color: rgb(82, 149, 211);
+}
+.task.limitedTimeTask .taskProgress>div:first-child{
+  background-color: rgb(211, 159, 82);
+}
+.task.limitedTimeTask .taskIcon>div{
+  color: rgb(211, 159, 82);
+}
+.taskIcon{
+  width: 3rem;
+  height: 3rem;
+}
+.taskIcon div{
+  height: 100%;
+  width: 100%;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.taskDetails{
+  flex: 1;
+}
+.taskTitle{
+  font-size: 2rem;
+  font-weight: 900;
+}
+.taskTimeing{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3px;
+}
+.taskTime{
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgb(197, 197, 206);
+}
+.taskProgress{
+  width: 40%;
+  height: 1rem;
+  border-radius: 15px;
+  background-color: rgb(51, 78, 104);
+  position: relative;
+}
+.taskProgress>div:first-child{
+  height: 100%;
+  width: 50%;
+  background-color: rgb(192, 206, 231);
+  border-radius: 15px;
+}
+.taskProgressNumber{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+}
+
+
+
+/* footer */
+footer{
+  height: 70px;
+  width: 100dvw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+footer button{
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer button span{
+  font-size: 2rem;
 }
