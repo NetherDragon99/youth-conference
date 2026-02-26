@@ -94,19 +94,19 @@ nav {
 }
 
 #pointsNO {
-  font-size: 6rem;
+  font-size: 4.5rem;
   font-weight: 900;
   color: rgb(255, 238, 0);
 }
 
 #pointsSection h3 {
-  font-size: 3rem;
+  font-size: 1.5rem;
   margin-bottom: 5px;
 }
 
 #rank {
   color: red;
-  font-size: 3rem;
+  font-size: 1.2rem;
 }
 
 

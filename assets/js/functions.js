@@ -49,7 +49,8 @@ export const putData = (data) => {
   let tempEndingTime, tempStartingTime;
 
   //console.log(activitys, tempDate);
-  activitys.forEach(act => {
+  try{
+    activitys.forEach(act => {
     tempStartingTime = cleanTime(act.startingTime.toString());
     tempEndingTime = cleanTime(act.endingTime.toString());
 
@@ -69,6 +70,10 @@ export const putData = (data) => {
     `
     // console.log(act.activityDate);
   });
+}catch(err){
+  console.log(err);
+  htmlActivitys = '';
+}
   document.querySelector("#todayActivity").innerHTML = htmlActivitys;
 
   setCurrentActivity(data);
