@@ -1,0 +1,14 @@
+@media (max-height:700px) {
+  #pointsNO {
+  font-size: 4.5rem;
+  font-weight: 900;
+}
+
+#pointsSection h3 {
+  font-size: 1.5rem;
+}
+
+#rank {
+  font-size: 1.2rem;
+}
+}
