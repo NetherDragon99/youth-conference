@@ -17,7 +17,7 @@ export let newData;
 export async function getData(target) {
   try {
     await fetchData(target);
-    //console.log(rawdata);
+    // console.log(rawdata);
 
     function organiseData() {
       let tempData;
@@ -40,6 +40,7 @@ export async function getData(target) {
     Array.from(document.getElementsByClassName('notice')).forEach((v,i)=>{
       document.getElementsByClassName('notice')[i].style.display = 'flex';
     })
-    newData = [];
+    newData = [];; 
   }
+  console.log(newData);
 }

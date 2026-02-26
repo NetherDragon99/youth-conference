@@ -91,7 +91,8 @@ export const setCurrentActivity = (data) => {
   document.querySelectorAll(".activityIcon").forEach(span => span.classList.add("icon-pause"))
 
 
-  currentData.forEach((v, i) => {
+  if (currentData) {
+    currentData.forEach((v, i) => {
 
     if (document.querySelector(`#todayActivity>div:nth-child(${i + 1}) .currentActivityProgress > div`).style.width = "100%") {
       document.querySelector(`#todayActivity>div:nth-child(${i + 1})`).classList.remove("activeTask");
@@ -121,6 +122,7 @@ export const setCurrentActivity = (data) => {
       //console.log('not pass here', currentTime);
     }
   })
+  }
   autoScroll();
 }
 
