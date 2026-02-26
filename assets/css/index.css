@@ -387,7 +387,7 @@ nav {
 .taskIcon div{
   height: 100%;
   width: 100%;
-  font-size: 3rem;
+  font-size: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -396,7 +396,7 @@ nav {
   flex: 1;
 }
 .taskTitle{
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 900;
 }
 .taskTimeing{
@@ -407,7 +407,7 @@ nav {
   margin-top: 3px;
 }
 .taskTime{
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 600;
   color: rgb(197, 197, 206);
 }
