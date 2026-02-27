@@ -192,15 +192,20 @@ nav {
 #activityTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  margin: .3rem 0 .3rem 0;
+  margin: 4px 0 4px 0;
 }
 
-#activityTiming,
 #activityPlace {
   color: rgb(197, 197, 206);
-  font-size: 1.1rem;
+  font-size: 1rem;
   align-self: flex-end;
-  margin-top: .3rem;
+  margin-top: 3px;
+}
+#activityTiming{
+  color: rgb(197, 197, 206);
+  font-size: .7rem;
+  align-self: flex-end;
+  margin-top: 3px;
 }
 .currentActivityProgress{
   width: 95%;
@@ -244,11 +249,12 @@ nav {
 #activityState.loading{
   width: 50%;
   height: 1rem;
+  margin-top: 5px;
 }
 #activityTitle.loading{
   width: 80%;
   height: 1.2rem;
-  margin-top: .7rem;
+  margin-top: .7;
 }
 #activityPlace.loading{
   width: 40%;
