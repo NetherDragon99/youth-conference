@@ -94,7 +94,7 @@ nav {
 }
 
 #pointsNO {
-  font-size: 4.5rem;
+  font-size: 3.2rem;
   font-weight: 900;
   color: rgb(255, 238, 0);
 }
@@ -151,6 +151,7 @@ nav {
   flex-shrink: 0;
   width: 75%;
   max-width: 300px;
+  aspect-ratio: 16/6;
   border-radius: 15px;
   background-color: rgba(96, 145, 168, 0.692);
   display: flex;
@@ -186,13 +187,13 @@ nav {
 
 #activityState {
   color: rgb(197, 197, 206);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 #activityTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  margin: 1px 0 5px 0;
+  margin: 1px 0 2px 0;
 }
 
 #activityTiming,
@@ -454,7 +455,7 @@ footer a{
 }
 footer a span{
   font-size: 2rem;
-  color: rgb(212, 212, 212);
+  color: rgb(182, 180, 180);
 }
 .activePage{
   color: aliceblue;

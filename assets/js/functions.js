@@ -61,8 +61,9 @@ export const putData = (data) => {
         <div class="activityInfo">
           <h3 id="activityState">الفقرة الحالية</h3>
           <h2 id="activityTitle">${((act.activityName).toString())}</h2>
-          <p id="activityTiming">من ${tempStartingTime} الى ${tempEndingTime}</p>
           <p id="activityPlace">${(act.activityPlace).toString()}</p>
+          <p id="activityTiming">من ${tempStartingTime} الى ${tempEndingTime}</p>
+
         </div>
       </div>
       <div class="currentActivityProgress"><div style="width: ${getTimeProgress((act.startingTime).toString(), (act.endingTime).toString())}%"></div></div>
@@ -74,7 +75,7 @@ export const putData = (data) => {
   console.log(err);
   htmlActivitys = '';
 }
-  document.querySelector("#todayActivity").innerHTML = htmlActivitys;
+  //document.querySelector("#todayActivity").innerHTML = htmlActivitys;
 
   setCurrentActivity(data);
 }
