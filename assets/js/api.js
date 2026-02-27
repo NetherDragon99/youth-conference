@@ -24,7 +24,8 @@ export async function getData(target) {
       newData = {}; // the data
 
       rawdata.forEach((v) => {
-        tempData = v.activityDate;
+        tempData = (v.activityDate).toString();
+        
         if (!newData[tempData]) {
 
           newData[tempData] = [];
@@ -32,6 +33,8 @@ export async function getData(target) {
         newData[tempData].push(v);
       })
     };    
+    //console.log(newData);
+    
     return organiseData();
 
   } catch (err) {

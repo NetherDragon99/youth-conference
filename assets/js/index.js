@@ -5,10 +5,8 @@ scrollFunction();
 
 async function todaysActivity() {
   let start = await getData('conferenceActivitys');
-  if (start) {
-    await putData(newData);
+  await putData(newData);
   autoRefresh(newData)
   activitySession();
-  }
 }
 todaysActivity();

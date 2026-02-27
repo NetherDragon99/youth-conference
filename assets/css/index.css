@@ -151,7 +151,6 @@ nav {
   flex-shrink: 0;
   width: 75%;
   max-width: 300px;
-  aspect-ratio: 16/6;
   border-radius: 15px;
   background-color: rgba(96, 145, 168, 0.692);
   display: flex;
@@ -193,7 +192,7 @@ nav {
 #activityTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  margin: 3px 0 2px 0;
+  margin: .3rem 0 .3rem 0;
 }
 
 #activityTiming,
@@ -201,7 +200,7 @@ nav {
   color: rgb(197, 197, 206);
   font-size: 1.1rem;
   align-self: flex-end;
-  margin-top: 3px;
+  margin-top: .3rem;
 }
 .currentActivityProgress{
   width: 95%;
@@ -249,7 +248,7 @@ nav {
 #activityTitle.loading{
   width: 80%;
   height: 1.2rem;
-  margin-top: 7px;
+  margin-top: .7rem;
 }
 #activityPlace.loading{
   width: 40%;
@@ -259,7 +258,7 @@ nav {
 #activityTiming.loading{
   width: 70%;
   height: 1rem;
-  margin-top: 3px;
+  margin-top: .4rem;
 }
 .loadingC.activityIcon{
   width: 3rem;
