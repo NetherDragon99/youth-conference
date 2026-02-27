@@ -31,8 +31,7 @@ export async function getData(target) {
         }
         newData[tempData].push(v);
       })
-    };
-
+    };    
     return organiseData();
 
   } catch (err) {
@@ -42,5 +41,5 @@ export async function getData(target) {
     })
     newData = [];; 
   }
-  console.log(newData);
+  //console.log(newData);
 }

@@ -57,7 +57,7 @@ export const putData = (data) => {
     htmlActivitys += `
     <div class="${(act.activityDate).toString()}">
       <div class="activityDataContainer">
-        <div><span class="icon-pause activityIcon"></span></div>
+        <div><span class="activityIcon"></span></div>
         <div class="activityInfo">
           <h3 id="activityState">الفقرة الحالية</h3>
           <h2 id="activityTitle">${((act.activityName).toString())}</h2>
@@ -75,13 +75,14 @@ export const putData = (data) => {
   console.log(err);
   htmlActivitys = '';
 }
-  //document.querySelector("#todayActivity").innerHTML = htmlActivitys;
+  document.querySelector("#todayActivity").innerHTML = htmlActivitys;
 
   setCurrentActivity(data);
 }
 
 // detect the current active activity and select it to work with
 export const setCurrentActivity = (data) => {
+  
   let currentTime = new Date().getTime();
   const currentData = data[getCurrentDate()];
   //console.log(data);
@@ -118,9 +119,6 @@ export const setCurrentActivity = (data) => {
       }
       //console.log(activediv);
 
-    } else if (activediv) {
-
-      //console.log('not pass here', currentTime);
     }
   })
   }

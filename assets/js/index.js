@@ -1,15 +1,14 @@
 import { getData, newData } from "./api.js";
 import { putData, autoRefresh, scrollFunction, autoScroll, activitySession} from "./functions.js";
 
+scrollFunction();
 
 async function todaysActivity() {
-  await getData('conferenceActivitys');
-  await putData(newData);
-  //console.log(htmlActivitys);
-  //await setCurrentActivity(newData);
+  let start = await getData('conferenceActivitys');
+  if (start) {
+    await putData(newData);
   autoRefresh(newData)
-  autoScroll()
-  scrollFunction();
-  activitySession()
+  activitySession();
+  }
 }
 todaysActivity();
