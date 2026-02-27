@@ -6,6 +6,7 @@
   color: whitesmoke;
   background-color: transparent;
   border: none;
+  line-height: 1;
 }
 
 body {
@@ -182,12 +183,13 @@ nav {
 
 #todayActivity>div {
   scroll-snap-align: center;
-  aspect-ratio: 15/6;
+  height: fit-content;
 }
 
 #activityState {
   color: rgb(197, 197, 206);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  margin-bottom: 3px;
 }
 
 #activityTitle {
@@ -200,13 +202,13 @@ nav {
   color: rgb(197, 197, 206);
   font-size: 1rem;
   align-self: flex-end;
-  margin-top: 3px;
+  margin-top: 5px;
 }
 #activityTiming{
   color: rgb(197, 197, 206);
   font-size: .7rem;
   align-self: flex-end;
-  margin-top: 2px;
+  margin-top: 10px;
 }
 .currentActivityProgress{
   width: 95%;
@@ -249,11 +251,11 @@ nav {
 
 #activityState.loading{
   width: 50%;
-  height: 1.2rem;
+  height: 1.1rem;
 }
 #activityTitle.loading{
   width: 80%;
-  height: 1.5rem;
+  height: 1.3rem;
 }
 #activityPlace.loading{
   width: 40%;
@@ -261,7 +263,7 @@ nav {
 }
 #activityTiming.loading{
   width: 70%;
-  height: 1rem;
+  height: .7rem;
 }
 .loadingC.activityIcon{
   width: 3rem;
