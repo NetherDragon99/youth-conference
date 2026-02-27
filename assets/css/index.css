@@ -444,13 +444,18 @@ footer{
   justify-content: space-around;
   align-items: center;
 }
-footer button{
+footer a{
   height: 100%;
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
 }
-footer button span{
+footer a span{
   font-size: 2rem;
+  color: rgb(212, 212, 212);
+}
+.activePage{
+  color: aliceblue;
 }
