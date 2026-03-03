@@ -4,16 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Main Page</title>
-  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/general.css">
+  <link rel="stylesheet" href="assets/css/main-page.css">
+  <link rel="stylesheet" href="assets/css/profile-page.css">
   <link rel="stylesheet" href="assets/fonts & icons/icons/style.css">
   <script type="module" src="assets/js/index.js" defer></script>
   <meta lang="ar">
   <meta dir="rtl">
+  <meta name="author" content="steven Mario">
+  <title>Main Page</title>
 </head>
 
 <body>
-  <nav>
+  <header>
     <button class="notificationIcon">
       <span class="icon-bell unreadedNotifications"></span>
     </button>
@@ -24,282 +27,225 @@
         <h3>OF CHRIST</h3>
       </div>
     </div>
-    <button class="profilePicture"><span class="icon-user"></span></button>
-  </nav>
-  <section id="pointsSection">
-    <h1 id="pointsNO">10000</h1>
-    <h3>POINTS</h3>
-    <h5 id="rank">v 1.10</h5>
-  </section>
-  <section id="todayActivity">
-    <!--activeTack-->
-    <div>
-      <div class="notice">
-        <span class="icon-notice"></span>
-        <h2>Failed to load activities</h2>
-        <p>plz check your internet the page or contact steven</p>
-      </div>
-      <div class="activityDataContainer">
-        <div><span class="loadingC activityIcon"></span></div>
-        <div class="activityInfo">
-          <h3 id="activityState" class="loading"></h3>
-          <h2 id="activityTitle" class="loading"></h2>
-          <p id="activityPlace" class="loading"></p>
-          <p id="activityTiming" class="loading"></p>
-        </div>
-      </div>
-      <div class="currentActivityProgress loading">
-        <div></div>
-      </div>
-    </div>
-    <!-- <div class="activeTask" bis_skin_checked="1">
-      <div class="activityDataContainer" bis_skin_checked="1">
-        <div bis_skin_checked="1"><span class="activityIcon icon-play"></span></div>
-        <div class="activityInfo" bis_skin_checked="1">
-          <h3 id="activityState">الفقرة الحالية</h3>
-          <h2 id="activityTitle">الفقرة رقم 2</h2>
-          <p id="activityPlace">المكان رقم 2</p>
-          <p id="activityTiming">من 3:00am الى 6:00am</p>
-        </div>
-      </div>
-      <div class="currentActivityProgress" bis_skin_checked="1"><div style="width: 9.593%;" bis_skin_checked="1"></div></div>
-    </div> -->
-    <div>
-      <div class="notice">
-        <span class="icon-notice"></span>
-        <h2>Failed to load activities</h2>
-        <p>plz check your internet the page or contact steven</p>
-      </div>
-      <div class="activityDataContainer">
-        <div><span class="loadingC activityIcon"></span></div>
-        <div class="activityInfo">
-          <h3 id="activityState" class="loading"></h3>
-          <h2 id="activityTitle" class="loading"></h2>
-          <p id="activityPlace" class="loading"></p>
-          <p id="activityTiming" class="loading"></p>
-        </div>
-      </div>
-      <div class="currentActivityProgress loading">
-        <div></div>
-      </div>
-    </div>
-    <div>
-      <div class="notice">
-        <span class="icon-notice"></span>
-        <h2>Failed to load activities</h2>
-        <p>plz check your internet the page or contact steven</p>
-      </div>
-      <div class="activityDataContainer">
-        <div><span class="loadingC activityIcon"></span></div>
-        <div class="activityInfo">
-          <h3 id="activityState" class="loading"></h3>
-          <h2 id="activityTitle" class="loading"></h2>
-          <p id="activityPlace" class="loading"></p>
-          <p id="activityTiming" class="loading"></p>
-        </div>
-      </div>
-      <div class="currentActivityProgress loading">
-        <div></div>
-      </div>
-    </div>
-  </section>
-  <section id="todayTasks">
-    <header>
-      <h3>المهام اليومية</h3>
-      <div id="todayTasksProgress">
-        <div></div>
-        <div class="tasksProgressNumber">50%</div>
-      </div>
-    </header>
-    <section id="tasks">
-      <div class="task completedTask">
-        <div class="taskIcon">
-          <div class="icon-done"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 1</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
+    <a class="profilePicture"><span class="icon-user"></span></a>
+  </header>
+  <div class="mainContainer">
+    <home-page id="home-page">
+      <section id="pointsSection">
+        <h1 id="pointsNO">10000</h1>
+        <h3>POINTS</h3>
+        <h5 id="rank">v 1.10</h5>
+      </section>
+      <section id="todayActivity">
+        <!--activeTack-->
+        <div>
+          <div class="notice">
+            <span class="icon-notice"></span>
+            <h2>Failed to load activities</h2>
+            <p>plz check your internet the page or contact steven</p>
+          </div>
+          <div class="activityDataContainer">
+            <div><span class="loadingC activityIcon"></span></div>
+            <div class="activityInfo">
+              <h3 id="activityState" class="loading"></h3>
+              <h2 id="activityTitle" class="loading"></h2>
+              <p id="activityPlace" class="loading"></p>
+              <p id="activityTiming" class="loading"></p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="task inprogressTask">
-        <div class="taskIcon">
-          <div class="icon-time"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 2</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
-            </div>
+          <div class="currentActivityProgress loading">
+            <div></div>
           </div>
         </div>
-      </div>
-      <div class="task limitedTimeTask">
-        <div class="taskIcon">
-          <div class="icon-timer"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 3</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
+        <div>
+          <div class="notice">
+            <span class="icon-notice"></span>
+            <h2>Failed to load activities</h2>
+            <p>plz check your internet the page or contact steven</p>
+          </div>
+          <div class="activityDataContainer">
+            <div><span class="loadingC activityIcon"></span></div>
+            <div class="activityInfo">
+              <h3 id="activityState" class="loading"></h3>
+              <h2 id="activityTitle" class="loading"></h2>
+              <p id="activityPlace" class="loading"></p>
+              <p id="activityTiming" class="loading"></p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="task completedTask">
-        <div class="taskIcon">
-          <div class="icon-done"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 4</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
-            </div>
+          <div class="currentActivityProgress loading">
+            <div></div>
           </div>
         </div>
-      </div>
-      <div class="task inprogressTask">
-        <div class="taskIcon">
-          <div class="icon-time"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 5</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
+        <div>
+          <div class="notice">
+            <span class="icon-notice"></span>
+            <h2>Failed to load activities</h2>
+            <p>plz check your internet the page or contact steven</p>
+          </div>
+          <div class="activityDataContainer">
+            <div><span class="loadingC activityIcon"></span></div>
+            <div class="activityInfo">
+              <h3 id="activityState" class="loading"></h3>
+              <h2 id="activityTitle" class="loading"></h2>
+              <p id="activityPlace" class="loading"></p>
+              <p id="activityTiming" class="loading"></p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="task limitedTimeTask">
-        <div class="taskIcon">
-          <div class="icon-timer"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 6</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
-            </div>
+          <div class="currentActivityProgress loading">
+            <div></div>
           </div>
         </div>
-      </div>
-      <div class="task completedTask">
-        <div class="taskIcon">
-          <div class="icon-done"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 7</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
+      </section>
+      <section id="todayTasks">
+        <section-title>
+          <h3>المهام اليومية</h3>
+          <div id="todayTasksProgress">
+            <div></div>
+            <div class="tasksProgressNumber">50%</div>
+          </div>
+        </section-title>
+        <section id="tasks">
+          <div class="task completedTask">
+            <div class="taskIcon">
+              <div class="icon-done"></div>
+            </div>
+            <div class="taskDetails">
+              <div class="taskTitle">اعمل كذا رقم 1</div>
+              <div class="taskTimeing">
+                <div class="taskTime">من 9:00 لحد 10:00</div>
+                <div class="taskProgress">
+                  <div></div>
+                  <div class="taskProgressNumber">50%</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="task inprogressTask">
-        <div class="taskIcon">
-          <div class="icon-time"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 8</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
+          <div class="task inprogressTask" style="animation-delay: .1s;">
+            <div class="taskIcon">
+              <div class="icon-time"></div>
+            </div>
+            <div class="taskDetails">
+              <div class="taskTitle">اعمل كذا رقم 2</div>
+              <div class="taskTimeing">
+                <div class="taskTime">من 9:00 لحد 10:00</div>
+                <div class="taskProgress">
+                  <div></div>
+                  <div class="taskProgressNumber">50%</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="task limitedTimeTask">
-        <div class="taskIcon">
-          <div class="icon-timer"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 9</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
+          <div class="task limitedTimeTask" style="animation-delay: .2s">
+            <div class="taskIcon">
+              <div class="icon-timer"></div>
+            </div>
+            <div class="taskDetails">
+              <div class="taskTitle">اعمل كذا رقم 3</div>
+              <div class="taskTimeing">
+                <div class="taskTime">من 9:00 لحد 10:00</div>
+                <div class="taskProgress">
+                  <div></div>
+                  <div class="taskProgressNumber">50%</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="task completedTask">
-        <div class="taskIcon">
-          <div class="icon-done"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 10</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
+          <div class="task completedTask" style="animation-delay: .3s">
+            <div class="taskIcon">
+              <div class="icon-done"></div>
+            </div>
+            <div class="taskDetails">
+              <div class="taskTitle">اعمل كذا رقم 4</div>
+              <div class="taskTimeing">
+                <div class="taskTime">من 9:00 لحد 10:00</div>
+                <div class="taskProgress">
+                  <div></div>
+                  <div class="taskProgressNumber">50%</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="task inprogressTask">
-        <div class="taskIcon">
-          <div class="icon-time"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 11</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
+          <div class="task inprogressTask" style="animation-delay: .4s">
+            <div class="taskIcon">
+              <div class="icon-time"></div>
+            </div>
+            <div class="taskDetails">
+              <div class="taskTitle">اعمل كذا رقم 5</div>
+              <div class="taskTimeing">
+                <div class="taskTime">من 9:00 لحد 10:00</div>
+                <div class="taskProgress">
+                  <div></div>
+                  <div class="taskProgressNumber">50%</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="task limitedTimeTask">
-        <div class="taskIcon">
-          <div class="icon-timer"></div>
-        </div>
-        <div class="taskDetails">
-          <div class="taskTitle">اعمل كذا رقم 12</div>
-          <div class="taskTimeing">
-            <div class="taskTime">من 9:00 لحد 10:00</div>
-            <div class="taskProgress">
-              <div></div>
-              <div class="taskProgressNumber">50%</div>
-            </div>
+        </section>
+      </section>
+    </home-page>
+    <points-page id="points-page">
+
+    </points-page>
+    <games-page id="games-page">
+
+    </games-page>
+    <rank-page id="rank-page">
+
+    </rank-page>
+    <profile-page id="profile-page">
+      <div class="profileContainer">
+        <div class="publicProfile">
+          <div class="profilePicture">
+            <span class="icon-user1 profile"></span>
+          </div>
+          <div class="userName">
+            <h2>Guest</h2>
           </div>
         </div>
+        <form id="profileForm">
+          <fieldset class="mainProfileData">
+            <legend>Profile</legend>
+            <div>
+              <label for="profileUserName">Name:</label>
+              <input type="text" id="profileUserName" placeholder="Guest" name="userName" required>
+            </div>
+            <div>
+              <label for="profileGender">Gender:</label>
+              <select name="gender" id="profileGender" required>
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+                <option value="o">Other</option>
+              </select>
+              <p class="genderOther">أحنا هنستعبط ولا اية !!؟؟  اختار عدل ويلا متزعلنيش منك <br>يلا انا قفلتلك الفورم لحد ما تعقل كدة 😂</p>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="accountProfileData">Account</legend>
+            <div>
+              <label for="profileGmail">G-Mail:</label>
+              <input type="email" id="profileGmail" placeholder="guest@gmail.com" name="email" required>
+            </div>
+            <div>
+              <label for="profilePassoword">password:</label>
+              <input type="password" id="profilePassoword" placeholder="**********" name="password" required>
+            </div>
+            <div>
+              <label for="profileConfirmPassoword">confirm password:</label>
+              <input type="password" id="profileConfirmPassoword" placeholder="**********" name="confirmPassoword" required>
+            </div>
+            <input type="text" id="profileID" value="none" hidden>
+            <input type="submit" id="profileSubmit" value="Sign-In">
+          </fieldset>
+        </form>
       </div>
-    </section>
-  </section>
+    </profile-page>
+  </div>
   <footer>
-    <a href=""><span class="icon-home activePage"></span></a>
-    <a href=""><span class="icon-task"></span></a>
-    <a href=""><span class="icon-gamepad"></span></a>
-    <a href=""><span class="icon-leaderboard"></span></a>
-    <a href="assets/pages/profile-page.html"><span class="icon-user"></span></a>
+    <a href="#home-page"><span class="icon-home activePage"></span></a>
+    <a href="#points-page"><span class="icon-credit-card"></span></a>
+    <a href="#games-page"><span class="icon-gamepad"></span></a>
+    <a href="#rank-page"><span class="icon-leaderboard"></span></a>
+    <a href="#profile-page"><span class="icon-user"></span></a>
   </footer>
 </body>
 

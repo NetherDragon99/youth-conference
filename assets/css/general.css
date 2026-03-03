@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  color: whitesmoke;
+  background-color: transparent;
+  border: none;
+  line-height: 1;
+}
+
+body {
+  background-color: rgb(6, 2, 32);
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+#pointsSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2dvh 0 0 0;
+}
+
+#pointsNO {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: rgb(255, 238, 0);
+}
+
+#pointsSection h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+#rank {
+  color: red;
+  font-size: 1.2rem;
+}
+
+.mainContainer {
+  width: 100%;
+  height: calc(100dvh - 140px);
+  overflow: hidden;
+  display: flex;
+  scroll-behavior: smooth;
+}
+
+/* header */ 
+
+header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  width: 100dvw;
+}
+
+.icon-bell {
+  font-size: 2rem;
+  position: relative;
+}
+
+.unreadedNotifications::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  aspect-ratio: 1/1;
+  background-color: red;
+  border-radius: 50%;
+  top: -2px;
+  right: -2px;
+}
+
+.logoTitle {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logoTitle div {
+  height: 100%;
+}
+
+.logoTitle img {
+  object-fit: contain;
+  height: 100%;
+}
+
+.logoTitleName {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+header a.profilePicture {
+  height: 3rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: aliceblue solid;
+}
+
+header a.profilePicture span {
+  height: 100%;
+  font-size: 2.5rem;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: aliceblue;
+}
+
+
+/* footer */
+footer{
+  height: 70px;
+  width: 100dvw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+footer a{
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+footer a span{
+  font-size: 2rem;
+  color: rgb(182, 180, 180);
+}
+.activePage{
+  color: aliceblue;
+}

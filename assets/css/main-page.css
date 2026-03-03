@@ -1,116 +1,13 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  box-sizing: border-box;
-  color: whitesmoke;
-  background-color: transparent;
-  border: none;
-  line-height: 1;
-}
+/* Points section */
 
-body {
-  background-color: rgb(6, 2, 32);
+#home-page{
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100dvw;
-  height: 100dvh
-}
-
-nav {
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-  width: 100dvw;
-}
-
-.icon-bell {
-  font-size: 2rem;
-  position: relative;
-}
-
-.unreadedNotifications::after {
-  content: "";
-  position: absolute;
-  width: 12px;
-  aspect-ratio: 1/1;
-  background-color: red;
-  border-radius: 50%;
-  top: -2px;
-  right: -2px;
-}
-
-.logoTitle {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.logoTitle div {
-  height: 100%;
-}
-
-.logoTitle img {
-  object-fit: contain;
-  height: 100%;
-}
-
-.logoTitleName {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.profilePicture {
-  height: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-  background-color: aliceblue;
-}
-
-.profilePicture span {
-  height: 100%;
-  font-size: 2.7rem;
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgb(122, 121, 121);
-}
-
-#pointsSection {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 2dvh 0 0 0;
+  height: 100%;
+  flex-shrink: 0;
 }
-
-#pointsNO {
-  font-size: 3.2rem;
-  font-weight: 900;
-  color: rgb(255, 238, 0);
-}
-
-#pointsSection h3 {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
-}
-
-#rank {
-  color: red;
-  font-size: 1.2rem;
-}
-
-
 /* activities */
 #todayActivity {
   margin-bottom: 10px;
@@ -310,14 +207,14 @@ nav {
   display: flex;
   flex-direction: column;
 }
-#todayTasks header{
+#todayTasks section-title{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
-#todayTasks header h3{
-  font-size: 2rem;
+#todayTasks section-title h3{
+  font-size: 1.8rem;
   font-weight: 900;
 }
 #todayTasksProgress{
@@ -368,6 +265,15 @@ nav {
   background-color: rgb(25, 34, 53);
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  transform: translate(-150%);
+  animation: taskIntro 1s forwards;
+}
+@keyframes taskIntro {
+  from{
+    transform: translate(-150%);
+  }to{
+    transform: translate(0);
+  }
 }
 .task.completedTask{
   background: linear-gradient(to right, rgb(66, 145, 66), rgb(3, 80, 3));
@@ -439,30 +345,4 @@ nav {
   font-size: 1rem;
   color: rgb(255, 255, 255);
   font-weight: 700;
-}
-
-
-
-/* footer */
-footer{
-  height: 70px;
-  width: 100dvw;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-footer a{
-  height: 100%;
-  aspect-ratio: 1/1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-}
-footer a span{
-  font-size: 2rem;
-  color: rgb(182, 180, 180);
-}
-.activePage{
-  color: aliceblue;
 }

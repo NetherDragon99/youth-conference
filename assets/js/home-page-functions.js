@@ -32,7 +32,7 @@ export const scrollFunction = () => {
 }
 export const autoScroll = () => {
   const activeTask = document.querySelector(".activeTask");
-  if (activeTask && userScroll <= 0) {
+  if (activeTask && userScroll <= 0 && location.hash == '#home-page') {
     activeTask.scrollIntoView({
       inline: "center",
       behavior: "smooth"
@@ -40,8 +40,12 @@ export const autoScroll = () => {
   }
 }
 
-// put the data on the page depends on the today activitys
 export let htmlActivitys = '';
+
+
+ 
+
+// put the data on the page depends on the today activitys
 export const putData = (data) => {
 
   let tempDate = getCurrentDate();
@@ -76,7 +80,6 @@ export const putData = (data) => {
   htmlActivitys = '';
 }
   document.querySelector("#todayActivity").innerHTML = htmlActivitys;
-
   setCurrentActivity(data);
 }
 

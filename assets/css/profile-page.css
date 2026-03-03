@@ -1,0 +1,112 @@
+#profile-page {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.profileContainer{
+  width: 85%;
+  height: 100%;
+  max-width: 500px;
+}
+.publicProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+profile-page .publicProfile .profilePicture{
+  width: 5rem;
+  aspect-ratio: 1/1;
+  border: aliceblue solid;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;;
+}
+profile-page .profilePicture .profile{
+  font-size: 4.5rem;
+  line-height: 1;
+  margin-top: 1rem;
+}
+.userName{
+  margin-top: 15px;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+fieldset {
+  background-color: rgb(25, 34, 53);
+  margin: 10px;
+
+  border-radius: 15px;
+  margin: 20px;
+}
+
+
+.profileContainer fieldset{
+  display: flex;
+  flex-direction: column;
+}
+.profileContainer legend{
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+fieldset div{
+  padding: .5rem .5rem;
+}
+.profileContainer input{
+  font-size: 1rem;
+  border-radius: 6px;
+  line-height: 1;
+  padding: 3px 5px;
+}
+input::placeholder{
+  line-height: 1;
+  font-size: 1rem;
+} 
+#profileGender + p{
+  direction: rtl;
+  margin-top: 10px;
+  background-color: rgba(255, 0, 0, 0.37);
+  line-height: 1.1;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 10px;
+  height: 0px;
+  overflow: hidden;
+  transition: 1s;
+}
+.genderOther{
+  animation: profileOther 1s forwards;
+}
+@keyframes profileOther {
+  to{
+    border: red solid;
+    height: fit-content;
+    padding: 7px;
+  }
+}
+.profileContainer input{
+  margin-left: 0px;
+}
+#profileGender{
+  background-color: rgb(25, 34, 53);
+  border-radius: 10px;
+}
+#profileSubmit{
+  padding: 10px;
+  width: 90%;
+  align-self: center;
+  background-color: rgb(21, 49, 88);
+  border-radius: 10px;
+  margin: 10px;
+}
+

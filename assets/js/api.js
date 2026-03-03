@@ -8,7 +8,7 @@ async function fetchData(target) {
     rawdata = await res.json();
     return rawdata; // بنرجع الداتا عشان الملف التاني يستلمها
   } catch (err) {
-    console.error("فيه غلط حصل:", err);
+    console.error("erro on getting data:", err);
     return [];
   }
 }
@@ -33,9 +33,11 @@ export async function getData(target) {
         newData[tempData].push(v);
       })
     };    
-    //console.log(newData);
+    await organiseData();
     
-    return organiseData();
+    //console.log(newData);
+
+    return newData;
 
   } catch (err) {
     console.log(err);
