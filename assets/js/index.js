@@ -1,5 +1,6 @@
 import { getData, newData } from "./api.js";
-import { putData, autoRefresh, scrollFunction, autoScroll, activitySession } from "./home-page-functions.js";
+import { putData, autoRefresh, scrollFunction, activitySession } from "./home-page-functions.js";
+import { } from './profile-page-functions.js'
 
 scrollFunction();
 
@@ -19,40 +20,29 @@ window.addEventListener('DOMContentLoaded', () => {
   location.hash = localStorage.getItem('historyPage');
 })
 
-const profileForm = document.getElementById("profileForm");
-const genderDropMenu = document.getElementById('profileGender');
 
-genderDropMenu.addEventListener('change', () => {
-  const otherGenderP = document.querySelector('#profileGender + p');
 
-  if (genderDropMenu.value == 'o') {
-    otherGenderP.classList.add('genderOther');
-    document.querySelectorAll('.profileContainer input').forEach((v) => {
-      v.setAttribute('disabled', 'true');
-    })
-  } else {
-    otherGenderP.classList.remove('genderOther');
-    document.querySelectorAll('.profileContainer input').forEach((v) => {
-      v.removeAttribute('disabled', 'true');
-    })
+// creating ADs
+let adBannerNumber = 0;
+export function createAD(inputText,inputColor) {
+
+  let color = 'red';
+  if (inputColor) {
+    color = inputColor
   }
+  adBannerNumber += 1;
 
-  const profileIcon = document.querySelector('profile-page .profilePicture .profile');
-  if (genderDropMenu.value == 'm'){
-    profileIcon.classList.remove('icon-user' , 'icon-user2');
-    profileIcon.classList.add('icon-user1')
-  }else if (genderDropMenu.value == 'f') {
-    profileIcon.classList.remove('icon-user' , 'icon-user1');
-    profileIcon.classList.add('icon-user2')
-  }else{
-    profileIcon.classList.remove('icon-user1' , 'icon-user2');
-    profileIcon.classList.add('icon-user')
+  document.getElementsByClassName('adBanner')[0].insertAdjacentHTML("beforeend", `<div class="adDiv ${color}">${inputText}</div>`);
+  console.log('add created');
+
+
+  removeAD();
+}
+function removeAD() {
+  for (adBannerNumber; adBannerNumber > 0; adBannerNumber--) {
+    setTimeout(() => {
+      document.querySelector('.adDiv:first-child').remove()
+    }, 10000)
+
   }
-})
-
-
-profileForm.addEventListener('submit', (f) => {
-  f.preventDefault();
-  const formData = Object.fromEntries(new FormData(profileForm))
-
-})
+}

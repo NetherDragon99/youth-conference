@@ -1,4 +1,6 @@
+import { createAD } from "./index.js";
 import { getCurrentDate, getTimeProgress, cleanTime } from "./timing.js";
+import { text } from "./text.js";
 
 
 //scroll
@@ -52,7 +54,7 @@ export const putData = (data) => {
   let activitys = data[tempDate];
   let tempEndingTime, tempStartingTime;
 
-  //console.log(activitys, tempDate);
+  //console.log(activitys, tempDate, data);
   try{
     activitys.forEach(act => {
     tempStartingTime = cleanTime(act.startingTime.toString());
@@ -73,11 +75,18 @@ export const putData = (data) => {
       <div class="currentActivityProgress"><div style="width: ${getTimeProgress((act.startingTime).toString(), (act.endingTime).toString())}%"></div></div>
     </div>
     `
-    // console.log(act.activityDate);
+    //console.log(act.activityDate);
   });
 }catch(err){
-  console.log(err);
+  //console.log(err);
   htmlActivitys = '';
+  if (data && activitys == undefined) {
+    createAD(text.noActivities, 'green');
+    
+  }else{
+    createAD(text.activitysFailed);
+    
+  }
 }
   document.querySelector("#todayActivity").innerHTML = htmlActivitys;
   setCurrentActivity(data);

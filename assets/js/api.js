@@ -1,15 +1,19 @@
-const apiURL = "https://script.google.com/macros/s/AKfycbyx9GYA8Vv3kJ91oZd2ZU4T7U88JFwOgp0HfM3JU8XX_zBPotxsNTmpsvmah735RPq_/exec";
+import { text } from "./text.js";
+import { createAD } from "./index.js";
+
+export const apiURL = "https://script.google.com/macros/s/AKfycby6jgBHSt2EwMH-pizyvgUvfhZ2p0YYSJgiD_6UTGsXW6fD2f8QK2AJC7Xy1PV95KCI/exec";
 
 let rawdata;
-
-async function fetchData(target) {
+export async function fetchData(target) {
   try {
     const res = await fetch(`${apiURL}?page=${target}`);
     rawdata = await res.json();
-    return rawdata; // بنرجع الداتا عشان الملف التاني يستلمها
+    return rawdata;
   } catch (err) {
-    console.error("erro on getting data:", err);
-    return [];
+    console.error("error on getting data:");
+    createAD(text.activitysFailed);
+
+    return rawdata = 'error';
   }
 }
 export let newData;
@@ -17,7 +21,7 @@ export let newData;
 export async function getData(target) {
   try {
     await fetchData(target);
-    // console.log(rawdata);
+    //console.log(rawdata);
 
     function organiseData() {
       let tempData;
@@ -25,26 +29,26 @@ export async function getData(target) {
 
       rawdata.forEach((v) => {
         tempData = (v.activityDate).toString();
-        
+
         if (!newData[tempData]) {
 
           newData[tempData] = [];
         }
         newData[tempData].push(v);
       })
-    };    
+    };
     await organiseData();
-    
+
     //console.log(newData);
 
     return newData;
 
   } catch (err) {
-    console.log(err);
-    Array.from(document.getElementsByClassName('notice')).forEach((v,i)=>{
+    //console.log('no data to deal with');
+    Array.from(document.getElementsByClassName('notice')).forEach((v, i) => {
       document.getElementsByClassName('notice')[i].style.display = 'flex';
     })
-    newData = [];; 
+    newData = [];
   }
   //console.log(newData);
 }
