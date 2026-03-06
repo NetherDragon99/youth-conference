@@ -47,11 +47,17 @@ profile-page .profilePicture .profile {
   font-size: 1.2rem;
   font-weight: 900;
 }
+#profileForm{
+  display: flex;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  padding: auto;
+}
 
 fieldset {
   background-color: rgb(25, 34, 53);
   margin: 10px;
-
+  min-width: 90%;
   border-radius: 15px;
   margin: 20px;
 }
@@ -113,7 +119,7 @@ input::placeholder {
   border-radius: 10px;
 }
 
-#profileSubmit {
+#profileSubmit ,#profileSignupSubmit{
   padding: 10px;
   width: 90%;
   align-self: center;

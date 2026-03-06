@@ -33,7 +33,7 @@ export function createAD(inputText,inputColor) {
   adBannerNumber += 1;
 
   document.getElementsByClassName('adBanner')[0].insertAdjacentHTML("beforeend", `<div class="adDiv ${color}">${inputText}</div>`);
-  console.log('add created');
+  console.log('AD created');
 
 
   removeAD();

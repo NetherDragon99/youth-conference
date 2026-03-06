@@ -31,8 +31,6 @@
   </header>
   <div class="mainContainer">
     <div class="adBanner">
-      <!-- <div class="adDiv">أحنا هنستعبط ولا اية !!؟؟ اختار عدل ويلا متزعلنيش منك <br>يلا انا قفلتلك الفورم لحد ما تعقل كدة
-        😂</div> -->
     </div>
     <home-page id="home-page">
       <section id="pointsSection">
@@ -207,22 +205,6 @@
           </div>
         </div>
         <form id="profileForm">
-          <fieldset class="mainProfileData">
-            <legend>Profile</legend>
-            <div>
-              <label for="profileUserName">Name:</label>
-              <input type="text" id="profileUserName" placeholder="Guest" name="userName" required>
-            </div>
-            <div>
-              <label for="profileGender">Gender:</label>
-              <select name="gender" id="profileGender" required>
-                <option value="m">Male</option>
-                <option value="f">Female</option>
-                <option value="p">Prefer not to say</option>
-                <option value="o">Other</option>
-              </select>
-            </div>
-          </fieldset>
           <fieldset>
             <legend class="accountProfileData">Account</legend>
             <div>
@@ -233,8 +215,24 @@
               <label for="profilePassoword">password:</label>
               <input type="password" id="profilePassoword" placeholder="**********" name="password" required>
             </div>
-            <input type="text" id="profileID" value="undefine" hidden name="id">
-            <input type="submit" id="profileSubmit" value="Sign-In">
+            <input type="submit" id="profileSubmit" value="Sign-In/Log-In">
+          </fieldset>
+          <fieldset class="mainProfileData">
+            <legend>New Account</legend>
+            <div>
+              <label for="profileUserName">Name:</label>
+              <input type="text" id="profileUserName" placeholder="Guest" name="userName">
+            </div>
+            <div>
+              <label for="profileGender">Gender:</label>
+              <select name="gender" id="profileGender">
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+                <option value="p">Prefer not to say</option>
+                <option value="o">Other</option>
+              </select>
+            </div>
+            <input type="submit" id="profileSignupSubmit" value="Sign-up">
           </fieldset>
         </form>
       </div>
