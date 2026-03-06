@@ -14,7 +14,7 @@ async function todaysActivity() {
 addEventListener('hashchange', () => {
   localStorage.setItem('historyPage', location.hash);
 })
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   todaysActivity();
   location.hash = '';
   location.hash = localStorage.getItem('historyPage');
