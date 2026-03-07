@@ -17,7 +17,7 @@ async function getProfileData() {
   if (localStorage.getItem('profile')) {
     await getAccountData('accounts', (JSON.parse(localStorage.getItem('profile')).email));
     allUserData = emailData;
-    console.log(allUserData);
+    // console.log(allUserData);
     putData();
   }
 };
@@ -125,7 +125,7 @@ async function updateProfile() {
 
     await postAccountData(toAPIData);
     localStorage.setItem('profile', JSON.stringify(toLocalStorage));
-    await createAD(text.accountCreated, 'green');
+    await createAD(text.accountUpdated, 'green');
     setTimeout(() => {
       location.reload();
     }, 5000);

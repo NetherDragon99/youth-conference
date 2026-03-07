@@ -11,7 +11,8 @@ export const text = {
   accountCreated: 'الاكونت اتعمل وكله زى الفل يا باشا',
   newAccount: 'اكونت جديد!!<br>دخل اسمك واختار الgender علشان نعمل الاكونت',
   loginSucces: 'تم تسجيل الدخول بنجاح',
-  wrongPassword: 'الباسورد غلط !!<br>حاول تفتكر او راجع الحروف كويس'
+  wrongPassword: 'الباسورد غلط !!<br>حاول تفتكر او راجع الحروف كويس',
+  accountUpdated: 'تم تحديث بياناتك بنجاح'
 }
 
 export const dom ={
