@@ -9,8 +9,12 @@ const signUpBut = document.getElementById('profileSignupSubmit');
 
 
 // gender drop menu
+export const profileIcon = document.querySelector('profile-page .profilePicture .profile');
 genderDropMenu.addEventListener('change', () => {
-  const profileIcon = document.querySelector('profile-page .profilePicture .profile');
+  genderIcon();
+})
+
+export const genderIcon = ()=>{
   if (genderDropMenu.value == 'm') {
     profileIcon.classList.remove('icon-user', 'icon-user2');
     profileIcon.classList.add('icon-user1')
@@ -21,7 +25,7 @@ genderDropMenu.addEventListener('change', () => {
     profileIcon.classList.remove('icon-user1', 'icon-user2');
     profileIcon.classList.add('icon-user')
   }
-})
+}
 
 const profileScroll = () => {
   const toProfileData = document.querySelector(".mainProfileData");
@@ -33,7 +37,7 @@ const profileScroll = () => {
   }
 }
 
-
+let emailData;
 submitBt.addEventListener('click', async (x) => {
   x.preventDefault();
   let toLocalStorage = {};
@@ -51,7 +55,8 @@ submitBt.addEventListener('click', async (x) => {
 
   submitBt.setAttribute('value', 'working . . .')
   const getEmailData = await getAccountData('accounts', formData.email);
-  //console.log(getEmailData);
+  console.log(emailData);
+
 
   try {
     // creating a new account
@@ -85,17 +90,20 @@ submitBt.addEventListener('click', async (x) => {
           data: formData
         };
         toLocalStorage = {
-          email: formData.email,
-          password: formData.password
+          email: emailData.email,
+          password: emailData.password,
+          gender: emailData.gender
         }
 
         try {
-          console.log('passed');
+          //console.log('passed');
 
           await postAccountData(toAPIData);
           localStorage.setItem('profile', JSON.stringify(toLocalStorage));
           await createAD(text.accountCreated, 'green');
-          location.reload();
+          setTimeout(() => {
+            location.reload();
+          }, 5000);
 
         } catch (err) {
           console.log(err);
@@ -115,8 +123,9 @@ submitBt.addEventListener('click', async (x) => {
         //console.log(formData.password , tempPass);
         if (formData.password == tempPass) {
           toLocalStorage = {
-            email: formData.email,
-            password: formData.password
+            email: emailData.email,
+            password: emailData.password,
+            gender: emailData.gender
           }
           await localStorage.setItem('profile', JSON.stringify(toLocalStorage))
           createAD(text.loginSucces, 'green')
@@ -134,7 +143,7 @@ submitBt.addEventListener('click', async (x) => {
       postAccountData(toAPIData)
     } else {
       throw new Error("unexpected error");
-      
+
     }
   } catch (error) {
     console.log(error);
@@ -147,10 +156,10 @@ submitBt.addEventListener('click', async (x) => {
 const getAccountData = async (page, target) => {
   try {
     const res = await fetch(`${apiURL}?page=${page}&email=${target}`);
-    const rawdata = await res.json();
+    emailData = await res.json();
 
-    //console.log(rawdata);
-    return rawdata;
+    //console.log(emailData);
+    return emailData;
   } catch (err) {
     console.error("erro on getting data:");
   }

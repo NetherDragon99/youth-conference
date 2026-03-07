@@ -1,6 +1,7 @@
 import { getData, newData } from "./api.js";
-import { putData, autoRefresh, scrollFunction, activitySession } from "./home-page-functions.js";
+import { putData, autoRefresh, scrollFunction, activitySession, tasksTotalPercentage } from "./home-page-functions.js";
 import { } from './profile-page-functions.js'
+import{} from './loading-account-data.js'
 
 scrollFunction();
 
@@ -11,15 +12,33 @@ async function todaysActivity() {
   activitySession();
 }
 
+const footerNavIcons = document.querySelectorAll('body footer a');
 addEventListener('hashchange', () => {
-  localStorage.setItem('historyPage', location.hash);
+  const currentPage = location.hash;
+
+  localStorage.setItem('historyPage', currentPage);
+
+  footerNavIcons.forEach((v) => {
+    v.querySelector(`span`).classList.remove('activePage');
+
+    if (`${v.getAttribute('href')}` == `${currentPage}`) {
+      console.log('ok');
+      v.setAttribute('class', 'active');
+      v.querySelector(`span`).classList.add('activePage');
+    }else{
+      console.log('erro');
+      
+    }
+    console.log(v.getAttribute('href'),currentPage);
+    
+  })
 })
+
 window.addEventListener('load', () => {
   todaysActivity();
   location.hash = '';
   location.hash = localStorage.getItem('historyPage');
 })
-
 
 
 // creating ADs
@@ -46,3 +65,9 @@ function removeAD() {
 
   }
 }
+
+// tasks
+tasksTotalPercentage();
+
+
+//loading profile data
