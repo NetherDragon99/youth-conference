@@ -6,9 +6,38 @@ export const text = {
   noName: 'تقريبا كدة نسيت تختار اسم البروفايل بتاعك',
   noEmail: 'تقريبا كدة نسيت تكتب الايميل بتاعك',
   noPassword: 'تقريبا كدة نسيت تكتب الباسورد بتاعك<br>لو ايميل جديد اكتب الباسورد الى عاوزة بس خليك فاكرة',
+  noPasswordUpdate: 'تقريبا كدة نسيت تكتب الباسورد بتاعك',
   accountCreatingFailed: 'فى مشكلة والاكونت متعملش<br>معلش حاول تانى',
   accountCreated: 'الاكونت اتعمل وكله زى الفل يا باشا',
   newAccount: 'اكونت جديد!!<br>دخل اسمك واختار الgender علشان نعمل الاكونت',
   loginSucces: 'تم تسجيل الدخول بنجاح',
   wrongPassword: 'الباسورد غلط !!<br>حاول تفتكر او راجع الحروف كويس'
+}
+
+export const dom ={
+  updateDataForm: `<fieldset>
+            <legend class="accountProfileData">My Account</legend>
+            <div>
+              <label for="profileUserName">Name:</label>
+              <input type="text" id="profileUserName" placeholder="Guest" name="userName">
+            </div>
+            <div>
+              <label for="profileGender">Gender:</label>
+              <select name="gender" id="profileGender">
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+                <option value="p">Prefer not to say</option>
+                <option value="o">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="profileGmail">G-Mail:</label>
+              <input type="email" id="profileGmail" placeholder="guest@gmail.com" name="email" required>
+            </div>
+            <div>
+              <label for="profilePassoword">password:</label>
+              <input type="password" id="profilePassoword" placeholder="**********" name="password" required>
+            </div>
+            <input type="submit" id="updateProfileSubmitButton" value="Update your data">
+          </fieldset>`
 }

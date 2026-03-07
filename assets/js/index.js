@@ -22,15 +22,9 @@ addEventListener('hashchange', () => {
     v.querySelector(`span`).classList.remove('activePage');
 
     if (`${v.getAttribute('href')}` == `${currentPage}`) {
-      console.log('ok');
       v.setAttribute('class', 'active');
       v.querySelector(`span`).classList.add('activePage');
-    }else{
-      console.log('erro');
-      
-    }
-    console.log(v.getAttribute('href'),currentPage);
-    
+    }    
   })
 })
 

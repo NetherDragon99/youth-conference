@@ -119,7 +119,7 @@ input::placeholder {
   border-radius: 10px;
 }
 
-#profileSubmit ,#profileSignupSubmit{
+#profileSubmit ,#profileSignupSubmit, #updateProfileSubmitButton{
   padding: 10px;
   width: 90%;
   align-self: center;

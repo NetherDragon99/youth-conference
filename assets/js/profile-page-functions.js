@@ -1,11 +1,14 @@
 import { createAD } from "./index.js";
 import { text } from "./text.js";
-import { fetchData, apiURL } from "./api.js";
+import { apiURL } from "./api.js";
+import { updateProfileBt } from "./loading-account-data.js";
 
 export const profileForm = document.getElementById("profileForm");
 export const genderDropMenu = document.getElementById('profileGender');
 export const submitBt = document.getElementById('profileSubmit');
 const signUpBut = document.getElementById('profileSignupSubmit');
+
+
 
 
 // gender drop menu
@@ -14,7 +17,7 @@ genderDropMenu.addEventListener('change', () => {
   genderIcon();
 })
 
-export const genderIcon = ()=>{
+export const genderIcon = () => {
   if (genderDropMenu.value == 'm') {
     profileIcon.classList.remove('icon-user', 'icon-user2');
     profileIcon.classList.add('icon-user1')
@@ -37,7 +40,7 @@ const profileScroll = () => {
   }
 }
 
-let emailData;
+export let emailData;
 submitBt.addEventListener('click', async (x) => {
   x.preventDefault();
   let toLocalStorage = {};
@@ -152,8 +155,7 @@ submitBt.addEventListener('click', async (x) => {
 
 })
 
-
-const getAccountData = async (page, target) => {
+export async function getAccountData(page, target) {
   try {
     const res = await fetch(`${apiURL}?page=${page}&email=${target}`);
     emailData = await res.json();
@@ -165,7 +167,7 @@ const getAccountData = async (page, target) => {
   }
 }
 
-const postAccountData = async (enteredData) => {
+export async function postAccountData(enteredData){
   try {
     const response = await fetch(apiURL, {
       method: 'POST',

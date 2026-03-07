@@ -52,3 +52,6 @@ export async function getData(target) {
   }
   //console.log(newData);
 }
+
+
+// profile data
