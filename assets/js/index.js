@@ -60,6 +60,19 @@ function removeAD() {
   }
 }
 
+// notifications
+console.log((document.querySelector('.unreadedNotification')));
+const unreadedNotificationsDot = document.createElement('style');
+unreadedNotificationsDot.classList.add('unreadedNotificationsDot');
+document.head.appendChild(unreadedNotificationsDot)
+
+if (document.querySelector('.unreadedNotification')) {
+  console.log('pass here');
+  unreadedNotificationsDot.innerHTML = '.unreadedNotifications::after{content: "";}'
+}else{
+  unreadedNotificationsDot.innerHTML = '';
+}
+
 // tasks
 tasksTotalPercentage();
 

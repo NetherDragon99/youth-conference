@@ -17,9 +17,25 @@
 
 <body>
   <header>
-    <button class="notificationIcon">
+    <div class="notificationIcon">
       <span class="icon-bell unreadedNotifications"></span>
-    </button>
+      <div id="notificationBanner">
+        <div class="notification unreadedNotification">
+          <div class="notificationHeader">
+            <div class="notificationIcon icon-done"></div>
+            <div class="notificationData">
+              <div class="notificationTitle">تم اضافة الهدية الترحيبية</div>
+              <div class="notificationDescription">تمت اضافة 10 نقاط</div>
+            </div>
+          </div>
+          <div class="notificationDetails">
+            <p>كل شخص جديد على الابلكيشن يحصل على 10 من النقاط كا هدية ترحيبية</p>
+            <div class="notificationTime">12/3/2026 12:00pm</div>
+            <button class="notificationExit icon-exit"><div>Close</div></button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="logoTitle">
       <div><img src="assets/imgs/new coc logo.png" alt="church logo"></div>
       <div class="logoTitleName">
@@ -36,7 +52,7 @@
       <section id="pointsSection">
         <h1 id="pointsNO">10000</h1>
         <h3>POINTS</h3>
-        <h5 id="rank">v 2.05</h5>
+        <h5 id="rank">v 2.06</h5>
       </section>
       <section id="todayActivity">
         <!--activeTack-->
@@ -125,8 +141,13 @@
               </div>
             </div>
             <div class="taskDescription">
-              <p class="extraDetails">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptate itaque praesentium libero tempore, quibusdam numquam unde quis aperiam debitis quas ea. Harum in eos praesentium id inventore, provident maxime distinctio. Eligendi ea error praesentium in vero a molestias est voluptatum doloribus, suscipit dignissimos! Vel perspiciatis illum aut possimus sint?</p>
-              <div class="taskExitButton icon-exit"><p>Exit</p></div>
+              <p class="extraDetails">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptate
+                itaque praesentium libero tempore, quibusdam numquam unde quis aperiam debitis quas ea. Harum in eos
+                praesentium id inventore, provident maxime distinctio. Eligendi ea error praesentium in vero a molestias
+                est voluptatum doloribus, suscipit dignissimos! Vel perspiciatis illum aut possimus sint?</p>
+              <div class="taskExitButton icon-exit">
+                <p>Exit</p>
+              </div>
             </div>
           </button>
           <button class="task inprogressTask closed" style="animation-delay: .1s;">
@@ -145,9 +166,14 @@
                 </div>
               </div>
             </div>
-           <div class="taskDescription">
-              <p class="extraDetails">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptate itaque praesentium libero tempore, quibusdam numquam unde quis aperiam debitis quas ea. Harum in eos praesentium id inventore, provident maxime distinctio. Eligendi ea error praesentium in vero a molestias est voluptatum doloribus, suscipit dignissimos! Vel perspiciatis illum aut possimus sint?</p>
-              <div class="taskExitButton icon-exit"><p>Exit</p></div>
+            <div class="taskDescription">
+              <p class="extraDetails">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptate
+                itaque praesentium libero tempore, quibusdam numquam unde quis aperiam debitis quas ea. Harum in eos
+                praesentium id inventore, provident maxime distinctio. Eligendi ea error praesentium in vero a molestias
+                est voluptatum doloribus, suscipit dignissimos! Vel perspiciatis illum aut possimus sint?</p>
+              <div class="taskExitButton icon-exit">
+                <p>Exit</p>
+              </div>
             </div>
           </button>
           <button class="task limitedTimeTask closed" style="animation-delay: .2s">
@@ -167,8 +193,13 @@
               </div>
             </div>
             <div class="taskDescription">
-              <p class="extraDetails">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptate itaque praesentium libero tempore, quibusdam numquam unde quis aperiam debitis quas ea. Harum in eos praesentium id inventore, provident maxime distinctio. Eligendi ea error praesentium in vero a molestias est voluptatum doloribus, suscipit dignissimos! Vel perspiciatis illum aut possimus sint?</p>
-              <div class="taskExitButton icon-exit"><p>Exit</p></div>
+              <p class="extraDetails">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptate
+                itaque praesentium libero tempore, quibusdam numquam unde quis aperiam debitis quas ea. Harum in eos
+                praesentium id inventore, provident maxime distinctio. Eligendi ea error praesentium in vero a molestias
+                est voluptatum doloribus, suscipit dignissimos! Vel perspiciatis illum aut possimus sint?</p>
+              <div class="taskExitButton icon-exit">
+                <p>Exit</p>
+              </div>
             </div>
           </button>
         </section>

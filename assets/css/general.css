@@ -35,7 +35,6 @@ header {
 }
 
 .unreadedNotifications::after {
-  content: "";
   position: absolute;
   width: 12px;
   aspect-ratio: 1/1;
@@ -86,16 +85,96 @@ header a.profilePicture span {
   transform: translateX(-50%);
   color: aliceblue;
 }
-
-#pointsSection h3 {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
+#notificationBanner{
+  position: absolute;
+  z-index: 8;
+  width: 400px;
+  max-width: 65%;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: rgba(0, 61, 102, 0.842);
+  display: flex;
+  flex-direction: column;
 }
-
-#rank {
-  color: red;
+.notification{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  text-align: start;
+  direction: rtl;
+  color: rgb(212, 212, 240);;
+}
+.notificationHeader{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  color: inherit;
+}
+.notificationIcon{
+  font-size: 2rem;
+  color: inherit;
+}
+.notificationData{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 10px;
+  direction: rtl;
+  color: inherit;
+}
+.notificationTitle{
   font-size: 1.2rem;
+  font-weight: 900;
+  color: inherit;
 }
+.notificationDescription{
+  font-size: 1.1rem;
+  color: inherit;
+}
+.notificationDetails{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 15px;
+  color: inherit;
+  position: absolute;
+  top: 100%;
+  overflow-x: hidden;
+  width: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.notificationDetails p{
+  font-size: .9rem;
+  line-height: 1.1rem;
+  margin-bottom: 5px;
+  color: inherit;
+}
+.notificationTime{
+  font-size: .8rem;
+  color: inherit;
+}
+.notificationExit{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  border: solid;
+  width: 300%;
+  padding: 10px;
+  gap: 10px;
+  font-size: 1.2rem;
+  color: inherit;
+}
+.notificationExit div{
+  font-weight: 900;
+  color: inherit;
+}
+
+
 
 .mainContainer {
   width: 100%;
