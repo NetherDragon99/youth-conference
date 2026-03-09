@@ -55,3 +55,30 @@ export const cleanTime = (time) => {
 
   return time;
 }
+
+// set the time to useable formate
+
+export const timeText = (insertedTime)=>{
+  
+  let days = new Date(insertedTime).getDate().toString().padStart(2, '0');
+  let months = (new Date(insertedTime).getMonth() + 1).toString().padStart(2, '0');
+  let years = new Date(insertedTime).getFullYear().toString();
+  let hours = new Date(insertedTime).getHours().toString();
+  let minutes = new Date(insertedTime).getMinutes().toString();  
+  let timeState = 'AM';
+
+  if (Number(hours) > 12) {
+    hours = (Number(hours)-12).toString();
+    timeState = 'PM';
+  }else if (Number(hours) == 12) {
+    timeState = 'PM';
+  }else if (Number(hours) == 0 || Number(hours) == 24) {
+    hours = '12';
+    timeState = 'AM';
+  };
+  if (minutes.length == 1) {
+    minutes = `0${minutes}`;
+    
+  }
+  return `${days}/${months}/${years} ${hours}:${minutes} ${timeState}`;
+}

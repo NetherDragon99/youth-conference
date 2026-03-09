@@ -1,7 +1,7 @@
 import { text } from "./text.js";
 import { createAD } from "./index.js";
 
-export const apiURL = "https://script.google.com/macros/s/AKfycby6jgBHSt2EwMH-pizyvgUvfhZ2p0YYSJgiD_6UTGsXW6fD2f8QK2AJC7Xy1PV95KCI/exec";
+export const apiURL = "https://script.google.com/macros/s/AKfycbyg42i1HzKbeoSxwwl9Qh4wGRg7IsJcLxD4StjPJEaIcgcLRI531X1YE4zktov5EHuW/exec";
 
 let rawdata;
 export async function fetchData(target) {

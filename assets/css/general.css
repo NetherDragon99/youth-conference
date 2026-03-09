@@ -35,6 +35,7 @@ header {
 }
 
 .unreadedNotifications::after {
+  content: '';
   position: absolute;
   width: 12px;
   aspect-ratio: 1/1;
@@ -90,21 +91,46 @@ header a.profilePicture span {
   z-index: 8;
   width: 400px;
   max-width: 65%;
-  padding: 15px;
+  max-height: 50dvh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
   border-radius: 15px;
   background-color: rgba(0, 61, 102, 0.842);
   display: flex;
   flex-direction: column;
+  left: -100dvw;
+  transition: 1s;
+}
+#notificationBanner>h3{
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background-color: rgba(0, 61, 102, 0.842);
+  padding: 15px;
 }
 .notification{
   width: 100%;
+  min-height: max-content;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
   text-align: start;
   direction: rtl;
-  color: rgb(212, 212, 240);;
+  color: rgb(212, 212, 240);
+  cursor: pointer;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 15px;
+  transition: 1s;
+}
+.notification.unreadedNotification{
+  color: white;
+  background-color: rgba(1, 72, 119, 0.897);
 }
 .notificationHeader{
   display: flex;
@@ -116,6 +142,7 @@ header a.profilePicture span {
 .notificationIcon{
   font-size: 2rem;
   color: inherit;
+  text-align: center;
 }
 .notificationData{
   display: flex;
@@ -131,13 +158,12 @@ header a.profilePicture span {
   color: inherit;
 }
 .notificationDescription{
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: inherit;
 }
 .notificationDetails{
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
   gap: 15px;
   color: inherit;
   position: absolute;
@@ -153,13 +179,17 @@ header a.profilePicture span {
   line-height: 1.1rem;
   margin-bottom: 5px;
   color: inherit;
+  margin: 10px;
 }
 .notificationTime{
   font-size: .8rem;
   color: inherit;
+  width: fit-content;
+  direction: ltr;
+  align-self: flex-start;
 }
 .notificationExit{
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-self: center;
   border: solid;
@@ -167,11 +197,23 @@ header a.profilePicture span {
   padding: 10px;
   gap: 10px;
   font-size: 1.2rem;
-  color: inherit;
+  color: inherit; */
+  display: none;
 }
 .notificationExit div{
   font-weight: 900;
   color: inherit;
+}
+.CurrentOpenedNotification{
+  background-color: rgba(5, 84, 138, 0.952);
+}
+.noNotificationsMs{
+  direction: rtl;
+  width: fit-content;
+  margin: 20px 0;
+  align-self: center;
+  font-size: 1.2rem;
+  font-weight: 900;
 }
 
 

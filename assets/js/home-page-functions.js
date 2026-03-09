@@ -174,7 +174,7 @@ const tasks = document.querySelectorAll('.task');
 const openedTask = document.createElement('div');
 openedTask.id = 'openedTask'
 const homePage = document.getElementById('home-page');
-let tempOpenedTaskPosition;
+export let tempOpenedTaskPosition;
 let taskDescription;
 
 tasks.forEach((v) => {
@@ -182,10 +182,6 @@ tasks.forEach((v) => {
     tasks.forEach((x) => {
       x.disabled = true;
     })
-
-
-    console.log(v);
-
     tempOpenedTaskPosition = v.getBoundingClientRect();
 
     openedTask.style.width = `${tempOpenedTaskPosition.width}px`;
@@ -197,7 +193,7 @@ tasks.forEach((v) => {
     if (v.classList.contains('completedTask')) {
       openedTask.removeAttribute('class');
       openedTask.classList.add('completedTask');
-      console.log('completed');
+      // console.log('completed');
 
     } else if (v.classList.contains('inprogressTask')) {
       openedTask.removeAttribute('class');
@@ -228,9 +224,9 @@ tasks.forEach((v) => {
       const taskDescriptionStyle = taskDescription.style;
 
       taskDescriptionStyle.top = '0px';
-      taskDescriptionStyle.padding = '20px';
+      taskDescriptionStyle.padding = '0 20px';
       taskDescriptionStyle.position = 'relative';
-      console.log(tempOpenedTaskPosition.height);
+      // console.log(tempOpenedTaskPosition.height);
     }, 10)
 
     document.querySelectorAll('.taskExitButton').forEach((butt) => {
@@ -244,13 +240,10 @@ tasks.forEach((v) => {
 })
 
 //close opened task from outside
-window.addEventListener('click', (x) => {
-  if (!(x.target.closest('#openedTask')) && !(x.target.closest('.task')) && document.querySelector('#openedTask.completedTask')) {
-    closeTask();
-  }
-})
 
-const closeTask = () => {
+export const closeTask = () => {
+  // console.log(tempOpenedTaskPosition);
+  
   openedTask.style.cssText = `
   height: ${tempOpenedTaskPosition.height}px;
   width: ${tempOpenedTaskPosition.width}px;

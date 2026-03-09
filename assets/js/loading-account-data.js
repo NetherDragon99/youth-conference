@@ -1,6 +1,7 @@
-import { genderIcon, profileIcon, getAccountData, emailData, postAccountData } from "./profile-page-functions.js";
+import { getAccountData, emailData, postAccountData } from "./profile-page-functions.js";
 import { text, dom } from "./text.js";
-import { createAD } from "./index.js";
+import { createAD, notificationsFunction, unreadedNotificationsDot } from "./index.js";
+import { timeText } from './timing.js'
 
 let getProfileGender;
 if (localStorage.getItem('profile')) {
@@ -21,6 +22,48 @@ async function getProfileData() {
     putData();
   }
 };
+
+
+const notificationContainer = document.querySelector('#notificationBanner')
+let HTMLnotifications = `<h3>Notifications</h3>`;
+async function getProfileNotifications() {
+  try {
+    if (localStorage.getItem('profile')) {
+      await getAccountData('notifications', (JSON.parse(localStorage.getItem('profile')).email));
+      const userNotifications = emailData;
+
+      await getAccountData('notifications', 'general');
+      const generalNotifications = [...emailData, ...userNotifications];
+
+      let notification = generalNotifications.toSorted((a, b) => new Date(a.time) - new Date(b.time))
+
+      notificationContainer ? notification.forEach((v) => [
+        HTMLnotifications += `
+        <div class="notification ${v.state}">
+          <div class="notificationHeader">
+            <div class="notificationIcon ${v.icon}"></div>
+            <div class="notificationData">
+              <h4 class="notificationTitle">${v.title}</h4>
+              <h5 class="notificationDescription">${v.description}</h5>
+            </div>
+          </div>
+          <div class="notificationDetails">
+            <p>${v.details}</p>
+            <div class="notificationTime">${timeText(v.time)}</div>
+            <button class="notificationExit icon-exit"><div>Close</div></button>
+          </div>
+        </div>
+        `
+      ]) : null;
+      notificationContainer.innerHTML = HTMLnotifications;
+      unreadedNotificationsDot();
+    }
+    notificationsFunction();
+    not
+  } catch (err) {
+    console.log(err);
+  }
+};
 getProfileData();
 export let updateProfileBt, genderDropMenu;
 
@@ -39,7 +82,9 @@ async function putData() {
   genderDropMenu.addEventListener('change', () => {
     changeGenderIconUpdateData();
   })
+  getProfileNotifications();
 }
+
 
 const changeGenderIcon = () => {
   if (getProfileGender) {

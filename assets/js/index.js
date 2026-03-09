@@ -1,7 +1,7 @@
 import { getData, newData } from "./api.js";
-import { putData, autoRefresh, scrollFunction, activitySession, tasksTotalPercentage } from "./home-page-functions.js";
+import { putData, autoRefresh, scrollFunction, activitySession, tasksTotalPercentage, closeTask, tempOpenedTaskPosition } from "./home-page-functions.js";
 import { } from './profile-page-functions.js'
-import{} from './loading-account-data.js'
+import { } from './loading-account-data.js'
 
 scrollFunction();
 
@@ -24,7 +24,7 @@ addEventListener('hashchange', () => {
     if (`${v.getAttribute('href')}` == `${currentPage}`) {
       v.setAttribute('class', 'active');
       v.querySelector(`span`).classList.add('activePage');
-    }    
+    }
   })
 })
 
@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
 
 // creating ADs
 let adBannerNumber = 0;
-export function createAD(inputText,inputColor) {
+export function createAD(inputText, inputColor) {
 
   let color = 'red';
   if (inputColor) {
@@ -61,17 +61,90 @@ function removeAD() {
 }
 
 // notifications
-console.log((document.querySelector('.unreadedNotification')));
-const unreadedNotificationsDot = document.createElement('style');
-unreadedNotificationsDot.classList.add('unreadedNotificationsDot');
-document.head.appendChild(unreadedNotificationsDot)
+const unreadedNotifications = document.querySelector('.notificationsIcon .icon-bell');
 
-if (document.querySelector('.unreadedNotification')) {
-  console.log('pass here');
-  unreadedNotificationsDot.innerHTML = '.unreadedNotifications::after{content: "";}'
-}else{
-  unreadedNotificationsDot.innerHTML = '';
+export function unreadedNotificationsDot() {
+  if (document.querySelector('.unreadedNotification')) {
+    // console.log('pass here');
+    unreadedNotifications.classList.add('unreadedNotifications');
+  } else {
+    unreadedNotifications.classList.remove('unreadedNotifications');
+  }
 }
+
+let notification = document.querySelectorAll('.notification');
+
+const notificationBellIcon = document.querySelector('.notificationsIcon');
+
+let notificationBannerLeft;
+notificationBellIcon.querySelector('span').addEventListener('click', () => {
+  notificationBannerLeft = Number((window.getComputedStyle(document.querySelector('#notificationBanner')).left).slice(0, -2));
+
+  if (notificationBannerLeft < 0) {
+    document.querySelector('#notificationBanner').style.left = '0'
+    document.querySelector('#notificationBanner').style.left = '15px'
+  } else {
+    document.querySelector('#notificationBanner').style.left = '-100dvw'
+  }
+
+})
+
+export function notificationsFunction() {
+  notification = document.querySelectorAll('.notification');
+
+  notification.forEach((v) => {
+    const notificationDetails = v.querySelector('.notificationDetails');    
+
+    v.addEventListener('click', () => {
+      closeNotification();
+
+      if (!(v.classList.contains('CurrentOpenedNotification'))) {
+        v.style.minHeight = `${v.getBoundingClientRect().height}px`;
+        v.style.minHeight = `${(v.getBoundingClientRect().height) + (notificationDetails.getBoundingClientRect().height)}px`;
+
+        notificationDetails.style.top = `${(v.querySelector('.notificationHeader').getBoundingClientRect().height)}px`
+
+        v.classList.add('CurrentOpenedNotification');
+        v.classList.remove('unreadedNotification');
+
+        unreadedNotificationsDot();
+      }
+    })
+    v.querySelector('.notificationExit').addEventListener('click', () => {
+      closeNotification();
+    })
+  })
+}
+
+
+function closeNotification() {
+  const currrenOpenedNotification = document.querySelector('.CurrentOpenedNotification');
+
+  setTimeout(() => {
+    if (currrenOpenedNotification) {
+      currrenOpenedNotification.style.minHeight = `${(currrenOpenedNotification.querySelector('.notificationHeader').getBoundingClientRect().height + 5)}px`;
+      currrenOpenedNotification.classList.remove('CurrentOpenedNotification');
+      unreadedNotificationsDot();
+    }
+  }, 10)
+}
+
+
+
+// exit opened windows from outside
+
+window.addEventListener('click', (click) => {
+  if (!click.target.closest('.CurrentOpenedNotification')
+    && !(click.target.closest('#openedTask'))
+    && !(click.target.closest('.task'))
+    && !(click.target.closest('.notificationsIcon span'))
+    && !(click.target.closest('#notificationBanner'))) {
+    tempOpenedTaskPosition ? closeTask() : null;
+    closeNotification();
+    notificationBannerLeft < 0 ? document.querySelector('#notificationBanner').style.left = '-100dvw' : null;
+  };
+})
+
 
 // tasks
 tasksTotalPercentage();
