@@ -62,6 +62,8 @@ async function getProfileNotifications() {
     not
   } catch (err) {
     console.log(err);
+    notificationContainer.innerHTML = `<h3>Notifications</h3>
+        <div class="noNotificationsMs">You don't have any notifications for now</div>`
   }
 };
 getProfileData();

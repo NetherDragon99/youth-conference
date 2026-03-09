@@ -208,12 +208,13 @@ header a.profilePicture span {
   background-color: rgba(5, 84, 138, 0.952);
 }
 .noNotificationsMs{
-  direction: rtl;
+  direction: ltr;
   width: fit-content;
   margin: 20px 0;
   align-self: center;
   font-size: 1.2rem;
   font-weight: 900;
+  text-align: center;
 }
 
 
