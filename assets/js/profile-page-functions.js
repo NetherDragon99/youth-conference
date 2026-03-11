@@ -57,16 +57,17 @@ submitBt.addEventListener('click', async (x) => {
   }
 
   let formData = Object.fromEntries(new FormData(profileForm));
-  // console.log(formData);
+  console.log(formData);
 
   submitBt.setAttribute('value', 'working . . .')
+  submitBt.setAttribute('disabled', 'true');
   const getEmailData = await getAccountData('accounts', formData.email);
-  // console.log(getEmailData,emailData);
+  console.log(getEmailData,emailData);
 
 
   try {
     // creating a new account
-    if (getEmailData.length == 0) {
+    if (getEmailData.error) {
       createAD(text.newAccount, 'green')
 
       profileScroll();
@@ -87,6 +88,7 @@ submitBt.addEventListener('click', async (x) => {
         };
 
         signUpBut.setAttribute('value', 'Creating your account . . .');
+        signUpBut.setAttribute('disabled', 'true');
         formData = Object.fromEntries(new FormData(profileForm));
         console.log(formData);
 
@@ -120,7 +122,7 @@ submitBt.addEventListener('click', async (x) => {
 
       try {
         const tempAccount = await getAccountData('accounts', formData.email);
-        // console.log(tempAccount);
+        console.log(tempAccount);
 
         const tempPass = tempAccount[0].password;
 
@@ -185,6 +187,7 @@ export const updateProfileSubmitBtn = () => {
 async function updateProfile() {
   updateProfileBt.setAttribute('value', 'updating your data . . .');
   updateProfileBt.setAttribute('disabled', 'true');
+  logOutBtn.setAttribute('disabled', 'true');
   const formData = Object.fromEntries(new FormData(profileForm));
 
   const toAPIData = {
