@@ -1,94 +1,106 @@
-import { getAccountData, emailData, postAccountData } from "./profile-page-functions.js";
-import { text, dom } from "./text.js";
+import { dom, text } from "./text.js";
 import { createAD, notificationsFunction, unreadedNotificationsDot } from "./index.js";
-import { timeText } from './timing.js'
+import { getAccountData, emailData } from './api.js';
+import { updateProfileSubmitBtn, logOut } from "./profile-page-functions.js";
 
 let getProfileGender;
-if (localStorage.getItem('profile')) {
-  getProfileGender = JSON.parse(localStorage.getItem('profile')).gender;
-  // console.log('pass');
+const checkingGenderLocalStorage = () => {
+  if (localStorage.getItem('profile')) {
+    (JSON.parse(localStorage.getItem('profile')).gender) ? getProfileGender = JSON.parse(localStorage.getItem('profile')).gender : localStorage.removeItem('profile');
+    // console.log('pass');
+  } else {
+    localStorage.removeItem('profile');
+  }
 }
 
 const getProfilePicIcon = document.querySelector('header .profilePicture span');
 const ProfilePicIcon = document.querySelector('.publicProfile .profilePicture span');
 //profile data
-let allUserData
+export let allUserData
 
-async function getProfileData() {
-  if (localStorage.getItem('profile')) {
+
+export async function getProfileData() {
+  if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}'){
     await getAccountData('accounts', (JSON.parse(localStorage.getItem('profile')).email));
     allUserData = emailData;
-    // console.log(allUserData);
-    putData();
+    allUserData.length != 0 ? putData() : localStorage.removeItem('profile');
+  }else{
+    localStorage.removeItem('profile');
+    notificationContainer.innerHTML = dom.sinInNotifications;
   }
 };
 
 
+// notifications
 const notificationContainer = document.querySelector('#notificationBanner')
 let HTMLnotifications = `<h3>Notifications</h3>`;
-async function getProfileNotifications() {
+async function getProfileNotifications() {  
+  
+  if (!(localStorage.getItem('profile')) || !(JSON.parse(localStorage.getItem('profile')).email)) {
+    return notificationContainer.innerHTML = dom.sinInNotifications;
+  }
+
   try {
     if (localStorage.getItem('profile')) {
-      await getAccountData('notifications', (JSON.parse(localStorage.getItem('profile')).email));
-      const userNotifications = emailData;
+      await getAccountData('notifications', JSON.parse(localStorage.getItem('profile')).email);      
+      let userNotifications = emailData;
 
       await getAccountData('notifications', 'general');
-      const generalNotifications = [...emailData, ...userNotifications];
+      
+      if (!userNotifications.error && !emailData.error) {
+        userNotifications = [...emailData, ...userNotifications];
+      }      
 
-      let notification = generalNotifications.toSorted((a, b) => new Date(a.time) - new Date(b.time))
+      let notification = userNotifications.toSorted((a, b) => new Date(a.time) - new Date(b.time))
+      if (notification.length == 0) {
+        return notificationContainer.innerHTML = dom.noNotifications;
+      }
+
 
       notificationContainer ? notification.forEach((v) => [
-        HTMLnotifications += `
-        <div class="notification ${v.state}">
-          <div class="notificationHeader">
-            <div class="notificationIcon ${v.icon}"></div>
-            <div class="notificationData">
-              <h4 class="notificationTitle">${v.title}</h4>
-              <h5 class="notificationDescription">${v.description}</h5>
-            </div>
-          </div>
-          <div class="notificationDetails">
-            <p>${v.details}</p>
-            <div class="notificationTime">${timeText(v.time)}</div>
-            <button class="notificationExit icon-exit"><div>Close</div></button>
-          </div>
-        </div>
-        `
+        HTMLnotifications += dom.notificationDOM(v)
       ]) : null;
       notificationContainer.innerHTML = HTMLnotifications;
       unreadedNotificationsDot();
     }
     notificationsFunction();
-    not
   } catch (err) {
     console.log(err);
-    notificationContainer.innerHTML = `<h3>Notifications</h3>
-        <div class="noNotificationsMs">You don't have any notifications for now</div>`
+    notificationContainer.innerHTML = dom.notificationLoadingError;
   }
 };
-getProfileData();
-export let updateProfileBt, genderDropMenu;
+export let updateProfileBt, genderDropMenu, logOutBtn;
 
-async function putData() {
-  document.querySelector('.publicProfile .userName h2').innerHTML = allUserData.userName;
 
+// put the data
+export async function putData() {
   document.getElementById('profileForm').innerHTML = dom.updateDataForm
-  document.getElementById('profileUserName').value = allUserData.userName;
-  document.getElementById('profileGmail').value = allUserData.email;
-  document.getElementById('profileGmail').setAttribute('disabled', true);
+  document.getElementById('profileUserName').value = allUserData[0].userName;
+  document.getElementById('profileGmail').value = allUserData[0].email;
   document.getElementById('profilePassoword').value;
   updateProfileBt = document.getElementById('updateProfileSubmitButton');
+  logOutBtn = document.getElementById('logOutBtn');
   genderDropMenu = document.getElementById('profileGender');
+
   changeGenderIcon();
   updateProfileSubmitBtn();
+  logOut();
   genderDropMenu.addEventListener('change', () => {
     changeGenderIconUpdateData();
   })
+
+  document.querySelector('.publicProfile .userName h2').innerHTML = allUserData[0].userName;
+  changeGenderIconUpdateData();
+  updateProfileBt.removeAttribute('disabled');
+  logOutBtn.removeAttribute('disabled');
   getProfileNotifications();
 }
 
+getProfileData();
+
 
 const changeGenderIcon = () => {
+  checkingGenderLocalStorage();
   if (getProfileGender) {
     if (getProfileGender == 'm') {
       getProfilePicIcon.setAttribute('class', 'icon-user1');
@@ -97,13 +109,11 @@ const changeGenderIcon = () => {
     } else if (getProfileGender == 'f') {
       getProfilePicIcon.setAttribute('class', 'icon-user2');
       genderDropMenu.value = 'f';
-      console.log(genderDropMenu.value);
+      // console.log(genderDropMenu.value);
     }
   }
 }
-const changeGenderIconUpdateData = () => {
-  console.log('updated');
-
+export const changeGenderIconUpdateData = () => {
   let currentGender = genderDropMenu.value;
   if (currentGender == 'm') {
     ProfilePicIcon.classList.remove('icon-user2', 'icon-user');
@@ -114,71 +124,9 @@ const changeGenderIconUpdateData = () => {
     ProfilePicIcon.classList.remove('icon-user1', 'icon-user');
     ProfilePicIcon.classList.add('icon-user2');
     genderDropMenu.value = 'f';
-    console.log(genderDropMenu.value);
+    // console.log(genderDropMenu.value);
   } else {
     ProfilePicIcon.classList.remove('icon-user1', 'icon-user2');
     ProfilePicIcon.classList.add('icon-user')
-  }
-}
-
-
-const updateProfileSubmitBtn = () => {
-  updateProfileBt.addEventListener('click', async (bt) => {
-    bt.preventDefault();
-    console.log(genderDropMenu.value);
-    changeGenderIconUpdateData();
-
-    if (genderDropMenu.value == 'p') {
-      createAD(text.preferNotToSayGender)
-      return
-    } else if (genderDropMenu.value == 'o') {
-      createAD(text.otherGender)
-      return
-    } else if (document.getElementById('profileUserName').value == '') {
-      createAD(text.noName)
-      return
-    } else if (document.getElementById('profilePassoword').value == '') {
-      createAD(text.noPasswordUpdate)
-      return
-    }
-
-    if (allUserData.password != document.getElementById('profilePassoword').value) {
-      return createAD(text.wrongPassword);
-    }
-    updateProfile();
-
-  })
-}
-
-async function updateProfile() {
-  updateProfileBt.setAttribute('value', 'updating your data . . .');
-  const formData = Object.fromEntries(new FormData(profileForm));
-  console.log(formData);
-
-  const toAPIData = {
-    page: 'accounts',
-    action: 'update',
-    email: allUserData.email,
-    data: formData
-  };
-  const toLocalStorage = {
-    email: emailData.email,
-    password: emailData.password,
-    gender: emailData.gender
-  }
-
-  try {
-    //console.log('passed');
-
-    await postAccountData(toAPIData);
-    localStorage.setItem('profile', JSON.stringify(toLocalStorage));
-    await createAD(text.accountUpdated, 'green');
-    setTimeout(() => {
-      location.reload();
-    }, 5000);
-
-  } catch (err) {
-    console.log(err);
-    createAD(text.accountCreatingFailed)
   }
 }

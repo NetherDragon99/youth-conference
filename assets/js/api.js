@@ -1,7 +1,7 @@
 import { text } from "./text.js";
 import { createAD } from "./index.js";
 
-export const apiURL = "https://script.google.com/macros/s/AKfycbyg42i1HzKbeoSxwwl9Qh4wGRg7IsJcLxD4StjPJEaIcgcLRI531X1YE4zktov5EHuW/exec";
+export const apiURL = "https://script.google.com/macros/s/AKfycbwFBGJOmxqxDW8v3V4mKMuMWSRVjTs7QHYBGGXkEwa_CnTqC43DJwEVdwxLRFB-2vad/exec";
 
 let rawdata;
 export async function fetchData(target) {
@@ -55,3 +55,66 @@ export async function getData(target) {
 
 
 // profile data
+export let emailData;
+export async function getAccountData(page, target) {
+  try {
+    const res = await fetch(`${apiURL}?page=${page}&email=${target}`);
+    emailData = await res.json();
+
+    //console.log(emailData);
+    return emailData;
+  } catch (err) {
+    console.error("erro on getting data:");
+  }
+}
+
+export async function postAccountData(enteredData) {
+  try {
+    const response = await fetch(apiURL, {
+      method: 'POST',
+      body: JSON.stringify(enteredData)
+    })
+    const res = await response.json();
+    //console.log(res);
+
+    return res;
+  } catch (err) {
+    console.log(err);
+
+  }
+}
+
+export async function getSpecificData(page, target, data) {
+  try {
+    const res = await fetch(`${apiURL}?page=${page}&searchKey=${target}&searchValue=${data}`);
+    let getSpecificData = await res.json();
+
+    // console.log(getSpecificData);
+    return getSpecificData;
+  } catch (err) {
+    return console.error("erro on getting data:");
+  }
+}
+
+export async function postSpecificData(page, target, data, dataToAdd) {
+  const dataToUpdate = {
+    page: `${page}`,
+    action: 'update',
+    searchKey: `${target}`,
+    searchValue: `${data}`,
+    data: dataToAdd
+  }
+  try {
+    const response = await fetch(apiURL, {
+      method: 'POST',
+      body: JSON.stringify(dataToUpdate)
+    })
+    const res = await response.json();
+    //console.log(res);
+
+    return res;
+  } catch (err) {
+    console.log(err);
+
+  }
+}

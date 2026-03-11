@@ -1,7 +1,7 @@
 import { createAD } from "./index.js";
 import { text } from "./text.js";
-import { apiURL } from "./api.js";
-import { updateProfileBt } from "./loading-account-data.js";
+import { getAccountData, postAccountData, emailData } from "./api.js";
+import { getProfileData, updateProfileBt, logOutBtn, allUserData } from "./loading-account-data.js";
 
 export const profileForm = document.getElementById("profileForm");
 export const genderDropMenu = document.getElementById('profileGender');
@@ -30,6 +30,7 @@ export const genderIcon = () => {
   }
 }
 
+// scrool to fill personal data
 const profileScroll = () => {
   const toProfileData = document.querySelector(".mainProfileData");
   if (toProfileData) {
@@ -40,11 +41,13 @@ const profileScroll = () => {
   }
 }
 
-export let emailData;
+
+//sign in and log in
 submitBt.addEventListener('click', async (x) => {
   x.preventDefault();
   let toLocalStorage = {};
 
+  // checking for empty email or password
   if (document.getElementById('profileGmail').value == '') {
     createAD(text.noEmail)
     return
@@ -54,16 +57,16 @@ submitBt.addEventListener('click', async (x) => {
   }
 
   let formData = Object.fromEntries(new FormData(profileForm));
-  //console.log(formData);
+  // console.log(formData);
 
   submitBt.setAttribute('value', 'working . . .')
   const getEmailData = await getAccountData('accounts', formData.email);
-  console.log(emailData);
+  // console.log(getEmailData,emailData);
 
 
   try {
     // creating a new account
-    if (getEmailData.error) {
+    if (getEmailData.length == 0) {
       createAD(text.newAccount, 'green')
 
       profileScroll();
@@ -93,20 +96,18 @@ submitBt.addEventListener('click', async (x) => {
           data: formData
         };
         toLocalStorage = {
-          email: emailData.email,
-          password: emailData.password,
-          gender: emailData.gender
+          email: formData.email,
+          password: formData.password,
+          gender: formData.gender
         }
 
         try {
-          //console.log('passed');
+          console.log('passed');
 
           await postAccountData(toAPIData);
           localStorage.setItem('profile', JSON.stringify(toLocalStorage));
-          await createAD(text.accountCreated, 'green');
-          setTimeout(() => {
-            location.reload();
-          }, 5000);
+          createAD(text.accountCreated, 'green');
+          getProfileData();
 
         } catch (err) {
           console.log(err);
@@ -119,22 +120,20 @@ submitBt.addEventListener('click', async (x) => {
 
       try {
         const tempAccount = await getAccountData('accounts', formData.email);
-        //console.log(tempAccount);
+        // console.log(tempAccount);
 
-        const tempPass = tempAccount.password;
+        const tempPass = tempAccount[0].password;
 
-        //console.log(formData.password , tempPass);
+        console.log(formData.password, tempPass);
         if (formData.password == tempPass) {
           toLocalStorage = {
-            email: emailData.email,
-            password: emailData.password,
-            gender: emailData.gender
+            email: tempAccount[0].email,
+            password: tempAccount[0].password,
+            gender: tempAccount[0].gender
           }
-          await localStorage.setItem('profile', JSON.stringify(toLocalStorage))
+          localStorage.setItem('profile', JSON.stringify(toLocalStorage))
           createAD(text.loginSucces, 'green')
-          setTimeout(() => {
-            location.reload();
-          }, 5000);
+          getProfileData();
 
         } else {
           createAD(text.wrongPassword);
@@ -143,7 +142,6 @@ submitBt.addEventListener('click', async (x) => {
       } catch (err) {
         console.log(err);
       }
-      postAccountData(toAPIData)
     } else {
       throw new Error("unexpected error");
 
@@ -155,30 +153,72 @@ submitBt.addEventListener('click', async (x) => {
 
 })
 
-export async function getAccountData(page, target) {
-  try {
-    const res = await fetch(`${apiURL}?page=${page}&email=${target}`);
-    emailData = await res.json();
 
-    //console.log(emailData);
-    return emailData;
-  } catch (err) {
-    console.error("erro on getting data:");
-  }
+// updating data
+export const updateProfileSubmitBtn = () => {
+  updateProfileBt.addEventListener('click', async (bt) => {
+    bt.preventDefault();
+    console.log('updating');
+
+
+    if (genderDropMenu.value == 'p') {
+      createAD(text.preferNotToSayGender)
+      return
+    } else if (genderDropMenu.value == 'o') {
+      createAD(text.otherGender)
+      return
+    } else if (document.getElementById('profileUserName').value == '') {
+      createAD(text.noName)
+      return
+    } else if (document.getElementById('profilePassoword').value == '') {
+      createAD(text.noPasswordUpdate)
+      return
+    }
+
+    if (allUserData[0].password != document.getElementById('profilePassoword').value) {
+      return createAD(text.wrongPassword);
+    }
+    updateProfile();
+
+  })
 }
+async function updateProfile() {
+  updateProfileBt.setAttribute('value', 'updating your data . . .');
+  updateProfileBt.setAttribute('disabled', 'true');
+  const formData = Object.fromEntries(new FormData(profileForm));
 
-export async function postAccountData(enteredData){
+  const toAPIData = {
+    page: 'accounts',
+    action: 'update',
+    email: formData.email,
+    data: formData
+  };
+  const toLocalStorage = {
+    email: formData.email,
+    password: formData.password,
+    gender: formData.gender
+  }
+
   try {
-    const response = await fetch(apiURL, {
-      method: 'POST',
-      body: JSON.stringify(enteredData)
-    })
-    const res = await response.json();
-    console.log(res);
+    //console.log('passed');
 
+    await postAccountData(toAPIData);
+    localStorage.setItem('profile', JSON.stringify(toLocalStorage));
+    createAD(text.accountUpdated, 'green');
+    getProfileData();
 
   } catch (err) {
     console.log(err);
-
+    createAD(text.accountCreatingFailed)
   }
+}
+
+// log out
+export function logOut() {
+  logOutBtn.addEventListener('click', () => {
+    logOutBtn.setAttribute('disabled', 'true');
+    logOutBtn.innerHTML = 'Logging out . . .';
+    localStorage.removeItem('profile');
+    location.reload();
+  })
 }

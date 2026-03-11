@@ -1,4 +1,4 @@
-import { getData, newData } from "./api.js";
+import { getData, newData, getSpecificData, postSpecificData } from "./api.js";
 import { putData, autoRefresh, scrollFunction, activitySession, tasksTotalPercentage, closeTask, tempOpenedTaskPosition } from "./home-page-functions.js";
 import { } from './profile-page-functions.js'
 import { } from './loading-account-data.js'
@@ -86,7 +86,7 @@ notificationBellIcon.querySelector('span').addEventListener('click', () => {
   } else {
     document.querySelector('#notificationBanner').style.left = '-100dvw'
   }
-
+  
 })
 
 export function notificationsFunction() {
@@ -95,7 +95,7 @@ export function notificationsFunction() {
   notification.forEach((v) => {
     const notificationDetails = v.querySelector('.notificationDetails');    
 
-    v.addEventListener('click', () => {
+    v.addEventListener('click', async () => {
       closeNotification();
 
       if (!(v.classList.contains('CurrentOpenedNotification'))) {
@@ -103,11 +103,20 @@ export function notificationsFunction() {
         v.style.minHeight = `${(v.getBoundingClientRect().height) + (notificationDetails.getBoundingClientRect().height)}px`;
 
         notificationDetails.style.top = `${(v.querySelector('.notificationHeader').getBoundingClientRect().height)}px`
-
         v.classList.add('CurrentOpenedNotification');
-        v.classList.remove('unreadedNotification');
 
-        unreadedNotificationsDot();
+        if (v.classList.contains('unreadedNotification')) {
+          v.classList.remove('unreadedNotification');
+          console.log('unreaded',v.getAttribute('id'));
+          let getNotic = await getSpecificData('notifications','id',v.getAttribute('id'));
+          getNotic[0].state = '';
+          const toAPIData = await postSpecificData('notifications','id',v.getAttribute('id'),getNotic[0]);
+          console.log(toAPIData);
+        }
+
+        
+
+        unreadedNotificationsDot();    
       }
     })
     v.querySelector('.notificationExit').addEventListener('click', () => {
