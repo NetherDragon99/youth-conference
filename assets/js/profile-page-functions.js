@@ -62,12 +62,12 @@ submitBt.addEventListener('click', async (x) => {
   submitBt.setAttribute('value', 'working . . .')
   submitBt.setAttribute('disabled', 'true');
   const getEmailData = await getAccountData('accounts', formData.email);
-  // console.log(getEmailData,emailData);
+  console.log(getEmailData);
 
 
   try {
     // creating a new account
-    if (getEmailData.error || getEmailData.length == []) {
+    if (getEmailData.length == 0) {
       createAD(text.newAccount, 'green')
 
       profileScroll();
@@ -143,6 +143,7 @@ submitBt.addEventListener('click', async (x) => {
         } else {
           createAD(text.wrongPassword);
           submitBt.setAttribute('value', 'Sign-In/Log-In')
+          signUpBut.removeAttribute('disabled');
         }
       } catch (err) {
         console.log(err);

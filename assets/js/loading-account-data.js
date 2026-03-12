@@ -47,7 +47,7 @@ export async function getProfileNotifications() {
 
       await getAccountData('notifications', 'general');
       
-      if (!userNotifications.error && !emailData.error) {
+      if (userNotifications.length != 0 && emailData.length != 0) {
         userNotifications = [...emailData, ...userNotifications];
       }      
 
