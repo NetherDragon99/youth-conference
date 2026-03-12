@@ -67,3 +67,12 @@ export const dom = {
   sinInNotifications: `<h3>Notifications</h3>
         <div class="noNotificationsMs">please sign in to see your notifications</div>`
 }
+
+export const notificationsdata = {
+  welcomeGift: {
+    title: `اهلا بيك فى مؤتمر الشباب`,
+    description: `تم اضافة الهدية الترحيبية`,
+    details: `اهلا بيك فى مؤتمر الشباب<br>قررنا فى المؤتمر دة انه يكون مؤتمر مميز وفية افكرا اول مرة تتعمل فى مؤتمر والعاب تكون جديدة بحيث يكون ديما فى تشويق وانشطة مطلوب منك تعملها طول اليوم <br>الابلكيشن دة هو اول خطوة فى المؤتمر دة و كا هدية ترحيبية ضيفنالك 10 نقاط هدية واللى لازم تحافظ عليهم ومتفرطش فيهم بسهولة لاى حد`,
+    icon: 'icon-done'
+  }
+}

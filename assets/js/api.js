@@ -37,7 +37,7 @@ export async function getData(target) {
         newData[tempData].push(v);
       })
     };
-    await organiseData();
+    organiseData();
 
     //console.log(newData);
 
@@ -69,6 +69,7 @@ export async function getAccountData(page, target) {
 }
 
 export async function postAccountData(enteredData) {
+
   try {
     const response = await fetch(apiURL, {
       method: 'POST',
@@ -96,7 +97,7 @@ export async function getSpecificData(page, target, data) {
   }
 }
 
-export async function postSpecificData(page, target, data, dataToAdd) {
+export async function updateSpecificData(page, target, data, dataToAdd) {
   const dataToUpdate = {
     page: `${page}`,
     action: 'update',
@@ -116,5 +117,23 @@ export async function postSpecificData(page, target, data, dataToAdd) {
   } catch (err) {
     console.log(err);
 
+  }
+}
+export async function addSpecificData(page, data){
+  const toAPI = {
+    page: page,
+    action: 'add',
+    data: data
+  }
+  try {
+    const response = await fetch(apiURL, {
+      method: 'POST',
+      body: JSON.stringify(toAPI)
+    })
+    const res = await response.json();
+    //console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
   }
 }

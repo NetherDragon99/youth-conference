@@ -1,7 +1,7 @@
-import { createAD } from "./index.js";
+import { createAD, createNotification } from "./index.js";
 import { text } from "./text.js";
-import { getAccountData, postAccountData, emailData } from "./api.js";
-import { getProfileData, updateProfileBt, logOutBtn, allUserData } from "./loading-account-data.js";
+import { getAccountData, postAccountData, updateSpecificData } from "./api.js";
+import { getProfileData, updateProfileBt, logOutBtn, allUserData,ProfilePicIcon } from "./loading-account-data.js";
 
 export const profileForm = document.getElementById("profileForm");
 export const genderDropMenu = document.getElementById('profileGender');
@@ -57,20 +57,23 @@ submitBt.addEventListener('click', async (x) => {
   }
 
   let formData = Object.fromEntries(new FormData(profileForm));
-  console.log(formData);
+  // console.log(formData);
 
   submitBt.setAttribute('value', 'working . . .')
   submitBt.setAttribute('disabled', 'true');
   const getEmailData = await getAccountData('accounts', formData.email);
-  console.log(getEmailData,emailData);
+  // console.log(getEmailData,emailData);
 
 
   try {
     // creating a new account
-    if (getEmailData.error) {
+    if (getEmailData.error || getEmailData.length == []) {
       createAD(text.newAccount, 'green')
 
       profileScroll();
+      ProfilePicIcon.classList.remove('icon-user');
+      ProfilePicIcon.classList.add('icon-user1');
+      genderDropMenu.value = 'm';
 
       signUpBut.addEventListener('click', async (y) => {
         y.preventDefault();
@@ -90,7 +93,7 @@ submitBt.addEventListener('click', async (x) => {
         signUpBut.setAttribute('value', 'Creating your account . . .');
         signUpBut.setAttribute('disabled', 'true');
         formData = Object.fromEntries(new FormData(profileForm));
-        console.log(formData);
+        // console.log(formData);
 
         const toAPIData = {
           page: 'accounts',
@@ -104,11 +107,11 @@ submitBt.addEventListener('click', async (x) => {
         }
 
         try {
-          console.log('passed');
-
           await postAccountData(toAPIData);
           localStorage.setItem('profile', JSON.stringify(toLocalStorage));
           createAD(text.accountCreated, 'green');
+          await addWelcomGift();
+          document.querySelector('.noNotificationsMs').remove();
           getProfileData();
 
         } catch (err) {
@@ -122,11 +125,11 @@ submitBt.addEventListener('click', async (x) => {
 
       try {
         const tempAccount = await getAccountData('accounts', formData.email);
-        console.log(tempAccount);
+        // console.log(tempAccount);
 
         const tempPass = tempAccount[0].password;
 
-        console.log(formData.password, tempPass);
+        // console.log(formData.password, tempPass);
         if (formData.password == tempPass) {
           toLocalStorage = {
             email: tempAccount[0].email,
@@ -224,4 +227,10 @@ export function logOut() {
     localStorage.removeItem('profile');
     location.reload();
   })
+}
+
+// welcome gift
+async function addWelcomGift() {
+  await updateSpecificData('accounts', 'email', JSON.parse(localStorage.getItem('profile')).email, { points: 10 });
+  createNotification('welcomeGift');
 }

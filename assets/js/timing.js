@@ -58,8 +58,10 @@ export const cleanTime = (time) => {
 
 // set the time to useable formate
 
-export const timeText = (insertedTime)=>{
-  
+export const timeText = (insertedTime)=>{  
+  if (new Date(insertedTime) == 'Invalid Date') {
+    return '';
+  }
   let days = new Date(insertedTime).getDate().toString().padStart(2, '0');
   let months = (new Date(insertedTime).getMonth() + 1).toString().padStart(2, '0');
   let years = new Date(insertedTime).getFullYear().toString();

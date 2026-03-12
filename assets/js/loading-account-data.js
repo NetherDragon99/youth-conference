@@ -14,10 +14,10 @@ const checkingGenderLocalStorage = () => {
 }
 
 const getProfilePicIcon = document.querySelector('header .profilePicture span');
-const ProfilePicIcon = document.querySelector('.publicProfile .profilePicture span');
+export const ProfilePicIcon = document.querySelector('.publicProfile .profilePicture span');
 //profile data
-export let allUserData
-
+export let allUserData;
+const points = document.getElementById('pointsNO') 
 
 export async function getProfileData() {
   if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}'){
@@ -32,9 +32,9 @@ export async function getProfileData() {
 
 
 // notifications
-const notificationContainer = document.querySelector('#notificationBanner')
+export const notificationContainer = document.querySelector('#notificationBanner')
 let HTMLnotifications = `<h3>Notifications</h3>`;
-async function getProfileNotifications() {  
+export async function getProfileNotifications() {  
   
   if (!(localStorage.getItem('profile')) || !(JSON.parse(localStorage.getItem('profile')).email)) {
     return notificationContainer.innerHTML = dom.sinInNotifications;
@@ -51,7 +51,7 @@ async function getProfileNotifications() {
         userNotifications = [...emailData, ...userNotifications];
       }      
 
-      let notification = userNotifications.toSorted((a, b) => new Date(a.time) - new Date(b.time))
+      let notification = userNotifications.toSorted((a, b) => new Date(b.time) - new Date(a.time))
       if (notification.length == 0) {
         return notificationContainer.innerHTML = dom.noNotifications;
       }
@@ -94,6 +94,8 @@ export async function putData() {
   updateProfileBt.removeAttribute('disabled');
   logOutBtn.removeAttribute('disabled');
   getProfileNotifications();
+
+  points.innerHTML = allUserData[0].points;
 }
 
 getProfileData();

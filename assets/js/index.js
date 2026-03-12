@@ -1,7 +1,8 @@
-import { getData, newData, getSpecificData, postSpecificData } from "./api.js";
+import { getData, newData, getSpecificData, updateSpecificData, addSpecificData} from "./api.js";
 import { putData, autoRefresh, scrollFunction, activitySession, tasksTotalPercentage, closeTask, tempOpenedTaskPosition } from "./home-page-functions.js";
-import { } from './profile-page-functions.js'
-import { } from './loading-account-data.js'
+import { } from './profile-page-functions.js';
+import {notificationContainer} from './loading-account-data.js';
+import * as text from './text.js';
 
 scrollFunction();
 
@@ -86,14 +87,14 @@ notificationBellIcon.querySelector('span').addEventListener('click', () => {
   } else {
     document.querySelector('#notificationBanner').style.left = '-100dvw'
   }
-  
+
 })
 
 export function notificationsFunction() {
   notification = document.querySelectorAll('.notification');
 
   notification.forEach((v) => {
-    const notificationDetails = v.querySelector('.notificationDetails');    
+    const notificationDetails = v.querySelector('.notificationDetails');
 
     v.addEventListener('click', async () => {
       closeNotification();
@@ -107,16 +108,14 @@ export function notificationsFunction() {
 
         if (v.classList.contains('unreadedNotification')) {
           v.classList.remove('unreadedNotification');
-          console.log('unreaded',v.getAttribute('id'));
-          let getNotic = await getSpecificData('notifications','id',v.getAttribute('id'));
+          let getNotic = await getSpecificData('notifications', 'id', v.getAttribute('id'));
           getNotic[0].state = '';
-          const toAPIData = await postSpecificData('notifications','id',v.getAttribute('id'),getNotic[0]);
-          console.log(toAPIData);
+          const toAPIData = await updateSpecificData('notifications', 'id', v.getAttribute('id'), getNotic[0]);
         }
 
-        
 
-        unreadedNotificationsDot();    
+
+        unreadedNotificationsDot();
       }
     })
     v.querySelector('.notificationExit').addEventListener('click', () => {
@@ -124,7 +123,6 @@ export function notificationsFunction() {
     })
   })
 }
-
 
 function closeNotification() {
   const currrenOpenedNotification = document.querySelector('.CurrentOpenedNotification');
@@ -138,10 +136,22 @@ function closeNotification() {
   }, 10)
 }
 
-
+//create notification
+export function createNotification(whichNotification) {
+  const tempEmail = JSON.parse(localStorage.getItem('profile')).email;
+  let noticeData = text.notificationsdata[whichNotification];
+  
+  noticeData.email = tempEmail;
+  noticeData.time = new Date();
+  noticeData.state = 'unreadedNotification';
+  noticeData.id = `userNotic${(Math.random() * 100000).toFixed().toString()}`
+  
+  addSpecificData('notifications', noticeData);
+  notificationContainer.children[0].insertAdjacentHTML('afterend', text.dom.notificationDOM(noticeData))
+  unreadedNotificationsDot();
+}
 
 // exit opened windows from outside
-
 window.addEventListener('click', (click) => {
   if (!click.target.closest('.CurrentOpenedNotification')
     && !(click.target.closest('#openedTask'))
@@ -159,4 +169,4 @@ window.addEventListener('click', (click) => {
 tasksTotalPercentage();
 
 
-//loading profile data
+//adding welcome gift points
