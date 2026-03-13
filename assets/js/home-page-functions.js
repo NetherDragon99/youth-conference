@@ -281,6 +281,7 @@ export async function getTodayTasks() {
   const currentDate = timing.getCurrentDate();
   const todayTasks = await getSpecificData('tasks', 'activityDate', currentDate);
   console.log(todayTasks);
+  let toAddTasks = [];
 
   await todayTasks.forEach((v, i) => {
     let icon = 'done';
@@ -296,23 +297,18 @@ export async function getTodayTasks() {
     }
     const progress = timing.getTimeProgress(v.startingTime, v.endingTime);
 
-    setTimeout(() => {
-      taskContainer.insertAdjacentHTML('beforeend', `${text.dom.tasksDOM(v, icon, progress, displayBtn)}`);
-     
-      if (i == todayTasks.length - 1) {
-        tasks = document.querySelectorAll('.task');
-        tasksTotalPercentage();
-        
-      }
-    }, i * 200)
-
-    // console.log(text.dom.tasksDOM(v, icon, progress, displayBtn));
-    // console.log(Number(progress).toFixed());
-
+    toAddTasks.push(`${text.dom.tasksDOM(v, icon, progress, displayBtn)}`)
   })
-  console.log(todayTasks);
+  console.log(toAddTasks);
   console.log(tasks);
   
+  taskContainer.innerHTML ='';
+  toAddTasks.forEach((v,i)=>{
+    setTimeout(()=>{
+      taskContainer.insertAdjacentHTML('beforeend', v);
+    },i*300)
+  })
+
   taskFunction();
   
 }
