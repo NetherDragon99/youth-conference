@@ -282,7 +282,7 @@ export async function getTodayTasks() {
     let icon = 'done';
     if (v.type == 'inprogress') {
       icon = 'time'
-    } else if (v.type == 'limited time') {
+    } else if (v.type == 'limitedTime') {
       icon = 'timer'
     }
 
