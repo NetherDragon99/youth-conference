@@ -278,7 +278,7 @@ export async function getTodayTasks() {
   const todayTasks = await getSpecificData('tasks', 'activityDate', currentDate);
   console.log(todayTasks);
 
-  await todayTasks.forEach((v) => {
+  await todayTasks.forEach((v,i) => {
     let icon = 'done';
     if (v.type == 'inprogress') {
       icon = 'time'
@@ -292,7 +292,9 @@ export async function getTodayTasks() {
     }
     const progress = timing.getTimeProgress(v.startingTime, v.endingTime);
 
-    taskContainer.insertAdjacentHTML('afterbegin', `${text.dom.tasksDOM(v, icon, progress, displayBtn)}`)
+    setTimeout(() => {
+      taskContainer.insertAdjacentHTML('beforeend', `${text.dom.tasksDOM(v, icon, progress, displayBtn)}`);
+    }, i*200)
 
     // console.log(text.dom.tasksDOM(v, icon, progress, displayBtn));
 
