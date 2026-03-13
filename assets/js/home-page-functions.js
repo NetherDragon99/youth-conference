@@ -262,15 +262,19 @@ export const closeTask = () => {
   }, 2000)
 };
 
+let finishedTasksNo = document.querySelectorAll('.completedTask').length;
 export function tasksTotalPercentage() {
   const totalTasksNo = tasks.length;
-  const finishedTasksNo = document.querySelectorAll('.completedTask').length;
+  finishedTasksNo = document.querySelectorAll('.completedTask').length;
+  
   let finishedTaskspercent = (finishedTasksNo / totalTasksNo) * 100;
   const taskProgressNo = document.querySelector('.tasksProgressNumber');
   const taskProgressLine = document.querySelector('#todayTasksProgress>div:first-child');
 
   taskProgressNo.innerHTML = finishedTaskspercent.toFixed() + '%'
   taskProgressLine.style.width = `${finishedTaskspercent}%`
+  console.log(finishedTasksNo, totalTasksNo);
+
 }
 
 export async function getTodayTasks() {
@@ -278,7 +282,7 @@ export async function getTodayTasks() {
   const todayTasks = await getSpecificData('tasks', 'activityDate', currentDate);
   console.log(todayTasks);
 
-  await todayTasks.forEach((v,i) => {
+  await todayTasks.forEach((v, i) => {
     let icon = 'done';
     if (v.type == 'inprogress') {
       icon = 'time'
@@ -291,18 +295,25 @@ export async function getTodayTasks() {
       displayBtn = 'style="display:none;"'
     }
     const progress = timing.getTimeProgress(v.startingTime, v.endingTime);
-    
+
     setTimeout(() => {
       taskContainer.insertAdjacentHTML('beforeend', `${text.dom.tasksDOM(v, icon, progress, displayBtn)}`);
-    }, i*200)
+     
+      if (i == todayTasks.length - 1) {
+        tasks = document.querySelectorAll('.task');
+        tasksTotalPercentage();
+        
+      }
+    }, i * 200)
 
     // console.log(text.dom.tasksDOM(v, icon, progress, displayBtn));
     console.log(Number(progress).toFixed());
-    
+
   })
   console.log(todayTasks);
-  tasks = document.querySelectorAll('.task');
+  console.log(tasks);
+  
   taskFunction();
-  tasksTotalPercentage();
+  
 }
 getTodayTasks();
