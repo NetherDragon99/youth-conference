@@ -78,7 +78,7 @@ export const dom = {
                   <div class="taskTime">من ${timing.cleanTime(v.startingTime)} لحد ${timing.cleanTime(v.endingTime)}</div>
                   <div class="taskProgress">
                     <div style="width: ${progress}%"></div>
-                    <div class="taskProgressNumber">${progress}%</div>
+                    <div class="taskProgressNumber">${Number(progress).toFixed()}%</div>
                   </div>
                 </div>
               </div>

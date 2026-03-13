@@ -291,13 +291,14 @@ export async function getTodayTasks() {
       displayBtn = 'style="display:none;"'
     }
     const progress = timing.getTimeProgress(v.startingTime, v.endingTime);
-
+    
     setTimeout(() => {
       taskContainer.insertAdjacentHTML('beforeend', `${text.dom.tasksDOM(v, icon, progress, displayBtn)}`);
     }, i*200)
 
     // console.log(text.dom.tasksDOM(v, icon, progress, displayBtn));
-
+    console.log(Number(progress).toFixed());
+    
   })
   console.log(todayTasks);
   tasks = document.querySelectorAll('.task');
