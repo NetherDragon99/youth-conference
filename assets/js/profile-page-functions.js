@@ -62,7 +62,7 @@ submitBt.addEventListener('click', async (x) => {
   submitBt.setAttribute('value', 'working . . .')
   submitBt.setAttribute('disabled', 'true');
   const getEmailData = await getAccountData('accounts', formData.email);
-  console.log(getEmailData);
+  // console.log(getEmailData);
 
 
   try {
@@ -143,7 +143,7 @@ submitBt.addEventListener('click', async (x) => {
         } else {
           createAD(text.wrongPassword);
           submitBt.setAttribute('value', 'Sign-In/Log-In')
-          signUpBut.removeAttribute('disabled');
+          submitBt.removeAttribute('disabled');
         }
       } catch (err) {
         console.log(err);

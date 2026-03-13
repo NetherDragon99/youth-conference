@@ -1,4 +1,4 @@
-import { timeText } from "./timing.js"
+import * as timing from "./timing.js"
 
 export const text = {
   otherGender: 'أحنا هنستعبط ولا اية !!؟؟<br> اختار عدل ويلا متزعلنيش منك<br>معروفة يا ولد يا بنت',
@@ -55,7 +55,7 @@ export const dom = {
                     </div>
                     <div class="notificationDetails">
                       <p>${v.details}</p>
-                      <div class="notificationTime">${timeText(v.time)}</div>
+                      <div class="notificationTime">${timing.timeText(v.time)}</div>
                       <button class="notificationExit icon-exit"><div>Close</div></button>
                     </div>
                   </div>
@@ -65,7 +65,32 @@ export const dom = {
   notificationLoadingError: `<h3>Notifications</h3>
         <div class="noNotificationsMs">Unexpectied Error</div>`,
   sinInNotifications: `<h3>Notifications</h3>
-        <div class="noNotificationsMs">please sign in to see your notifications</div>`
+        <div class="noNotificationsMs">please sign in to see your notifications</div>`,
+  tasksDOM: (v, icon, progress, displayBtn)=>`
+  <button class="task ${v.type}Task" data-id="${v.id}">
+            <div class="taskHeader">
+              <div class="taskIcon">
+                <div class="icon-${icon}"></div>
+              </div>
+              <div class="taskDetails">
+                <div class="taskTitle">${v.title}</div>
+                <div class="taskTimeing">
+                  <div class="taskTime">من ${timing.cleanTime(v.startingTime)} لحد ${timing.cleanTime(v.endingTime)}</div>
+                  <div class="taskProgress">
+                    <div style="width: ${progress}%"></div>
+                    <div class="taskProgressNumber">${progress}%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="taskDescription">
+              <p class="extraDetails">${v.description}</p>
+              <div class="taskActionBtn" ${displayBtn}>${v.buttonName}</div>
+              <div class="taskExitButton icon-exit">
+                <p>Exit</p>
+              </div>
+            </div>
+          </button>`
 }
 
 export const notificationsdata = {

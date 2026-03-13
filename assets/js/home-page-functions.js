@@ -1,6 +1,7 @@
 import { createAD } from "./index.js";
-import { getCurrentDate, getTimeProgress, cleanTime } from "./timing.js";
-import { text } from "./text.js";
+import * as timing from "./timing.js";
+import * as text from "./text.js";
+import { getSpecificData } from "./api.js";
 
 
 //scroll
@@ -47,18 +48,18 @@ export let htmlActivitys = '';
 
 
 
-// put the data on the page depends on the today activitys
+// put the activities on the page depends on the today activitys
 export const putData = (data) => {
 
-  let tempDate = getCurrentDate();
+  let tempDate = timing.getCurrentDate();
   let activitys = data[tempDate];
   let tempEndingTime, tempStartingTime;
 
   //console.log(activitys, tempDate, data);
   try {
     activitys.forEach(act => {
-      tempStartingTime = cleanTime(act.startingTime.toString());
-      tempEndingTime = cleanTime(act.endingTime.toString());
+      tempStartingTime = timing.cleanTime(act.startingTime.toString());
+      tempEndingTime = timing.cleanTime(act.endingTime.toString());
 
       htmlActivitys += `
     <div class="${(act.activityDate).toString()}">
@@ -72,7 +73,7 @@ export const putData = (data) => {
 
         </div>
       </div>
-      <div class="currentActivityProgress"><div style="width: ${getTimeProgress((act.startingTime).toString(), (act.endingTime).toString())}%"></div></div>
+      <div class="currentActivityProgress"><div style="width: ${timing.getTimeProgress((act.startingTime).toString(), (act.endingTime).toString())}%"></div></div>
     </div>
     `
       //console.log(act.activityDate);
@@ -81,10 +82,10 @@ export const putData = (data) => {
     //console.log(err);
     htmlActivitys = '';
     if (data && activitys == undefined) {
-      createAD(text.noActivities, 'green');
+      createAD(text.text.noActivities, 'green');
 
     } else {
-      createAD(text.activitysFailed);
+      createAD(text.text.activitysFailed);
 
     }
   }
@@ -96,7 +97,7 @@ export const putData = (data) => {
 export const setCurrentActivity = (data) => {
 
   let currentTime = new Date().getTime();
-  const currentData = data[getCurrentDate()];
+  const currentData = data[timing.getCurrentDate()];
   //console.log(data);
   //console.log(currentData);
 
@@ -112,11 +113,11 @@ export const setCurrentActivity = (data) => {
         document.querySelector(`#todayActivity>div:nth-child(${i + 1})`).classList.remove("activeTask");
       }
 
-      const tempstart = new Date(`${getCurrentDate()} ${v.startingTime}`).getTime();
-      const tempend = new Date(`${getCurrentDate()} ${v.endingTime}`).getTime();
+      const tempstart = new Date(`${timing.getCurrentDate()} ${v.startingTime}`).getTime();
+      const tempend = new Date(`${timing.getCurrentDate()} ${v.endingTime}`).getTime();
       const activediv = document.querySelector(`#todayActivity>div:nth-child(${i + 1})`)
 
-      document.querySelector(`#todayActivity>div:nth-child(${i + 1}) .currentActivityProgress > div`).style.width = `${getTimeProgress((v.startingTime).toString(), (v.endingTime).toString())}%`
+      document.querySelector(`#todayActivity>div:nth-child(${i + 1}) .currentActivityProgress > div`).style.width = `${timing.getTimeProgress((v.startingTime).toString(), (v.endingTime).toString())}%`
 
       //console.log(document.querySelector(`#todayActivity>div:nth-child(${i + 1}) .currentActivityProgress > div`).style.width);
 
@@ -170,80 +171,83 @@ export const activitySession = () => {
 }
 
 //tasks
-const tasks = document.querySelectorAll('.task');
+let tasks = document.querySelectorAll('.task');
 const openedTask = document.createElement('div');
 openedTask.id = 'openedTask'
 const homePage = document.getElementById('home-page');
 export let tempOpenedTaskPosition;
 let taskDescription;
+const taskContainer = document.getElementById('tasks');
 
-tasks.forEach((v) => {
-  v.addEventListener('click', () => {
-    tasks.forEach((x) => {
-      x.disabled = true;
-    })
-    tempOpenedTaskPosition = v.getBoundingClientRect();
+function taskFunction() {
+  tasks.forEach((v) => {
+    v.addEventListener('click', () => {
+      tasks.forEach((x) => {
+        x.disabled = true;
+      })
+      tempOpenedTaskPosition = v.getBoundingClientRect();
 
-    openedTask.style.width = `${tempOpenedTaskPosition.width}px`;
-    openedTask.style.height = `${tempOpenedTaskPosition.height}px`;
-    openedTask.style.left = `${tempOpenedTaskPosition.left}px`;
-    openedTask.style.top = `${tempOpenedTaskPosition.top}px`;
-    openedTask.innerHTML = v.innerHTML;
+      openedTask.style.width = `${tempOpenedTaskPosition.width}px`;
+      openedTask.style.height = `${tempOpenedTaskPosition.height}px`;
+      openedTask.style.left = `${tempOpenedTaskPosition.left}px`;
+      openedTask.style.top = `${tempOpenedTaskPosition.top}px`;
+      openedTask.innerHTML = v.innerHTML;
 
-    if (v.classList.contains('completedTask')) {
-      openedTask.removeAttribute('class');
-      openedTask.classList.add('completedTask');
-      // console.log('completed');
+      if (v.classList.contains('completedTask')) {
+        openedTask.removeAttribute('class');
+        openedTask.classList.add('completedTask');
+        // console.log('completed');
 
-    } else if (v.classList.contains('inprogressTask')) {
-      openedTask.removeAttribute('class');
-      openedTask.classList.add('inprogressTask')
-      console.log('inprogress');
+      } else if (v.classList.contains('inprogressTask')) {
+        openedTask.removeAttribute('class');
+        openedTask.classList.add('inprogressTask')
+        console.log('inprogress');
 
-    } else if (v.classList.contains('limitedTimeTask')) {
-      openedTask.removeAttribute('class');
-      openedTask.classList.add('limitedTimeTask')
-      console.log('limited');
+      } else if (v.classList.contains('limitedTimeTask')) {
+        openedTask.removeAttribute('class');
+        openedTask.classList.add('limitedTimeTask')
+        console.log('limited');
 
-    }
-    homePage.append(openedTask);
-    taskDescription = document.querySelector('#openedTask .taskDescription')
+      }
+      homePage.append(openedTask);
+      taskDescription = document.querySelector('#openedTask .taskDescription')
 
-    setTimeout(() => {
-      const openedTaskStyle = openedTask.style;
+      setTimeout(() => {
+        const openedTaskStyle = openedTask.style;
 
-      openedTaskStyle.top = '50%';
-      openedTaskStyle.transform = 'translateY(-50%)';
-      openedTaskStyle.transition = '1s';
-      openedTaskStyle.overflow = 'scroll';
-      openedTaskStyle.scrollbarWidth = 'none';
-      openedTaskStyle.whitspace = 'normal';
-      openedTaskStyle.height = '70%';
-      openedTaskStyle.width = `${tempOpenedTaskPosition.width}px`;
+        openedTaskStyle.top = '50%';
+        openedTaskStyle.transform = 'translateY(-50%)';
+        openedTaskStyle.transition = '1s';
+        openedTaskStyle.overflow = 'scroll';
+        openedTaskStyle.scrollbarWidth = 'none';
+        openedTaskStyle.whitspace = 'normal';
+        openedTaskStyle.height = '70%';
+        openedTaskStyle.width = `${tempOpenedTaskPosition.width}px`;
 
-      const taskDescriptionStyle = taskDescription.style;
+        const taskDescriptionStyle = taskDescription.style;
 
-      taskDescriptionStyle.top = '0px';
-      taskDescriptionStyle.padding = '0 20px';
-      taskDescriptionStyle.position = 'relative';
-      // console.log(tempOpenedTaskPosition.height);
-    }, 10)
+        taskDescriptionStyle.top = '0px';
+        taskDescriptionStyle.padding = '0 20px';
+        taskDescriptionStyle.position = 'relative';
+        // console.log(tempOpenedTaskPosition.height);
+      }, 10)
 
-    document.querySelectorAll('.taskExitButton').forEach((butt) => {
-      butt.addEventListener('click', () => {
-        closeTask();
-        console.log(butt);
+      document.querySelectorAll('.taskExitButton').forEach((butt) => {
+        butt.addEventListener('click', () => {
+          closeTask();
+          console.log(butt);
 
+        })
       })
     })
   })
-})
+}
 
 //close opened task from outside
 
 export const closeTask = () => {
   // console.log(tempOpenedTaskPosition);
-  
+
   openedTask.style.cssText = `
   height: ${tempOpenedTaskPosition.height}px;
   width: ${tempOpenedTaskPosition.width}px;
@@ -268,3 +272,34 @@ export function tasksTotalPercentage() {
   taskProgressNo.innerHTML = finishedTaskspercent.toFixed() + '%'
   taskProgressLine.style.width = `${finishedTaskspercent}%`
 }
+
+export async function getTodayTasks() {
+  const currentDate = timing.getCurrentDate();
+  const todayTasks = await getSpecificData('tasks', 'activityDate', currentDate);
+  console.log(todayTasks);
+
+  await todayTasks.forEach((v) => {
+    let icon = 'done';
+    if (v.type == 'inprogress') {
+      icon = 'time'
+    } else if (v.type == 'limited time') {
+      icon = 'timer'
+    }
+
+    let displayBtn = '';
+    if (v.buttonName == '') {
+      displayBtn = 'style="display:none;"'
+    }
+    const progress = timing.getTimeProgress(v.startingTime, v.endingTime);
+
+    taskContainer.insertAdjacentHTML('afterbegin', `${text.dom.tasksDOM(v, icon, progress, displayBtn)}`)
+
+    // console.log(text.dom.tasksDOM(v, icon, progress, displayBtn));
+
+  })
+  console.log(todayTasks);
+  tasks = document.querySelectorAll('.task');
+  taskFunction();
+  tasksTotalPercentage();
+}
+getTodayTasks();

@@ -1,7 +1,7 @@
 import { text } from "./text.js";
 import { createAD } from "./index.js";
 
-export const apiURL = "https://script.google.com/macros/s/AKfycbyejAuH4mcRVO91L3dmmA-8cZGUf4cD6yA0K0U4ajwSiXI5x9zUxbE5oZ1cUK230ftf/exec";
+export const apiURL = "https://script.google.com/macros/s/AKfycby3-ALjd_qkJIAmbeqntaUiDsuIJU9cW7sO6ubcaQBG_T_LvMcG-F49G_qn9fpTGFhM/exec";
 
 let rawdata;
 export async function fetchData(target) {
@@ -131,9 +131,18 @@ export async function addSpecificData(page, data){
       body: JSON.stringify(toAPI)
     })
     const res = await response.json();
-    //console.log(res);
+    console.log(res);
     return res;
   } catch (err) {
     console.log(err);
+  }
+}
+export const getUserTodayTask = async (page , email, date)=>{
+  try{
+    const res = await fetch(`${apiURL}?page=${page}&email=${email}&date=${date}`);
+    const response = res.json();
+    return response;
+  }catch(err){
+    console.log(err); 
   }
 }

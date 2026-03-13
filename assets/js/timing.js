@@ -1,4 +1,4 @@
-// get dd/mm/yyyy
+// get yyyy/mm/dd
 export const getCurrentDate = () => {
   const days = new Date().getDate().toString().padStart(2, '0');
   const months = (new Date().getMonth() + 1).toString().padStart(2, '0');
@@ -31,7 +31,7 @@ export const getTimeProgress = (enteredStartTime, enteredendTime) => {
 }
 // console.log(getTimeProgress("00:00:00", "00:05:00"));
 
-getTimeProgress();
+// getTimeProgress();
 
 // make time from 00:00:00 to 0:00
 export const cleanTime = (time) => {
