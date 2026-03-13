@@ -305,3 +305,43 @@ footer a span{
   }
 }
 
+
+@keyframes loading {
+  0% {
+    background: linear-gradient(to right, rgb(121, 133, 163), rgb(192, 206, 231), rgb(121, 133, 163));
+    background-size: 500%;
+    background-position: 0%;
+    border-radius: 10px;
+  }
+
+  100% {
+    background: linear-gradient(to right, rgb(121, 133, 163), rgb(192, 206, 231), rgb(121, 133, 163));
+    background-size: 500%;
+    border-radius: 10px;
+    background-position: -120%;
+  }
+}
+
+.loading {
+  border-radius: 15px;
+  animation: loading 2s infinite forwards;
+}
+.loadingC{
+  animation: loadingC 2s infinite forwards;
+}
+
+@keyframes loadingC {
+  0% {
+    background: linear-gradient(to right, rgb(121, 133, 163), rgb(192, 206, 231), rgb(121, 133, 163));
+    background-size: 500%;
+    background-position: 0%;
+    border-radius: 50%;
+  }
+
+  100% {
+    background: linear-gradient(to right, rgb(121, 133, 163), rgb(192, 206, 231), rgb(121, 133, 163));
+    background-size: 500%;
+    border-radius: 50%;
+    background-position: -120%;
+  }
+}

@@ -176,12 +176,6 @@
 }
 
 /*loading skelaton animation*/
-.loading {
-  background: linear-gradient(to right, rgb(121, 133, 163), rgb(192, 206, 231), rgb(121, 133, 163));
-  border-radius: 15px;
-  background-size: 500%;
-  animation: loading 2s infinite forwards;
-}
 
 #activityState.loading {
   width: 50%;
@@ -207,36 +201,7 @@
   width: 3rem;
   height: 3rem;
   display: block;
-  background: linear-gradient(to right, rgb(121, 133, 163), rgb(192, 206, 231), rgb(121, 133, 163));
-  border-radius: 15px;
-  background-size: 500%;
-  animation: loadingC 2s infinite forwards;
 }
-
-@keyframes loading {
-  0% {
-    background-position: 0%;
-    border-radius: 10px;
-  }
-
-  100% {
-    border-radius: 10px;
-    background-position: -120%;
-  }
-}
-
-@keyframes loadingC {
-  0% {
-    background-position: 0%;
-    border-radius: 50%;
-  }
-
-  100% {
-    border-radius: 50%;
-    background-position: -120%;
-  }
-}
-
 
 /* tasks section */
 
@@ -437,16 +402,13 @@
   align-items: center;
 }
 
-.taskDetails {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
 .taskTitle {
   font-size: 1.5rem;
   font-weight: 900;
+}
+.taskTitle.loading{
+  width: 20%;
+  height: 1.4rem;
 }
 
 .taskTimeing {
@@ -461,6 +423,17 @@
   font-size: 1rem;
   font-weight: 600;
   color: rgb(197, 197, 206);
+}
+.taskTime.loading{
+  height: 1rem;
+  width: 5rem;
+}
+
+.taskDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .taskProgress {

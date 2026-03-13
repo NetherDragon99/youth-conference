@@ -307,7 +307,7 @@ export async function getTodayTasks() {
     }, i * 200)
 
     // console.log(text.dom.tasksDOM(v, icon, progress, displayBtn));
-    console.log(Number(progress).toFixed());
+    // console.log(Number(progress).toFixed());
 
   })
   console.log(todayTasks);
