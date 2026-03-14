@@ -1,7 +1,7 @@
 import { createAD } from "./index.js";
 import * as timing from "./timing.js";
 import * as text from "./text.js";
-import { getSpecificData } from "./api.js";
+import * as api from "./api.js";
 
 
 //scroll
@@ -279,7 +279,7 @@ export function tasksTotalPercentage() {
 
 export async function getTodayTasks() {
   const currentDate = timing.getCurrentDate();
-  const todayTasks = await getSpecificData('tasks', 'activityDate', currentDate);
+  const todayTasks = await api.getSpecificData('tasks', 'activityDate', currentDate);
   // console.log(todayTasks);
   let toAddTasks = [];
   if (todayTasks.length == 0) {
@@ -288,7 +288,7 @@ export async function getTodayTasks() {
     return;
   }
 
-  await todayTasks.forEach((v, i) => {
+  await todayTasks.forEach((v) => {
     let icon = 'done';
     if (v.type == 'inprogress') {
       icon = 'time'
@@ -315,9 +315,34 @@ export async function getTodayTasks() {
       if (i == toAddTasks.length-1) {
       tasks = document.querySelectorAll('.task');
       taskFunction();     
-      console.log(i, tasks);
     }
     },i*300)
   })  
+  userTasks();
 }
 getTodayTasks();
+
+async function userTasks(){
+  const userTasksData = await api.getUserTodayTask('profileTask', JSON.parse(localStorage.getItem('profile')).email, timing.getCurrentDate());
+  console.log(userTasksData);
+  let completedUserTasks = [];
+
+  if (userTasksData.length == 0) {
+    api.addSpecificData('profileTask',{email: JSON.parse(localStorage.getItem('profile')).email});
+    return
+  }
+
+  Object.values(userTasksData[0]).forEach((v,i)=>{
+    if (v == 'ok') {
+      completedUserTasks.push(Object.keys(userTasksData[0])[i])
+      
+    }
+  })
+  console.log(completedUserTasks);
+  completedUserTasks.forEach((v)=>{
+    console.log(v,document.querySelector(`.task[data-id="${v}"]`));
+    
+    document.querySelector(`.task[data-id="${v}"]`).setAttribute('class','task completedTask');
+    document.querySelector(`.task[data-id="${v}"] .taskIcon>div`).setAttribute('class','icon-done')
+  })
+}
