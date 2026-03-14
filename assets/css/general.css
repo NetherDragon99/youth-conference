@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Cairo';
+  src: url('../fonts\ &\ icons/fonts/Cairo.ttf') format('truetype');
+  font-weight: 200 900;
+}
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +13,7 @@
   border: none;
   line-height: 1;
   user-select: none;
+  font-family: 'cairo','sans-serif';
 }
 
 body {

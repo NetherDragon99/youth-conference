@@ -169,4 +169,3 @@ window.addEventListener('click', (click) => {
 tasksTotalPercentage();
 
 
-//adding welcome gift points

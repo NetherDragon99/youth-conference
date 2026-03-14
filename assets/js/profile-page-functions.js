@@ -232,6 +232,6 @@ export function logOut() {
 
 // welcome gift
 async function addWelcomGift() {
-  await updateSpecificData('accounts', 'email', JSON.parse(localStorage.getItem('profile')).email, { points: 10 });
+  await updateSpecificData('accounts', 'email', JSON.parse(localStorage.getItem('profile')).email, { cocs: 10 });
   createNotification('welcomeGift');
 }

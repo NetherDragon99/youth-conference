@@ -1,4 +1,4 @@
-/* Points section */
+/* cocs section */
 
 #home-page {
   display: flex;
@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 
-/* points section */
+/* cocs section */
 #pointsSection {
   width: 100%;
   flex-shrink: 0;
@@ -22,7 +22,7 @@
   top: 0;
 }
 
-#pointsNO {
+#cocsNO {
   font-size: 3.2rem;
   font-weight: 900;
   color: rgb(255, 238, 0);
@@ -225,7 +225,7 @@
 }
 
 #todayTasks section-title h3 {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 900;
 }
 
@@ -408,7 +408,7 @@
 
 .taskTitle {
   font-size: 1.5rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 .taskTitle.loading{
   width: 20%;

@@ -17,7 +17,7 @@ const getProfilePicIcon = document.querySelector('header .profilePicture span');
 export const ProfilePicIcon = document.querySelector('.publicProfile .profilePicture span');
 //profile data
 export let allUserData;
-const points = document.getElementById('pointsNO') 
+const cocs = document.getElementById('cocsNO') 
 
 export async function getProfileData() {
   if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}'){
@@ -95,7 +95,7 @@ export async function putData() {
   logOutBtn.removeAttribute('disabled');
   getProfileNotifications();
 
-  points.innerHTML = allUserData[0].points;
+  cocs.innerHTML = allUserData[0].cocs;
 }
 
 getProfileData();
