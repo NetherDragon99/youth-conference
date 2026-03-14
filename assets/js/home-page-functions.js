@@ -296,14 +296,14 @@ export async function getTodayTasks() {
 
     let displayBtn = '';
     if (v.buttonName == '') {
-      displayBtn = 'style="display:none;"'
+      displayBtn = 'style= "display:none;"';
     }
     const progress = timing.getTimeProgress(v.startingTime, v.endingTime);
 
     toAddTasks.push(`${text.dom.tasksDOM(v, icon, progress, displayBtn)}`)
   })
-  // console.log(toAddTasks);
-  // console.log(tasks);
+  console.log(toAddTasks);
+  console.log(tasks);
   
   taskContainer.innerHTML ='';
   toAddTasks.forEach((v,i)=>{
@@ -329,6 +329,7 @@ async function userTasks(){
     return
   }
 
+  // get completed tasks
   Object.values(userTasksData[0]).forEach((v,i)=>{
     if (v == 'ok') {
       completedUserTasks.push(Object.keys(userTasksData[0])[i])

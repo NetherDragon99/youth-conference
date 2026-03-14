@@ -160,6 +160,7 @@ header a.profilePicture span {
 .notificationDescription{
   font-size: 1rem;
   color: inherit;
+  margin-top: 5px;
 }
 .notificationDetails{
   display: flex;

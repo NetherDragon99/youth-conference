@@ -85,7 +85,7 @@ export const dom = {
             </div>
             <div class="taskDescription">
               <p class="extraDetails">${v.description}</p>
-              <div class="taskActionBtn" data-btnId="${v.id}" style="${displayBtn}">${v.buttonName}</div>
+              <div class="taskActionBtn" data-btnId="${v.id}" ${displayBtn}>${v.buttonName}</div>
               <div class="taskExitButton icon-exit">
                 <p>Exit</p>
               </div>
