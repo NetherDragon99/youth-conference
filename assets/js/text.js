@@ -85,7 +85,7 @@ export const dom = {
             </div>
             <div class="taskDescription">
               <p class="extraDetails">${v.description}</p>
-              <div class="taskActionBtn" ${displayBtn}>${v.buttonName}</div>
+              <div class="taskActionBtn" data-btnId="${v.id}" style="${displayBtn}">${v.buttonName}</div>
               <div class="taskExitButton icon-exit">
                 <p>Exit</p>
               </div>
@@ -116,5 +116,11 @@ export const notificationsdata = {
     description: `تم اضافة الهدية الترحيبية`,
     details: `اهلا بيك فى مؤتمر الشباب<br>قررنا فى المؤتمر دة انه يكون مؤتمر مميز وفية افكرا اول مرة تتعمل فى مؤتمر والعاب تكون جديدة بحيث يكون ديما فى تشويق وانشطة مطلوب منك تعملها طول اليوم <br>الابلكيشن دة هو اول خطوة فى المؤتمر دة و كا هدية ترحيبية ضيفنالك 10 نقاط هدية واللى لازم تحافظ عليهم ومتفرطش فيهم بسهولة لاى حد`,
     icon: 'icon-done'
+  }
+}
+
+export const tasksActionBtn = {
+  tsk123456: ()=>{
+    console.log('hi');
   }
 }

@@ -231,7 +231,7 @@ function taskFunction() {
         taskDescriptionStyle.position = 'relative';
         // console.log(tempOpenedTaskPosition.height);
       }, 10)
-
+      tasksActionBtnF();
       document.querySelectorAll('.taskExitButton').forEach((butt) => {
         butt.addEventListener('click', () => {
           closeTask();
@@ -273,8 +273,6 @@ export function tasksTotalPercentage() {
 
   taskProgressNo.innerHTML = finishedTaskspercent.toFixed() + '%'
   taskProgressLine.style.width = `${finishedTaskspercent}%`
-  console.log(finishedTasksNo, totalTasksNo);
-
 }
 
 export async function getTodayTasks() {
@@ -324,7 +322,6 @@ getTodayTasks();
 
 async function userTasks(){
   const userTasksData = await api.getUserTodayTask('profileTask', JSON.parse(localStorage.getItem('profile')).email, timing.getCurrentDate());
-  console.log(userTasksData);
   let completedUserTasks = [];
 
   if (userTasksData.length == 0) {
@@ -338,11 +335,21 @@ async function userTasks(){
       
     }
   })
-  console.log(completedUserTasks);
-  completedUserTasks.forEach((v)=>{
-    console.log(v,document.querySelector(`.task[data-id="${v}"]`));
-    
+  completedUserTasks.forEach((v)=>{    
     document.querySelector(`.task[data-id="${v}"]`).setAttribute('class','task completedTask');
     document.querySelector(`.task[data-id="${v}"] .taskIcon>div`).setAttribute('class','icon-done')
+  })
+  tasksTotalPercentage();
+  tasksActionBtnF()
+}
+
+function tasksActionBtnF() {
+  const tasksActionsBtn = document.querySelectorAll('.taskActionBtn');
+  
+  tasksActionsBtn.forEach((v)=>{
+    v.addEventListener('click',()=>{
+      let tempID = v.getAttribute('data-btnId');
+      text.tasksActionBtn[tempID]();
+    })
   })
 }
