@@ -179,7 +179,7 @@ export let tempOpenedTaskPosition;
 let taskDescription;
 const taskContainer = document.getElementById('tasks');
 
-function taskFunction() {
+function taskFunction() {  
   tasks.forEach((v) => {
     v.addEventListener('click', () => {
       tasks.forEach((x) => {
@@ -280,8 +280,13 @@ export function tasksTotalPercentage() {
 export async function getTodayTasks() {
   const currentDate = timing.getCurrentDate();
   const todayTasks = await getSpecificData('tasks', 'activityDate', currentDate);
-  console.log(todayTasks);
+  // console.log(todayTasks);
   let toAddTasks = [];
+  if (todayTasks.length == 0) {
+    taskContainer.innerHTML = text.dom.noTaskDOM;
+    console.log('no data');
+    return;
+  }
 
   await todayTasks.forEach((v, i) => {
     let icon = 'done';
@@ -299,17 +304,20 @@ export async function getTodayTasks() {
 
     toAddTasks.push(`${text.dom.tasksDOM(v, icon, progress, displayBtn)}`)
   })
-  console.log(toAddTasks);
-  console.log(tasks);
+  // console.log(toAddTasks);
+  // console.log(tasks);
   
   taskContainer.innerHTML ='';
   toAddTasks.forEach((v,i)=>{
     setTimeout(()=>{
       taskContainer.insertAdjacentHTML('beforeend', v);
-    },i*300)
-  })
 
-  taskFunction();
-  
+      if (i == toAddTasks.length-1) {
+      tasks = document.querySelectorAll('.task');
+      taskFunction();     
+      console.log(i, tasks);
+    }
+    },i*300)
+  })  
 }
 getTodayTasks();

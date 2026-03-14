@@ -75,7 +75,7 @@ export const dom = {
               <div class="taskDetails">
                 <div class="taskTitle">${v.title}</div>
                 <div class="taskTimeing">
-                  <div class="taskTime">من ${timing.cleanTime(v.startingTime)} لحد ${timing.cleanTime(v.endingTime)}</div>
+                  <div class="taskTime">من ${timing.cleanTime(v.startingTime)} <br>لحد ${timing.cleanTime(v.endingTime)}</div>
                   <div class="taskProgress">
                     <div style="width: ${progress}%"></div>
                     <div class="taskProgressNumber">${Number(progress).toFixed()}%</div>
@@ -88,6 +88,23 @@ export const dom = {
               <div class="taskActionBtn" ${displayBtn}>${v.buttonName}</div>
               <div class="taskExitButton icon-exit">
                 <p>Exit</p>
+              </div>
+            </div>
+          </button>`,
+  noTaskDOM: `<button class="task inprogressTask">
+            <div class="taskHeader">
+              <div class="taskIcon">
+                <div class="icon-tongue"></div>
+              </div>
+              <div class="taskDetails">
+                <div class="taskTitle">مفيش حاجة النهاردة</div>
+                <div class="taskTimeing">
+                  <div class="taskTime">خليك مستعد هنبدأ قريب</div>
+                  <div class="taskProgress">
+                    <div></div>
+                    <div class="tasksProgressNumber">24/6/2026</div>
+                  </div>
+                </div>
               </div>
             </div>
           </button>`
