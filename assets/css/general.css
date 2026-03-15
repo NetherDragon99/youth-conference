@@ -276,9 +276,6 @@ footer a span{
   align-items: end;
   justify-content: end;
 }
-.adBanner>*{
-  pointer-events: painted;
-}
 .adBanner div{
   min-height: max-content;
   width: 400px;

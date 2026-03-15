@@ -1,7 +1,9 @@
-import { dom, text } from "./text.js";
-import { createAD, notificationsFunction, unreadedNotificationsDot } from "./index.js";
+import { dom} from "./text.js";
+import { notificationsFunction, unreadedNotificationsDot } from "./index.js";
 import { getAccountData, emailData } from './api.js';
 import { updateProfileSubmitBtn, logOut } from "./profile-page-functions.js";
+import * as transaction from './transaction-page-functions.js';
+
 
 let getProfileGender;
 const checkingGenderLocalStorage = () => {
@@ -17,7 +19,8 @@ const getProfilePicIcon = document.querySelector('header .profilePicture span');
 export const ProfilePicIcon = document.querySelector('.publicProfile .profilePicture span');
 //profile data
 export let allUserData;
-const cocs = document.getElementById('cocsNO') 
+const transactionPicIcon = document.querySelector('.transactionProfilePicture div')
+
 
 export async function getProfileData() {
   if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}'){
@@ -95,7 +98,8 @@ export async function putData() {
   logOutBtn.removeAttribute('disabled');
   getProfileNotifications();
 
-  cocs.innerHTML = allUserData[0].cocs;
+  transaction.cocsAndRank();
+  allUserData[0].gender == 'm'? transactionPicIcon.setAttribute('class', 'icon-user1'):allUserData[0].gender == 'f'? transactionPicIcon.setAttribute('class', 'icon-user2'):null;
 }
 
 getProfileData();
