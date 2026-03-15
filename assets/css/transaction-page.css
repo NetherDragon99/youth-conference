@@ -19,19 +19,30 @@
   flex-shrink: 0;
 }
 
-#transactionProfileData #rank {
+#transactionProfileData #transactionRank {
   margin-top: 5px;
   display: flex;
   color: white;
 }
 
+#transactionCocsNO{
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: gold;
+}
 #transactionProfileData h3 {
   color: gold;
 }
 
-#transactionProfileData #rank p {
+#transactionRank {
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+#transactionProfileData #transactionRank p {
   color: gold;
   margin-left: 5px;
+  font-size: 1.2rem;
 }
 
 
