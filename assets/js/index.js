@@ -1,16 +1,15 @@
-import { getData, newData, getSpecificData, updateSpecificData, addSpecificData} from "./api.js";
-import { putData, autoRefresh, scrollFunction, activitySession, tasksTotalPercentage, closeTask, tempOpenedTaskPosition } from "./home-page-functions.js";
-import { } from './profile-page-functions.js';
-import {notificationContainer} from './loading-account-data.js';
+import * as api from "./api.js";
+import * as home from "./home-page-functions.js";
+import * as loading from './loading-account-data.js';
 import * as text from './text.js';
 
-scrollFunction();
+home.scrollFunction();
 
 async function todaysActivity() {
-  await getData('conferenceActivitys');
-  await putData(newData);
-  autoRefresh(newData)
-  activitySession();
+  await api.getData('conferenceActivitys');
+  home.putData(api.newData);
+  home.autoRefresh(api.newData)
+  home.activitySession();
 }
 
 const footerNavIcons = document.querySelectorAll('body footer a');
@@ -108,9 +107,9 @@ export function notificationsFunction() {
 
         if (v.classList.contains('unreadedNotification')) {
           v.classList.remove('unreadedNotification');
-          let getNotic = await getSpecificData('notifications', 'id', v.getAttribute('id'));
+          let getNotic = await api.getSpecificData('notifications', 'id', v.getAttribute('id'));
           getNotic[0].state = '';
-          const toAPIData = await updateSpecificData('notifications', 'id', v.getAttribute('id'), getNotic[0]);
+          const toAPIData = await api.updateSpecificData('notifications', 'id', v.getAttribute('id'), getNotic[0]);
         }
 
 
@@ -146,8 +145,8 @@ export function createNotification(whichNotification) {
   noticeData.state = 'unreadedNotification';
   noticeData.id = `userNotic${(Math.random() * 100000).toFixed().toString()}`
   
-  addSpecificData('notifications', noticeData);
-  notificationContainer.children[0].insertAdjacentHTML('afterend', text.dom.notificationDOM(noticeData))
+  api.addSpecificData('notifications', noticeData);
+  loading.notificationContainer.children[0].insertAdjacentHTML('afterend', text.dom.notificationDOM(noticeData))
   unreadedNotificationsDot();
 }
 
@@ -158,7 +157,7 @@ window.addEventListener('click', (click) => {
     && !(click.target.closest('.task'))
     && !(click.target.closest('.notificationsIcon span'))
     && !(click.target.closest('#notificationBanner'))) {
-    tempOpenedTaskPosition ? closeTask() : null;
+    home.tempOpenedTaskPosition ? home.closeTask() : null;
     closeNotification();
     notificationBannerLeft < 0 ? document.querySelector('#notificationBanner').style.left = '-100dvw' : null;
   };
@@ -166,6 +165,6 @@ window.addEventListener('click', (click) => {
 
 
 // tasks
-tasksTotalPercentage();
+home.tasksTotalPercentage();
 
 

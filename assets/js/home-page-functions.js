@@ -1,4 +1,4 @@
-import { createAD } from "./index.js";
+import * as index from "./index.js";
 import * as timing from "./timing.js";
 import * as text from "./text.js";
 import * as api from "./api.js";
@@ -82,10 +82,10 @@ export const putData = (data) => {
     //console.log(err);
     htmlActivitys = '';
     if (data && activitys == undefined) {
-      createAD(text.text.noActivities, 'green');
+      index.createAD(text.text.noActivities, 'green');
 
     } else {
-      createAD(text.text.activitysFailed);
+      index.createAD(text.text.activitysFailed);
 
     }
   }
@@ -148,7 +148,7 @@ export const autoRefresh = (data) => {
 
 export const activitySession = () => {
   let activitiesLength = document.querySelectorAll("#todayActivity>div").length;
-  let activeItemIndex, temp1;
+  let activeItemIndex;
 
   Array.from(document.getElementById('todayActivity').children).forEach((v, i) => {
     if (v.classList.contains('activeTask')) {
@@ -282,7 +282,6 @@ export async function getTodayTasks() {
   let toAddTasks = [];
   if (todayTasks.length == 0) {
     taskContainer.innerHTML = text.dom.noTaskDOM;
-    console.log('no data');
     return;
   }
 

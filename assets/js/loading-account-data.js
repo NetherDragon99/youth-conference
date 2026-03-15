@@ -1,7 +1,7 @@
-import { dom} from "./text.js";
-import { notificationsFunction, unreadedNotificationsDot } from "./index.js";
-import { getAccountData, emailData } from './api.js';
-import { updateProfileSubmitBtn, logOut } from "./profile-page-functions.js";
+import * as text from "./text.js";
+import * as index from "./index.js";
+import * as api from './api.js';
+import * as profile from "./profile-page-functions.js";
 import * as transaction from './transaction-page-functions.js';
 
 
@@ -24,12 +24,12 @@ const transactionPicIcon = document.querySelector('.transactionProfilePicture di
 
 export async function getProfileData() {
   if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}'){
-    await getAccountData('accounts', (JSON.parse(localStorage.getItem('profile')).email));
-    allUserData = emailData;
+    await api.getAccountData('accounts', (JSON.parse(localStorage.getItem('profile')).email));
+    allUserData = api.emailData;
     allUserData.length != 0 ? putData() : localStorage.removeItem('profile');
   }else{
     localStorage.removeItem('profile');
-    notificationContainer.innerHTML = dom.sinInNotifications;
+    notificationContainer.innerHTML = text.dom.sinInNotifications;
   }
 };
 
@@ -40,36 +40,36 @@ let HTMLnotifications = `<h3>Notifications</h3>`;
 export async function getProfileNotifications() {  
   
   if (!(localStorage.getItem('profile')) || !(JSON.parse(localStorage.getItem('profile')).email)) {
-    return notificationContainer.innerHTML = dom.sinInNotifications;
+    return notificationContainer.innerHTML = text.dom.sinInNotifications;
   }
 
   try {
     if (localStorage.getItem('profile')) {
-      await getAccountData('notifications', JSON.parse(localStorage.getItem('profile')).email);      
-      let userNotifications = emailData;
+      await api.getAccountData('notifications', JSON.parse(localStorage.getItem('profile')).email);      
+      let userNotifications = api.emailData;
 
-      await getAccountData('notifications', 'general');
+      await api.getAccountData('notifications', 'general');
       
-      if (userNotifications.length != 0 && emailData.length != 0) {
-        userNotifications = [...emailData, ...userNotifications];
+      if (userNotifications.length != 0 && api.emailData.length != 0) {
+        userNotifications = [...api.emailData, ...userNotifications];
       }      
 
       let notification = userNotifications.toSorted((a, b) => new Date(b.time) - new Date(a.time))
       if (notification.length == 0) {
-        return notificationContainer.innerHTML = dom.noNotifications;
+        return notificationContainer.innerHTML = text.dom.noNotifications;
       }
 
 
       notificationContainer ? notification.forEach((v) => [
-        HTMLnotifications += dom.notificationDOM(v)
+        HTMLnotifications += text.dom.notificationDOM(v)
       ]) : null;
       notificationContainer.innerHTML = HTMLnotifications;
-      unreadedNotificationsDot();
+      index.unreadedNotificationsDot();
     }
-    notificationsFunction();
+    index.notificationsFunction();
   } catch (err) {
     console.log(err);
-    notificationContainer.innerHTML = dom.notificationLoadingError;
+    notificationContainer.innerHTML = text.dom.notificationLoadingError;
   }
 };
 export let updateProfileBt, genderDropMenu, logOutBtn;
@@ -77,7 +77,7 @@ export let updateProfileBt, genderDropMenu, logOutBtn;
 
 // put the data
 export async function putData() {
-  document.getElementById('profileForm').innerHTML = dom.updateDataForm
+  document.getElementById('profileForm').innerHTML = text.dom.updateDataForm
   document.getElementById('profileUserName').value = allUserData[0].userName;
   document.getElementById('profileGmail').value = allUserData[0].email;
   document.getElementById('profilePassoword').value;
@@ -86,8 +86,8 @@ export async function putData() {
   genderDropMenu = document.getElementById('profileGender');
 
   changeGenderIcon();
-  updateProfileSubmitBtn();
-  logOut();
+  profile.updateProfileSubmitBtn();
+  profile.logOut();
   genderDropMenu.addEventListener('change', () => {
     changeGenderIconUpdateData();
   })

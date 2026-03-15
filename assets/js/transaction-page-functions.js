@@ -5,7 +5,7 @@ const transactionCocs = document.getElementById('transactionCocsNO');
 const userRank = document.getElementById('rank');
 const transactionRank = document.querySelector('#transactionRank p')
 
-
+// user data
 export const cocsAndRank = () => {
   cocs.innerHTML = loadingData.allUserData[0].cocs;
   transactionCocs.innerHTML = loadingData.allUserData[0].cocs;
@@ -23,3 +23,16 @@ function checkingRank(rankNo) {
     return 'th'
   }
 }
+
+
+// search
+const search = document.getElementById('transactionSearchBar');
+const transactionIconSearch = document.querySelector('#transactionSearch .icon-search');
+
+search.addEventListener('input', (input)=>{
+  if (input.target.value == '') {
+    transactionIconSearch.style.opacity = '1';
+  }else{
+    transactionIconSearch.style.opacity = '0';
+  }
+})

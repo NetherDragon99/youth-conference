@@ -1,7 +1,7 @@
-import { createAD, createNotification } from "./index.js";
-import { text } from "./text.js";
-import { getAccountData, postAccountData, updateSpecificData } from "./api.js";
-import { getProfileData, updateProfileBt, logOutBtn, allUserData,ProfilePicIcon } from "./loading-account-data.js";
+import * as index from "./index.js";
+import * as text from "./text.js";
+import * as api from "./api.js";
+import * as loading from "./loading-account-data.js";
 
 export const profileForm = document.getElementById("profileForm");
 export const genderDropMenu = document.getElementById('profileGender');
@@ -49,10 +49,10 @@ submitBt.addEventListener('click', async (x) => {
 
   // checking for empty email or password
   if (document.getElementById('profileGmail').value == '') {
-    createAD(text.noEmail)
+    index.createAD(text.text.noEmail)
     return
   } else if (document.getElementById('profilePassoword').value == '') {
-    createAD(text.noPassword)
+    index.createAD(text.text.noPassword)
     return
   }
 
@@ -61,33 +61,33 @@ submitBt.addEventListener('click', async (x) => {
 
   submitBt.setAttribute('value', 'working . . .')
   submitBt.setAttribute('disabled', 'true');
-  const getEmailData = await getAccountData('accounts', formData.email);
+  const getEmailData = await api.getAccountData('accounts', formData.email);
   // console.log(getEmailData);
 
 
   try {
     // creating a new account
     if (getEmailData.length == 0) {
-      createAD(text.newAccount, 'green')
+      index.createAD(text.text.newAccount, 'green')
 
       profileScroll();
-      ProfilePicIcon.classList.remove('icon-user');
-      ProfilePicIcon.classList.add('icon-user1');
+      loading.ProfilePicIcon.classList.remove('icon-user');
+      loading.ProfilePicIcon.classList.add('icon-user1');
       genderDropMenu.value = 'm';
 
       signUpBut.addEventListener('click', async (y) => {
         y.preventDefault();
 
         if (genderDropMenu.value == 'p') {
-          createAD(text.preferNotToSayGender)
+          index.createAD(text.text.preferNotToSayGender)
           return
         } else if (genderDropMenu.value == 'o') {
-          createAD(text.otherGender)
+          index.createAD(text.text.otherGender)
           return
         }
 
         if (document.getElementById('profileUserName').value == '') {
-          return createAD(text.noName)
+          return index.createAD(text.text.noName)
         };
 
         signUpBut.setAttribute('value', 'Creating your account . . .');
@@ -107,16 +107,16 @@ submitBt.addEventListener('click', async (x) => {
         }
 
         try {
-          await postAccountData(toAPIData);
+          await api.postAccountData(toAPIData);
           localStorage.setItem('profile', JSON.stringify(toLocalStorage));
-          createAD(text.accountCreated, 'green');
+          index.createAD(text.text.accountCreated, 'green');
           await addWelcomGift();
           document.querySelector('.noNotificationsMs').remove();
-          getProfileData();
+          loading.getProfileData();
 
         } catch (err) {
           console.log(err);
-          createAD(text.accountCreatingFailed)
+          index.createAD(text.text.accountCreatingFailed)
         }
       })
 
@@ -124,7 +124,7 @@ submitBt.addEventListener('click', async (x) => {
     } else if (getEmailData) {
 
       try {
-        const tempAccount = await getAccountData('accounts', formData.email);
+        const tempAccount = await api.getAccountData('accounts', formData.email);
         // console.log(tempAccount);
 
         const tempPass = tempAccount[0].password;
@@ -137,11 +137,11 @@ submitBt.addEventListener('click', async (x) => {
             gender: tempAccount[0].gender
           }
           localStorage.setItem('profile', JSON.stringify(toLocalStorage))
-          createAD(text.loginSucces, 'green')
-          getProfileData();
+          index.createAD(text.text.loginSucces, 'green')
+          loading.getProfileData();
 
         } else {
-          createAD(text.wrongPassword);
+          index.createAD(text.text.wrongPassword);
           submitBt.setAttribute('value', 'Sign-In/Log-In')
           submitBt.removeAttribute('disabled');
         }
@@ -162,36 +162,36 @@ submitBt.addEventListener('click', async (x) => {
 
 // updating data
 export const updateProfileSubmitBtn = () => {
-  updateProfileBt.addEventListener('click', async (bt) => {
+  loading.updateProfileBt.addEventListener('click', async (bt) => {
     bt.preventDefault();
     console.log('updating');
 
 
     if (genderDropMenu.value == 'p') {
-      createAD(text.preferNotToSayGender)
+      index.createAD(text.text.preferNotToSayGender)
       return
     } else if (genderDropMenu.value == 'o') {
-      createAD(text.otherGender)
+      index.createAD(text.text.otherGender)
       return
     } else if (document.getElementById('profileUserName').value == '') {
-      createAD(text.noName)
+      index.createAD(text.text.noName)
       return
     } else if (document.getElementById('profilePassoword').value == '') {
-      createAD(text.noPasswordUpdate)
+      index.createAD(text.text.noPasswordUpdate)
       return
     }
 
-    if (allUserData[0].password != document.getElementById('profilePassoword').value) {
-      return createAD(text.wrongPassword);
+    if (loading.allUserData[0].password != document.getElementById('profilePassoword').value) {
+      return index.createAD(text.text.wrongPassword);
     }
     updateProfile();
 
   })
 }
 async function updateProfile() {
-  updateProfileBt.setAttribute('value', 'updating your data . . .');
-  updateProfileBt.setAttribute('disabled', 'true');
-  logOutBtn.setAttribute('disabled', 'true');
+  loading.updateProfileBt.setAttribute('value', 'updating your data . . .');
+  loading.updateProfileBt.setAttribute('disabled', 'true');
+  loading.logOutBtn.setAttribute('disabled', 'true');
   const formData = Object.fromEntries(new FormData(profileForm));
 
   const toAPIData = {
@@ -209,22 +209,22 @@ async function updateProfile() {
   try {
     //console.log('passed');
 
-    await postAccountData(toAPIData);
+    await api.postAccountData(toAPIData);
     localStorage.setItem('profile', JSON.stringify(toLocalStorage));
-    createAD(text.accountUpdated, 'green');
-    getProfileData();
+    index.createAD(text.text.accountUpdated, 'green');
+    loading.getProfileData();
 
   } catch (err) {
     console.log(err);
-    createAD(text.accountCreatingFailed)
+    index.createAD(text.text.accountCreatingFailed)
   }
 }
 
 // log out
 export function logOut() {
-  logOutBtn.addEventListener('click', () => {
-    logOutBtn.setAttribute('disabled', 'true');
-    logOutBtn.innerHTML = 'Logging out . . .';
+  loading.logOutBtn.addEventListener('click', () => {
+    loading.logOutBtn.setAttribute('disabled', 'true');
+    loading.logOutBtn.innerHTML = 'Logging out . . .';
     localStorage.removeItem('profile');
     location.reload();
   })
@@ -232,6 +232,6 @@ export function logOut() {
 
 // welcome gift
 async function addWelcomGift() {
-  await updateSpecificData('accounts', 'email', JSON.parse(localStorage.getItem('profile')).email, { cocs: 10 });
-  createNotification('welcomeGift');
+  await api.updateSpecificData('accounts', 'email', JSON.parse(localStorage.getItem('profile')).email, { cocs: 10 });
+  index.createNotification('welcomeGift');
 }

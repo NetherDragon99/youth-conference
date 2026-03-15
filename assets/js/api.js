@@ -1,7 +1,7 @@
-import { text } from "./text.js";
-import { createAD } from "./index.js";
+import * as text from "./text.js";
+import * as index from "./index.js";
 
-export const apiURL = "https://script.google.com/macros/s/AKfycby3-ALjd_qkJIAmbeqntaUiDsuIJU9cW7sO6ubcaQBG_T_LvMcG-F49G_qn9fpTGFhM/exec";
+export const apiURL = "https://script.google.com/macros/s/AKfycbzmBmnavjHrSoaeQmrgT4mjZg8Yi7wH90E44n8Mn1oOEz3unPdF2dRcqr40KXaxOb6T/exec";
 
 let rawdata;
 export async function fetchData(target) {
@@ -11,7 +11,7 @@ export async function fetchData(target) {
     return rawdata;
   } catch (err) {
     console.error("error on getting data:");
-    createAD(text.activitysFailed);
+    index.createAD(text.text.activitysFailed);
 
     return rawdata = 'error';
   }
@@ -146,3 +146,17 @@ export const getUserTodayTask = async (page , email, date)=>{
     console.log(err); 
   }
 }
+
+// get all users data
+export let allUserData = undefined;
+async function allUsersData() {
+  const fetchedData = await fetch(`${apiURL}?page=accounts`);
+  allUserData = await fetchedData.json();
+  
+  allUserData.forEach((v)=>{
+    delete v.password;
+  })
+  console.log(allUserData);
+  
+}
+allUsersData()
