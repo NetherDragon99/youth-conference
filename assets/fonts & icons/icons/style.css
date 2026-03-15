@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?99ffpo');
-  src:  url('fonts/icomoon.eot?99ffpo#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?99ffpo') format('truetype'),
-    url('fonts/icomoon.woff?99ffpo') format('woff'),
-    url('fonts/icomoon.svg?99ffpo#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?iz1m7v');
+  src:  url('fonts/icomoon.eot?iz1m7v#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?iz1m7v') format('truetype'),
+    url('fonts/icomoon.woff?iz1m7v') format('woff'),
+    url('fonts/icomoon.svg?iz1m7v#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -43,8 +43,14 @@
 .icon-missed:before {
   content: "\e909";
 }
+.icon-minus:before {
+  content: "\e90f";
+}
 .icon-gamepad:before {
   content: "\e901";
+}
+.icon-search:before {
+  content: "\e90d";
 }
 .icon-user:before {
   content: "\e902";
@@ -57,6 +63,12 @@
 }
 .icon-notice:before {
   content: "\e906";
+}
+.icon-paperplane:before {
+  content: "\e90e";
+}
+.icon-play:before {
+  content: "\e905";
 }
 .icon-play:before {
   content: "\e905";

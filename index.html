@@ -5,9 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="assets/css/general.css">
-  <link rel="stylesheet" href="assets/css/main-page.css">
-  <link rel="stylesheet" href="assets/css/profile-page.css">
-  <link rel="stylesheet" href="assets/fonts & icons/icons/style.css">
   <script type="module" src="assets/js/index.js" defer></script>
   <meta lang="ar">
   <meta dir="rtl">
@@ -40,7 +37,7 @@
       <section id="pointsSection">
         <h1 id="cocsNO">0</h1>
         <h3>COCs</h3>
-        <h5 id="rank">v 2.23</h5>
+        <h5 id="rank">v 3.00</h5>
       </section>
       <section id="todayActivity">
         <!--activeTack-->
@@ -160,12 +157,94 @@
         </section>
       </section>
     </home-page>
-    <points-page id="points-page">
-
-    </points-page>
-    <games-page id="games-page">
-
-    </games-page>
+    <transaction-page id="transaction-page">
+      <section id="transactionProfileData">
+          <div class="transactionUserData">
+            <h1 id="cocsNO">0</h1>
+            <h3>COCs</h3>
+            <h5 id="rank">Rank: <p>1st</p></h5>
+          </div>
+          <div class="transactionProfilePicture">
+            <div class="icon-user"></div>
+          </div>
+      </section>
+      <section id="transactions">
+        <h4>تحويل الكوكس</h4>
+        <div id="transactionSearch">
+          <input type="search" id="transactionSearchBar" placeholder="اكتب اسم الشخص او الايميل بتاعه" autofocus>
+          <div class="icon-search"></div>
+        </div>
+        <button id="transactionSend">ٍSend <div class="icon-paperplane"></div></button>
+      </section>
+      <section id="transactionHistory">
+        <div class="transactionHistoryHeader">
+          <h2>سجل المعاملات</h2>
+          <div class="icon-refresh"></div>
+        </div>
+        <div class="transactionHistoryData">
+          <div class="transaction recive" data-trnID="trn201738453">
+            <div class="transactionIcon">
+              <div class="icon-done"></div>
+            </div>
+            <div class="transactionData">
+              <div class="transactionDate">25 مايو 2026</div>
+              <div class="transactionDetails">استلام من: ستيفين</div>
+            </div>
+            <div class="transactionAmount">+50</div>
+          </div>
+          <div class="transaction send" data-trnID="trn201738453">
+            <div class="transactionIcon">
+              <div class="icon-minus"></div>
+            </div>
+            <div class="transactionData">
+              <div class="transactionDate">25 مايو 2026</div>
+              <div class="transactionDetails">استلام من: ستيفين</div>
+            </div>
+            <div class="transactionAmount">+50</div>
+          </div>
+          <div class="transaction recive" data-trnID="trn201738453">
+            <div class="transactionIcon">
+              <div class="icon-done"></div>
+            </div>
+            <div class="transactionData">
+              <div class="transactionDate">25 مايو 2026</div>
+              <div class="transactionDetails">استلام من: ستيفين</div>
+            </div>
+            <div class="transactionAmount">+50</div>
+          </div>
+          <div class="transaction send" data-trnID="trn201738453">
+            <div class="transactionIcon">
+              <div class="icon-minus"></div>
+            </div>
+            <div class="transactionData">
+              <div class="transactionDate">25 مايو 2026</div>
+              <div class="transactionDetails">استلام من: ستيفين</div>
+            </div>
+            <div class="transactionAmount">+50</div>
+          </div>
+          <div class="transaction recive" data-trnID="trn201738453">
+            <div class="transactionIcon">
+              <div class="icon-done"></div>
+            </div>
+            <div class="transactionData">
+              <div class="transactionDate">25 مايو 2026</div>
+              <div class="transactionDetails">استلام من: ستيفين</div>
+            </div>
+            <div class="transactionAmount">+50</div>
+          </div>
+          <div class="transaction send" data-trnID="trn201738453">
+            <div class="transactionIcon">
+              <div class="icon-minus"></div>
+            </div>
+            <div class="transactionData">
+              <div class="transactionDate">25 مايو 2026</div>
+              <div class="transactionDetails">استلام من: ستيفين</div>
+            </div>
+            <div class="transactionAmount">+50</div>
+          </div>
+        </div>
+      </section>
+    </transaction-page>
     <rank-page id="rank-page">
 
     </rank-page>
@@ -188,7 +267,8 @@
             </div>
             <div>
               <label for="profilePassoword">password:</label>
-              <input type="password" id="profilePassoword" placeholder="**********" name="password" autocomplete="current-password" required>
+              <input type="password" id="profilePassoword" placeholder="**********" name="password"
+                autocomplete="current-password" required>
             </div>
             <input type="submit" id="profileSubmit" value="Sign-In/Log-In">
           </fieldset>
@@ -215,8 +295,7 @@
   </div>
   <footer>
     <a href="#home-page"><span class="icon-home activePage"></span></a>
-    <a href="#points-page"><span class="icon-credit-card"></span></a>
-    <a href="#games-page"><span class="icon-gamepad"></span></a>
+    <a href="#transaction-page"><span class="icon-credit-card"></span></a>
     <a href="#rank-page"><span class="icon-leaderboard"></span></a>
     <a href="#profile-page"><span class="icon-user"></span></a>
   </footer>
