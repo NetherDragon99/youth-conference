@@ -112,7 +112,18 @@ export const dom = {
     `<div class="searchResult">
         <div class="searchResultName">${v.userName}</div>
         <div class="searchResultEmal">${v.email}</div>
-      </div>`
+      </div>`,
+  rankedUsersDom: v =>
+    `<div class="rankedProfile">
+            <div class="rankPlaceNo">${v.rank}</div>
+            <div class="rankProfilePicture">
+              <div class="icon-${v.gender == 'f' ? 'user2' : 'user1'}"></div>
+            </div>
+            <div class="rankUserDetails">
+              <div class="rankUserNameRanked">${v.userName}</div>
+              <div class="rankUserCocsNo">${v.cocs} COCs</div>
+            </div>
+          </div>`
   
 }
 

@@ -2,6 +2,7 @@ import * as api from "./api.js";
 import * as home from "./home-page-functions.js";
 import * as loading from './loading-account-data.js';
 import * as text from './text.js';
+import * as rank from './rank-page.js'
 
 home.scrollFunction();
 

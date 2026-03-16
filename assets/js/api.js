@@ -3,6 +3,7 @@ export const apiURL = "https://script.google.com/macros/s/AKfycbzmBmnavjHrSoaeQm
 import * as text from "./text.js";
 import * as index from "./index.js";
 
+
 let rawdata;
 export async function fetchData(target) {
   try {
@@ -147,3 +148,13 @@ export const getUserTodayTask = async (page , email, date)=>{
   }
 }
 
+// get all users data
+export async function getAllUsersData() {
+  const fetchedData = await fetch(`${apiURL}?page=accounts&searchKey=state&searchValue=active`);
+  const allUsersData = await fetchedData.json();
+  
+  allUsersData.forEach((v)=>{
+    delete v.password;
+  })
+  return allUsersData;
+}
