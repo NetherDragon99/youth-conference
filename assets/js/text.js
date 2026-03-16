@@ -44,7 +44,7 @@ export const dom = {
             <input type="submit" id="updateProfileSubmitButton" value="Update your data">
             <button id='logOutBtn'>Log Out</button>
           </fieldset>`,
-  notificationDOM: (v)=>`
+  notificationDOM: (v) => `
                   <div class="notification ${v.state}" id="${v.id}">
                     <div class="notificationHeader">
                       <div class="notificationIcon ${v.icon}"></div>
@@ -66,7 +66,7 @@ export const dom = {
         <div class="noNotificationsMs">Unexpectied Error</div>`,
   sinInNotifications: `<h3>Notifications</h3>
         <div class="noNotificationsMs">please sign in to see your notifications</div>`,
-  tasksDOM: (v, icon, progress, displayBtn)=>`
+  tasksDOM: (v, icon, progress, displayBtn) => `
   <button class="task ${v.type}Task" data-id="${v.id}">
             <div class="taskHeader">
               <div class="taskIcon">
@@ -107,7 +107,13 @@ export const dom = {
                 </div>
               </div>
             </div>
-          </button>`
+          </button>`,
+  searchResultDOM: v => 
+    `<div class="searchResult">
+        <div class="searchResultName">${v.userName}</div>
+        <div class="searchResultEmal">${v.email}</div>
+      </div>`
+  
 }
 
 export const notificationsdata = {
@@ -120,7 +126,7 @@ export const notificationsdata = {
 }
 
 export const tasksActionBtn = {
-  tsk123456: ()=>{
+  tsk123456: () => {
     console.log('hi');
   }
 }

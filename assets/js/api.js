@@ -1,7 +1,7 @@
+export const apiURL = "https://script.google.com/macros/s/AKfycbzmBmnavjHrSoaeQmrgT4mjZg8Yi7wH90E44n8Mn1oOEz3unPdF2dRcqr40KXaxOb6T/exec";
+
 import * as text from "./text.js";
 import * as index from "./index.js";
-
-export const apiURL = "https://script.google.com/macros/s/AKfycbzmBmnavjHrSoaeQmrgT4mjZg8Yi7wH90E44n8Mn1oOEz3unPdF2dRcqr40KXaxOb6T/exec";
 
 let rawdata;
 export async function fetchData(target) {
@@ -61,10 +61,10 @@ export async function getAccountData(page, target) {
     const res = await fetch(`${apiURL}?page=${page}&email=${target}`);
     emailData = await res.json();
 
-    //console.log(emailData);
+    // console.log(emailData);
     return emailData;
   } catch (err) {
-    console.error("erro on getting data:");
+    console.log("erro on getting data:" ,err);
   }
 }
 
@@ -147,16 +147,3 @@ export const getUserTodayTask = async (page , email, date)=>{
   }
 }
 
-// get all users data
-export let allUserData = undefined;
-async function allUsersData() {
-  const fetchedData = await fetch(`${apiURL}?page=accounts`);
-  allUserData = await fetchedData.json();
-  
-  allUserData.forEach((v)=>{
-    delete v.password;
-  })
-  console.log(allUserData);
-  
-}
-allUsersData()

@@ -1,7 +1,8 @@
 @import url(./main-page.css);
 @import url(./profile-page.css);
-@import url(./transaction-page.css);
+@import url(./rank.css);
 @import url(../fonts\ &\ icons/icons/style.css);
+
 
 @font-face {
   font-family: 'Cairo';

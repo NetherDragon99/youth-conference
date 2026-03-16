@@ -2,8 +2,6 @@ import * as text from "./text.js";
 import * as index from "./index.js";
 import * as api from './api.js';
 import * as profile from "./profile-page-functions.js";
-import * as transaction from './transaction-page-functions.js';
-
 
 let getProfileGender;
 const checkingGenderLocalStorage = () => {
@@ -24,8 +22,9 @@ const transactionPicIcon = document.querySelector('.transactionProfilePicture di
 
 export async function getProfileData() {
   if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}'){
-    await api.getAccountData('accounts', (JSON.parse(localStorage.getItem('profile')).email));
-    allUserData = api.emailData;
+    const fetchedData = await api.getAccountData('accounts', (JSON.parse(localStorage.getItem('profile')).email));
+    allUserData = fetchedData;
+    
     allUserData.length != 0 ? putData() : localStorage.removeItem('profile');
   }else{
     localStorage.removeItem('profile');
@@ -73,7 +72,8 @@ export async function getProfileNotifications() {
   }
 };
 export let updateProfileBt, genderDropMenu, logOutBtn;
-
+const userRank = document.getElementById('rank');
+const cocs = document.getElementById('cocsNO');
 
 // put the data
 export async function putData() {
@@ -98,11 +98,11 @@ export async function putData() {
   logOutBtn.removeAttribute('disabled');
   getProfileNotifications();
 
-  transaction.cocsAndRank();
-  allUserData[0].gender == 'm'? transactionPicIcon.setAttribute('class', 'icon-user1'):allUserData[0].gender == 'f'? transactionPicIcon.setAttribute('class', 'icon-user2'):null;
+  cocs.innerHTML = allUserData[0].cocs;
+  userRank.innerHTML = `#${allUserData[0].rank}`;
 }
 
-getProfileData();
+window.addEventListener('DOMContentLoaded',()=> getProfileData())
 
 
 const changeGenderIcon = () => {
