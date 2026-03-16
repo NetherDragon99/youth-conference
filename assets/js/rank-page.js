@@ -7,8 +7,6 @@ const rankAutoRefreshIcon = document.querySelector('#rankRefreshButton>div');
 let allUsersRankData, getUsersDataInterval;
 async function getUsersDataIntervalfunction() {
   getUsersDataInterval = setInterval(async () => {
-    console.log('passed here');
-
     allUsersRankData = await api.getAllUsersData();
     putRankData(allUsersRankData);
   }, 10000)
@@ -86,7 +84,6 @@ function putRankData(usersRankData) {
       middlePositionCocs.innerHTML = `${usersRankData[i].cocs} COCs`;
       firstPlaceData = true;
     } else if (!secondPlaceData && v.cocs >= 50) {
-      console.log(v);
 
       // second place
       leftPositionPic.setAttribute('class', `icon-${usersRankData[i].gender == 'f' ? 'user2' : 'user1'} profilePic`)

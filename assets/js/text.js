@@ -102,7 +102,7 @@ export const dom = {
                   <div class="taskTime">خليك مستعد هنبدأ قريب</div>
                   <div class="taskProgress">
                     <div></div>
-                    <div class="tasksProgressNumber">24/6/2026</div>
+                    <div class="taskProgressNumber">24/6/2026</div>
                   </div>
                 </div>
               </div>
