@@ -14,7 +14,8 @@ export const text = {
   newAccount: 'اكونت جديد!!<br>دخل اسمك واختار الgender علشان نعمل الاكونت',
   loginSucces: 'تم تسجيل الدخول بنجاح',
   wrongPassword: 'الباسورد غلط !!<br>حاول تفتكر او راجع الحروف كويس',
-  accountUpdated: 'تم تحديث بياناتك بنجاح'
+  accountUpdated: 'تم تحديث بياناتك بنجاح',
+  noImage: 'خلى بالك ان كدة مفيش صورة مرفوعة'
 }
 
 export const dom = {
@@ -32,6 +33,19 @@ export const dom = {
                 <option value="p">Prefer not to say</option>
                 <option value="o">Other</option>
               </select>
+            </div>
+            <div>
+              <label for="profilePicture" id="profilePictureLable">picture:
+                <div>
+                  Select your profile picture...
+                  <div id="removeImage">
+                    <img src="assets/imgs/picture.ico" alt="images icon">
+                    <div class="icon-clear"></div>
+                  </div>
+                </div>
+              </label>
+              <input type="file" id="profilePicture" name="profilePictuure" accept="image/*">
+              <input type="text" name="profilePictuure" style="display: none;" id="profilePictureUrl">
             </div>
             <div>
               <label for="profileGmail">G-Mail:</label>
@@ -124,7 +138,6 @@ export const dom = {
               <div class="rankUserCocsNo">${v.cocs} COCs</div>
             </div>
           </div>`
-  
 }
 
 export const notificationsdata = {

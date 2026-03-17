@@ -28,7 +28,10 @@
         <h3>OF CHRIST</h3>
       </div>
     </div>
-    <a class="profilePicture" href="#profile-page"><span class="icon-user"></span></a>
+    <a class="profilePicture" href="#profile-page">
+      <span class="icon-user"></span>
+      <img>
+    </a>
   </header>
   <div class="mainContainer">
     <div class="adBanner">
@@ -262,6 +265,7 @@
         <div class="publicProfile">
           <div class="profilePicture">
             <span class="icon-user profile"></span>
+            <img>
           </div>
           <div class="userName">
             <h2>Guest</h2>
@@ -295,6 +299,19 @@
                 <option value="p">Prefer not to say</option>
                 <option value="o">Other</option>
               </select>
+            </div>
+            <div>
+              <label for="profilePicture" id="profilePictureLable">picture:
+                <div>
+                  Select your profile picture...
+                  <div id="removeImage">
+                    <img src="assets/imgs/picture.ico" alt="images icon">
+                    <div class="icon-clear"></div>
+                  </div>
+                </div>
+              </label>
+              <input type="file" id="profilePicture" accept="image/*">
+              <input type="text" name="profilePictuure" style="display: none;" id="profilePictureUrl">
             </div>
             <input type="submit" id="profileSignupSubmit" value="Sign-up">
           </fieldset>

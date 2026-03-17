@@ -42,6 +42,13 @@ profile-page .profilePicture .profile {
   margin-top: 1rem;
 }
 
+profile-page .profilePicture img{
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
 .userName {
   margin-top: 15px;
   font-size: 1.2rem;
@@ -117,6 +124,41 @@ input::placeholder {
 #profileGender {
   background-color: rgb(25, 34, 53);
   border-radius: 10px;
+}
+#profilePicture{
+  display: none;
+}
+#profilePictureLable{
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  align-items: center;
+}
+#profilePictureLable>div{
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+#profilePictureLable>div>div{
+  height: 3rem;
+  aspect-ratio: 1/1;
+  margin-left: 10px;
+  position: relative;
+}
+#profilePictureLable>div>div>img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#profilePictureLable>div>div>div{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
 }
 
 #profileSubmit ,#profileSignupSubmit, #updateProfileSubmitButton{

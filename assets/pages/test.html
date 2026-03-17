@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta lang="ar">
+  <meta dir="rtl">
+  <meta name="author" content="steven Mario">
+  <title>Profile Page</title>
+</head>
+
+<body>
+  <input id="input" type="file">
+  <img src="" alt="hello" id="image">
+  <script>
+    const input = document.getElementById("input");
+    const image = document.getElementById("image");
+
+     function makeSuitableImages(insertedImg) {
+      return new Promise((resolve, reject) => {
+        const tempImg = new Image();
+        tempImg.src = URL.createObjectURL(insertedImg);
+
+        tempImg.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = 150;
+          canvas.height = 150;
+
+          ctx.drawImage(tempImg, 0, 0, 150, 150);
+
+          const compressedImage = canvas.toDataURL('image/jpeg', 0.7);
+          URL.revokeObjectURL(tempImg.src);
+          resolve(compressedImage);
+        }
+        tempImg.onerror = (err) => {
+          reject(err);
+        }
+      })
+    }
+
+    input.addEventListener("change", async (file) => {
+      const img = file.target.files[0];
+      if (img) {
+        console.log(img);
+
+      console.log(await makeSuitableImages(img));
+      image.src = await makeSuitableImages(img);
+      }else{
+        console.log('no image found');
+        
+      }
+    })
+
+  </script>
+</body>
+
+</html>

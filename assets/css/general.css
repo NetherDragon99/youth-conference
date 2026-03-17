@@ -99,6 +99,12 @@ header a.profilePicture span {
   transform: translateX(-50%);
   color: aliceblue;
 }
+header a.profilePicture img{
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
 #notificationBanner{
   position: absolute;
   z-index: 8;

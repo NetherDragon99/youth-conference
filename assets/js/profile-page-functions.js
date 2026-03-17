@@ -235,3 +235,32 @@ async function addWelcomGift() {
   await api.updateSpecificData('accounts', 'email', JSON.parse(localStorage.getItem('profile')).email, { cocs: 10 });
   index.createNotification('welcomeGift');
 }
+
+// profile pic
+export function formPicture() {
+  const profilePicInput = document.getElementById('profilePicture');
+  const accountProfilePicture = document.querySelector('.publicProfile .profilePicture img');
+  const profilePictureUrl = document.getElementById('profilePictureUrl');
+
+  removeImageF();
+
+  profilePicInput.addEventListener('change', async (inputfile) => {
+    const inputImage = inputfile.target.files[0];
+    if (inputImage){
+      console.log('passed');
+      
+      let imageUrl = await index.makeSuitableImages(inputImage)
+      accountProfilePicture.src = imageUrl;
+      profilePictureUrl.value = imageUrl;
+      accountProfilePicture.style.display = 'block';
+    }
+  })
+}
+function removeImageF() {
+  const removeImage = document.getElementById('removeImage');
+  removeImage.addEventListener('click', ()=>{
+    document.querySelector('.publicProfile .profilePicture img').style.display = 'none';
+    document.getElementById('profilePictureUrl').value = '';
+    index.createAD(text.text.noImage);
+  })
+}

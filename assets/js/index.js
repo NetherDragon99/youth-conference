@@ -168,4 +168,30 @@ window.addEventListener('click', (click) => {
 // tasks
 home.tasksTotalPercentage();
 
+// images
+
+// create images url
+
+export function makeSuitableImages(insertedImg) {
+  return new Promise((resolve, reject) => {
+    const tempImg = new Image();
+    tempImg.src = URL.createObjectURL(insertedImg);
+
+    tempImg.onload = ()=>{
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 150;
+      canvas.height = 150;
+
+      ctx.drawImage(tempImg, 0, 0, 150, 150);
+
+      const compressedImage = canvas.toDataURL('image/jpeg',0.7);
+      URL.revokeObjectURL(tempImg.src);
+      resolve(compressedImage);      
+    }
+    tempImg.onerror = (err)=>{
+      reject(err);
+    }
+  })
+}
 

@@ -17,8 +17,6 @@ const getProfilePicIcon = document.querySelector('header .profilePicture span');
 export const ProfilePicIcon = document.querySelector('.publicProfile .profilePicture span');
 //profile data
 export let allUserData;
-const transactionPicIcon = document.querySelector('.transactionProfilePicture div')
-
 
 export async function getProfileData() {
   if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}'){
@@ -29,6 +27,7 @@ export async function getProfileData() {
   }else{
     localStorage.removeItem('profile');
     notificationContainer.innerHTML = text.dom.sinInNotifications;
+    profile.formPicture();
   }
 };
 
@@ -77,7 +76,18 @@ const cocs = document.getElementById('cocsNO');
 
 // put the data
 export async function putData() {
-  document.getElementById('profileForm').innerHTML = text.dom.updateDataForm
+  document.getElementById('profileForm').innerHTML = text.dom.updateDataForm;
+  profile.formPicture();
+  if (allUserData[0].profilePictuure != '') {
+    document.querySelector('.publicProfile .profilePicture img').src = allUserData[0].profilePictuure;
+    document.querySelector('.publicProfile .profilePicture img').style.display = 'block';
+    document.querySelector('header .profilePicture img').src = allUserData[0].profilePictuure;
+    document.querySelector('header .profilePicture img').style.display = 'block';
+  }else{
+    document.querySelector('header .profilePicture img').style.display = 'none';
+
+  }
+
   document.getElementById('profileUserName').value = allUserData[0].userName;
   document.getElementById('profileGmail').value = allUserData[0].email;
   document.getElementById('profilePassoword').value;
