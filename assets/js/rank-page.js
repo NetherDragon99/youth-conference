@@ -51,6 +51,10 @@ const leftPositionColor = document.querySelector('#topThree>#rankLeftPlace .rank
 const leftPositionBorder = document.querySelector('#rankLeftPlace .rankProfile>div:first-child');
 const rightPositionColor = document.querySelector('#topThree>#rankRightPlace .rankDetails>div:first-child');
 const rightPositionBorder = document.querySelector('#rankRightPlace .rankProfile>div:first-child');
+const leftPosistionImg = document.querySelector('#rankLeftPlace #rankPicIMage');
+const rightPosistionImg = document.querySelector('#rankRightPlace #rankPicIMage');
+const middlePosistionImg = document.querySelector('#rankMiddlePlace #rankPicIMage');
+
 
 const rankedUsersContainer = document.getElementsByClassName('rankUsers')[0];
 
@@ -69,6 +73,9 @@ function putRankData(usersRankData) {
   rightPositionPic.setAttribute('class', `icon-user profilePic`)
   rightPositionName.innerHTML = 'unranked';
   rightPositionCocs.innerHTML = ``;
+  leftPosistionImg.style.display = 'none';
+  rightPosistionImg.style.display = 'none';
+  middlePosistionImg.style.display = 'none';
 
   let rankedUsers = '';
 
@@ -76,12 +83,28 @@ function putRankData(usersRankData) {
 
   resetTop3Colors();
   usersRankData.forEach((v, i) => {
+    let imageAtt;
+    if (v.profilePicture !== '') {
+      imageAtt = `src="${v.profilePicture}" alt="profilePicture" style="display: block;"`
+    } else {
+      imageAtt = `style="display: none;"`;
+    }
+    
 
     if (!firstPlaceData && v.cocs >= 50) {
       // first place
       middlePositionPic.setAttribute('class', `icon-${usersRankData[i].gender == 'f' ? 'user2' : 'user1'} profilePic`)
       middlePositionName.innerHTML = usersRankData[i].userName;
       middlePositionCocs.innerHTML = `${usersRankData[i].cocs} COCs`;
+
+      if (v.profilePicture != '') {
+        middlePosistionImg.setAttribute('src', v.profilePicture);
+        middlePosistionImg.style.display = 'block';
+      } else {
+        middlePosistionImg.style.display = 'none';
+
+      }
+
       firstPlaceData = true;
     } else if (!secondPlaceData && v.cocs >= 50) {
 
@@ -90,6 +113,13 @@ function putRankData(usersRankData) {
       leftPositionName.innerHTML = usersRankData[i].userName;
       leftPositionCocs.innerHTML = `${usersRankData[i].cocs} COCs`;
       rankleftNo.innerHTML = `${v.rank}`;
+      if (v.profilePicture != '') {
+        leftPosistionImg.setAttribute('src', v.profilePicture);
+        leftPosistionImg.style.display = 'block';
+      } else {
+        leftPosistionImg.style.display = 'none';
+      }
+
       secondPlaceData = true;
 
       if (v.rank == '1') {
@@ -99,13 +129,18 @@ function putRankData(usersRankData) {
         rankleftNo.style.cssText = 'color: gold;';
       }
     } else if (!thirdPlaceData && v.cocs >= 50) {
-      console.log(v);
-
       // third place
       rightPositionPic.setAttribute('class', `icon-${usersRankData[i].gender == 'f' ? 'user2' : 'user1'} profilePic`)
       rightPositionName.innerHTML = usersRankData[i].userName;
       rightPositionCocs.innerHTML = `${usersRankData[i].cocs} COCs`;
       rankRightNo.innerHTML = `${usersRankData[i].rank}`;
+      if (v.profilePicture != '') {
+        rightPosistionImg.setAttribute('src', v.profilePicture);
+        rightPosistionImg.style.display = 'block';
+      } else {
+        rightPosistionImg.style.display = 'none';
+      }
+
       thirdPlaceData = true;
 
       if (v.rank == '1') {
@@ -120,8 +155,8 @@ function putRankData(usersRankData) {
         rankRightNo.style.cssText = 'color: silver;';
       }
     } else {
-      rankedUsers += text.dom.rankedUsersDom(v);
-
+      rankedUsers += text.dom.rankedUsersDom(v, imageAtt);
+      
     }
   })
   rankedUsersContainer.innerHTML = rankedUsers;

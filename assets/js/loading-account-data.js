@@ -78,10 +78,10 @@ const cocs = document.getElementById('cocsNO');
 export async function putData() {
   document.getElementById('profileForm').innerHTML = text.dom.updateDataForm;
   profile.formPicture();
-  if (allUserData[0].profilePictuure != '') {
-    document.querySelector('.publicProfile .profilePicture img').src = allUserData[0].profilePictuure;
+  if (allUserData[0].profilePicture != '') {
+    document.querySelector('.publicProfile .profilePicture img').src = allUserData[0].profilePicture;
     document.querySelector('.publicProfile .profilePicture img').style.display = 'block';
-    document.querySelector('header .profilePicture img').src = allUserData[0].profilePictuure;
+    document.querySelector('header .profilePicture img').src = allUserData[0].profilePicture;
     document.querySelector('header .profilePicture img').style.display = 'block';
   }else{
     document.querySelector('header .profilePicture img').style.display = 'none';

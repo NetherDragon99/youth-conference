@@ -44,8 +44,8 @@ export const dom = {
                   </div>
                 </div>
               </label>
-              <input type="file" id="profilePicture" name="profilePictuure" accept="image/*">
-              <input type="text" name="profilePictuure" style="display: none;" id="profilePictureUrl">
+              <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+              <input type="text" name="profilePicture" style="display: none;" id="profilePictureUrl">
             </div>
             <div>
               <label for="profileGmail">G-Mail:</label>
@@ -127,12 +127,12 @@ export const dom = {
         <div class="searchResultName">${v.userName}</div>
         <div class="searchResultEmal">${v.email}</div>
       </div>`,
-  rankedUsersDom: v =>
+  rankedUsersDom: (v, imageAtt) =>
     `<div class="rankedProfile">
             <div class="rankPlaceNo">${v.rank}</div>
             <div class="rankProfilePicture">
-              <div class="icon-${v.gender == 'f' ? 'user2' : 'user1'}"></div>
-            </div>
+              <div class="icon-${v.gender == 'f' ? 'user2' : 'user1'}"><img ${imageAtt}></div>
+            </div> 
             <div class="rankUserDetails">
               <div class="rankUserNameRanked">${v.userName}</div>
               <div class="rankUserCocsNo">${v.cocs} COCs</div>
