@@ -15,7 +15,9 @@ export const text = {
   loginSucces: 'تم تسجيل الدخول بنجاح',
   wrongPassword: 'الباسورد غلط !!<br>حاول تفتكر او راجع الحروف كويس',
   accountUpdated: 'تم تحديث بياناتك بنجاح',
-  noImage: 'خلى بالك ان كدة مفيش صورة مرفوعة'
+  noImage: 'خلى بالك ان كدة مفيش صورة مرفوعة',
+  notAdmin: 'الحساب دة مش مفعل كا ادمن',
+  toAdminPage: 'سيتم تحويلك الى صفحة الادمن'
 }
 
 export const dom = {

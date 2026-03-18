@@ -127,10 +127,18 @@ submitBt.addEventListener('click', async (x) => {
         const tempAccount = await api.getAccountData('accounts', formData.email);
         // console.log(tempAccount);
 
+
         const tempPass = tempAccount[0].password;
 
         // console.log(formData.password, tempPass);
         if (formData.password == tempPass) {
+          if (tempAccount[0].state == 'admin') {
+            index.createAD(text.text.toAdminPage, 'green');
+            localStorage.setItem('adminProfile', JSON.stringify({email: tempAccount[0].email, password: tempAccount[0].password}))
+            return setTimeout(()=>{
+              window.location.href = '../dashboard.html';
+            },6000)
+          }
           toLocalStorage = {
             email: tempAccount[0].email,
             password: tempAccount[0].password,

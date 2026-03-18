@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="assets/css/dashboard/dashboard.css">
+  <script type="module" src="assets/js/dashboard/dashboard.js" defer></script>
+  <meta lang="ar">
+  <meta dir="rtl">
+  <meta name="author" content="steven Mario">
+  <title>Main Page</title>
+</head>
+
+<body>
+  <header>
+    <div class="logoTitle">
+      <div><img src="assets/imgs/new coc logo.png" alt="church logo"></div>
+      <div class="logoTitleName">
+        <h3>CHURCH</h3>
+        <h3>OF CHRIST</h3>
+      </div>
+    </div>
+    <a id="dashboardUser" href="#profile-page">
+      <div id="dashboardHeaderName">
+        <h4>Admin</h4>
+        <h4 id="dashboardUserName">user name</h4>
+      </div>
+      <div id="dashboardProfilePic">
+        <span class="icon-user"></span>
+        <img>
+      </div>
+    </a>
+  </header>
+  <div class="mainContainer">
+    <div class="adBanner">
+    </div>
+    <profile-page id="dashboard-profile-page">
+      <div class="profileContainer">
+        <div class="publicProfile">
+          <div class="profilePicture">
+            <span class="icon-user profile"></span>
+            <img>
+          </div>
+          <div class="userName">
+            <h2>Admin Dashboard</h2>
+          </div>
+        </div>
+        <form id="profileForm">
+          <fieldset>
+            <legend class="accountProfileData">Account</legend>
+            <div>
+              <label for="profileGmail">G-Mail:</label>
+              <input type="email" id="profileGmail" placeholder="guest@gmail.com" name="email" required>
+            </div>
+            <div>
+              <label for="profilePassoword">password:</label>
+              <input type="password" id="profilePassoword" placeholder="**********" name="password"
+                autocomplete="current-password" required>
+            </div>
+            <input type="submit" id="profileSubmit" value="Log-In">
+          </fieldset>
+        </form>
+      </div>
+    </profile-page>
+  </div>
+  <footer>
+    <a href="#dashboard-profile-page"><span class="icon-user"></span></a>
+  </footer>
+</body>
+
+</html>

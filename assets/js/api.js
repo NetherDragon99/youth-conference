@@ -1,7 +1,6 @@
-export const apiURL = "https://script.google.com/macros/s/AKfycbzmBmnavjHrSoaeQmrgT4mjZg8Yi7wH90E44n8Mn1oOEz3unPdF2dRcqr40KXaxOb6T/exec";
-
 import * as text from "./text.js";
 import * as index from "./index.js";
+import { apiURL } from './dashboard/dashboard-api.js';
 
 
 let rawdata;
@@ -65,7 +64,7 @@ export async function getAccountData(page, target) {
     // console.log(emailData);
     return emailData;
   } catch (err) {
-    console.log("erro on getting data:" ,err);
+    console.log("erro on getting data:", err);
   }
 }
 
@@ -120,7 +119,7 @@ export async function updateSpecificData(page, target, data, dataToAdd) {
 
   }
 }
-export async function addSpecificData(page, data){
+export async function addSpecificData(page, data) {
   const toAPI = {
     page: page,
     action: 'add',
@@ -138,13 +137,13 @@ export async function addSpecificData(page, data){
     console.log(err);
   }
 }
-export const getUserTodayTask = async (page , email, date)=>{
-  try{
+export const getUserTodayTask = async (page, email, date) => {
+  try {
     const res = await fetch(`${apiURL}?page=${page}&email=${email}&date=${date}`);
     const response = res.json();
     return response;
-  }catch(err){
-    console.log(err); 
+  } catch (err) {
+    console.log(err);
   }
 }
 
@@ -152,9 +151,42 @@ export const getUserTodayTask = async (page , email, date)=>{
 export async function getAllUsersData() {
   const fetchedData = await fetch(`${apiURL}?page=accounts&searchKey=state&searchValue=active`);
   const allUsersData = await fetchedData.json();
-  
-  allUsersData.forEach((v)=>{
+
+  allUsersData.forEach((v) => {
     delete v.password;
   })
   return allUsersData;
+}
+
+// get specific data
+export async function getWith2Data(page, data1Key, data1Value, data2Key, data2Value) {
+  try {
+    const fetchedData = await fetch(`${apiURL}?page=${page}&${data1Key}=${data1Value}&${data2Key}=${data2Value}`);
+    fetchData.json();
+    return fetchedData;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function deleteSpecificData(page, target, data) {
+  const dataToUpdate = {
+    page: `${page}`,
+    action: 'delete',
+    searchKey: `${target}`,
+    searchValue: `${data}`,
+  }
+  try {
+    const response = await fetch(apiURL, {
+      method: 'POST',
+      body: JSON.stringify(dataToUpdate)
+    })
+    const res = await response.json();
+    //console.log(res);
+
+    return res;
+  } catch (err) {
+    console.log(err);
+
+  }
 }
