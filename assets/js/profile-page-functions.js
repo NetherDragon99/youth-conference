@@ -136,7 +136,7 @@ submitBt.addEventListener('click', async (x) => {
             index.createAD(text.text.toAdminPage, 'green');
             localStorage.setItem('adminProfile', JSON.stringify({email: tempAccount[0].email, password: tempAccount[0].password}))
             return setTimeout(()=>{
-              window.location.href = '../dashboard.html';
+              window.location.href = './dashboard.html';
             },6000)
           }
           toLocalStorage = {
