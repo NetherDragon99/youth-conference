@@ -3,11 +3,12 @@ import * as dashboard from './dashboard.js'
 import * as dashboardProfile from './dashboard-profile-page.js'
 import * as api from './dashboard-api.js'
 
+const dashboardProfilePagePic = document.querySelector('.publicProfile .profilePicture img')
 let localStore;
 window.addEventListener('DOMContentLoaded', () => {
 
   if (localStorage.getItem('adminProfile') && localStorage.getItem('adminProfile') != "{}") {
-
+    
     updateDashboardHeader();
     document.getElementById("profileForm").innerHTML = text.dom.updateDataForm;
     updateDataForm();
@@ -20,7 +21,6 @@ window.addEventListener('DOMContentLoaded', () => {
 const headerDashboardUserName = document.getElementById('dashboardUserName');
 const headerDashboardPic = document.querySelector('#dashboardProfilePic img');
 const headerDashboardIcon = document.querySelector('#dashboardProfilePic span');
-const dashboardProfilePagePic = document.querySelector('.publicProfile .profilePicture img')
 const dashboardProfilePageIcon = document.querySelector('.publicProfile .profilePicture .profile')
 
 export function updateDashboardHeader() {
@@ -36,7 +36,7 @@ export function updateDashboardHeader() {
   }
   if (localStore.profilePicture == '') {
     headerDashboardPic.style.display = 'none';
-  } else {
+  } else if(localStore.profilePicture) {
     headerDashboardPic.src = localStore.profilePicture;
     headerDashboardPic.style.display = 'block';
   }
@@ -59,7 +59,7 @@ export function updateDataForm() {
   }
   if (localStore.profilePicture == '') {
     dashboardProfilePagePic.style.display = 'none';
-  } else {
+  } else if (localStore.profilePicture) {
     dashboardProfilePagePic.src = localStore.profilePicture;
     dashboardProfilePagePic.style.display = 'block';
   }
