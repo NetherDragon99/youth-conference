@@ -117,11 +117,11 @@ export function formPicture() {
 }
 function removeImageF() {
   const removeImage = document.getElementById('removeImage');
-  removeImage.addEventListener('click', () => {
+  removeImage.onclick = () => {
     document.querySelector('.publicProfile .profilePicture img').style.display = 'none';
     document.getElementById('profilePictureUrl').value = '';
     dashboard.createAD(text.text.noImage);
-  })
+  }
 }
 function makeSuitableImages(insertedImg) {
   return new Promise((resolve, reject) => {
