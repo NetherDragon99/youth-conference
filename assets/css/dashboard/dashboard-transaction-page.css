@@ -42,6 +42,7 @@
   flex-direction: column;
   gap: 10px;
   flex-shrink: 0;
+  min-height: calc(100dvh - 220px - 1.5rem);
 }
 #transactionUsersSearch{
   width: 100%;
@@ -230,6 +231,12 @@
   border-bottom: white solid;
   padding-bottom: 10px;
 }
+#transactionDetailsMessage{
+  padding: 10px;
+  max-width: 100%;
+  height: 6rem;
+  line-height: 1rem;
+}
 
 #transactionButton{
   background-image: linear-gradient(to right, rgb(141, 121, 5), rgb(196, 171, 34), rgb(109, 93, 2));
@@ -255,6 +262,9 @@
   margin-bottom: 20px;
   padding: 0;
   height: max-content;
+}
+#transactionHistory>header>div{
+  font-weight: 700;
 }
 #transactionHistoryContainer{
   width: 100%;
