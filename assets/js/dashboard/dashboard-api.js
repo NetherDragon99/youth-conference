@@ -54,3 +54,15 @@ export async function updateSpecificData(page, target, data, dataToAdd) {
 
   }
 }
+
+export async function getSpecificData(page, target, data) {
+  try {
+    const res = await fetch(`${apiURL}?page=${page}&searchKey=${target}&searchValue=${data}`);
+    let getSpecificData = await res.json();
+
+    // console.log(getSpecificData);
+    return getSpecificData;
+  } catch (err) {
+    return console.error("erro on getting data:");
+  }
+}
