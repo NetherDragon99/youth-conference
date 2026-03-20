@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?9noo9a');
-  src:  url('fonts/icomoon.eot?9noo9a#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?9noo9a') format('truetype'),
-    url('fonts/icomoon.woff?9noo9a') format('woff'),
-    url('fonts/icomoon.svg?9noo9a#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?jaldhf');
+  src:  url('fonts/icomoon.eot?jaldhf#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?jaldhf') format('truetype'),
+    url('fonts/icomoon.woff?jaldhf') format('woff'),
+    url('fonts/icomoon.svg?jaldhf#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -28,11 +28,17 @@
 .icon-home:before {
   content: "\e900";
 }
+.icon-coin:before {
+  content: "\e93c";
+}
 .icon-credit-card:before {
   content: "\e93f";
 }
 .icon-bell:before {
   content: "\e951";
+}
+.icon-spinner:before {
+  content: "\e984";
 }
 .icon-tongue:before {
   content: "\e9e3";
@@ -42,6 +48,9 @@
 }
 .icon-missed:before {
   content: "\e909";
+}
+.icon-plus:before {
+  content: "\e912";
 }
 .icon-minus:before {
   content: "\e90f";
@@ -87,6 +96,9 @@
 }
 .icon-task:before {
   content: "\e907";
+}
+.icon-users:before {
+  content: "\e913";
 }
 .icon-refresh:before {
   content: "\f021";

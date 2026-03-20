@@ -168,8 +168,8 @@ window.addEventListener('click', (click) => {
 // tasks
 home.tasksTotalPercentage();
 
-// images
 
+// images
 // create images url
 
 export function makeSuitableImages(insertedImg) {

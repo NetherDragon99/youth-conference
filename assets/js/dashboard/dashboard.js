@@ -25,5 +25,24 @@ function removeAD() {
   }
 }
 
+const footerNavIcons = document.querySelectorAll('body footer a');
+addEventListener('hashchange', () => {
+  const currentPage = location.hash;
 
+  localStorage.setItem('historyPage', currentPage);
+
+  footerNavIcons.forEach((v) => {
+    v.querySelector(`span`).classList.remove('activePage');
+
+    if (`${v.getAttribute('href')}` == `${currentPage}`) {
+      v.setAttribute('class', 'active');
+      v.querySelector(`span`).classList.add('activePage');
+    }
+  })
+})
+
+window.addEventListener('load', () => {
+  location.hash = '';
+  location.hash = localStorage.getItem('historyPage');
+})
 

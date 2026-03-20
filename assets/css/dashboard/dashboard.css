@@ -1,5 +1,6 @@
 @import url(../profile-page.css);
 @import url(../../fonts\ &\ icons/icons/style.css);
+@import url(./dashboard-transaction-page.css);
 
 @font-face {
   font-family: 'Cairo';
@@ -137,6 +138,7 @@ footer a{
 footer a span{
   font-size: 2rem;
   color: rgb(182, 180, 180);
+  transition: .5s;
 }
 .activePage{
   color: aliceblue;

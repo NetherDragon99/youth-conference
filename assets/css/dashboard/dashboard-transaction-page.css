@@ -1,0 +1,300 @@
+#dashboard-transaction-page{
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  direction: rtl;
+}
+#dashboard-transaction-page>section{
+  background-color: rgb(10, 23, 39);
+  border: rgb(19, 36, 58) solid 2px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  margin-top: 20px;
+  padding: 15px;
+}
+#totalUsersNo{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+}
+#totalUsersNo>div{
+  font-size: 1.5rem;
+}
+#totalUsersNo>h3{
+  font-size: 1.4rem;
+}
+#totalUsersNo>h3:last-child{
+  margin-right: auto;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+#transactionSection{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+#transactionUsersSearch{
+  width: 100%;
+  height: 2.5rem;
+  background-color: rgb(19, 36, 58);
+  border-radius: 5px;
+  position: relative;
+}
+#transactionUsersSearch input{
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+}
+#transactionUsersSearch>div{
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.fastTransactionValues{
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+}
+.fastTransactionValue{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  max-width: 80px;
+  aspect-ratio: 1/1;
+  border-radius: 15px;
+  border-radius: 15px;
+  gap: 5px;
+  font-size: clamp(1rem , 2vw , 1.5rem);
+  font-weight: 900;
+}
+.fastTransactionValue:first-child{
+  background-image: linear-gradient(to top right, rgb(12, 36, 68), rgb(80, 148, 238));
+}
+.fastTransactionValue:nth-child(2){
+  background-image: linear-gradient(to top right, rgb(11, 70, 16), rgb(80, 180, 85));
+}
+.fastTransactionValue:nth-child(3){
+  background-image: linear-gradient(to top right, rgb(77, 72, 8), rgb(245, 216, 53));
+}
+.fastTransactionValue:nth-child(4){
+  background-image: linear-gradient(to top right, rgb(77, 8, 8), rgb(182, 70, 70));
+}
+
+#transactionValue{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 3rem;
+  border: rgba(108, 158, 175, 0.616) solid;
+  border-radius: 7px;
+  padding: 0 10px;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
+}
+#transactionValueInputField{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#transactionValueInputField input{
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  overflow: hidden;
+}
+#transactionValueInputField>div{
+  font-size: 1.3rem;
+}
+#transfereTypeButton{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+  max-width: 60px;
+  height: 80%;
+  border-radius: 15px;
+  padding: 10px;
+  position: relative;
+  transition: 1s;
+  border: green solid;
+  background-image: linear-gradient(to right, rgb(46, 228, 46), rgb(150, 235, 150), rgb(235, 150, 150), rgb(228, 46, 46));
+  background-size: 300%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+#transfereTypeButton>div{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  transition: 1s;
+}
+#transfereTypeButton>div>div{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: 1s;
+}
+#transfereTypeButton[data-state="addCocs"]{
+  background-position: 0%;
+  border: green solid;
+}
+#transfereTypeButton[data-state="removeCocs"]{
+  background-position: 100%;
+  border: red solid;
+}
+#transfereTypeButton[data-state="addCocs"]>div{
+  background-color: green;
+  left: 7px;
+}
+#transfereTypeButton[data-state="removeCocs"]>div{
+  background-color: red;
+  left: calc(100% - 17px);
+}
+#transfereTypeButton[data-state="addCocs"] .icon-plus{
+  opacity: 1;
+}
+#transfereTypeButton[data-state="addCocs"] .icon-minus{
+  opacity: 0;
+}
+#transfereTypeButton[data-state="removeCocs"] .icon-minus{
+  opacity: 1;
+}
+#transfereTypeButton[data-state="removeCocs"] .icon-plus{
+  opacity: 0;
+}
+
+#transactionDescriptionContainer,#transactionDetailsContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  position: relative;
+}
+#transactionDescription,#transactionDetailsMessage{
+  width: 100%;
+  height: 2.5rem;
+  background-color: rgb(19, 36, 58);
+  border-radius: 5px;
+  padding: 0 10px;
+}
+#transactionDescriptionSuggestions,#transactionDetailsSuggestions{
+  width: 100%;
+  max-height: 200px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  background-color: rgb(19, 36, 58);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 105%;
+  overflow-y: scroll;
+  scrollbar-width: 0;
+  display: none;
+}
+#transactionDescriptionSuggestions>h4,#transactionDetailsSuggestions>h4{
+  position: sticky;
+  top: -10px;
+  background-color: rgb(19, 36, 58);
+  padding: 10px 0;
+}
+.transactionDescriptionSuggestion,#transactionDetailsSuggestion{
+  border-bottom: white solid;
+  padding-bottom: 10px;
+}
+
+#transactionButton{
+  background-image: linear-gradient(to right, rgb(141, 121, 5), rgb(196, 171, 34), rgb(109, 93, 2));
+  width: 100%;
+  height: 3rem;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+#transactionHistory{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: calc(100dvh - 150px);
+}
+#transactionHistory>header{
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0;
+  height: max-content;
+}
+#transactionHistoryContainer{
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.transaction{
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 10px;
+  border-bottom: white solid 1px;
+  gap: 10px;
+  justify-content: start;
+}
+#transactionIcon{
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#transactionDetails{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: .8rem;
+}
+
+#transactionDetails>h4{
+  color: lightgray;
+}
+#trransactionDate{
+  direction: ltr;
+}
+.transaction.add .transactionType,.transaction.add .icon-plus{
+  color: rgb(5, 161, 5);
+}
+.transaction.remove .transactionType,.transaction.remove .icon-minus{
+  color: rgb(161, 5, 5);
+}
