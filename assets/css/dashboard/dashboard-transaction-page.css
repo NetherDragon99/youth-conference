@@ -58,12 +58,56 @@
   outline: none;
   padding: 10px;
 }
-#transactionUsersSearch>div{
+#transactionUsersSearch>div:nth-child(2){
   position: absolute;
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
+  transition: 1s;
+  touch-action: none;
 }
+#usersSearchSuggestions{
+  width: 100%;
+  max-height: 200px;
+  background-color: rgba(19, 36, 58, 0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 105%;
+  overflow: scroll;
+  scrollbar-width: none;
+  z-index: 3;
+  display: none;
+}
+.usersSearchSuggestion{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-bottom: white solid 1px;
+  padding: 5px;
+}
+.exitSearchMenu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 900;
+  width: fit-content;
+  height: fit-content;
+  align-self: flex-end;
+  opacity: 0;
+  transition: 1s
+}
+
 .fastTransactionValues{
   display: flex;
   flex-direction: row-reverse;
@@ -124,6 +168,11 @@
   outline: none;
   overflow: hidden;
 }
+#insertedTransactionAmount::-webkit-inner-spin-button,
+#insertedTransactionAmount::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 #transactionValueInputField>div{
   font-size: 1.3rem;
 }
@@ -175,7 +224,8 @@
 }
 #transfereTypeButton[data-state="removeCocs"]>div{
   background-color: red;
-  left: calc(100% - 17px);
+  left: calc(100% - 7px);
+  transform: translate(-100%, -50%);
 }
 #transfereTypeButton[data-state="addCocs"] .icon-plus{
   opacity: 1;
@@ -207,8 +257,6 @@
 #transactionDescriptionSuggestions,#transactionDetailsSuggestions{
   width: 100%;
   max-height: 200px;
-  overflow-y: scroll;
-  scrollbar-width: none;
   background-color: rgb(19, 36, 58);
   display: flex;
   flex-direction: column;
@@ -218,18 +266,27 @@
   position: absolute;
   top: 105%;
   overflow-y: scroll;
-  scrollbar-width: 0;
+  scrollbar-width: none;
+  z-index: 2;
   display: none;
 }
-#transactionDescriptionSuggestions>h4,#transactionDetailsSuggestions>h4{
-  position: sticky;
-  top: -10px;
-  background-color: rgb(19, 36, 58);
-  padding: 10px 0;
+.transactionDescriptionSuggestion.lastDescription{
+  background-color: rgb(35, 55, 82);
+  padding-top: 5px;
+}
+.lastDescriptionTitle{
+  font-size: .8rem;
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+
+#transactionDetailsSuggestions{
+  display: none;
 }
 .transactionDescriptionSuggestion,#transactionDetailsSuggestion{
   border-bottom: white solid;
   padding-bottom: 10px;
+  border-radius: 5px;
 }
 #transactionDetailsMessage{
   padding: 10px;
@@ -249,6 +306,23 @@
   gap: 10px;
   font-size: 1.3rem;
   font-weight: 900;
+  overflow: hidden;
+}
+#transactionButton:enabled:active{
+  background-image: linear-gradient(to right, rgb(116, 99, 4), rgb(160, 140, 27), rgb(80, 68, 1));
+}
+@keyframes sendBtn {
+  0%{
+    transform: translate(0%,0%);
+  }10%{
+    transform: translate(-50%,50%);
+  }50%{
+    transform: translate(200%,-200%);
+  }51%{
+    transform: translate(-200%,200%);
+  }100%{
+    transform: translate(0%,0%);
+  }
 }
 
 #transactionHistory{
@@ -265,6 +339,11 @@
 }
 #transactionHistory>header>div{
   font-weight: 700;
+}
+@keyframes spinner {
+  to{
+    transform: rotate(360deg);
+  }
 }
 #transactionHistoryContainer{
   width: 100%;
@@ -294,6 +373,11 @@
   flex-direction: column;
   gap: 5px;
   font-size: .8rem;
+}
+#trransactionDate{
+  margin-right: auto;
+  align-self: end;
+  font-size: .6rem;
 }
 
 #transactionDetails>h4{

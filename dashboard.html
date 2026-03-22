@@ -44,25 +44,28 @@
       <section id="transactionSection">
         <h2>تحويل الكوكس</h2>
         <div id="transactionUsersSearch">
-          <input type="search" id="transactionSearchBar" placeholder="اختار الحساب">
+          <input type="search" id="transactionSearchBar" placeholder="اختار الحساب" data-targetedUser="undefined" value="">
           <div class="icon-search"></div>
+          <div class="icon-clear exitSearchMenu"></div>
+          <div id="usersSearchSuggestions">
+          </div>
         </div>
         <div class="fastTransaction">
           <h3>تحويل سريع</h3>
           <div class="fastTransactionValues">
-            <div class="fastTransactionValue">
+            <div class="fastTransactionValue" data-value="5">
               <div class="icon-coin"></div>
               <h4>+5</h4>
             </div>
-            <div class="fastTransactionValue">
+            <div class="fastTransactionValue" data-value="10">
               <div class="icon-coin"></div>
               <h4>+10</h4>
             </div>
-            <div class="fastTransactionValue">
+            <div class="fastTransactionValue" data-value="20">
               <div class="icon-coin"></div>
               <h4>+20</h4>
             </div>
-            <div class="fastTransactionValue">
+            <div class="fastTransactionValue" data-value="50">
               <div class="icon-coin"></div>
               <h4>+50</h4>
             </div>
@@ -71,7 +74,7 @@
         <div id="transactionValue">
           <div id="transactionValueInputField">
             <div class="icon-coin"></div>
-            <input type="number" id="insertedTransactionAmount" placeholder="اكتب المبلغ">
+            <input type="number" id="insertedTransactionAmount" placeholder="اكتب المبلغ" data-transactionValue="0">
           </div>
           <button id="transfereTypeButton" data-state="addCocs">
             <div>
@@ -82,28 +85,12 @@
         </div>
         <h3>الرسالة الوصفية</h3>
         <div id="transactionDescriptionContainer">
-          <input type="text" id="transactionDescription" maxlength="50" placeholder="جائزة العالب">
-          <div id="transactionDescriptionSuggestions">
-            <h4>وصف سابق</h4>
-            <div class="transactionDescriptionSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDescriptionSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDescriptionSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDescriptionSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDescriptionSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDescriptionSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-          </div>
+          <input type="text" id="transactionDescription" maxlength="20" placeholder="جائزة العالب" data-transactionDescription="undefined">
+          <div id="transactionDescriptionSuggestions"></div>
         </div>
         <div id="transactionDetailsContainer">
-          <textarea id="transactionDetailsMessage"  placeholder="لا يوجد"></textarea>
-          <div id="transactionDetailsSuggestions">
-            <h4>وصف سابق</h4>
-            <div class="transactionDetailsSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDetailsSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDetailsSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDetailsSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDetailsSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-            <div class="transactionDetailsSuggestion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, beatae!</div>
-          </div>
+          <textarea id="transactionDetailsMessage" placeholder="لا يوجد"></textarea>
+          <div id="transactionDetailsSuggestions"></div>
         </div>
         <button id="transactionButton">
           <h4>تأكيد الكوكس</h4>
@@ -115,48 +102,7 @@
           <h2>سجل التحويلات</h2>
           <div class="icon-spinner"></div>
         </header>
-        <div id="transactionHistoryContainer">
-          <div class="transaction add">
-            <div id="trransactionDate">2025/03/12 12:00</div>
-            <div id="transactionDetails">
-              <h3>اضافة <span class="transactionType">+5</span> الى ستيفين</h3>
-              <h4>yoyo.m.king14@gmail.com</h4>
-            </div>
-            <div id="transactionIcon" class="icon-plus"></div>
-          </div>
-          <div class="transaction remove">
-            <div id="trransactionDate">2025/03/12 12:00</div>
-            <div id="transactionDetails">
-              <h3>خصم <span class="transactionType">-5</span> الى ستيفين</h3>
-              <h4>yoyo.m.king14@gmail.com</h4>
-            </div>
-            <div id="transactionIcon" class="icon-minus"></div>
-          </div>
-          <div class="transaction add">
-            <div id="trransactionDate">2025/03/12 12:00</div>
-            <div id="transactionDetails">
-              <h3>اضافة <span class="transactionType">+5</span> الى ستيفين</h3>
-              <h4>yoyo.m.king14@gmail.com</h4>
-            </div>
-            <div id="transactionIcon" class="icon-plus"></div>
-          </div>
-          <div class="transaction remove">
-            <div id="trransactionDate">2025/03/12 12:00</div>
-            <div id="transactionDetails">
-              <h3>خصم <span class="transactionType">-5</span> الى ستيفين</h3>
-              <h4>yoyo.m.king14@gmail.com</h4>
-            </div>
-            <div id="transactionIcon" class="icon-minus"></div>
-          </div>
-          <div class="transaction add">
-            <div id="trransactionDate">2025/03/12 12:00</div>
-            <div id="transactionDetails">
-              <h3>اضافة <span class="transactionType">+5</span> الى ستيفين</h3>
-              <h4>yoyo.m.king14@gmail.com</h4>
-            </div>
-            <div id="transactionIcon" class="icon-plus"></div>
-          </div>
-        </div>
+        <div id="transactionHistoryContainer"></div>
       </section>
     </transaction-page>
     <profile-page id="dashboard-profile-page">

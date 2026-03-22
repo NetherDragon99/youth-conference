@@ -57,7 +57,7 @@ export const cleanTime = (time) => {
 }
 
 // set the time to useable formate
-
+// dd/mm/yyyy hh:mm am
 export const timeText = (insertedTime)=>{  
   if (new Date(insertedTime) == 'Invalid Date') {
     return '';

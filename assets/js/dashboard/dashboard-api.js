@@ -1,4 +1,4 @@
-export const apiURL = "https://script.google.com/macros/s/AKfycbzmBmnavjHrSoaeQmrgT4mjZg8Yi7wH90E44n8Mn1oOEz3unPdF2dRcqr40KXaxOb6T/exec";
+export const apiURL = "https://script.google.com/macros/s/AKfycbxotU053o6YWIw5Y6KNGDl6yNx7HWbjGh-mFLShc_XuW8zTl4P6HIvkCJzAxFxAaoX1/exec";
 
 export async function deleteSpecificData(page, target, data) {
   const dataToUpdate = {
@@ -65,4 +65,40 @@ export async function getSpecificData(page, target, data) {
   } catch (err) {
     return console.error("erro on getting data:");
   }
+}
+
+export async function getColumn(page, target) {
+  try {
+    const res = await fetch(`${apiURL}?page=${page}&column=${target}`);
+    let getSpecificData = await res.json();
+
+    // console.log(getSpecificData);
+    return getSpecificData;
+  } catch (err) {
+    return console.error("erro on getting data:");
+  }
+}
+
+export async function addSpecificData(page, data) {
+  const toAPI = {
+    page: page,
+    action: 'add',
+    data: data
+  }
+  try {
+    const response = await fetch(apiURL, {
+      method: 'POST',
+      body: JSON.stringify(toAPI)
+    })
+    const res = await response.json();
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getData(page) {
+  const fetchedData = (await fetch(`${apiURL}?page=${page}`)).json();
+  return fetchedData;
 }

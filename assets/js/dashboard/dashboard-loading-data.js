@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('adminProfile');
   }
 
-  transactionPage.putUsersNo();
+  transactionPage.transactionPage();
 })
 
 const headerDashboardUserName = document.getElementById('dashboardUserName');

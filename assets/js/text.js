@@ -17,7 +17,14 @@ export const text = {
   accountUpdated: 'تم تحديث بياناتك بنجاح',
   noImage: 'خلى بالك ان كدة مفيش صورة مرفوعة',
   notAdmin: 'الحساب دة مش مفعل كا ادمن',
-  toAdminPage: 'سيتم تحويلك الى صفحة الادمن'
+  toAdminPage: 'سيتم تحويلك الى صفحة الادمن',
+  noTransactionTargete:'اختار الحساب الى هتحول له',
+  noTransactionAmount: 'اختار الكمية المطلوبة',
+  defaultAddTransactioDescription: amount => `تم اضافة ${amount} كوكس`,
+  defaultremoveTransactioDescription: amount => `تم خصم ${amount} كوكس`,
+  defaultTransactionDetails: 'تمت هذه العملية من قبل الادمن',
+  transactionFaild: 'حصلت مشكلة فى التحويل',
+  transactionUserNotAvailable: 'الشخص دة مش مودود او انت كتبته يدوى<br>معلش اختار الشخص من القائمة'
 }
 
 export const dom = {
@@ -139,6 +146,28 @@ export const dom = {
               <div class="rankUserNameRanked">${v.userName}</div>
               <div class="rankUserCocsNo">${v.cocs} COCs</div>
             </div>
+          </div>`,
+  usersSearchResults: v => `<div class="usersSearchSuggestion">
+              <h4 class="userSearchName">${v.userName}</h4>
+              <h4 class="userSearchEmail">${v.email}</h4>
+            </div>`,
+  transactiionDescription: v => `<div class="transactionDescriptionSuggestion">${v}</div>`,
+  transactiionLastDescription: v => `<div class="transactionDescriptionSuggestion lastDescription">
+              <p class="lastDescriptionTitle">الوصف السابق</p>
+              <p class="lastDescriptionText">${v}</p>
+            </div>`,
+  transactiionDetails: v => `<div class="transactionDescriptionSuggestion">${v}</div>`,
+  transactiionLastDetails: v => `<div class="transactionDescriptionSuggestion lastDescription">
+              <p class="lastDescriptionTitle">الوصف السابق</p>
+              <p class="lastDescriptionText">${v}</p>
+            </div>`,
+  transactionHistory: (state, time, description, email, icon, admin)=> `<div class="transaction ${state}" data-adminName="${admin}">
+            <div id="trransactionDate">${time}</div>
+            <div id="transactionDetails">
+              <h3>${description}</h3>
+              <h4>${email}</h4>
+            </div>
+            <div id="transactionIcon" class="icon-${icon}"></div>
           </div>`
 }
 
