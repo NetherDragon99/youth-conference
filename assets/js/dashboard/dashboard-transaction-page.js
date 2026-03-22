@@ -181,6 +181,10 @@ async function transactionDescriptionF() {
 
       suggestions.forEach((v) => {
         v.addEventListener('click', () => {
+          if (v.classList.contains('lastDescription')) {
+            transactionDescription.value = v.querySelector('.lastDescriptionText').innerHTML.replace(/\<br>/g, '\n');
+            return transactionDescriptionContainer.style.display = 'none';
+          }
           transactionDescription.value = v.innerHTML.replace(/\<br>/g, '\n');
           transactionDescriptionContainer.style.display = 'none';
         })
@@ -247,6 +251,11 @@ async function transactionDetailsF() {
 
       suggestions.forEach((v) => {
         v.addEventListener('click', () => {
+          if (v.classList.contains('lastDescription')) {
+          transactionDetails.value = v.querySelector('.lastDescriptionText').innerHTML.replace(/\<br>/g, '\n');
+          return transactionDetailsContainer.style.display = 'none';
+        }
+
           transactionDetails.value = v.innerHTML.replace(/\<br>/g, '\n');
           transactionDetailsContainer.style.display = 'none';
         })
@@ -261,11 +270,6 @@ const transactionHistoryContainer = document.getElementById('transactionHistoryC
 
 transactionSendBtn.onclick = async () => {
   transactionSendBtn.setAttribute('disabled', 'true');
-
-  setTimeout(() => {
-    transactionSendBtn.querySelector('div').style.animation = 'none'
-  }, 2000)
-
 
   let userTargeted, amount, description, details, confirmMessage;
   const type = document.getElementById('transfereTypeButton').getAttribute('data-state');
@@ -289,6 +293,8 @@ transactionSendBtn.onclick = async () => {
 
   description == ''? description = text.text.defaultAddTransactioDescription(amount) : description;
 
+  details == ''? details = text.text.defaultTransactionDetails : details;
+
     if (type == 'addCocs') {
       confirmMessage = text.text.defaultAddTransactioDescription(amount)
     } else {
@@ -303,8 +309,8 @@ transactionSendBtn.onclick = async () => {
     return dashboard.createAD(text.text.transactionUserNotAvailable)
   } else {
     getUserCocs = getUserCocs[0].cocs;
-    transactionSendBtn.querySelector('div').style.animation = 'sendBtn 2s forwards';
   }
+  transactionSendBtn.querySelector('div').style.animation = 'sendBtn 2s forwards';
 
   const updateData = await api.updateSpecificData('accounts', 'email', userTargeted, { cocs: Number(getUserCocs) + amount })
   transactionSendBtn.removeAttribute('disabled');
@@ -319,10 +325,9 @@ transactionSendBtn.onclick = async () => {
     return dashboard.createAD(text.text.transactionFaild);
   }
 
+
   function addTransactionHistory() {
     let state, time, description, email, icon;
-
-    console.log(amount);
     amount < 0 ? amount = amount * -1 : amount = amount;
     
     if (type == 'addCocs') {
@@ -338,6 +343,12 @@ transactionSendBtn.onclick = async () => {
     time = timing.timeText(new Date())
     email = userTargeted;
     transactionHistoryContainer.insertAdjacentHTML('afterbegin', text.dom.transactionHistory(state, time, description, email, icon, admin))
+
+    if (document.getElementById('transactionDescription').value == '') {
+      type == 'addCocs' ? description = text.text.defaultAddTransactioDescription(amount) : description = text.text.defaultremoveTransactioDescription(amount);
+    }else{
+      description = document.getElementById('transactionDescription').value;
+    }
 
     api.addSpecificData('transactionsHistory',{
       date: time,
@@ -355,10 +366,18 @@ transactionSendBtn.onclick = async () => {
 
 async function addTransactionHistory(){
   const fetchedData = await api.getData('transactionsHistory');
-
+  let description;
   transactionHistoryContainer.innerHTML = '';
+
   fetchedData.forEach((v)=>{
-    transactionHistoryContainer.insertAdjacentHTML('afterbegin', text.dom.transactionHistory(v.state, timing.timeText(v.date), v.description, v.email, v.icon, v.adminName))
+    if (v.state == 'add') {
+      description = `اضافة <span class="transactionType">+${v.amount}</span> الى ${v.userName}`
+    }else if (v.state == 'remove') {
+      description = `خصم <span class="transactionType">-${v.amount}</span> من ${v.userName}`
+    }else{
+      return
+    }
+    transactionHistoryContainer.insertAdjacentHTML('afterbegin', text.dom.transactionHistory(v.state, timing.timeText(v.date), description, v.email, v.icon, v.adminName))
   })
 
 }
