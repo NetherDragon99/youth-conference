@@ -1,4 +1,4 @@
-export const apiURL = "https://script.google.com/macros/s/AKfycbxotU053o6YWIw5Y6KNGDl6yNx7HWbjGh-mFLShc_XuW8zTl4P6HIvkCJzAxFxAaoX1/exec";
+export const apiURL = "https://script.google.com/macros/s/AKfycbxFrpgsy_WTpNL6Vn3ySVMj1LeBshR4ChgxYUFyWHKYXfLvebzpjfBVIRWFlQkCrzLy/exec";
 
 export async function deleteSpecificData(page, target, data) {
   const dataToUpdate = {
