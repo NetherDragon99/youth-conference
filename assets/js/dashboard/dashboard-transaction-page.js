@@ -361,9 +361,24 @@ transactionSendBtn.onclick = async () => {
       amount: amount,
       details: details
     })
+
+    let title
+    state == 'add'? title = `تم اضافة ${amount} كوكس` : title = `تم خصم ${amount} كوكس`
+    api.addSpecificData('notifications',{
+      email: email,
+      title: title,
+      description: description,
+      details: details,
+      icon: `icon-${icon}`,
+      time: new Date(),
+      state: 'unreadedNotification',
+      id: `userNotic${(Math.random() * 100000).toFixed().toString()}`
+    })
   }  
 }
 
+
+// add history from the server
 async function addTransactionHistory(){
   const fetchedData = await api.getData('transactionsHistory');
   let description;
