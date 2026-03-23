@@ -195,6 +195,12 @@ async function transactionDescriptionF() {
 
 const transactionDetails = document.getElementById('transactionDetailsMessage');
 const transactionDetailsContainer = document.getElementById('transactionDetailsSuggestions');
+
+transactionDetails.addEventListener('input', function(){
+  this.style.height = 'auto';
+  this.style.height = this.scrollHeight + 'px';
+})
+
 async function transactionDetailsF() {
   const allDescriptionSuggestion = await api.getColumn('text', 'transactionDetails');
   // console.log(allDescriptionSuggestion);

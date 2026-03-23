@@ -288,11 +288,18 @@
   padding-bottom: 10px;
   border-radius: 5px;
 }
+#transactionDetailsContainer{
+  flex-grow: 1;
+}
 #transactionDetailsMessage{
   padding: 10px;
-  max-width: 100%;
-  height: 6rem;
+  width: 100%;
+  min-height: 100%;
+  max-height: 150px;
   line-height: 1rem;
+  overflow: hidden;
+  resize: none;
+  overflow: hidden;
 }
 
 #transactionButton{
@@ -307,6 +314,8 @@
   font-size: 1.3rem;
   font-weight: 900;
   overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 #transactionButton:enabled:active{
   background-image: linear-gradient(to right, rgb(116, 99, 4), rgb(160, 140, 27), rgb(80, 68, 1));
