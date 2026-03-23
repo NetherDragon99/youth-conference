@@ -276,6 +276,7 @@ const transactionHistoryContainer = document.getElementById('transactionHistoryC
 
 transactionSendBtn.onclick = async () => {
   transactionSendBtn.setAttribute('disabled', 'true');
+  transactionSendBtn.querySelector('div').style.animation = 'none';
 
   let userTargeted, amount, description, details, confirmMessage;
   const type = document.getElementById('transfereTypeButton').getAttribute('data-state');

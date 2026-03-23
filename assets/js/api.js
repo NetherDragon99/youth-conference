@@ -81,7 +81,6 @@ export async function postAccountData(enteredData) {
     return res;
   } catch (err) {
     console.log(err);
-
   }
 }
 

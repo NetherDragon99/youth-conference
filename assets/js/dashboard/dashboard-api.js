@@ -91,7 +91,7 @@ export async function addSpecificData(page, data) {
       body: JSON.stringify(toAPI)
     })
     const res = await response.json();
-    console.log(res);
+    // console.log(res);
     return res;
   } catch (err) {
     console.log(err);

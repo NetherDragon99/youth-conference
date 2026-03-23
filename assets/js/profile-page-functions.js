@@ -93,7 +93,7 @@ submitBt.addEventListener('click', async (x) => {
         signUpBut.setAttribute('value', 'Creating your account . . .');
         signUpBut.setAttribute('disabled', 'true');
         formData = Object.fromEntries(new FormData(profileForm));
-        // console.log(formData);
+        console.log(formData);
 
         const toAPIData = {
           page: 'accounts',
@@ -107,8 +107,10 @@ submitBt.addEventListener('click', async (x) => {
         }
 
         try {
-          await api.postAccountData(toAPIData);
+          const toAPI = await api.postAccountData(toAPIData);
           localStorage.setItem('profile', JSON.stringify(toLocalStorage));
+          console.log(toAPI);
+          
           index.createAD(text.text.accountCreated, 'green');
           await addWelcomGift();
           document.querySelector('.noNotificationsMs').remove();
@@ -193,7 +195,6 @@ export const updateProfileSubmitBtn = () => {
       return index.createAD(text.text.wrongPassword);
     }
     updateProfile();
-
   })
 }
 async function updateProfile() {
