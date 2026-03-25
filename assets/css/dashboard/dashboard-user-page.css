@@ -1,0 +1,295 @@
+#usersPage{
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  direction: rtl;
+}
+#usersPage>section{
+  width: 90%;
+  max-width: 500px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+#accountsAnalisis>div{
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+#accountsAnalisis>div>div{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(10, 23, 39);
+  border: rgb(19, 36, 58) solid 2px;
+  border-radius: 15px;
+  padding: 15px;
+}
+#accountsAnalisis>div>div>p:first-child{
+  font-weight: 700;
+}
+
+#requests{
+  width: 100%;
+  flex-shrink: 0;
+}
+#requestsContainer{
+  display: flex;
+  gap: 10px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+.request{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: rgb(10, 23, 39);
+  border: rgb(19, 36, 58) solid 2px;
+  border-radius: 15px;
+  padding: 15px;
+  width: 45%;
+  min-width: 220px;
+  height: fit-content;
+  transition: 1s;
+}
+.requestDetail{
+  width: 100%;
+  height: 50%;
+  display: flex;
+  gap: 10px
+}
+#requestProfilePic{
+  height: 50px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: aliceblue solid;
+  font-size: 45px;
+  line-height: 50px;
+}
+#requestProfilePic>img{
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+.requestProfileData{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+}
+.requestAction{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.requestAction>button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  direction: ltr;
+  font-weight: 700;
+  flex: 1;
+  border-radius: 7px;
+  cursor: pointer;
+  padding: 10px;
+  height: 1.5rem;
+  text-align: center;
+}
+.requestAction>.approve{
+  background-color: green;
+  width: 100%;
+  flex: none;
+}
+.requestAction>.remove{
+  background-color: red;
+}
+.requestAction>.delete{
+  border: rgb(145, 0, 0) solid;
+  background-color: transparent;
+}
+
+#usersSection{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  max-height: 100%;
+  flex-grow: 1;
+}
+#accountsSearch{
+  width: 100%;
+  height: 2.5rem;
+  background-color: rgb(19, 36, 58);
+  border-radius: 5px;
+  position: relative;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+#accountsSearch input{
+  width: 100%;
+  border: none;
+  outline: none;
+}
+#accountsSearch div{
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 1s;
+  touch-action: none;
+  font-size: 1rem;
+}
+#accountsSearchCategorys{
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+#accountsSearchCategorys div{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  font-size: .8rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: 1s;
+  background-color: rgb(19, 19, 49);
+  border: rgb(44, 44, 65) solid 1px;
+}
+#accountsSearchCategorys div[data-state="slected"]{
+  background-color: rgb(10, 57, 102);
+  border: rgb(68, 82, 95) solid 1px;
+}
+
+#usersContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  flex-grow: 1;
+  padding: 10px 0;
+}
+#usersContainer .user{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: rgb(19, 19, 49);
+  border: rgb(44, 44, 65) solid 1px;
+}
+#usersContainer .user .userProfilePic{
+  height: 50px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: aliceblue solid;
+  font-size: 45px;
+  line-height: 50px;
+}
+#usersContainer .user .userProfilePic>img{
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+#usersContainer .user .userDetails{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  direction: ltr;
+}
+#usersContainer .user .userDetails .upperSection{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#usersContainer .user .userDetails .upperSection p{
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+#usersContainer #userState{
+  border-radius: 7px;
+  padding: 4px 7px;
+  font-size: .6rem;
+  font-weight: 700;
+  margin-left: 10px;
+}
+#usersContainer #userState[data-state="active"]{
+  background-color: red;
+  border: rgb(255, 111, 111) solid 1px;
+}
+#usersContainer #userState[data-state="admin"]{
+  background-color: rgb(255, 136, 0);
+  border: rgb(255, 221, 111) solid 1px;
+}
+#usersContainer #userState[data-state="active"]{
+  background-color: rgb(0, 185, 9);
+  border: rgb(111, 255, 147) solid 1px;
+}
+#usersContainer .user .userActions{
+  position: relative;
+  margin-left: auto;
+  cursor: pointer;
+}
+.userActions .actionsMenue{
+  position: absolute;
+  top: -150%;
+  right: 100%;
+  z-index: 2;
+  border-radius: 15px;
+  transition: 1.2s;
+  overflow: hidden;
+  height: 0;
+}
+.userActions .actionsMenue #actionMenueContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background-color: rgb(10, 23, 39);
+  border: rgb(19, 36, 58) solid 2px;
+}
+#actionMenueContainer div{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: max-content;
+}
+#actionMenueContainer #viewUserDetails *{
+  color: yellow;
+}
+#actionMenueContainer #deleteAccount *{
+  color: red;
+}
+#actionMenueContainer #editUserDetails *{
+  color: rgb(6, 138, 190);
+}

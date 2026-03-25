@@ -45,4 +45,3 @@ window.addEventListener('load', () => {
   location.hash = '';
   location.hash = localStorage.getItem('historyPage');
 })
-

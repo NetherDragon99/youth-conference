@@ -1,6 +1,7 @@
 @import url(../profile-page.css);
 @import url(../../fonts\ &\ icons/icons/style.css);
 @import url(./dashboard-transaction-page.css);
+@import url(./dashboard-user-page.css);
 
 @font-face {
   font-family: 'Cairo';
