@@ -1,5 +1,6 @@
-import * as dashboardProfile from "./dashboard-profile-page.js"
-import * as dashboardLoading from "./dashboard-loading-data.js"
+import * as dashboardProfile from "./dashboard-profile-page.js";
+import * as dashboardLoading from "./dashboard-loading-data.js";
+import * as usersPage from './dashboard-users-page.js';
 
 // ad banner
 let adBannerNumber = 0;

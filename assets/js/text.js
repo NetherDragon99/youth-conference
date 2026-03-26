@@ -18,7 +18,7 @@ export const text = {
   noImage: 'خلى بالك ان كدة مفيش صورة مرفوعة',
   notAdmin: 'الحساب دة مش مفعل كا ادمن',
   toAdminPage: 'سيتم تحويلك الى صفحة الادمن',
-  noTransactionTargete:'اختار الحساب الى هتحول له',
+  noTransactionTargete: 'اختار الحساب الى هتحول له',
   noTransactionAmount: 'اختار الكمية المطلوبة',
   defaultAddTransactioDescription: amount => `تم اضافة ${amount} كوكس`,
   defaultremoveTransactioDescription: amount => `تم خصم ${amount} كوكس`,
@@ -131,7 +131,7 @@ export const dom = {
               </div>
             </div>
           </button>`,
-  searchResultDOM: v => 
+  searchResultDOM: v =>
     `<div class="searchResult">
         <div class="searchResultName">${v.userName}</div>
         <div class="searchResultEmal">${v.email}</div>
@@ -161,13 +161,36 @@ export const dom = {
               <p class="lastDescriptionTitle">الوصف السابق</p>
               <p class="lastDescriptionText">${v}</p>
             </div>`,
-  transactionHistory: (state, time, description, email, icon, admin)=> `<div class="transaction ${state}" data-adminName="${admin}">
+  transactionHistory: (state, time, description, email, icon, admin) =>
+     `<div class="transaction ${state}" data-adminName="${admin}">
             <div id="trransactionDate">${time}</div>
             <div id="transactionDetails">
               <h3>${description}</h3>
               <h4>${email}</h4>
             </div>
             <div id="transactionIcon" class="icon-${icon}"></div>
+          </div>`,
+  requestDOM: (userName, email, img, imgDisplay) => 
+    `<div class="request" data-email="${email}">
+            <div class="requestDetail">
+              <div id="requestProfilePic" class="icon-user1"><img src="${img}" alt="profile picture" ${imgDisplay}>
+              </div>
+              <div class="requestProfileData">
+                <h4 id="requestUserName">${userName}</h4>
+                <h4 id="requestEmail">${email}</h4>
+              </div>
+            </div>
+            <div class="requestAction">
+              <button class="approve">قبول
+                <div class="icon-checkmark"></div>
+              </button>
+              <button class="remove">حذف
+                <div class="icon-trash"></div>
+              </button>
+              <button class="delete">مسح
+                <div class="icon-blocked"></div>
+              </button>
+            </div>
           </div>`
 }
 

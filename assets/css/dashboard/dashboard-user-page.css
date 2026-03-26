@@ -76,6 +76,7 @@
   border: aliceblue solid;
   font-size: 45px;
   line-height: 50px;
+  flex-shrink: 0;
 }
 #requestProfilePic>img{
   object-fit: contain;
@@ -88,6 +89,24 @@
   flex-direction: column;
   gap: 5px;
   justify-content: center;
+  flex: 1;
+  overflow: hidden;
+}
+.requestProfileData #requestUserName.loading{
+  width: 40%;
+  height: 1rem;
+}
+.requestProfileData #requestEmail.loading{
+  width: 80%;
+  height: 1rem;
+}
+.requestProfileData #requestEmail{
+  font-size: .9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: ltr;
+  margin-left: auto;
 }
 .requestAction{
   display: flex;

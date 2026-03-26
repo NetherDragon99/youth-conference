@@ -144,6 +144,9 @@ footer a span{
 .activePage{
   color: aliceblue;
 }
+
+
+/* general */
 .adBanner{
   width: 100%;
   height: calc(100% - 140px);
