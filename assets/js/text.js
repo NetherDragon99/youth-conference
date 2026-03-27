@@ -191,6 +191,38 @@ export const dom = {
                 <div class="icon-blocked"></div>
               </button>
             </div>
+          </div>`,
+  dashboardUsers: (userName, email, state, gender, profielPicture, picState)=> `
+  <div class="user" data-email="${email}">
+            <div class="userProfilePic icon-${gender}">
+              <img src="${profielPicture}" alt="profile picture" style="opacity: ${picState};">
+            </div>
+            <div class="userDetails">
+              <div class="upperSection">
+                <p>${userName}</p>
+                <div id="userState" data-state="${state}">${state}</div>
+              </div>
+              <div class="lowerSection">${email}</div>
+            </div>
+            <div class="userActions">
+              <span class="icon-actionDots"></span>
+              <div class="actionsMenue">
+                <div id="actionMenueContainer">
+                  <div id="viewUserDetails">
+                    <p>عرض التفاصيل</p>
+                    <span class="icon-info"></span>
+                  </div>
+                  <div id="deleteAccount">
+                    <p>حظر الحساب</p>
+                    <span class="icon-blocked"></span>
+                  </div>
+                  <div id="editUserDetails">
+                    <p>تعديل البيانات</p>
+                    <span class="icon-pencil"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>`
 }
 

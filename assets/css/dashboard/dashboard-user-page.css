@@ -174,6 +174,7 @@
   transition: 1s;
   touch-action: none;
   font-size: 1rem;
+  cursor: pointer;
 }
 #accountsSearchCategorys{
   display: flex;
@@ -195,7 +196,7 @@
   background-color: rgb(19, 19, 49);
   border: rgb(44, 44, 65) solid 1px;
 }
-#accountsSearchCategorys div[data-state="slected"]{
+#accountsSearchCategorys div[data-state="selected"]{
   background-color: rgb(10, 57, 102);
   border: rgb(68, 82, 95) solid 1px;
 }
@@ -236,6 +237,9 @@
   height: 100%;
   width: 100%;
   opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 #usersContainer .user .userDetails{
   display: flex;
@@ -260,11 +264,15 @@
   font-weight: 700;
   margin-left: 10px;
 }
-#usersContainer #userState[data-state="active"]{
+#usersContainer #userState[data-state="admin"]{
   background-color: red;
   border: rgb(255, 111, 111) solid 1px;
 }
-#usersContainer #userState[data-state="admin"]{
+#usersContainer #userState[data-state="deleted"]{
+  background-color: rgb(18, 48, 59);
+  border: rgb(44, 60, 70) solid 1px;
+}
+#usersContainer #userState[data-state="pending"]{
   background-color: rgb(255, 136, 0);
   border: rgb(255, 221, 111) solid 1px;
 }
