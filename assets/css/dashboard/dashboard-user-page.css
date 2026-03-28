@@ -293,7 +293,7 @@
   border-radius: 15px;
   transition: 1.2s;
   overflow: hidden;
-  height: 0;
+  max-height: 0px;
 }
 .userActions .actionsMenue #actionMenueContainer{
   display: flex;
@@ -319,4 +319,7 @@
 }
 #actionMenueContainer #editUserDetails *{
   color: rgb(6, 138, 190);
+}
+#actionMenueContainer #acceptUser *{
+  color: rgb(6, 190, 31);
 }

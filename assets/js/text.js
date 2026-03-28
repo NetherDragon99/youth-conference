@@ -192,7 +192,7 @@ export const dom = {
               </button>
             </div>
           </div>`,
-  dashboardUsers: (userName, email, state, gender, profielPicture, picState)=> `
+  dashboardUsers: (userName, email, state, gender, profielPicture, picState, acceptDisplay)=> `
   <div class="user" data-email="${email}">
             <div class="userProfilePic icon-${gender}">
               <img src="${profielPicture}" alt="profile picture" style="opacity: ${picState};">
@@ -212,13 +212,17 @@ export const dom = {
                     <p>عرض التفاصيل</p>
                     <span class="icon-info"></span>
                   </div>
-                  <div id="deleteAccount">
-                    <p>حظر الحساب</p>
-                    <span class="icon-blocked"></span>
+                  <div id="acceptUser" ${acceptDisplay}>
+                    <p>قبول الحساب</p>
+                    <span class="icon-user-approved"></span>
                   </div>
                   <div id="editUserDetails">
                     <p>تعديل البيانات</p>
                     <span class="icon-pencil"></span>
+                  </div>
+                  <div id="deleteAccount">
+                    <p>حظر الحساب</p>
+                    <span class="icon-blocked"></span>
                   </div>
                 </div>
               </div>

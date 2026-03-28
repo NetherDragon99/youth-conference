@@ -4,7 +4,7 @@ import * as text from "../text.js";
 
 let allUsers = await api.getData('accounts');
 let activeUsers = [];
-// console.log(allUsers);
+console.log(allUsers);
 
 activeUsers = allUsers.filter(v => v.state == 'active');
 allUsers = allUsers.filter(v => v.state != 'deleted');
@@ -180,14 +180,17 @@ function addUsersToDom(users) {
 
   users.forEach(v => {
     let state, gender, picState;
+    let acceptDisplay = 'style="display:none;"';
 
     v.state == '' ? state = 'pending' : v.state == 'active' ? state = 'active' : state == 'admin' ? state = 'admin' : state = v.state;
+
+    v.state == '' ? acceptDisplay = 'style="display:flex;"':acceptDisplay;
 
     v.gender == 'm' ? gender = 'user1' : gender = 'user2';
 
     v.profilePicture == '' ? picState = '0' : picState = '1';
 
-    usersToDom += text.dom.dashboardUsers(v.userName, v.email, state, gender, v.profilePicture, picState)
+    usersToDom += text.dom.dashboardUsers(v.userName, v.email, state, gender, v.profilePicture, picState, acceptDisplay)
   })
   usersConainer.innerHTML = usersToDom;
 }
@@ -228,8 +231,8 @@ filterButton.forEach(v => {
       })
     } else {
       allUsers.forEach((v, i) => {
-          searchList.push({ [v.userName.toLowerCase()]: i });
-          searchList.push({ [v.email.toLowerCase()]: i });
+        searchList.push({ [v.userName.toLowerCase()]: i });
+        searchList.push({ [v.email.toLowerCase()]: i });
       })
     }
 
@@ -241,7 +244,7 @@ function checkDuplicate(inputData) {
   let tempData = [];
 
   console.log(inputData);
-  inputData.forEach(v=>{
+  inputData.forEach(v => {
     if (!tempData.includes(Object.values(v)[0])) {
       tempData.push(Object.values(v)[0]);
     }
@@ -249,8 +252,22 @@ function checkDuplicate(inputData) {
   console.log(tempData);
 
   let data = [];
-  tempData.forEach(v=>{
+  tempData.forEach(v => {
     data.push(allUsers[v])
   })
   return data;
 }
+
+
+const userActionsIcon = document.querySelectorAll('.user .userActions .icon-actionDots');
+const userActionsMenue = document.querySelectorAll('.user .userActions .actionsMenue');
+let targetedActionMenue;
+
+userActionsIcon.forEach(v =>{
+  v.addEventListener('click',function() {
+    
+    targetedActionMenue = this.closest('.user').querySelector('.actionsMenue');
+    targetedActionMenue.style.maxHeight = '300px'
+    
+  })
+})
