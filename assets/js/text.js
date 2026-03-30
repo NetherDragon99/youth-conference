@@ -31,11 +31,11 @@ export const dom = {
   updateDataForm: `<fieldset>
             <legend class="accountProfileData">My Account</legend>
             <div>
-              <label for="profileUserName">Name:</label>
+              <label for="profileUserName">name:</label>
               <input type="text" id="profileUserName" placeholder="Guest" name="userName">
             </div>
             <div>
-              <label for="profileGender">Gender:</label>
+              <label for="profileGender">gender:</label>
               <select name="gender" id="profileGender">
                 <option value="m">Male</option>
                 <option value="f">Female</option>
@@ -57,7 +57,7 @@ export const dom = {
               <input type="text" name="profilePicture" style="display: none;" id="profilePictureUrl">
             </div>
             <div>
-              <label for="profileGmail">G-Mail:</label>
+              <label for="profileGmail">email:</label>
               <input type="email" id="profileGmail" placeholder="guest@gmail.com" name="email" readonly>
             </div>
             <div>

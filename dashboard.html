@@ -310,6 +310,52 @@
     <a href="#dashboard-transaction-page"><span class="icon-credit-card"></span></a>
     <a href="#dashboard-profile-page"><span class="icon-user"></span></a>
   </footer>
+  <div id="popUpWindow">
+    <div id="editUserWindow">
+      <div id="popUpupperProfile">
+        <div id="popUpProfilePic" class="icon-user">
+          <img src="assets/imgs/new coc logo.png" alt="profile Picture">
+        </div>
+        <h4>userName</h4>
+      </div>
+      <div id="popUplowerProfile">
+        <div id="popUpUserNameFiled">
+          <label for="popUpUserName">username: </label>
+          <input type="text" placeholder="username" id="popUpUserName">
+        </div>
+        <div id="popUpEmailFiled">
+          <label for="popUpEmail">email: </label>
+          <input type="email" placeholder="username@email.com" id="popUpEmail">
+        </div>
+        <div id="popUpGenderFiled">
+          <label for="popUpGender">gender:</label>
+          <select name="gender" id="popUpGender">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+          </select>
+        </div>
+        <div id="popUpPictureFiled">
+          <label for="popUpProfilePicture" id="popUpProfilePictureLable">picture:
+            <div>
+              Select your profile picture...
+            </div>
+          </label>
+          <div id="popUpRemovePic">
+            <img src="assets/imgs/picture.ico" alt="remove image">
+            <span class="icon-clear"></span>
+          </div>
+          <input type="file" id="popUpProfilePicture" name="profilePicture" accept="image/*" style="display: none;">
+          <input type="text" name="profilePicture" style="display: none;" id="popUpProfilePictureUrl">
+        </div>
+        <p id="cocsNo">COCS: <span>100</span></p>
+        <p id="rankNo">Rank: <span>#1</span></p>
+        <button id="popUpUpdateData">Update Account Data</button>
+        <button id="popUpDeactivate">Deactivate Account</button>
+        <Button id="popUpDelete">Delete Account</Button>
+        <Button id="popUpExit">Exit Menue</Button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

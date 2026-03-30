@@ -323,3 +323,157 @@
 #actionMenueContainer #acceptUser *{
   color: rgb(6, 190, 31);
 }
+
+
+
+#popUpWindow{
+  width: 100%;
+  height: calc(100dvh - 140px);
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  transform: translateX(-50%);
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 70px;
+}
+#editUserWindow{
+  width: 90%;
+  max-width: 500px;
+  height: 90%;
+  overflow: scroll;
+  scrollbar-width: none;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: rgb(10, 23, 39);
+  border: rgb(19, 36, 58) solid 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  direction: ltr;
+}
+#popUpupperProfile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+#popUpProfilePic{
+  width: 100px;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border: white solid 1px;
+  border-radius: 50%;
+  position: relative;
+  font-size: 90px;
+  line-height: 1.2;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+#popUpProfilePic img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: none;
+}
+#popUpupperProfile h4{
+  font-size: 1.7rem;
+}
+
+#popUplowerProfile{
+  width: 100%;
+  overflow: scroll;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  margin: 10px;
+  padding: 10px;
+}
+#popUplowerProfile div{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 95%;
+  max-width: 300px;
+}
+#popUplowerProfile>div>*:first-child{
+  font-weight: 900;
+}
+#popUplowerProfile div input{
+  flex-grow: 1;
+  height: 1.1rem;
+  padding: 3px;
+}
+#popUplowerProfile #popUpPictureFiled{
+  height: 2rem;
+  max-width: 100%;
+}
+#popUpProfilePictureLable{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 5px;
+}
+#popUpRemovePic{
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-grow: 0;
+  width: unset !important;
+  max-width: unset !important;
+}
+#popUpRemovePic img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#popUpRemovePic span{
+  position: absolute;
+  font-size: 2rem;
+  line-height: 1;
+  top: 0;
+  left: 0;
+}
+#popUplowerProfile p{
+  font-weight: 900;
+}
+#popUplowerProfile #cocsNo{
+  color: gold;
+}
+#popUplowerProfile #rankNo{
+  color: red;
+}
+#popUplowerProfile button{
+  width: 95%;
+  padding: 5px;
+  border-radius: 7px;
+  font-size: 1.2rem;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+}
+#popUpUpdateData{
+  background-color: rgba(7, 255, 7, 0.212);
+  border: rgba(0, 255, 0, 0.226) solid;
+}
+#popUpDeactivate, #popUpDelete{
+  background-color: rgba(255, 0, 0, 0.11);
+  border: rgba(255, 0, 0, 0.295) solid;
+}
+#popUpExit{
+  background-color: rgba(255, 0, 0, 0.322);
+  border: rgba(255, 0, 0, 0.534) solid;
+}
