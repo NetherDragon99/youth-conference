@@ -1,5 +1,6 @@
 import * as api from "./dashboard-api.js";
 import * as text from "../text.js";
+import * as dashboard from "./dashboard.js"
 
 let allUsers;
 try {
@@ -72,7 +73,6 @@ try {
 }
 let activeUsers = [];
 console.log(allUsers);
-
 
 activeUsers = allUsers.filter(v => v.state == 'active');
 allUsers = allUsers.filter(v => v.state != 'deleted');
@@ -350,14 +350,16 @@ document.getElementById('usersPage').addEventListener('click', (click) => {
     userActionsMenue.forEach(v => {
       v.style.maxHeight = '0';
     })
+
+    document.getElementById('editUserWindow').style.height = '0px';
   }
 })
 
 
 const viewUserDetails = document.querySelectorAll('#viewUserDetails');
 
-viewUserDetails.forEach(v=> {
-  
+viewUserDetails.forEach(v => {
+
   v.addEventListener('click', function () {
     const selectedEmail = this.closest('.user').getAttribute('data-email');
     putUserDetailsData(selectedEmail, allUsers)
@@ -365,35 +367,81 @@ viewUserDetails.forEach(v=> {
 })
 
 const userDetailsContainer = document.getElementById('popUpWindow');
-function putUserDetailsData(selectedUser, allUsers) {  
+function putUserDetailsData(selectedUser, allUsers) {
   userDetailsContainer.style.height = 'calc(100dvh - 140px)';
 
-  let selectedUserData, genderIcon, imgDisplay;
-  allUsers.forEach(v=>{v.email == selectedUser? selectedUserData = v:null});
+  let selectedUserData, genderIcon, imgDisplay, updateState;
+  allUsers.forEach(v => { v.email == selectedUser ? selectedUserData = v : null });
   console.log(selectedUserData);
-  
 
-  selectedUserData.gender =='m'?genderIcon = 'user1':genderIcon = 'user2';
 
-  selectedUserData.profilePicture == ''?imgDisplay = 'display: none;':imgDisplay = 'display: block;';
-  
-  userDetailsContainer.innerHTML = text.dom.dashboardUsersDetails(genderIcon, selectedUserData.profilePicture, imgDisplay, selectedUserData.userName, selectedUserData.email, selectedUserData.gender, selectedUserData.cocs, selectedUserData.rank);
+  selectedUserData.gender == 'm' ? genderIcon = 'user1' : genderIcon = 'user2';
+
+  selectedUserData.profilePicture == '' ? imgDisplay = 'display: none;' : imgDisplay = 'display: block;';
+
+  selectedUserData.state == '' ? updateState = 'Activate' : updateState = 'Deactivate';
+
+  userDetailsContainer.innerHTML = text.dom.dashboardUsersDetails(genderIcon, selectedUserData.profilePicture, imgDisplay, selectedUserData.userName, selectedUserData.email, selectedUserData.gender, selectedUserData.cocs, selectedUserData.rank, updateState);
 
   userDetailsButtons(selectedUserData.email);
+
+  userDetailsContainer.onclick = click => {
+    if (click.target.closest('#popUpWindow') && !click.target.closest('#editUserWindow') && !click.target.closest('#popUpExit')) {
+      document.getElementById('popUpWindow').style.height = '0px';
+    }
+  }
+
 }
 
 let popUpUpdateAccountData;
 function userDetailsButtons(email) {
   const deactivateAccount = document.getElementById('popUpDeactivate');
+  const activateAccount = document.getElementById('popUpActivate');
   const deleteAccount = document.getElementById('popUpDelete');
   const exitMenue = document.getElementById('popUpExit');
   popUpUpdateAccountData = document.getElementById('popUpUpdateData');
 
-  deactivateAccount.onclick = v=>{
-    console.log(email);
-    api.updateSpecificData('accounts', 'email', email, {"state": ""})
-    allUsers.forEach(v=>{
-      v.email == email?v.state="":null;
+  deactivateAccount.onclick = async v => {
+    console.log('deactivate');
+    const updateState = await api.updateSpecificData('accounts', 'email', email, { 'state': '' });
+    console.log(updateState);
+    allUsers.forEach(v => {
+      v.email == email ? v.state = "" : null;
     })
+
+    if (updateState.result == 'Success: Updated') {
+      dashboard.createAD(text.text.accountDeactivated ,'green');
+
+      deactivateAccount.innerHTML='Activate Account'
+      deactivateAccount.id="popUpActivate";
+    }else{
+      dashboard.createAD(text.text.error)
+    }
+    userDetailsButtons(email);
+  }
+
+  activateAccount.onclick = async v => {
+    console.log('active');
+    
+    console.log(email);
+    const updateState = await api.updateSpecificData('accounts', 'email', email, { 'state': 'active' });
+    console.log(updateState);
+    allUsers.forEach(v => {
+      v.email == email ? v.state = "active" : null;
+    })
+
+    if (updateState.result == 'Success: Updated') {
+      dashboard.createAD(text.text.accountActivated ,'green');
+
+      activateAccount.innerHTML='Deactivate Account'
+      deactivateAccount.id="popUpDeactivate";
+    }else{
+      dashboard.createAD(text.text.error)
+    }
+    userDetailsButtons(email)
+  }
+
+  exitMenue.onclick = click => {
+    document.getElementById('popUpWindow').style.height = '0px';
   }
 }

@@ -24,7 +24,10 @@ export const text = {
   defaultremoveTransactioDescription: amount => `تم خصم ${amount} كوكس`,
   defaultTransactionDetails: 'تمت هذه العملية من قبل الادمن',
   transactionFaild: 'حصلت مشكلة فى التحويل',
-  transactionUserNotAvailable: 'الشخص دة مش مودود او انت كتبته يدوى<br>معلش اختار الشخص من القائمة'
+  transactionUserNotAvailable: 'الشخص دة مش مودود او انت كتبته يدوى<br>معلش اختار الشخص من القائمة',
+  accountActivated: 'تم تفعيل الحساب',
+  accountDeactivated: 'تم الغاء تفعيل الحساب',
+  error: 'حصلت مشكلة'
 }
 
 export const dom = {
@@ -224,7 +227,7 @@ export const dom = {
               </div>
             </div>
           </div>`,
-  dashboardUsersDetails: (genderIcon, img, imgDisplay, userName, email, gender, cocs, rank)=> `
+  dashboardUsersDetails: (genderIcon, img, imgDisplay, userName, email, gender, cocs, rank, updateState)=> `
   <div id="editUserWindow" data-email="${email}">
       <div id="popUpupperProfile">
         <div id="popUpProfilePic" class="icon-${genderIcon}">
@@ -264,7 +267,7 @@ export const dom = {
         <p id="cocsNo">COCS: <span>${cocs}</span></p>
         <p id="rankNo">Rank: <span>#${rank}</span></p>
         <button id="popUpUpdateData">Update Account Data</button>
-        <button id="popUpDeactivate">Deactivate Account</button>
+        <button id="popUp${updateState}">${updateState} Account</button>
         <Button id="popUpDelete">Delete Account</Button>
         <Button id="popUpExit">Exit Menue</Button>
       </div>

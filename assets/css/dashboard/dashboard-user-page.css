@@ -356,6 +356,8 @@
   align-items: center;
   gap: 10px;
   direction: ltr;
+  position: sticky;
+  top: 2.5%;
 }
 #popUpupperProfile{
   display: flex;
@@ -473,6 +475,10 @@
 #popUpUpdateData{
   background-color: rgba(7, 255, 7, 0.212);
   border: rgba(0, 255, 0, 0.226) solid;
+}
+#popUpActivate{
+  background-color: rgba(219, 198, 7, 0.767);
+  border: rgba(219, 235, 79, 0.384) solid;
 }
 #popUpDeactivate, #popUpDelete{
   background-color: rgba(255, 0, 0, 0.11);
