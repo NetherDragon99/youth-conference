@@ -68,7 +68,7 @@ try {
     }
   ]
   console.log(error);
-  
+
 }
 let activeUsers = [];
 console.log(allUsers);
@@ -353,3 +353,47 @@ document.getElementById('usersPage').addEventListener('click', (click) => {
   }
 })
 
+
+const viewUserDetails = document.querySelectorAll('#viewUserDetails');
+
+viewUserDetails.forEach(v=> {
+  
+  v.addEventListener('click', function () {
+    const selectedEmail = this.closest('.user').getAttribute('data-email');
+    putUserDetailsData(selectedEmail, allUsers)
+  })
+})
+
+const userDetailsContainer = document.getElementById('popUpWindow');
+function putUserDetailsData(selectedUser, allUsers) {  
+  userDetailsContainer.style.height = 'calc(100dvh - 140px)';
+
+  let selectedUserData, genderIcon, imgDisplay;
+  allUsers.forEach(v=>{v.email == selectedUser? selectedUserData = v:null});
+  console.log(selectedUserData);
+  
+
+  selectedUserData.gender =='m'?genderIcon = 'user1':genderIcon = 'user2';
+
+  selectedUserData.profilePicture == ''?imgDisplay = 'display: none;':imgDisplay = 'display: block;';
+  
+  userDetailsContainer.innerHTML = text.dom.dashboardUsersDetails(genderIcon, selectedUserData.profilePicture, imgDisplay, selectedUserData.userName, selectedUserData.email, selectedUserData.gender, selectedUserData.cocs, selectedUserData.rank);
+
+  userDetailsButtons(selectedUserData.email);
+}
+
+let popUpUpdateAccountData;
+function userDetailsButtons(email) {
+  const deactivateAccount = document.getElementById('popUpDeactivate');
+  const deleteAccount = document.getElementById('popUpDelete');
+  const exitMenue = document.getElementById('popUpExit');
+  popUpUpdateAccountData = document.getElementById('popUpUpdateData');
+
+  deactivateAccount.onclick = v=>{
+    console.log(email);
+    api.updateSpecificData('accounts', 'email', email, {"state": ""})
+    allUsers.forEach(v=>{
+      v.email == email?v.state="":null;
+    })
+  }
+}

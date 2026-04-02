@@ -328,7 +328,7 @@
 
 #popUpWindow{
   width: 100%;
-  height: calc(100dvh - 140px);
+  height: 0;
   overflow: hidden;
   position: absolute;
   left: 50%;
@@ -339,6 +339,7 @@
   align-items: center;
   justify-content: center;
   top: 70px;
+  transition: 1s;
 }
 #editUserWindow{
   width: 90%;
@@ -434,6 +435,10 @@
   flex-grow: 0;
   width: unset !important;
   max-width: unset !important;
+}
+#popUpGender{
+  background-color: rgb(19, 19, 49);
+  border-radius: 4px;
 }
 #popUpRemovePic img{
   width: 100%;

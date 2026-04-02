@@ -216,10 +216,6 @@ export const dom = {
                     <p>قبول الحساب</p>
                     <span class="icon-user-approved"></span>
                   </div>
-                  <div id="editUserDetails">
-                    <p>تعديل البيانات</p>
-                    <span class="icon-pencil"></span>
-                  </div>
                   <div id="deleteAccount">
                     <p>حظر الحساب</p>
                     <span class="icon-blocked"></span>
@@ -227,7 +223,52 @@ export const dom = {
                 </div>
               </div>
             </div>
-          </div>`
+          </div>`,
+  dashboardUsersDetails: (genderIcon, img, imgDisplay, userName, email, gender, cocs, rank)=> `
+  <div id="editUserWindow" data-email="${email}">
+      <div id="popUpupperProfile">
+        <div id="popUpProfilePic" class="icon-${genderIcon}">
+          <img src="${img}" alt="profile Picture" style="${imgDisplay}">
+        </div>
+        <h4>${userName}</h4>
+      </div>
+      <div id="popUplowerProfile">
+        <div id="popUpUserNameFiled">
+          <label for="popUpUserName">username: </label>
+          <input type="text" placeholder="username" id="popUpUserName" value="${userName}">
+        </div>
+        <div id="popUpEmailFiled">
+          <label for="popUpEmail">email: </label>
+          <input type="email" placeholder="username@email.com" id="popUpEmail" value="${email}">
+        </div>
+        <div id="popUpGenderFiled">
+          <label for="popUpGender">gender:</label>
+          <select name="gender" id="popUpGender" value="${gender}">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+          </select>
+        </div>
+        <div id="popUpPictureFiled">
+          <label for="popUpProfilePicture" id="popUpProfilePictureLable">picture:
+            <div>
+              Select your profile picture...
+            </div>
+          </label>
+          <div id="popUpRemovePic">
+            <img src="assets/imgs/picture.ico" alt="remove image">
+            <span class="icon-clear"></span>
+          </div>
+          <input type="file" id="popUpProfilePicture" name="profilePicture" accept="image/*" style="display: none;">
+          <input type="text" name="profilePicture" style="display: none;" id="popUpProfilePictureUrl" value="${img}">
+        </div>
+        <p id="cocsNo">COCS: <span>${cocs}</span></p>
+        <p id="rankNo">Rank: <span>#${rank}</span></p>
+        <button id="popUpUpdateData">Update Account Data</button>
+        <button id="popUpDeactivate">Deactivate Account</button>
+        <Button id="popUpDelete">Delete Account</Button>
+        <Button id="popUpExit">Exit Menue</Button>
+      </div>
+    </div>`        
 }
 
 export const notificationsdata = {
