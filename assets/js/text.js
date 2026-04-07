@@ -27,7 +27,10 @@ export const text = {
   transactionUserNotAvailable: 'الشخص دة مش مودود او انت كتبته يدوى<br>معلش اختار الشخص من القائمة',
   accountActivated: 'تم تفعيل الحساب',
   accountDeactivated: 'تم الغاء تفعيل الحساب',
-  error: 'حصلت مشكلة'
+  accountWillDeleted: 'فى حالة مسح او حظر الحساب هيتم تنبيه صاحب الحساب وهيختفى من عندك وهيتم مسحة بشكل نهائى بمجرد ما صاحب الحساب يحاول يخش',
+  accountDeleted: 'تم مسح الاكونت بنجاح',
+  error: 'حصلت مشكلة',
+  dataUpdated: 'تم تحديث البيانات بنجاح'
 }
 
 export const dom = {
@@ -92,8 +95,8 @@ export const dom = {
         <div class="noNotificationsMs">Unexpectied Error</div>`,
   sinInNotifications: `<h3>Notifications</h3>
         <div class="noNotificationsMs">please sign in to see your notifications</div>`,
-  tasksDOM: (v, icon, progress, displayBtn) => `
-  <button class="task ${v.type}Task" data-id="${v.id}">
+  tasksDOM: (v, icon, progress, displayBtn) =>
+    `<button class="task ${v.type}Task" data-id="${v.id}">
             <div class="taskHeader">
               <div class="taskIcon">
                 <div class="icon-${icon}"></div>
@@ -150,22 +153,26 @@ export const dom = {
               <div class="rankUserCocsNo">${v.cocs} COCs</div>
             </div>
           </div>`,
-  usersSearchResults: v => `<div class="usersSearchSuggestion">
+  usersSearchResults: v =>
+    `<div class="usersSearchSuggestion">
               <h4 class="userSearchName">${v.userName}</h4>
               <h4 class="userSearchEmail">${v.email}</h4>
             </div>`,
   transactiionDescription: v => `<div class="transactionDescriptionSuggestion">${v}</div>`,
-  transactiionLastDescription: v => `<div class="transactionDescriptionSuggestion lastDescription">
+  transactiionLastDescription: v =>
+    `<div class="transactionDescriptionSuggestion lastDescription">
               <p class="lastDescriptionTitle">الوصف السابق</p>
               <p class="lastDescriptionText">${v}</p>
             </div>`,
-  transactiionDetails: v => `<div class="transactionDescriptionSuggestion">${v}</div>`,
-  transactiionLastDetails: v => `<div class="transactionDescriptionSuggestion lastDescription">
+  transactiionDetails: v =>
+    `<div class="transactionDescriptionSuggestion">${v}</div>`,
+  transactiionLastDetails: v =>
+    `<div class="transactionDescriptionSuggestion lastDescription">
               <p class="lastDescriptionTitle">الوصف السابق</p>
               <p class="lastDescriptionText">${v}</p>
             </div>`,
   transactionHistory: (state, time, description, email, icon, admin) =>
-     `<div class="transaction ${state}" data-adminName="${admin}">
+    `<div class="transaction ${state}" data-adminName="${admin}">
             <div id="trransactionDate">${time}</div>
             <div id="transactionDetails">
               <h3>${description}</h3>
@@ -173,10 +180,10 @@ export const dom = {
             </div>
             <div id="transactionIcon" class="icon-${icon}"></div>
           </div>`,
-  requestDOM: (userName, email, img, imgDisplay) => 
+  requestDOM: (userName, email, img, imgDisplay, gender) =>
     `<div class="request" data-email="${email}">
             <div class="requestDetail">
-              <div id="requestProfilePic" class="icon-user1"><img src="${img}" alt="profile picture" ${imgDisplay}>
+              <div id="requestProfilePic" class="icon-user${gender=='m'?'1':'2'}"><img src="${img}" alt="profile picture" ${imgDisplay}>
               </div>
               <div class="requestProfileData">
                 <h4 id="requestUserName">${userName}</h4>
@@ -195,7 +202,7 @@ export const dom = {
               </button>
             </div>
           </div>`,
-  dashboardUsers: (userName, email, state, gender, profielPicture, picState, acceptDisplay)=> `
+  dashboardUsers: (userName, email, state, gender, profielPicture, picState, acceptDisplay) => `
   <div class="user" data-email="${email}">
             <div class="userProfilePic icon-${gender}">
               <img src="${profielPicture}" alt="profile picture" style="opacity: ${picState};">
@@ -227,7 +234,7 @@ export const dom = {
               </div>
             </div>
           </div>`,
-  dashboardUsersDetails: (genderIcon, img, imgDisplay, userName, email, gender, cocs, rank, updateState)=> `
+  dashboardUsersDetails: (genderIcon, img, imgDisplay, userName, email, gender, cocs, rank, updateState) => `
   <div id="editUserWindow" data-email="${email}">
       <div id="popUpupperProfile">
         <div id="popUpProfilePic" class="icon-${genderIcon}">
@@ -236,34 +243,36 @@ export const dom = {
         <h4>${userName}</h4>
       </div>
       <div id="popUplowerProfile">
-        <div id="popUpUserNameFiled">
-          <label for="popUpUserName">username: </label>
-          <input type="text" placeholder="username" id="popUpUserName" value="${userName}">
-        </div>
-        <div id="popUpEmailFiled">
-          <label for="popUpEmail">email: </label>
-          <input type="email" placeholder="username@email.com" id="popUpEmail" value="${email}">
-        </div>
-        <div id="popUpGenderFiled">
-          <label for="popUpGender">gender:</label>
-          <select name="gender" id="popUpGender" value="${gender}">
-            <option value="m">Male</option>
-            <option value="f">Female</option>
-          </select>
-        </div>
-        <div id="popUpPictureFiled">
-          <label for="popUpProfilePicture" id="popUpProfilePictureLable">picture:
-            <div>
-              Select your profile picture...
-            </div>
-          </label>
-          <div id="popUpRemovePic">
-            <img src="assets/imgs/picture.ico" alt="remove image">
-            <span class="icon-clear"></span>
+        <form id="popUpForm">
+          <div id="popUpUserNameFiled">
+            <label for="popUpUserName">username: </label>
+            <input type="text" placeholder="username" id="popUpUserName" value="${userName}" name="userName">
           </div>
-          <input type="file" id="popUpProfilePicture" name="profilePicture" accept="image/*" style="display: none;">
-          <input type="text" name="profilePicture" style="display: none;" id="popUpProfilePictureUrl" value="${img}">
-        </div>
+          <div id="popUpEmailFiled">
+            <label for="popUpEmail">email: </label>
+            <input type="email" placeholder="username@email.com" id="popUpEmail" value="${email}" name="email">
+          </div>
+          <div id="popUpGenderFiled">
+            <label for="popUpGender">gender:</label>
+            <select name="gender" id="popUpGender">
+              <option value="m" ${gender=='m'?'selected':''}>Male</option>
+              <option value="f" ${gender=='f'?'selected':''}>Female</option>
+            </select>
+          </div>
+          <div id="popUpPictureFiled">
+            <label for="popUpProfilePicture" id="popUpProfilePictureLable">picture:
+              <div>
+                Select your profile picture...
+              </div>
+            </label>
+            <div id="popUpRemovePic">
+              <img src="assets/imgs/picture.ico" alt="remove image">
+              <span class="icon-clear"></span>
+            </div>
+            <input type="file" id="popUpProfilePicture" name="profilePicture" accept="image/*" style="display: none;">
+            <input type="text" name="profilePicture" style="display: none;" id="popUpProfilePictureUrl" value="${img}" id="imgToDisplat">
+          </div>
+        </form>
         <p id="cocsNo">COCS: <span>${cocs}</span></p>
         <p id="rankNo">Rank: <span>#${rank}</span></p>
         <button id="popUpUpdateData">Update Account Data</button>
@@ -271,7 +280,7 @@ export const dom = {
         <Button id="popUpDelete">Delete Account</Button>
         <Button id="popUpExit">Exit Menue</Button>
       </div>
-    </div>`        
+    </div>`
 }
 
 export const notificationsdata = {

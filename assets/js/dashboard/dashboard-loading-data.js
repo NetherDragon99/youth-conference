@@ -126,7 +126,7 @@ function removeImageF() {
     dashboard.createAD(text.text.noImage);
   }
 }
-function makeSuitableImages(insertedImg) {
+export function makeSuitableImages(insertedImg) {
   return new Promise((resolve, reject) => {
     const tempImg = new Image();
     tempImg.src = URL.createObjectURL(insertedImg);
