@@ -135,7 +135,7 @@ try {
 //     }
 //   ]
 let activeUsers = [];
-console.log(allUsers);
+// console.log(allUsers);
 
 activeUsers = allUsers.filter(v => v.state == 'active');
 allUsers = allUsers.filter(v => v.state != 'deleted');
@@ -181,7 +181,7 @@ function addingRequests() {
       inactiveUsers.push(v);
     }
   })
-  console.log(inactiveUsers);
+  // console.log(inactiveUsers);
 
 
   let toInactiveDom = '';
@@ -287,7 +287,7 @@ userSearchInput.addEventListener('input', inputSearch => {
   let toDisplay = [];
   let indexToAdd = [];
 
-  console.log(searchList);
+  // console.log(searchList);
 
   searchList.forEach(v => {
     if (Object.keys(v).toString().includes(inputSearch.target.value.toLowerCase())) {
@@ -296,12 +296,12 @@ userSearchInput.addEventListener('input', inputSearch => {
       }
     }
   })
-  console.log(indexToAdd);
+  // console.log(indexToAdd);
   indexToAdd.forEach(v => {
     toDisplay.push(allUsers[v]);
   })
 
-  console.log(toDisplay);
+  // console.log(toDisplay);
   addUsersToDom(toDisplay);
 })
 
@@ -336,7 +336,7 @@ filterButton.forEach(v => {
 
     clicked.target.setAttribute('data-state', 'selected');
     clicked = clicked.target.getAttribute('id');
-    console.log(clicked);
+    // console.log(clicked);
 
     searchList = [];
     if (clicked == 'activeAccounts') {
@@ -374,13 +374,13 @@ filterButton.forEach(v => {
 function checkDuplicate(inputData) {
   let tempData = [];
 
-  console.log(inputData);
+  // console.log(inputData);
   inputData.forEach(v => {
     if (!tempData.includes(Object.values(v)[0])) {
       tempData.push(Object.values(v)[0]);
     }
   })
-  console.log(tempData);
+  // console.log(tempData);
 
   let data = [];
   tempData.forEach(v => {
@@ -434,7 +434,6 @@ function threeDotsOptions() {
 
   document.getElementById('usersPage').addEventListener('click', (click) => {
     if (!click.target.closest('.actionsMenue') && !click.target.closest('.userActions .icon-actionDots')) {
-      console.log('clicked');
 
       userActionsMenue.forEach(v => {
         v.style.maxHeight = '0';
@@ -452,7 +451,7 @@ function putUserDetailsData(selectedUser, allUsers) {
 
   let selectedUserData, genderIcon, imgDisplay, updateState;
   allUsers.forEach(v => { v.email == selectedUser ? selectedUserData = v : null });
-  console.log(selectedUserData);
+  // console.log(selectedUserData);
 
 
   selectedUserData.gender == 'm' ? genderIcon = 'user1' : genderIcon = 'user2';
@@ -482,11 +481,11 @@ function userDetailsButtons(email) {
   popUpUpdateAccountData = document.getElementById('popUpUpdateData');
 
   deactivateAccount ? deactivateAccount.onclick = async v => {
-    console.log('deactivate');
+    // console.log('deactivate');
     deactivateAccount.setAttribute('disabled', 'true');
 
     const updateState = await api.updateSpecificData('accounts', 'email', email, { 'state': '' });
-    console.log(updateState);
+    // console.log(updateState);
     allUsers.forEach(v => {
       v.email == email ? v.state = "" : null;
     })
@@ -502,7 +501,6 @@ function userDetailsButtons(email) {
       deactivateAccount.removeAttribute('disabled')
       deactivateAccount.innerHTML = 'Activate Account'
       deactivateAccount.id = "popUpActivate";
-      console.log();
 
     } else {
       dashboard.createAD(text.text.error)
@@ -511,12 +509,13 @@ function userDetailsButtons(email) {
   } : null;
 
   activateAccount ? activateAccount.onclick = async v => {
-    console.log('active');
+    // console.log('active');
     activateAccount.setAttribute('disabled', 'true')
 
-    console.log(email);
+    // console.log(email);
     const updateState = await api.updateSpecificData('accounts', 'email', email, { 'state': 'active' });
-    console.log(updateState);
+    // console.log(updateState);
+
     allUsers.forEach(v => {
       v.email == email ? v.state = "active" : null;
     })
@@ -559,7 +558,7 @@ function userDetailsButtons(email) {
 async function acceptAccountF(account) {
   try {
     const acceptRes = await api.updateSpecificData('accounts', 'email', account, { 'state': 'active' })
-    console.log(acceptRes);
+    // console.log(acceptRes);
     if (Object.values(acceptRes)[0].includes('Error')) {
       throw acceptRes;
 
@@ -568,7 +567,7 @@ async function acceptAccountF(account) {
     allUsers.forEach((v) => {
       v.email == account ? v.state = 'active' : null
     })
-    console.log(allUsers);
+    // console.log(allUsers);
 
     addingRequests();
     addUsersToDom(allUsers);
@@ -583,7 +582,7 @@ async function acceptAccountF(account) {
 async function deleteAccountF(account) {
   try {
     const deleteRes = await api.updateSpecificData('accounts', 'email', account, { 'state': 'deleted' })
-    console.log(deleteRes);
+    // console.log(deleteRes);
     if (Object.values(deleteRes)[0].includes('Error')) {
       throw deleteRes;
 
@@ -593,7 +592,7 @@ async function deleteAccountF(account) {
       v.email == account ? v.state = 'deleted' : null
     })
     allUsers = allUsers.filter(v => v.state !== 'deleted')
-    console.log(allUsers);
+    // console.log(allUsers);
 
     addingRequests();
     addUsersToDom(allUsers);
@@ -613,14 +612,14 @@ async function updateDataUserBtn() {
   btn.addEventListener('click', async () => {
     const formData = Object.fromEntries(new FormData(document.getElementById('popUpForm')));
 
-    console.log(formData, targetedAccount);
+    // console.log(formData, targetedAccount);
     try {
       let sentData = await api.updateSpecificData('accounts', 'email', targetedAccount, formData)
 
       if (sentData.result == 'Success: Updated') {
         dashboard.createAD(text.text.dataUpdated, 'green');
 
-        console.log(allUsers);
+        // console.log(allUsers);
 
         allUsers.forEach((v, i) => {
           if (v.email == targetedAccount) {
@@ -649,10 +648,10 @@ function popUpPic() {
   const outputImage = document.getElementById('popUpProfilePictureUrl');
   const displayImage = document.querySelector('#popUpProfilePic img');
 
-  console.log(inputImage);
+  // console.log(inputImage);
 
   inputImage.addEventListener('change', async (img) => {
-    console.log(img.target.files[0]);
+    // console.log(img.target.files[0]);
     const newImgUrl = await loading.makeSuitableImages(img.target.files[0])
 
     outputImage.setAttribute('value', newImgUrl);

@@ -76,6 +76,8 @@ const cocs = document.getElementById('cocsNO');
 
 // put the data
 export async function putData() {
+  checkingAccount(JSON.parse(localStorage.getItem('profile')).email)
+
   document.getElementById('profileForm').innerHTML = text.dom.updateDataForm;
   profile.formPicture();
   if (allUserData[0].profilePicture != '') {
@@ -144,5 +146,28 @@ export const changeGenderIconUpdateData = () => {
   } else {
     ProfilePicIcon.classList.remove('icon-user1', 'icon-user2');
     ProfilePicIcon.classList.add('icon-user')
+  }
+}
+
+async function checkingAccount(account){
+  try {
+    const getAccount = await api.getAccountData('accounts', account)
+
+    alert(text.text.userAccountDeleted);
+
+  if (getAccount.length != 0) {
+    const res = await api.deleteSpecificData('accounts', 'email', account)
+    console.log(res);
+    
+    localStorage.removeItem('profile');
+    window.location.reload();
+  }else{
+    throw new Error("account not find");
+    
+  }
+    
+  } catch (error) {
+    console.log(error);
+    
   }
 }
