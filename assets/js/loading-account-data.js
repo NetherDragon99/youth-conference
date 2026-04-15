@@ -19,12 +19,12 @@ export const ProfilePicIcon = document.querySelector('.publicProfile .profilePic
 export let allUserData;
 
 export async function getProfileData() {
-  if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}'){
+  if (localStorage.getItem('profile') && localStorage.getItem('profile') != '{}') {
     const fetchedData = await api.getAccountData('accounts', (JSON.parse(localStorage.getItem('profile')).email));
     allUserData = fetchedData;
-    
+
     allUserData.length != 0 ? putData() : localStorage.removeItem('profile');
-  }else{
+  } else {
     localStorage.removeItem('profile');
     notificationContainer.innerHTML = text.dom.sinInNotifications;
     profile.formPicture();
@@ -35,22 +35,22 @@ export async function getProfileData() {
 // notifications
 export const notificationContainer = document.querySelector('#notificationBanner')
 let HTMLnotifications = `<h3>Notifications</h3>`;
-export async function getProfileNotifications() {  
-  
+export async function getProfileNotifications() {
+
   if (!(localStorage.getItem('profile')) || !(JSON.parse(localStorage.getItem('profile')).email)) {
     return notificationContainer.innerHTML = text.dom.sinInNotifications;
   }
 
   try {
     if (localStorage.getItem('profile')) {
-      await api.getAccountData('notifications', JSON.parse(localStorage.getItem('profile')).email);      
+      await api.getAccountData('notifications', JSON.parse(localStorage.getItem('profile')).email);
       let userNotifications = api.emailData;
 
       await api.getAccountData('notifications', 'general');
-      
+
       if (userNotifications.length != 0 && api.emailData.length != 0) {
         userNotifications = [...api.emailData, ...userNotifications];
-      }      
+      }
 
       let notification = userNotifications.toSorted((a, b) => new Date(b.time) - new Date(a.time))
       if (notification.length == 0) {
@@ -85,7 +85,7 @@ export async function putData() {
     document.querySelector('.publicProfile .profilePicture img').style.display = 'block';
     document.querySelector('header .profilePicture img').src = allUserData[0].profilePicture;
     document.querySelector('header .profilePicture img').style.display = 'block';
-  }else{
+  } else {
     document.querySelector('header .profilePicture img').style.display = 'none';
 
   }
@@ -114,7 +114,7 @@ export async function putData() {
   userRank.innerHTML = `#${allUserData[0].rank}`;
 }
 
-window.addEventListener('DOMContentLoaded',()=> getProfileData())
+window.addEventListener('DOMContentLoaded', () => getProfileData())
 
 
 const changeGenderIcon = () => {
@@ -149,25 +149,27 @@ export const changeGenderIconUpdateData = () => {
   }
 }
 
-async function checkingAccount(account){
-  try {
-    const getAccount = await api.getAccountData('accounts', account)
+async function checkingAccount(account) {
+  const getAccount = await api.getAccountData('accounts', account)  
+  if (getAccount[0].state == 'deleted') {
+    try {
+      alert(text.text.userAccountDeleted);
 
-    alert(text.text.userAccountDeleted);
+      if (getAccount.length != 0) {
+        const res = await api.deleteSpecificData('accounts', 'email', account)
+        console.log(res);
 
-  if (getAccount.length != 0) {
-    const res = await api.deleteSpecificData('accounts', 'email', account)
-    console.log(res);
-    
-    localStorage.removeItem('profile');
-    window.location.reload();
-  }else{
-    throw new Error("account not find");
-    
+        localStorage.removeItem('profile');
+        window.location.reload();
+      } else {
+        throw new Error("account not find");
+
+      }
+
+    } catch (error) {
+      console.log(error);
+
+    }
   }
-    
-  } catch (error) {
-    console.log(error);
-    
-  }
+
 }
