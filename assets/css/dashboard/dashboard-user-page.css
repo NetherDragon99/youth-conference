@@ -1,4 +1,4 @@
-#usersPage{
+#usersPage {
   width: 100%;
   height: 100%;
   flex-shrink: 0;
@@ -10,19 +10,21 @@
   scrollbar-width: none;
   direction: rtl;
 }
-#usersPage>section{
+
+#usersPage>section {
   width: 90%;
   max-width: 500px;
   padding: 15px;
   border-radius: 15px;
 }
 
-#accountsAnalisis>div{
+#accountsAnalisis>div {
   display: flex;
   gap: 10px;
   width: 100%;
 }
-#accountsAnalisis>div>div{
+
+#accountsAnalisis>div>div {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -34,21 +36,24 @@
   border-radius: 15px;
   padding: 15px;
 }
-#accountsAnalisis>div>div>p:first-child{
+
+#accountsAnalisis>div>div>p:first-child {
   font-weight: 700;
 }
 
-#requests{
+#requests {
   width: 100%;
   flex-shrink: 0;
 }
-#requestsContainer{
+
+#requestsContainer {
   display: flex;
   gap: 10px;
   overflow-x: scroll;
   scrollbar-width: none;
 }
-.request{
+
+.request {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -61,13 +66,15 @@
   height: fit-content;
   transition: 1s;
 }
-.requestDetail{
+
+.requestDetail {
   width: 100%;
   height: 50%;
   display: flex;
   gap: 10px
 }
-#requestProfilePic{
+
+#requestProfilePic {
   height: 50px;
   aspect-ratio: 1/1;
   border-radius: 50%;
@@ -78,7 +85,8 @@
   line-height: 50px;
   flex-shrink: 0;
 }
-#requestProfilePic>img{
+
+#requestProfilePic>img {
   object-fit: contain;
   height: 100%;
   width: 100%;
@@ -88,7 +96,8 @@
   left: 0;
   z-index: 2;
 }
-.requestProfileData{
+
+.requestProfileData {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -96,15 +105,18 @@
   flex: 1;
   overflow: hidden;
 }
-.requestProfileData #requestUserName.loading{
+
+.requestProfileData #requestUserName.loading {
   width: 40%;
   height: 1rem;
 }
-.requestProfileData #requestEmail.loading{
+
+.requestProfileData #requestEmail.loading {
   width: 80%;
   height: 1rem;
 }
-.requestProfileData #requestEmail{
+
+.requestProfileData #requestEmail {
   font-size: .9rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -112,7 +124,8 @@
   direction: ltr;
   margin-left: auto;
 }
-.requestAction{
+
+.requestAction {
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -120,7 +133,8 @@
   width: 100%;
   flex-wrap: wrap;
 }
-.requestAction>button{
+
+.requestAction>button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,20 +148,23 @@
   height: 1.5rem;
   text-align: center;
 }
-.requestAction>.approve{
+
+.requestAction>.approve {
   background-color: green;
   width: 100%;
   flex: none;
 }
-.requestAction>.remove{
+
+.requestAction>.remove {
   background-color: red;
 }
-.requestAction>.delete{
+
+.requestAction>.delete {
   border: rgb(145, 0, 0) solid;
   background-color: transparent;
 }
 
-#usersSection{
+#usersSection {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -155,7 +172,8 @@
   max-height: 100%;
   flex-grow: 1;
 }
-#accountsSearch{
+
+#accountsSearch {
   width: 100%;
   height: 2.5rem;
   background-color: rgb(19, 36, 58);
@@ -165,12 +183,14 @@
   display: flex;
   align-items: center;
 }
-#accountsSearch input{
+
+#accountsSearch input {
   width: 100%;
   border: none;
   outline: none;
 }
-#accountsSearch div{
+
+#accountsSearch div {
   position: absolute;
   left: 10px;
   top: 50%;
@@ -180,14 +200,16 @@
   font-size: 1rem;
   cursor: pointer;
 }
-#accountsSearchCategorys{
+
+#accountsSearchCategorys {
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
   gap: 10px;
   width: 100%;
 }
-#accountsSearchCategorys div{
+
+#accountsSearchCategorys div {
   flex: 1;
   display: flex;
   align-items: center;
@@ -200,12 +222,13 @@
   background-color: rgb(19, 19, 49);
   border: rgb(44, 44, 65) solid 1px;
 }
-#accountsSearchCategorys div[data-state="selected"]{
+
+#accountsSearchCategorys div[data-state="selected"] {
   background-color: rgb(10, 57, 102);
   border: rgb(68, 82, 95) solid 1px;
 }
 
-#usersContainer{
+#usersContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -215,7 +238,8 @@
   flex-grow: 1;
   padding: 10px 0;
 }
-#usersContainer .user{
+
+#usersContainer .user {
   display: flex;
   flex-direction: row-reverse;
   justify-content: end;
@@ -226,9 +250,10 @@
   background-color: rgb(19, 19, 49);
   border: rgb(44, 44, 65) solid 1px;
 }
-#usersContainer .user .userProfilePic{
+
+#usersContainer .user .userProfilePic {
   height: 50px;
-  aspect-ratio: 1/1;
+  min-width: 50px;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
@@ -236,7 +261,8 @@
   font-size: 45px;
   line-height: 50px;
 }
-#usersContainer .user .userProfilePic>img{
+
+#usersContainer .user .userProfilePic>img {
   object-fit: contain;
   height: 100%;
   width: 100%;
@@ -245,51 +271,70 @@
   top: 0;
   left: 0;
 }
-#usersContainer .user .userDetails{
+
+#usersContainer .user .userDetails {
   display: flex;
   flex-direction: column;
   gap: 5px;
   justify-content: center;
   direction: ltr;
+  flex-shrink: 1;
+  overflow: hidden;
 }
-#usersContainer .user .userDetails .upperSection{
+
+#usersContainer .user .userDetails .upperSection {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-#usersContainer .user .userDetails .upperSection p{
+
+#usersContainer .user .userDetails .upperSection p {
   font-size: 1.1rem;
   font-weight: 700;
 }
-#usersContainer #userState{
+
+#usersContainer #userState {
   border-radius: 7px;
   padding: 4px 7px;
   font-size: .6rem;
   font-weight: 700;
   margin-left: 10px;
 }
-#usersContainer #userState[data-state="admin"]{
+
+#usersContainer #userState[data-state="admin"] {
   background-color: red;
   border: rgb(255, 111, 111) solid 1px;
 }
-#usersContainer #userState[data-state="deleted"]{
+
+#usersContainer #userState[data-state="deleted"] {
   background-color: rgb(18, 48, 59);
   border: rgb(44, 60, 70) solid 1px;
 }
-#usersContainer #userState[data-state="pending"]{
+
+#usersContainer #userState[data-state="pending"] {
   background-color: rgb(255, 136, 0);
   border: rgb(255, 221, 111) solid 1px;
 }
-#usersContainer #userState[data-state="active"]{
+
+#usersContainer #userState[data-state="active"] {
   background-color: rgb(0, 185, 9);
   border: rgb(111, 255, 147) solid 1px;
 }
-#usersContainer .user .userActions{
+
+#usersContainer .user .userDetails .lowerSection {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+#usersContainer .user .userActions {
   position: relative;
   margin-left: auto;
   cursor: pointer;
 }
-.userActions .actionsMenue{
+
+.userActions .actionsMenue {
   position: absolute;
   top: -150%;
   right: 100%;
@@ -299,7 +344,8 @@
   overflow: hidden;
   max-height: 0px;
 }
-.userActions .actionsMenue #actionMenueContainer{
+
+.userActions .actionsMenue #actionMenueContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -307,7 +353,8 @@
   background-color: rgb(10, 23, 39);
   border: rgb(19, 36, 58) solid 2px;
 }
-#actionMenueContainer div{
+
+#actionMenueContainer div {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -315,22 +362,26 @@
   gap: 15px;
   width: max-content;
 }
-#actionMenueContainer #viewUserDetails *{
+
+#actionMenueContainer #viewUserDetails * {
   color: yellow;
 }
-#actionMenueContainer #deleteAccount *{
+
+#actionMenueContainer #deleteAccount * {
   color: red;
 }
-#actionMenueContainer #editUserDetails *{
+
+#actionMenueContainer #editUserDetails * {
   color: rgb(6, 138, 190);
 }
-#actionMenueContainer #acceptUser *{
+
+#actionMenueContainer #acceptUser * {
   color: rgb(6, 190, 31);
 }
 
 
 
-#popUpWindow{
+#popUpWindow {
   width: 100%;
   height: 0;
   overflow: hidden;
@@ -345,7 +396,8 @@
   top: 70px;
   transition: 1s;
 }
-#editUserWindow{
+
+#editUserWindow {
   width: 90%;
   max-width: 500px;
   height: 90%;
@@ -363,13 +415,15 @@
   position: sticky;
   top: 2.5%;
 }
-#popUpupperProfile{
+
+#popUpupperProfile {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
-#popUpProfilePic{
+
+#popUpProfilePic {
   width: 100px;
   aspect-ratio: 1/1;
   overflow: hidden;
@@ -382,7 +436,8 @@
   justify-content: center;
   text-align: center;
 }
-#popUpProfilePic img{
+
+#popUpProfilePic img {
   position: absolute;
   top: 0;
   left: 0;
@@ -390,11 +445,12 @@
   height: 100%;
   object-fit: contain;
 }
-#popUpupperProfile h4{
+
+#popUpupperProfile h4 {
   font-size: 1.7rem;
 }
 
-#popUplowerProfile{
+#popUplowerProfile {
   width: 100%;
   overflow: scroll;
   scrollbar-width: none;
@@ -405,32 +461,38 @@
   margin: 10px;
   padding: 10px;
 }
-#popUplowerProfile div{
+
+#popUplowerProfile div {
   display: flex;
   align-items: center;
   gap: 5px;
   width: 95%;
   max-width: 300px;
 }
-#popUplowerProfile>div>*:first-child{
+
+#popUplowerProfile>div>*:first-child {
   font-weight: 900;
 }
-#popUplowerProfile div input{
+
+#popUplowerProfile div input {
   flex-grow: 1;
   height: 1.1rem;
   padding: 3px;
 }
-#popUplowerProfile #popUpPictureFiled{
+
+#popUplowerProfile #popUpPictureFiled {
   height: 2rem;
   max-width: 100%;
 }
-#popUpProfilePictureLable{
+
+#popUpProfilePictureLable {
   display: flex;
   align-items: center;
   height: 100%;
   gap: 5px;
 }
-#popUpRemovePic{
+
+#popUpRemovePic {
   height: 100%;
   aspect-ratio: 1/1;
   display: flex;
@@ -442,32 +504,39 @@
   max-width: unset !important;
   cursor: pointer;
 }
-#popUpGender{
+
+#popUpGender {
   background-color: rgb(19, 19, 49);
   border-radius: 4px;
 }
-#popUpRemovePic img{
+
+#popUpRemovePic img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-#popUpRemovePic span{
+
+#popUpRemovePic span {
   position: absolute;
   font-size: 2rem;
   line-height: 1;
   top: 0;
   left: 0;
 }
-#popUplowerProfile p{
+
+#popUplowerProfile p {
   font-weight: 900;
 }
-#popUplowerProfile #cocsNo{
+
+#popUplowerProfile #cocsNo {
   color: gold;
 }
-#popUplowerProfile #rankNo{
+
+#popUplowerProfile #rankNo {
   color: red;
 }
-#popUplowerProfile button{
+
+#popUplowerProfile button {
   width: 95%;
   padding: 5px;
   border-radius: 7px;
@@ -476,19 +545,24 @@
   font-weight: 700;
   cursor: pointer;
 }
-#popUpUpdateData{
+
+#popUpUpdateData {
   background-color: rgba(7, 255, 7, 0.212);
   border: rgba(0, 255, 0, 0.226) solid;
 }
-#popUpActivate{
+
+#popUpActivate {
   background-color: rgba(219, 198, 7, 0.767);
   border: rgba(219, 235, 79, 0.384) solid;
 }
-#popUpDeactivate, #popUpDelete{
+
+#popUpDeactivate,
+#popUpDelete {
   background-color: rgba(255, 0, 0, 0.11);
   border: rgba(255, 0, 0, 0.295) solid;
 }
-#popUpExit{
+
+#popUpExit {
   background-color: rgba(255, 0, 0, 0.322);
   border: rgba(255, 0, 0, 0.534) solid;
 }

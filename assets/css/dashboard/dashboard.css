@@ -33,7 +33,7 @@ body {
 
 /* header */ 
 
-body>header {
+header {
   padding: 15px;
   display: flex;
   justify-content: space-between;
@@ -47,7 +47,6 @@ body>header {
   display: flex;
   align-items: center;
   gap: 5px;
-  min-width: fit-content;
 }
 
 .logoTitle div {

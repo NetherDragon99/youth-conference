@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="assets/css/dashboard/dashboard.css">
+  <script type="module" src="assets/js/dashboard/dashboard.js" defer></script>
+  <meta lang="ar">
+  <meta dir="rtl">
+  <meta name="author" content="steven Mario">
+  <title>Main Page</title>
+</head>
+
+<body>
+  <header>
+    <div class="logoTitle">
+      <div><img src="assets/imgs/logo.png" alt="church logo"></div>
+      <div class="logoTitleName">
+        <img src="assets/imgs/coc-text.png" alt="">
+      </div>
+    </div>
+    <a id="dashboardUser" href="#profile-page">
+      <div id="dashboardHeaderName">
+        <h4>Admin</h4>
+        <h4 id="dashboardUserName">user name</h4>
+      </div>
+      <div id="dashboardProfilePic">
+        <span class="icon-user"></span>
+        <img style="display: none;">
+      </div>
+    </a>
+  </header>
+  <div class="mainContainer">
+    <div class="adBanner">
+    </div>
+    <users-page id="usersPage">
+      <section id="accountsAnalisis">
+        <h1>ادارة الحسابات</h1>
+        <div>
+          <div id="totalUsersNo">
+            <p>عدد الشباب</p>
+            <p>0</p>
+          </div>
+          <div id="totalAccountsNo">
+            <p>عدد الحسابات</p>
+            <p>0</p>
+          </div>
+        </div>
+      </section>
+      <section id="requests">
+        <h2>طلبات الانضمام</h2>
+        <div id="requestsContainer">
+          <div class="request">
+            <div class="requestDetail">
+              <div id="requestProfilePic" class="loadingC"><img src="assets/imgs/picture.ico" alt="profile picture">
+              </div>
+              <div class="requestProfileData">
+                <h4 id="requestUserName" class="loading"></h4>
+                <h4 id="requestEmail" class="loading"></h4>
+              </div>
+            </div>
+            <div class="requestAction">
+              <button class="approve">قبول
+                <div class="icon-checkmark"></div>
+              </button>
+              <button class="remove">حذف
+                <div class="icon-trash"></div>
+              </button>
+              <button class="delete">مسح
+                <div class="icon-blocked"></div>
+              </button>
+            </div>
+          </div>
+          <div class="request">
+            <div class="requestDetail">
+              <div id="requestProfilePic" class="loadingC"><img src="assets/imgs/picture.ico" alt="profile picture">
+              </div>
+              <div class="requestProfileData">
+                <h4 id="requestUserName" class="loading"></h4>
+                <h4 id="requestEmail" class="loading"></h4>
+              </div>
+            </div>
+            <div class="requestAction">
+              <button class="approve">قبول
+                <div class="icon-checkmark"></div>
+              </button>
+              <button class="remove">حذف
+                <div class="icon-trash"></div>
+              </button>
+              <button class="delete">مسح
+                <div class="icon-blocked"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="usersSection">
+        <h2>الحسابات</h2>
+        <div id="accountsSearch">
+          <input type="search" placeholder="ضور على حساب معين">
+          <div class="icon-search"></div>
+          <div class="icon-clear" style="opacity: 0;"></div>
+        </div>
+        <div id="accountsSearchCategorys">
+          <div id="pendingAccounts">غير مفعل</div>
+          <div id="adminAccounts">الادمن</div>
+          <div id="activeAccounts">مفعل</div>
+          <div id="allAccounts" data-state="selected">الكل</div>
+        </div>
+        <div id="usersContainer">
+          <div class="user">
+            <div class="userProfilePic icon-user1">
+              <img src="assets/imgs/picture.ico" alt="profile picture">
+            </div>
+            <div class="userDetails">
+              <div class="upperSection">
+                <p>user name</p>
+                <div id="userState" data-state="active">pending</div>
+              </div>
+              <div class="lowerSection">hello@gmail.com</div>
+            </div>
+            <div class="userActions">
+              <span class="icon-actionDots"></span>
+              <div class="actionsMenue">
+                <div id="actionMenueContainer">
+                  <div id="viewUserDetails">
+                    <p>عرض التفاصيل</p>
+                    <span class="icon-info"></span>
+                  </div>
+                  <div id="deleteAccount">
+                    <p>حظر الحساب</p>
+                    <span class="icon-blocked"></span>
+                  </div>
+                  <div id="editUserDetails">
+                    <p>تعديل البيانات</p>
+                    <span class="icon-pencil"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="user">
+            <div class="userProfilePic icon-user1">
+              <img src="assets/imgs/picture.ico" alt="profile picture">
+            </div>
+            <div class="userDetails">
+              <div class="upperSection">
+                <p>user name</p>
+                <div id="userState" data-state="active">pending</div>
+              </div>
+              <div class="lowerSection">hello@gmail.com</div>
+            </div>
+            <div class="userActions">
+              <span class="icon-actionDots"></span>
+              <div class="actionsMenue">
+                <div id="actionMenueContainer">
+                  <div id="viewUserDetails">
+                    <p>عرض التفاصيل</p>
+                    <span class="icon-info"></span>
+                  </div>
+                  <div id="deleteAccount">
+                    <p>حظر الحساب</p>
+                    <span class="icon-blocked"></span>
+                  </div>
+                  <div id="editUserDetails">
+                    <p>تعديل البيانات</p>
+                    <span class="icon-pencil"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="user">
+            <div class="userProfilePic icon-user1">
+              <img src="assets/imgs/picture.ico" alt="profile picture">
+            </div>
+            <div class="userDetails">
+              <div class="upperSection">
+                <p>user name</p>
+                <div id="userState" data-state="active">pending</div>
+              </div>
+              <div class="lowerSection">hello@gmail.com</div>
+            </div>
+            <div class="userActions">
+              <span class="icon-actionDots"></span>
+              <div class="actionsMenue">
+                <div id="actionMenueContainer">
+                  <div id="viewUserDetails">
+                    <p>عرض التفاصيل</p>
+                    <span class="icon-info"></span>
+                  </div>
+                  <div id="deleteAccount">
+                    <p>حظر الحساب</p>
+                    <span class="icon-blocked"></span>
+                  </div>
+                  <div id="editUserDetails">
+                    <p>تعديل البيانات</p>
+                    <span class="icon-pencil"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </users-page>
+    <transaction-page id="dashboard-transaction-page">
+      <section id="totalUsersNo">
+        <div class="icon-users"></div>
+        <h3>إجمالى عدد الشباب</h3>
+        <h3 id="usersNo">0</h3>
+      </section>
+      <section id="transactionSection">
+        <h2>تحويل الكوكس</h2>
+        <div id="transactionUsersSearch">
+          <input type="search" id="transactionSearchBar" placeholder="اختار الحساب" data-targetedUser value>
+          <div class="icon-search"></div>
+          <div class="icon-clear exitSearchMenu"></div>
+          <div id="usersSearchSuggestions">
+          </div>
+        </div>
+        <div class="fastTransaction">
+          <h3>تحويل سريع</h3>
+          <div class="fastTransactionValues">
+            <div class="fastTransactionValue" data-value="5">
+              <div class="icon-coin"></div>
+              <h4>+5</h4>
+            </div>
+            <div class="fastTransactionValue" data-value="10">
+              <div class="icon-coin"></div>
+              <h4>+10</h4>
+            </div>
+            <div class="fastTransactionValue" data-value="20">
+              <div class="icon-coin"></div>
+              <h4>+20</h4>
+            </div>
+            <div class="fastTransactionValue" data-value="50">
+              <div class="icon-coin"></div>
+              <h4>+50</h4>
+            </div>
+          </div>
+        </div>
+        <div id="transactionValue">
+          <div id="transactionValueInputField">
+            <div class="icon-coin"></div>
+            <input type="number" id="insertedTransactionAmount" placeholder="اكتب المبلغ" data-transactionValue="0">
+          </div>
+          <button id="transfereTypeButton" data-state="addCocs">
+            <div>
+              <div class="icon-plus"></div>
+              <div class="icon-minus"></div>
+            </div>
+          </button>
+        </div>
+        <h3>الرسالة الوصفية</h3>
+        <div id="transactionDescriptionContainer">
+          <input type="text" id="transactionDescription" maxlength="20" placeholder="جائزة العالب"
+            data-transactionDescription="undefined">
+          <div id="transactionDescriptionSuggestions"></div>
+        </div>
+        <div id="transactionDetailsContainer">
+          <textarea id="transactionDetailsMessage" placeholder="لا يوجد"></textarea>
+          <div id="transactionDetailsSuggestions"></div>
+        </div>
+        <button id="transactionButton">
+          <h4>تأكيد الكوكس</h4>
+          <div class="icon-paperplane"></div>
+        </button>
+      </section>
+      <section id="transactionHistory">
+        <header>
+          <h2>سجل التحويلات</h2>
+          <div class="icon-spinner"></div>
+        </header>
+        <div id="transactionHistoryContainer"></div>
+      </section>
+    </transaction-page>
+    <tasks-page id="dashboard-tasks-page">
+      <section id="createTask">
+        <header id="createTaskHeader">
+          <h2>انشاء مهمة جديدة</h2>
+          <div id="createTaskIconContainer">
+          </div>
+        </header>
+        <div id="createTaskContainer">
+          <input type="text" id="createTaskTitle" name="title" placeholder="عنوان المهمة">
+          <textarea name="description" id="createTaskDes" placeholder="وصف المهمة"></textarea>
+          <label id="dateFiled" for="dateF">
+            <div class="icon-actionDots"></div>
+            <input type="date" placeholder="date" id="dateF">
+          </label>
+          <div id="timeFiled" class="taskAdditions">
+            <div id="timerHeader" class="taskAdditionsHeader">
+              <h2>تحديد وقت البداية والنهاية</h2>
+              <div id="timerButton" class="taskAdditionsBtn">
+                <div></div>
+              </div>
+            </div>
+            <div id="timerBody" class="taskAdditionsBody">
+              <div id="startTime">
+                <div class="icon-user"></div>
+                <input type="time" placeholder="start time">
+              </div>
+              <div id="endTime">
+                <div class="icon-user"></div>
+                <input type="time" placeholder="end time">
+              </div>
+            </div>
+          </div>
+          <div id="actionBtnFiled" class="taskAdditions">
+            <div id="actionBtnHeader" class="taskAdditionsHeader">
+              <h2>اضافة زر اكشن</h2>
+              <div id="actionBtnBtn" class="taskAdditionsBtn">
+                <div></div>
+              </div>
+            </div>
+            <div id="actionBtnBody" class="taskAdditionsBody">
+              <div id="btnName">
+                <div class="icon-user"></div>
+                <input type="text" placeholder="button name">
+              </div>
+              <div id="btnLink">
+                <div class="icon-user"></div>
+                <input type="text" placeholder="button url">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </tasks-page>
+    <profile-page id="dashboard-profile-page">
+      <div class="profileContainer">
+        <div class="publicProfile">
+          <div class="profilePicture">
+            <span class="icon-user profile"></span>
+            <img style="display: none;">
+          </div>
+          <div class="userName">
+            <h2>Admin Dashboard</h2>
+          </div>
+        </div>
+        <form id="profileForm">
+          <fieldset>
+            <legend class="accountProfileData">Account</legend>
+            <div>
+              <label for="profileGmail">G-Mail:</label>
+              <input type="email" id="profileGmail" placeholder="guest@gmail.com" name="email" required>
+            </div>
+            <div>
+              <label for="profilePassoword">password:</label>
+              <input type="password" id="profilePassoword" placeholder="**********" name="password"
+                autocomplete="current-password" required>
+            </div>
+            <input type="submit" id="profileSubmit" value="Log-In">
+          </fieldset>
+        </form>
+      </div>
+    </profile-page>
+  </div>
+  <footer>
+    <a href="#usersPage"><span class="icon-users"></span></a>
+    <a href="#dashboard-transaction-page"><span class="icon-credit-card"></span></a>
+    <a href="#dashboard-tasks-page"><span class="icon-users"></span></a>
+    <a href="#dashboard-profile-page"><span class="icon-user"></span></a>
+  </footer>
+  <div id="popUpWindow">
+    <div id="editUserWindow">
+      <div id="popUpupperProfile">
+        <div id="popUpProfilePic" class="icon-user">
+          <img src="assets/imgs/new coc logo.png" alt="profile Picture">
+        </div>
+        <h4>userName</h4>
+      </div>
+      <div id="popUplowerProfile">
+        <div id="popUpUserNameFiled">
+          <label for="popUpUserName">username: </label>
+          <input type="text" placeholder="username" id="popUpUserName">
+        </div>
+        <div id="popUpEmailFiled">
+          <label for="popUpEmail">email: </label>
+          <input type="email" placeholder="username@email.com" id="popUpEmail">
+        </div>
+        <div id="popUpGenderFiled">
+          <label for="popUpGender">gender:</label>
+          <select name="gender" id="popUpGender">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+          </select>
+        </div>
+        <div id="popUpPictureFiled">
+          <label for="popUpProfilePicture" id="popUpProfilePictureLable">picture:
+            <div>
+              Select your profile picture...
+            </div>
+          </label>
+          <div id="popUpRemovePic">
+            <img src="assets/imgs/picture.ico" alt="remove image">
+            <span class="icon-clear"></span>
+          </div>
+          <input type="file" id="popUpProfilePicture" name="profilePicture" accept="image/*" style="display: none;">
+          <input type="text" name="profilePicture" style="display: none;" id="popUpProfilePictureUrl">
+        </div>
+        <p id="cocsNo">COCS: <span>100</span></p>
+        <p id="rankNo">Rank: <span>#1</span></p>
+        <button id="popUpUpdateData">Update Account Data</button>
+        <button id="popUpDeactivate">Deactivate Account</button>
+        <Button id="popUpDelete">Delete Account</Button>
+        <Button id="popUpExit">Exit Menue</Button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
