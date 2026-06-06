@@ -15,10 +15,9 @@
 <body>
   <header>
     <div class="logoTitle">
-      <div><img src="assets/imgs/new coc logo.png" alt="church logo"></div>
+      <div><img src="assets/imgs/logo.png" alt="church logo"></div>
       <div class="logoTitleName">
-        <h3>CHURCH</h3>
-        <h3>OF CHRIST</h3>
+        <img src="assets/imgs/coc-text.png" alt="">
       </div>
     </div>
     <a id="dashboardUser" href="#profile-page">
@@ -276,6 +275,59 @@
         <div id="transactionHistoryContainer"></div>
       </section>
     </transaction-page>
+    <tasks-page id="dashboard-tasks-page">
+      <section id="createTask">
+        <header id="createTaskHeader">
+          <h2>انشاء مهمة جديدة</h2>
+          <div id="createTaskIconContainer">
+          </div>
+        </header>
+        <div id="createTaskContainer">
+          <input type="text" id="createTaskTitle" name="title" placeholder="عنوان المهمة">
+          <textarea name="description" id="createTaskDes" placeholder="وصف المهمة"></textarea>
+          <label id="dateFiled" for="dateF">
+            <div class="icon-actionDots"></div>
+            <input type="date" placeholder="date" id="dateF">
+          </label>
+          <div id="timeFiled" class="taskAdditions">
+            <div id="timerHeader" class="taskAdditionsHeader">
+              <h2>تحديد وقت البداية والنهاية</h2>
+              <div id="timerButton" class="taskAdditionsBtn">
+                <div></div>
+              </div>
+            </div>
+            <div id="timerBody" class="taskAdditionsBody">
+              <div id="startTime">
+                <div class="icon-user"></div>
+                <input type="time" placeholder="start time">
+              </div>
+              <div id="endTime">
+                <div class="icon-user"></div>
+                <input type="time" placeholder="end time">
+              </div>
+            </div>
+          </div>
+          <div id="actionBtnFiled" class="taskAdditions">
+            <div id="actionBtnHeader" class="taskAdditionsHeader">
+              <h2>اضافة زر اكشن</h2>
+              <div id="actionBtnBtn" class="taskAdditionsBtn">
+                <div></div>
+              </div>
+            </div>
+            <div id="actionBtnBody" class="taskAdditionsBody">
+              <div id="btnName">
+                <div class="icon-user"></div>
+                <input type="text" placeholder="button name">
+              </div>
+              <div id="btnLink">
+                <div class="icon-user"></div>
+                <input type="text" placeholder="button url">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </tasks-page>
     <profile-page id="dashboard-profile-page">
       <div class="profileContainer">
         <div class="publicProfile">
@@ -308,6 +360,7 @@
   <footer>
     <a href="#usersPage"><span class="icon-users"></span></a>
     <a href="#dashboard-transaction-page"><span class="icon-credit-card"></span></a>
+    <a href="#dashboard-tasks-page"><span class="icon-users"></span></a>
     <a href="#dashboard-profile-page"><span class="icon-user"></span></a>
   </footer>
   <div id="popUpWindow">

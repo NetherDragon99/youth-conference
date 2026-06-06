@@ -2,6 +2,7 @@
 @import url(../../fonts\ &\ icons/icons/style.css);
 @import url(./dashboard-transaction-page.css);
 @import url(./dashboard-user-page.css);
+@import url(./dashboard-tasks-page.css);
 
 @font-face {
   font-family: 'Cairo';
@@ -32,7 +33,7 @@ body {
 
 /* header */ 
 
-header {
+body>header {
   padding: 15px;
   display: flex;
   justify-content: space-between;
@@ -46,6 +47,7 @@ header {
   display: flex;
   align-items: center;
   gap: 5px;
+  min-width: fit-content;
 }
 
 .logoTitle div {
