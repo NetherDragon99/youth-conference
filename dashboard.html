@@ -279,14 +279,13 @@
       <section id="createTask">
         <header id="createTaskHeader">
           <h2>انشاء مهمة جديدة</h2>
-          <div id="createTaskIconContainer">
-          </div>
+          <div class="icon-task"></div>
         </header>
         <div id="createTaskContainer">
           <input type="text" id="createTaskTitle" name="title" placeholder="عنوان المهمة">
           <textarea name="description" id="createTaskDes" placeholder="وصف المهمة"></textarea>
           <label id="dateFiled" for="dateF">
-            <div class="icon-actionDots"></div>
+            <div class="icon-calendar"></div>
             <input type="date" placeholder="date" id="dateF">
           </label>
           <div id="timeFiled" class="taskAdditions">
@@ -298,11 +297,11 @@
             </div>
             <div id="timerBody" class="taskAdditionsBody">
               <div id="startTime">
-                <div class="icon-user"></div>
+                <div class="icon-time"></div>
                 <input type="time" placeholder="start time">
               </div>
               <div id="endTime">
-                <div class="icon-user"></div>
+                <div class="icon-time"></div>
                 <input type="time" placeholder="end time">
               </div>
             </div>
@@ -316,12 +315,71 @@
             </div>
             <div id="actionBtnBody" class="taskAdditionsBody">
               <div id="btnName">
-                <div class="icon-user"></div>
                 <input type="text" placeholder="button name">
               </div>
               <div id="btnLink">
-                <div class="icon-user"></div>
                 <input type="text" placeholder="button url">
+              </div>
+            </div>
+          </div>
+        </div>
+        <button id="confirmTask">Confirm</button>
+        <button id="cancelTask">Cancel</button>
+      </section>
+      <section id="tasksHistory">
+        <h2>سجل المهام</h2>
+        <div id="tasksHistoryContainer">
+          <div class="adayTasks">
+            <div class="adayTaskDate">الجمعة 12/6/2026</div>
+            <div class="adayTasksList">
+              <div class="task">
+                <div class="taskActionBtn">
+                  <button class="icon-edit editTaskBtn"></button>
+                  <button class="icon-trash deleteTaskBtn"></button>
+                </div>
+                <div class="taskSummary">
+                  <h4>روح الملعب</h4>
+                  <p>روح الملعب واعمل كذا وكذا وكذا وابعدها  اعمل البتاع دة بعدها اعمل كدة وكدة</p>
+                  <p>الساعة 9:00</p>
+                </div>
+              </div>
+              <div class="task">
+                <div class="taskActionBtn">
+                  <button class="icon-edit editTaskBtn"></button>
+                  <button class="icon-trash deleteTaskBtn"></button>
+                </div>
+                <div class="taskSummary">
+                  <h4>روح الملعب</h4>
+                  <p>روح الملعب واعمل كذا وكذا وكذا وابعدها  اعمل البتاع دة بعدها اعمل كدة وكدة</p>
+                  <p>الساعة 9:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="adayTasks">
+            <div class="adayTaskDate">الجمعة 12/6/2026</div>
+            <div class="adayTasksList">
+              <div class="task">
+                <div class="taskActionBtn">
+                  <button class="icon-edit editTaskBtn"></button>
+                  <button class="icon-trash deleteTaskBtn"></button>
+                </div>
+                <div class="taskSummary">
+                  <h4>روح الملعب</h4>
+                  <p>روح الملعب واعمل كذا وكذا وكذا وابعدها  اعمل البتاع دة بعدها اعمل كدة وكدة</p>
+                  <p>الساعة 9:00</p>
+                </div>
+              </div>
+              <div class="task">
+                <div class="taskActionBtn">
+                  <button class="icon-edit editTaskBtn"></button>
+                  <button class="icon-trash deleteTaskBtn"></button>
+                </div>
+                <div class="taskSummary">
+                  <h4>روح الملعب</h4>
+                  <p>روح الملعب واعمل كذا وكذا وكذا وابعدها  اعمل البتاع دة بعدها اعمل كدة وكدة</p>
+                  <p>الساعة 9:00</p>
+                </div>
               </div>
             </div>
           </div>
@@ -360,7 +418,7 @@
   <footer>
     <a href="#usersPage"><span class="icon-users"></span></a>
     <a href="#dashboard-transaction-page"><span class="icon-credit-card"></span></a>
-    <a href="#dashboard-tasks-page"><span class="icon-users"></span></a>
+    <a href="#dashboard-tasks-page"><span class="icon-task"></span></a>
     <a href="#dashboard-profile-page"><span class="icon-user"></span></a>
   </footer>
   <div id="popUpWindow">

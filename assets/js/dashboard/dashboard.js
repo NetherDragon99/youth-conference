@@ -2,6 +2,27 @@ import * as dashboardProfile from "./dashboard-profile-page.js";
 import * as dashboardLoading from "./dashboard-loading-data.js";
 import * as usersPage from './dashboard-users-page.js';
 
+
+const footerDashboardNavIcons = document.querySelectorAll('body footer a');
+
+addEventListener('hashchange', () => {
+  const currentPage = location.hash;  
+
+  localStorage.setItem('historyDashboardPage', currentPage);
+
+  footerDashboardNavIcons.forEach((v) => {
+    v.querySelector(`span`).classList.remove('activePage');
+
+    if (`${v.getAttribute('href')}` == `${currentPage}`) {
+      v.setAttribute('class', 'active');
+      v.querySelector(`span`).classList.add('activePage');
+    }
+  })
+})
+
+  location.hash = '';
+  location.hash = localStorage.getItem('historyDashboardPage');
+
 // ad banner
 let adBannerNumber = 0;
 export function createAD(inputText, inputColor) {

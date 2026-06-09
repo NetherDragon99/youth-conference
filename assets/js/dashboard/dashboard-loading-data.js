@@ -3,6 +3,7 @@ import * as dashboard from './dashboard.js'
 import * as dashboardProfile from './dashboard-profile-page.js'
 import * as api from './dashboard-api.js'
 import * as transactionPage from './dashboard-transaction-page.js';
+import * as taskPage from './dashboard-tasks-page.js'
 
 const dashboardProfilePagePic = document.querySelector('.publicProfile .profilePicture img')
 let localStore;

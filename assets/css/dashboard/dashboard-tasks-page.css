@@ -11,7 +11,11 @@
   direction: rtl;
 }
 
-#dashboard-tasks-page>section {
+#createTask{
+  overflow: scroll;
+  scrollbar-width: none;
+  min-height: calc(100dvh - 160px);
+  max-height: max-content;
   background-color: rgb(10, 23, 39);
   border: rgb(19, 36, 58) solid 2px;
   border-radius: 15px;
@@ -20,10 +24,13 @@
   margin-top: 20px;
   padding: 15px;
 }
-#createTask{
-  overflow: hidden;
-  min-height: calc(100dvh - 160px);
-  max-height: max-content;
+#createTaskHeader{
+  margin: 0;
+  width: 100%;
+  padding-top: 0;
+}
+#createTaskHeader>div{
+  font-size: 2rem;
 }
 
 #createTaskContainer {
@@ -31,9 +38,7 @@
   flex-direction: column;
   gap: .5rem;
   width: 100%;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  height: calc(100% - 22px);
+  min-height: calc(100% - 75px);
 }
 
 #createTaskContainer>* {
@@ -53,7 +58,7 @@
   max-width: 100%;
   min-width: 100%;
   flex: 1;
-  min-height: 0;
+  min-height: 50px;
   overflow: auto;
 }
 
@@ -61,13 +66,14 @@
   width: 100%;
   height: max-content;
   display: flex;
-  padding: .5rem 0;
+  align-items: center;
+  padding: .5rem;
 }
 
 #dateF {
   height: 20px;
   flex: 1;
-  max-width: 200px;
+  max-width: 70px;
   margin-right: 5px;
 }
 
@@ -114,7 +120,9 @@
   padding: 3px;
   margin-top: 10px;
 }
-
+.taskAdditionsBody>div>div{
+  font-size: 1.5rem;
+}
 .taskAdditionsBody>div>input {
   flex: 1;
   max-width: 200px;
@@ -123,4 +131,115 @@
 }
 #actionBtnBody>div>input{
   text-align: start;
+}
+#createTask>button{
+  width: 100%;
+  height: 3rem;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: 900;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button#confirmTask{
+  background-image: linear-gradient(to right, rgb(141, 121, 5), rgb(196, 171, 34), rgb(109, 93, 2));
+}
+button#cancelTask{
+  background-image: linear-gradient(to right, rgb(141, 5, 5), rgb(196, 34, 34), rgb(109, 2, 2));
+}
+
+
+section#tasksHistory{
+  background-color: rgb(10, 23, 39);
+  border: rgb(19, 36, 58) solid 2px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  margin-top: 20px;
+  padding: 15px;
+}
+#tasksHistoryContainer{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.adayTasks{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.adayTaskDate{
+  background-image: linear-gradient(to right, rgb(141, 121, 5), rgb(196, 171, 34), rgb(109, 93, 2));
+  padding: 10px;
+  border-radius: 7px;
+  color: rgb(31, 28, 28);
+  font-weight: 900;
+}
+.adayTasksList{
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.adayTasksList>.task{
+  border: rgb(196, 171, 34) solid;
+  border-radius: 10px;
+  width: 100%;
+  height: 100px;
+  display: flex;
+}
+.task .taskActionBtn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, rgb(141, 121, 5), rgb(196, 171, 34), rgb(109, 93, 2));
+  overflow: hidden;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.task .taskActionBtn button{
+  font-size: 1.5rem;
+  color: black;
+  padding: 10px 20px;
+}
+.task .taskSummary{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: space-between;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  height: 100%;
+}
+.task .taskSummary h4{
+  margin-bottom: 5px;
+}
+.task .taskSummary p:nth-child(2){
+  min-height: 5px;
+  height: fit-content;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: unset;
+  -webkit-box-orient: vertical;
+
+}
+.task .taskSummary p:last-child{
+  height: 1rem;
+  font-size: .8rem;
+  color: aliceblue;
+  margin-top: 3px;
 }
