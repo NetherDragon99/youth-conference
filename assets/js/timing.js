@@ -32,6 +32,7 @@ export const getTimeProgress = (enteredStartTime, enteredendTime) => {
 // console.log(getTimeProgress("00:00:00", "00:05:00"));
 
 // getTimeProgress();
+console.log("11:59:59pm".slice(1));
 
 // make time from 00:00:00 to 0:00
 export const cleanTime = (time) => {
@@ -43,11 +44,11 @@ export const cleanTime = (time) => {
     time = `${Number(time.slice(0, 2)) - 12}:${time.slice(3, 8)}pm`
   } else {
     time = `${time}am`
-  }
+  }  
 
   if (time.charAt(0) == 0) {
-    time = `${time.slice(1, 5)}${time.slice(-2)}`;
-  } else if (time.slice(0, 2) == '12') {
+    time = `${time.slice(1, 5)}${time.slice(-2)}`;        
+  } else if (Number(time.slice(0, 2)) <= 12 && Number(time.slice(0, 2)) >= 1 ) {
     time = `${time.slice(0, 5)}${time.slice(-2)}`;
   } else {
     time = `${time.slice(0, 4)}${time.slice(-2)}`;

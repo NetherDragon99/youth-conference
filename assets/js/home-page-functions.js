@@ -170,6 +170,7 @@ export const activitySession = () => {
   }
 }
 
+
 //tasks
 let tasks = document.querySelectorAll('.task');
 const openedTask = document.createElement('div');
@@ -278,7 +279,7 @@ export function tasksTotalPercentage() {
 export async function getTodayTasks() {
   const currentDate = timing.getCurrentDate();
   const todayTasks = await api.getSpecificData('tasks', 'activityDate', currentDate);
-  // console.log(todayTasks);
+
   let toAddTasks = [];
   if (todayTasks.length == 0) {
     taskContainer.innerHTML = text.dom.noTaskDOM;
@@ -300,9 +301,9 @@ export async function getTodayTasks() {
     const progress = timing.getTimeProgress(v.startingTime, v.endingTime);
 
     toAddTasks.push(`${text.dom.tasksDOM(v, icon, progress, displayBtn)}`)
+    console.log(v);
+    
   })
-  console.log(toAddTasks);
-  console.log(tasks);
   
   taskContainer.innerHTML ='';
   toAddTasks.forEach((v,i)=>{

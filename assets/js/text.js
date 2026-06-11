@@ -109,7 +109,7 @@ export const dom = {
                   <div class="taskTime">من ${timing.cleanTime(v.startingTime)} <br>لحد ${timing.cleanTime(v.endingTime)}</div>
                   <div class="taskProgress">
                     <div style="width: ${progress}%"></div>
-                    <div class="taskProgressNumber">${Number(progress).toFixed()}%</div>
+                    <div class="taskProgressNumber">${Number(progress).toFixed() === '100'?'TimeUp':Number(progress).toFixed() + '%'}</div>
                   </div>
                 </div>
               </div>
