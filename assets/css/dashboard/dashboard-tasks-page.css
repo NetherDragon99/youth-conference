@@ -11,7 +11,7 @@
   direction: rtl;
 }
 
-#createTask{
+#makeTask{
   overflow: scroll;
   scrollbar-width: none;
   min-height: 90px;
@@ -29,19 +29,20 @@
   margin: 0;
   width: 100%;
   padding-top: 0;
+  cursor: pointer;
 }
 #createTaskHeader>div{
   font-size: 2rem;
 }
 
-#createTaskContainer {
+#makeTaskContainer{
   display: flex;
   flex-direction: column;
   gap: .5rem;
   width: 100%;
 }
 
-#createTaskContainer>* {
+#makeTaskContainer>*{
   background-color: rgb(19, 36, 58);
   border-radius: 7px;
   font-size: .9rem;
@@ -148,7 +149,7 @@
 #actionBtnBody>div>input{
   text-align: start;
 }
-#createTaskContainer>button{
+#makeTaskContainer>button{
   width: 100%;
   height: 3rem;
   border-radius: 7px;
@@ -211,6 +212,7 @@ section#tasksHistory{
   width: 100%;
   height: 100px;
   display: flex;
+  cursor: pointer;
 }
 .task .taskActionBtn{
   display: flex;
@@ -226,6 +228,7 @@ section#tasksHistory{
   font-size: 1.5rem;
   color: black;
   padding: 10px 20px;
+  cursor: pointer;
 }
 .task .taskSummary{
   width: 100%;

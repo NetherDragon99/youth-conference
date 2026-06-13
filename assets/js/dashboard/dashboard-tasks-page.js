@@ -1,15 +1,19 @@
 import * as api from "./dashboard-api.js";
 import * as dashboard from './dashboard.js';
 import * as time from '../timing.js';
+import * as text from '../text.js';
 
 let createTaskHeadder = document.getElementById('createTaskHeader');
-let createTaskDiv = document.getElementById('createTask');
+let createTaskDiv = document.getElementById('makeTask');
 
 createTaskHeadder.addEventListener('click', () => {
   if (createTaskDiv.getBoundingClientRect().height > 90) {
     createTaskDiv.style.minHeight = '90px';
     createTaskDiv.style.overflow = 'hidden';
-
+    createTaskDiv.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
   } else {
     createTaskDiv.style.minHeight = 'calc(100dvh - 160px)';
     createTaskDiv.style.overflow = 'scroll';
@@ -22,7 +26,7 @@ const apiTasks = [
     "activityDate": "2026/06/06",
     "title": "الفقرة رقم 1",
     "description": "المكان رقم 1",
-    "startingTime": "00:00:00",
+    "startingTime": "05:00:00",
     "endingTime": "24:00:00",
     "type": "inprogress",
     "buttonName": "hello",
@@ -34,7 +38,7 @@ const apiTasks = [
     "activityDate": "2026/06/07",
     "title": "الفقرة رقم 2",
     "description": "المكان رقم 2",
-    "startingTime": "01:00:00",
+    "startingTime": "06:00:00",
     "endingTime": "24:00:00",
     "type": "limitedTime",
     "buttonName": "",
@@ -93,11 +97,12 @@ const actionStateBtn = document.getElementById('actionBtnLink');
 const actionName = document.querySelector('#actionBtnBody>#btnName>input');
 const actionLink = document.querySelector('#actionBtnBody>#btnLink>input');
 
-document.getElementById('confirmTask').addEventListener('click', ()=>{
+
+document.getElementById('confirmTask').addEventListener('click', () => {
   let taskData = getTaskData();
   try {
     if (taskData) {
-      api.addSpecificData('tasks', taskData)
+      document.getElementById('createTaskContainer') ? api.addSpecificData('tasks', taskData) : null;
     }
   } catch (error) {
     console.log(error);
@@ -105,20 +110,54 @@ document.getElementById('confirmTask').addEventListener('click', ()=>{
   }
 });
 
+let waiting = 0;
+document.getElementById('cancelTask').addEventListener('click', () => {
+  if (waiting === 1) {
+    document.querySelector('#createTaskHeader>h2').innerHTML = 'انشاء مهمة جديدة';
+    document.querySelector('#createTaskHeader>div').classList.add('icon-task');
+    document.querySelector('#createTaskHeader>div').classList.remove('icon-edit');
+    createTaskDiv.dataset.type = 'create';
+
+    title.value = '';
+    description.value = '';
+    date.value = time.getCurrentDate().replaceAll('/', '-');
+    timeStateBtn.dataset.state = 'disactive';
+    startTime.value = '00:00:00';
+    endTime.value = '23:59:59';
+    actionStateBtn.dataset.state = 'disactive';
+    actionName.value = '';
+    actionLink.value = '';
+
+    createTaskDiv.style.minHeight = '90px';
+    createTaskDiv.style.overflow = 'hidden';
+
+    createTaskDiv.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  } else {
+    waiting = 1;
+    dashboard.createAD(text.text["confirm-cancel-task"], 'green');
+  }
+  setTimeout(() => {
+    waiting = 0;
+  }, 5000)
+})
+
 startTime.value = '00:00:00';
 endTime.value = '23:59:59';
 date.value = (time.getCurrentDate()).replaceAll('/', '-')
 
 
 
-actionStateBtn.addEventListener('click',()=>{
-  actionStateBtn.getAttribute('data-state') === 'active'?actionStateBtn.setAttribute('data-state', 'disactive'):actionStateBtn.setAttribute('data-state', 'active')
-  
+actionStateBtn.addEventListener('click', () => {
+  actionStateBtn.getAttribute('data-state') === 'active' ? actionStateBtn.setAttribute('data-state', 'disactive') : actionStateBtn.setAttribute('data-state', 'active')
+
 })
 
-timeStateBtn.addEventListener('click',()=>{
-  timeStateBtn.getAttribute('data-state') === 'active'?timeStateBtn.setAttribute('data-state', 'disactive'):timeStateBtn.setAttribute('data-state', 'active')
-  
+timeStateBtn.addEventListener('click', () => {
+  timeStateBtn.getAttribute('data-state') === 'active' ? timeStateBtn.setAttribute('data-state', 'disactive') : timeStateBtn.setAttribute('data-state', 'active')
+
 })
 
 function getTaskData() {
@@ -146,12 +185,12 @@ function getTaskData() {
     taskData.type = "inprogress";
 
     if (startTime.value === '') {
-        throw new Error("من فضلك حدد وقت البداية");
-      } else if (endTime.value === '') {
-        throw new Error("من فضلك حدد وقت النهاية");
-      }
-      taskData.startingTime = startTime.value;
-      taskData.endingTime = endTime.value
+      throw new Error("من فضلك حدد وقت البداية");
+    } else if (endTime.value === '') {
+      throw new Error("من فضلك حدد وقت النهاية");
+    }
+    taskData.startingTime = startTime.value;
+    taskData.endingTime = endTime.value
 
     if (timeStateBtn.getAttribute('data-state') === 'active') {
       taskData.type = "limitedTime";
@@ -177,35 +216,48 @@ function getTaskData() {
   }
 }
 
-function arrangeTasks(oldTasks) {
+function arrangeTasks(oldTasks){
   let newTasksList = [];
-  oldTasks.forEach((v) => {
+  oldTasks.forEach(currentTask => {
 
-    let currentTask = newTasksList.find(task => typeof task === 'object' && task !== null && v.activityDate in task);
-
-    if (currentTask) {
-      currentTask[v.activityDate].push(v);
-
-    } else {
-      if (newTasksList.length === 0) {
-        newTasksList.push({ [v.activityDate]: [v] });
-
-      } else {
-        let currentValueDate = new Date(v.activityDate).getTime();
-
-        let tempIndex = newTasksList.findIndex(value => {
-          let tempV = Object.keys(value)[0];
-          return currentValueDate < new Date(tempV).getTime();
+    // add task if empty
+    if (newTasksList.length === 0) {
+      newTasksList.push({[currentTask.activityDate]: [currentTask]})
+    }else{
+      // if not empty
+      let currentCategoryDate = newTasksList.find(task => typeof task === 'object' && task !== null && currentTask.activityDate in task);
+      console.log(currentCategoryDate);
+      
+      // if category found
+      if (currentCategoryDate) {
+        let valueIndex = currentCategoryDate[currentTask.activityDate].findIndex(v=>{
+          return new Date(`${currentTask.activityDate.replaceAll('/', '-')} ${currentTask.startingTime}`).getTime() < new Date(`${v.activityDate} ${v.startingTime}`).getTime()
         })
-        console.log(tempIndex);
-        if (tempIndex === -1) {
-          newTasksList.push({ [v.activityDate]: [v] })
-        } else {
-          newTasksList.splice(tempIndex, 0, { [v.activityDate]: [v] })
+        console.log(valueIndex,currentTask, new Date(`${currentTask.activityDate.replaceAll('/', '-')} ${currentTask.startingTime}`).getTime());
+        
+        // add value organized by date
+        if (valueIndex === -1) {
+          currentCategoryDate[currentTask.activityDate].push(currentTask)
+        }else{
+          currentCategoryDate[currentTask.activityDate].splice(valueIndex, 0, currentTask)
+        }
+      }else{
+        // if category not found
+        let categoryIndex = newTasksList.findIndex(value=>{
+          return new Date(Object.keys(value)[0]).getTime() > new Date(currentTask.activityDate).getTime();
+        })
+        console.log(categoryIndex,currentTask, newTasksList);
+        if (categoryIndex === -1) {
+          newTasksList.push({[currentTask.activityDate]: [currentTask]})
+        }else{
+          newTasksList.splice(categoryIndex, 0, {[currentTask.activityDate]: [currentTask]})
         }
       }
+
     }
-  })
-  return newTasksList;
+  });
+  console.log(newTasksList);
+  
 }
 
+arrangeTasks(apiTasks)
