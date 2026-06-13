@@ -32,7 +32,6 @@ export const getTimeProgress = (enteredStartTime, enteredendTime) => {
 // console.log(getTimeProgress("00:00:00", "00:05:00"));
 
 // getTimeProgress();
-console.log("11:59:59pm".slice(1));
 
 // make time from 00:00:00 to 0:00
 export const cleanTime = (time) => {

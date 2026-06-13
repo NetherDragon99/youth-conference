@@ -226,14 +226,12 @@ function arrangeTasks(oldTasks){
     }else{
       // if not empty
       let currentCategoryDate = newTasksList.find(task => typeof task === 'object' && task !== null && currentTask.activityDate in task);
-      console.log(currentCategoryDate);
       
       // if category found
       if (currentCategoryDate) {
         let valueIndex = currentCategoryDate[currentTask.activityDate].findIndex(v=>{
           return new Date(`${currentTask.activityDate.replaceAll('/', '-')} ${currentTask.startingTime}`).getTime() < new Date(`${v.activityDate} ${v.startingTime}`).getTime()
         })
-        console.log(valueIndex,currentTask, new Date(`${currentTask.activityDate.replaceAll('/', '-')} ${currentTask.startingTime}`).getTime());
         
         // add value organized by date
         if (valueIndex === -1) {
@@ -246,7 +244,7 @@ function arrangeTasks(oldTasks){
         let categoryIndex = newTasksList.findIndex(value=>{
           return new Date(Object.keys(value)[0]).getTime() > new Date(currentTask.activityDate).getTime();
         })
-        console.log(categoryIndex,currentTask, newTasksList);
+
         if (categoryIndex === -1) {
           newTasksList.push({[currentTask.activityDate]: [currentTask]})
         }else{
@@ -256,8 +254,49 @@ function arrangeTasks(oldTasks){
 
     }
   });
-  console.log(newTasksList);
-  
+  // console.log(newTasksList);
 }
 
-arrangeTasks(apiTasks)
+// arrangeTasks(apiTasks)
+
+
+
+// tasks history
+
+// open category function
+const adayTasksDate = document.querySelectorAll('#tasksHistoryContainer>.adayTasks>.adayTaskDate');
+
+adayTasksDate.forEach(category => {
+  
+  category.addEventListener('click', ()=>{
+    const adayTasks = category.closest('.adayTasks');
+    console.log('done');
+    if (adayTasks.dataset.state === 'opened') {
+      adayTasks.style.maxHeight = 'calc(1rem + 20px)';
+      adayTasks.dataset.state = 'closed'
+    }else{
+      adayTasks.style.maxHeight = '50000px';
+      adayTasks.dataset.state = 'opened'
+    }
+  })
+})
+
+// open users list function
+const tasksSummary = document.querySelectorAll('#tasksHistoryContainer .taskSummary');
+
+tasksSummary.forEach(allTasks => {
+  allTasks.addEventListener('click', clickedTask =>{
+    const tasksListContainer = clickedTask.target.closest('.task').querySelector('.tasksUsersList');
+    console.log('done', clickedTask, tasksListContainer);
+
+    if (tasksListContainer.dataset.state === 'opened') {
+      tasksListContainer.style.maxHeight = '0px';
+      tasksListContainer.style.overflow = 'hidden';
+      tasksListContainer.dataset.state = 'closed'
+    }else{
+      tasksListContainer.style.maxHeight = '500px';
+      tasksListContainer.style.overflow = 'scroll';
+      tasksListContainer.dataset.state = 'opened';
+    }
+  })
+})
