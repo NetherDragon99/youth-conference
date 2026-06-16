@@ -1,4 +1,4 @@
-#dashboard-transaction-page{
+#dashboard-transaction-page {
   width: 100%;
   height: 100%;
   flex-shrink: 0;
@@ -10,7 +10,8 @@
   scrollbar-width: none;
   direction: rtl;
 }
-#dashboard-transaction-page>section{
+
+#dashboard-transaction-page>section {
   background-color: rgb(10, 23, 39);
   border: rgb(19, 36, 58) solid 2px;
   border-radius: 15px;
@@ -19,46 +20,53 @@
   margin-top: 20px;
   padding: 15px;
 }
-#totalUsersNo{
+
+#totalUsersNo {
   display: flex;
   align-items: center;
   justify-content: end;
   gap: 10px;
 }
-#totalUsersNo>div{
+
+#totalUsersNo>div {
   font-size: 1.5rem;
 }
-#totalUsersNo>h3{
+
+#totalUsersNo>h3 {
   font-size: 1.4rem;
 }
-#totalUsersNo>h3:last-child{
+
+#totalUsersNo>h3:last-child {
   margin-right: auto;
   font-size: 1.5rem;
   font-weight: 700;
 }
 
-#transactionSection{
+#transactionSection {
   display: flex;
   flex-direction: column;
   gap: 10px;
   flex-shrink: 0;
   min-height: calc(100dvh - 220px - 1.5rem);
 }
-#transactionUsersSearch{
+
+#transactionUsersSearch {
   width: 100%;
   height: 2.5rem;
   background-color: rgb(19, 36, 58);
   border-radius: 5px;
   position: relative;
 }
-#transactionUsersSearch input{
+
+#transactionUsersSearch input {
   width: 100%;
   height: 100%;
   border: none;
   outline: none;
   padding: 10px;
 }
-#transactionUsersSearch>div:nth-child(2){
+
+#transactionUsersSearch>div:nth-child(2) {
   position: absolute;
   left: 10px;
   top: 50%;
@@ -66,7 +74,8 @@
   transition: 1s;
   touch-action: none;
 }
-#usersSearchSuggestions{
+
+#usersSearchSuggestions {
   width: 100%;
   max-height: 200px;
   background-color: rgba(19, 36, 58, 0.85);
@@ -82,14 +91,16 @@
   z-index: 3;
   display: none;
 }
-.usersSearchSuggestion{
+
+.usersSearchSuggestion {
   display: flex;
   flex-direction: column;
   gap: 5px;
   border-bottom: white solid 1px;
   padding: 5px;
 }
-.exitSearchMenu{
+
+.exitSearchMenu {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,14 +119,15 @@
   transition: 1s
 }
 
-.fastTransactionValues{
+.fastTransactionValues {
   display: flex;
   flex-direction: row-reverse;
   gap: 10px;
   margin-top: 15px;
   justify-content: center;
 }
-.fastTransactionValue{
+
+.fastTransactionValue {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,23 +138,27 @@
   border-radius: 15px;
   border-radius: 15px;
   gap: 5px;
-  font-size: clamp(1rem , 2vw , 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: 900;
 }
-.fastTransactionValue:first-child{
+
+.fastTransactionValue:first-child {
   background-image: linear-gradient(to top right, rgb(12, 36, 68), rgb(80, 148, 238));
 }
-.fastTransactionValue:nth-child(2){
+
+.fastTransactionValue:nth-child(2) {
   background-image: linear-gradient(to top right, rgb(11, 70, 16), rgb(80, 180, 85));
 }
-.fastTransactionValue:nth-child(3){
+
+.fastTransactionValue:nth-child(3) {
   background-image: linear-gradient(to top right, rgb(77, 72, 8), rgb(245, 216, 53));
 }
-.fastTransactionValue:nth-child(4){
+
+.fastTransactionValue:nth-child(4) {
   background-image: linear-gradient(to top right, rgb(77, 8, 8), rgb(182, 70, 70));
 }
 
-#transactionValue{
+#transactionValue {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -154,29 +170,34 @@
   align-items: center;
   flex-shrink: 0;
 }
-#transactionValueInputField{
+
+#transactionValueInputField {
   width: 70%;
   height: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-#transactionValueInputField input{
+
+#transactionValueInputField input {
   flex: 1;
   height: 100%;
   border: none;
   outline: none;
   overflow: hidden;
 }
+
 #insertedTransactionAmount::-webkit-inner-spin-button,
 #insertedTransactionAmount::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-#transactionValueInputField>div{
+
+#transactionValueInputField>div {
   font-size: 1.3rem;
 }
-#transfereTypeButton{
+
+#transfereTypeButton {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -194,7 +215,7 @@
   cursor: pointer;
 }
 
-#transfereTypeButton>div{
+#transfereTypeButton>div {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -203,58 +224,72 @@
   border-radius: 50%;
   transition: 1s;
 }
-#transfereTypeButton>div>div{
+
+#transfereTypeButton>div>div {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   transition: 1s;
 }
-#transfereTypeButton[data-state="addCocs"]{
+
+#transfereTypeButton[data-state="addCocs"] {
   background-position: 0%;
   border: green solid;
 }
-#transfereTypeButton[data-state="removeCocs"]{
+
+#transfereTypeButton[data-state="removeCocs"] {
   background-position: 100%;
   border: red solid;
 }
-#transfereTypeButton[data-state="addCocs"]>div{
+
+#transfereTypeButton[data-state="addCocs"]>div {
   background-color: green;
   left: 7px;
 }
-#transfereTypeButton[data-state="removeCocs"]>div{
+
+#transfereTypeButton[data-state="removeCocs"]>div {
   background-color: red;
   left: calc(100% - 7px);
   transform: translate(-100%, -50%);
 }
-#transfereTypeButton[data-state="addCocs"] .icon-plus{
+
+#transfereTypeButton[data-state="addCocs"] .icon-plus {
   opacity: 1;
 }
-#transfereTypeButton[data-state="addCocs"] .icon-minus{
-  opacity: 0;
-}
-#transfereTypeButton[data-state="removeCocs"] .icon-minus{
-  opacity: 1;
-}
-#transfereTypeButton[data-state="removeCocs"] .icon-plus{
+
+#transfereTypeButton[data-state="addCocs"] .icon-minus {
   opacity: 0;
 }
 
-#transactionDescriptionContainer,#transactionDetailsContainer{
+#transfereTypeButton[data-state="removeCocs"] .icon-minus {
+  opacity: 1;
+}
+
+#transfereTypeButton[data-state="removeCocs"] .icon-plus {
+  opacity: 0;
+}
+
+#transactionDescriptionContainer,
+#transactionDetailsContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
   position: relative;
 }
-#transactionDescription,#transactionDetailsMessage{
+
+#transactionDescription,
+#transactionDetailsMessage {
   width: 100%;
   height: 2.5rem;
   background-color: rgb(19, 36, 58);
   border-radius: 5px;
   padding: 0 10px;
 }
-#transactionDescriptionSuggestions,#transactionDetailsSuggestions{
+
+#transactionDescriptionSuggestions,
+#transactionDetailsSuggestions {
   width: 100%;
   max-height: 200px;
   background-color: rgb(19, 36, 58);
@@ -270,28 +305,34 @@
   z-index: 2;
   display: none;
 }
-.transactionDescriptionSuggestion.lastDescription{
+
+.transactionDescriptionSuggestion.lastDescription {
   background-color: rgb(35, 55, 82);
   padding-top: 5px;
 }
-.lastDescriptionTitle{
+
+.lastDescriptionTitle {
   font-size: .8rem;
   font-weight: 800;
   margin-bottom: 7px;
 }
 
-#transactionDetailsSuggestions{
+#transactionDetailsSuggestions {
   display: none;
 }
-.transactionDescriptionSuggestion,#transactionDetailsSuggestion{
+
+.transactionDescriptionSuggestion,
+#transactionDetailsSuggestion {
   border-bottom: white solid;
   padding-bottom: 10px;
   border-radius: 5px;
 }
-#transactionDetailsContainer{
+
+#transactionDetailsContainer {
   flex-grow: 1;
 }
-#transactionDetailsMessage{
+
+#transactionDetailsMessage {
   padding: 10px;
   width: 100%;
   min-height: 100%;
@@ -302,7 +343,7 @@
   overflow: hidden;
 }
 
-#transactionButton{
+#transactionButton {
   background-image: linear-gradient(to right, rgb(141, 121, 5), rgb(196, 171, 34), rgb(109, 93, 2));
   width: 100%;
   height: 3rem;
@@ -317,44 +358,62 @@
   flex-shrink: 0;
   cursor: pointer;
 }
-#transactionButton:enabled:active{
+
+#transactionButton:hover {
+  background-image: linear-gradient(to right, rgba(112, 96, 4, 0.801), rgba(150, 131, 24, 0.801), rgba(70, 59, 2, 0.801))
+}
+
+#transactionButton:enabled:active {
   background-image: linear-gradient(to right, rgb(116, 99, 4), rgb(160, 140, 27), rgb(80, 68, 1));
 }
+
 @keyframes sendBtn {
-  0%{
-    transform: translate(0%,0%);
-  }10%{
-    transform: translate(-50%,50%);
-  }50%{
-    transform: translate(200%,-200%);
-  }51%{
-    transform: translate(-200%,200%);
-  }100%{
-    transform: translate(0%,0%);
+  0% {
+    transform: translate(0%, 0%);
+  }
+
+  10% {
+    transform: translate(-50%, 50%);
+  }
+
+  50% {
+    transform: translate(200%, -200%);
+  }
+
+  51% {
+    transform: translate(-200%, 200%);
+  }
+
+  100% {
+    transform: translate(0%, 0%);
   }
 }
 
-#transactionHistory{
+#transactionHistory {
   display: flex;
   flex-direction: column;
   gap: 10px;
   height: calc(100dvh - 150px);
 }
-#transactionHistory>header{
+
+#transactionHistory>header {
   width: 100%;
   margin-bottom: 20px;
   padding: 0;
   height: max-content;
 }
-#transactionHistory>header>div{
+
+#transactionHistory>header>div {
   font-weight: 700;
 }
+
 @keyframes spinner {
-  to{
+  to {
     transform: rotate(360deg);
   }
 }
-#transactionHistoryContainer{
+
+#transactionHistoryContainer {
   width: 100%;
   flex: 1;
   display: flex;
@@ -363,7 +422,8 @@
   overflow-y: scroll;
   scrollbar-width: none;
 }
-.transaction{
+
+.transaction {
   display: flex;
   flex-direction: row-reverse;
   padding: 10px;
@@ -371,33 +431,41 @@
   gap: 10px;
   justify-content: start;
 }
-#transactionIcon{
+
+#transactionIcon {
   font-size: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#transactionDetails{
+
+#transactionDetails {
   display: flex;
   flex-direction: column;
   gap: 5px;
   font-size: .8rem;
 }
-#trransactionDate{
+
+#trransactionDate {
   margin-right: auto;
   align-self: end;
   font-size: .6rem;
 }
 
-#transactionDetails>h4{
+#transactionDetails>h4 {
   color: lightgray;
 }
-#trransactionDate{
+
+#trransactionDate {
   direction: ltr;
 }
-.transaction.add .transactionType,.transaction.add .icon-plus{
+
+.transaction.add .transactionType,
+.transaction.add .icon-plus {
   color: rgb(5, 161, 5);
 }
-.transaction.remove .transactionType,.transaction.remove .icon-minus{
+
+.transaction.remove .transactionType,
+.transaction.remove .icon-minus {
   color: rgb(161, 5, 5);
 }

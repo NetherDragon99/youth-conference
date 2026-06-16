@@ -7,7 +7,8 @@ import * as taskPage from './dashboard-tasks-page.js'
 
 const dashboardProfilePagePic = document.querySelector('.publicProfile .profilePicture img')
 let localStore;
-window.addEventListener('DOMContentLoaded', () => {
+
+window.addEventListener('load', () => {
 
   if (localStorage.getItem('adminProfile') && localStorage.getItem('adminProfile') != "{}") {
     
@@ -18,8 +19,6 @@ window.addEventListener('DOMContentLoaded', () => {
   } else {
     localStorage.removeItem('adminProfile');
   }
-
-  transactionPage.transactionPage();
 })
 
 const headerDashboardUserName = document.getElementById('dashboardUserName');

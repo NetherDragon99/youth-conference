@@ -12,7 +12,7 @@ export async function transactionPage() {
   transactionDescriptionF();
   transactionDetailsF();
   allUsersData = await api.getSpecificData('accounts', 'state', 'active');
-  // console.log(allUsersData);
+  console.log(allUsersData);
 
   usersNo.innerHTML = allUsersData.length;
   transactionUsersSearch();
@@ -33,6 +33,8 @@ function transactionUsersSearch() {
 
   transactionSearchBar.onfocus = () => {
     searchSuggestionsContainer.style.display = 'flex';
+    console.log('focus');
+    
     if (searchSuggestionsContainer.children.length == 0) {
       addSearchResults('')
     }
@@ -410,3 +412,6 @@ refreshHistory.onclick = async () => {
   await addTransactionHistory();
   refreshHistory.style.animation = 'none';
 }
+
+
+transactionPage();
