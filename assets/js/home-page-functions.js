@@ -27,9 +27,7 @@ export const scrollFunction = () => {
     userScroll = 5;
   }, { passive: false });
 
-  window.addEventListener('load', () => {
-    autoScroll();
-  })
+  autoScroll();
   todayActivity.addEventListener("mousemove", () => { autoScroll(); userScroll = 5; })
   todayActivity.addEventListener("touchmove", () => { autoScroll(); userScroll = 5; })
 }
@@ -301,7 +299,7 @@ export async function getTodayTasks() {
     const progress = timing.getTimeProgress(v.startingTime, v.endingTime);
 
     toAddTasks.push(`${text.dom.tasksDOM(v, icon, progress, displayBtn)}`)
-    console.log(v);
+    // console.log(v);
     
   })
   
@@ -321,8 +319,10 @@ export async function getTodayTasks() {
 getTodayTasks();
 
 async function userTasks(){
-  const userTasksData = await api.getUserTodayTask('profileTask', JSON.parse(localStorage.getItem('profile')).email, timing.getCurrentDate());
+  const userTasksData = await api.getAccountData('profileTask', JSON.parse(localStorage.getItem('profile')).email, timing.getCurrentDate());
   let completedUserTasks = [];
+  console.log(userTasksData);
+  
 
   if (userTasksData.length == 0) {
     api.addSpecificData('profileTask',{email: JSON.parse(localStorage.getItem('profile')).email});

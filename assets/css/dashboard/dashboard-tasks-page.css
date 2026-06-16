@@ -220,7 +220,7 @@ section#tasksHistory{
   width: 100%;
   /* height: 100px; */
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: calc(1.5rem + 40px) auto;
   grid-template-rows: auto auto;
   cursor: pointer;
   overflow: hidden;
@@ -288,6 +288,7 @@ section#tasksHistory{
   transition: 1.5s linear;
   overflow: hidden;
   scrollbar-width: none;
+  cursor: default;
 }
 
 .taskUser{
@@ -329,5 +330,10 @@ button.userTaskBtn{
   overflow: hidden;
   position: relative;
   font-size: 24px;
+  font-weight: 900;
   background-color: green;
+  cursor: pointer;
+}
+.taskUser[data-state="finished"] button.userTaskBtn{
+  background-color: red;
 }

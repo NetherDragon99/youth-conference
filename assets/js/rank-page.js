@@ -9,6 +9,7 @@ async function getUsersDataIntervalfunction() {
   getUsersDataInterval = setInterval(async () => {
     allUsersRankData = await api.getAllUsersData();
     putRankData(allUsersRankData);
+
   }, 10000)
 }
 
@@ -25,7 +26,6 @@ rankAutoRefreshBtn.addEventListener('click', () => {
     activeAutoRefrshBtn();
   }
 })
-activeAutoRefrshBtn();
 
 function activeAutoRefrshBtn() {
   rankAutoRefreshBtn.style.backgroundColor = 'rgb(38, 83, 42)';
@@ -89,7 +89,7 @@ function putRankData(usersRankData) {
     } else {
       imageAtt = `style="display: none;"`;
     }
-    
+
 
     if (!firstPlaceData && v.cocs >= 50) {
       // first place
@@ -156,7 +156,7 @@ function putRankData(usersRankData) {
       }
     } else {
       rankedUsers += text.dom.rankedUsersDom(v, imageAtt);
-      
+
     }
   })
   rankedUsersContainer.innerHTML = rankedUsers;
@@ -172,3 +172,6 @@ function resetTop3Colors() {
   rightPositionCocs.style.cssText = 'color: rgb(168, 116, 20);';
   rankRightNo.style.cssText = 'color: rgb(168, 116, 20);';
 }
+
+const startAllUsersRankData = await api.getAllUsersData();
+putRankData(startAllUsersRankData);

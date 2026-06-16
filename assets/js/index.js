@@ -4,14 +4,18 @@ import * as loading from './loading-account-data.js';
 import * as text from './text.js';
 import * as rank from './rank-page.js'
 
-home.scrollFunction();
-
 async function todaysActivity() {
   await api.getData('conferenceActivitys');
+
   home.putData(api.newData);
   home.autoRefresh(api.newData)
   home.activitySession();
+  home.scrollFunction();
 }
+
+todaysActivity();
+location.hash = '';
+location.hash = localStorage.getItem('historyPage');
 
 const footerNavIcons = document.querySelectorAll('body footer a');
 addEventListener('hashchange', () => {
@@ -27,12 +31,6 @@ addEventListener('hashchange', () => {
       v.querySelector(`span`).classList.add('activePage');
     }
   })
-})
-
-window.addEventListener('load', () => {
-  todaysActivity();
-  location.hash = '';
-  location.hash = localStorage.getItem('historyPage');
 })
 
 
@@ -140,12 +138,12 @@ function closeNotification() {
 export function createNotification(whichNotification) {
   const tempEmail = JSON.parse(localStorage.getItem('profile')).email;
   let noticeData = text.notificationsdata[whichNotification];
-  
+
   noticeData.email = tempEmail;
   noticeData.time = new Date();
   noticeData.state = 'unreadedNotification';
   noticeData.id = `userNotic${(Math.random() * 100000).toFixed().toString()}`
-  
+
   api.addSpecificData('notifications', noticeData);
   loading.notificationContainer.children[0].insertAdjacentHTML('afterend', text.dom.notificationDOM(noticeData))
   unreadedNotificationsDot();
@@ -177,7 +175,7 @@ export function makeSuitableImages(insertedImg) {
     const tempImg = new Image();
     tempImg.src = URL.createObjectURL(insertedImg);
 
-    tempImg.onload = ()=>{
+    tempImg.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       canvas.width = 150;
@@ -185,11 +183,11 @@ export function makeSuitableImages(insertedImg) {
 
       ctx.drawImage(tempImg, 0, 0, 150, 150);
 
-      const compressedImage = canvas.toDataURL('image/jpeg',0.7);
+      const compressedImage = canvas.toDataURL('image/jpeg', 0.7);
       URL.revokeObjectURL(tempImg.src);
-      resolve(compressedImage);      
+      resolve(compressedImage);
     }
-    tempImg.onerror = (err)=>{
+    tempImg.onerror = (err) => {
       reject(err);
     }
   })

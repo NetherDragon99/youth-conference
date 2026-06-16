@@ -1,0 +1,269 @@
+// ==========================================
+// 1. وظيفة القراءة (GET) - استرجاع الداتا
+// ==========================================
+function doGet(e) {
+  try {
+    var sheetName = e.parameter.page || "Sheet1";
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName(sheetName);
+    
+    // لو الشيت مش موجود، نرجع مصفوفة فاضية
+    if (!sheet) return createResponse([]); 
+
+    var data = sheet.getDataRange().getValues();
+    if (data.length < 2) return createResponse([]); 
+
+    var headers = data[0];
+    var rows = data.slice(1);
+
+    // =====================================
+    // 🎯 ميزة جديدة: جلب عمود واحد فقط لتخفيف الحمل
+    // =====================================
+    if (e.parameter.column) {
+      var targetColName = String(e.parameter.column).trim().toLowerCase();
+      var targetColIndex = headers.findIndex(h => String(h).trim().toLowerCase() === targetColName);
+
+      // لو العمود مش موجود نرجع مصفوفة فاضية
+      if (targetColIndex === -1) return createResponse([]); 
+
+      var columnData = [];
+      rows.forEach(function(row) {
+        var cellValue = row[targetColIndex];
+        // نتأكد إن الخلية مش فاضية عشان الداتا ترجع نظيفة
+        if (cellValue !== "" && cellValue !== undefined && cellValue !== null) {
+          columnData.push(cellValue);
+        }
+      });
+      // بنقفل الرد هنا ونرجعه للموقع فوراً من غير ما نكمل باقي الكود!
+      return createResponse(columnData); 
+    }
+    
+    // 🌟 التعديل السحري: فلتر تنظيف الصفوف الفاضية (بسبب الـ ARRAYFORMULA) 🌟
+    var jsonResponse = [];
+    rows.forEach(function(row) {
+      if (row.join("").trim() !== "") { 
+        var obj = {};
+        headers.forEach(function(header, i) {
+          obj[header] = row[i];
+        });
+        jsonResponse.push(obj);
+      }
+    });
+
+    // =====================================
+    // 🌟 النظام الجديد: الفلتر الشامل (Multi-Search)
+    // =====================================
+    // بنجيب كل المتغيرات اللي إنت باعتها في اللينك
+    var queryParams = Object.keys(e.parameter);
+    
+    // بنستبعد الكلمات المحجوزة للسيستم عشان ميدورش عليها جوه الشيت
+    var reservedWords = ['page', 'action', 'searchkey', 'searchvalue', 'column'];
+    
+    var filtersToApply = queryParams.filter(function(key) {
+       return reservedWords.indexOf(String(key).toLowerCase()) === -1;
+    });
+
+    // لو فيه شروط فلترة (زي إيميل، أو إيميل مع id)
+    if (filtersToApply.length > 0) {
+      var filtered = jsonResponse.filter(function(item) {
+        var isMatch = true; 
+        
+        filtersToApply.forEach(function(key) {
+          var columnFound = headers.find(h => String(h).toLowerCase() === String(key).toLowerCase());
+          
+          // لو العمود مش موجود، أو القيمة مش متطابقة، ارفض الصف ده
+          if (!columnFound || String(item[columnFound]).trim().toLowerCase() !== String(e.parameter[key]).trim().toLowerCase()) {
+            isMatch = false; 
+          }
+        });
+        
+        return isMatch; 
+      });
+      
+      return createResponse(filtered); 
+    }
+
+    // =====================================
+    // 🛡️ النظام القديم (Dynamic Search) للحفاظ على التوافق
+    // =====================================
+    var searchKey = e.parameter.searchKey;     
+    var searchValue = e.parameter.searchValue; 
+    
+    if (searchKey && searchValue) {
+      var columnFound = headers.find(h => String(h).toLowerCase() === String(searchKey).toLowerCase());
+      
+      if (!columnFound) return createResponse([]); 
+
+      var dynamicFiltered = jsonResponse.filter(function(item) {
+        return String(item[columnFound]).trim().toLowerCase() === String(searchValue).trim().toLowerCase();
+      });
+
+      return createResponse(dynamicFiltered); 
+    }
+
+    // لو مبعتش حاجة خالص، رجع كل الداتا
+    return createResponse(jsonResponse);
+
+  } catch (error) {
+    return createResponse({ "error": error.toString() });
+  }
+}
+
+// ==========================================
+// 2. وظيفة الكتابة والتعديل والمسح (POST)
+// ==========================================
+function doPost(e) {
+  try {
+    var request = JSON.parse(e.postData.contents);
+    var sheetName = request.page;
+    var action = request.action;
+    
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName(sheetName);
+    
+    if (!sheet) return createResponse({ "result": "Error: Sheet not found" });
+    
+    var allData = sheet.getDataRange().getValues();
+    var headers = allData[0];
+
+    // --- الإضافة (ADD) ---
+    if (action === "add") {
+      if (request.data) {
+        var payloadKeys = Object.keys(request.data);
+        var addedNewHeaders = false;
+
+        payloadKeys.forEach(function(key) {
+          var keyExists = headers.some(function(h) {
+            return String(h).trim().toLowerCase() === String(key).trim().toLowerCase();
+          });
+
+          if (!keyExists) {
+            headers.push(key);
+            addedNewHeaders = true;
+          }
+        });
+
+        if (addedNewHeaders) {
+          sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+          allData = sheet.getDataRange().getValues(); // تحديث الداتا لو ضفنا عمود جديد
+        }
+      }
+
+      var newRow = headers.map(function(h) { 
+        var matchedKey = request.data ? Object.keys(request.data).find(k => String(k).trim().toLowerCase() === String(h).trim().toLowerCase()) : undefined;
+        return matchedKey !== undefined ? request.data[matchedKey] : ""; 
+      });
+      
+      // ✅ التعديل السحري هنا: هندور على آخر صف حقيقي فيه بيانات من غير ما ننخدع بالمعادلات
+      var realLastRow = 0;
+      for (var i = allData.length - 1; i >= 0; i--) {
+        if (allData[i].join("").trim() !== "") {
+          realLastRow = i + 1; 
+          break;
+        }
+      }
+
+      // بنحط الداتا الجديدة في الصف اللي بعده على طول بدل appendRow
+      sheet.getRange(realLastRow + 1, 1, 1, newRow.length).setValues([newRow]);
+      
+      return createResponse({ "result": "Success: Added with dynamic headers" });
+    }
+
+    // --- التعديل (UPDATE) ---
+    if (action === "update") {
+      var targetKey = request.searchKey || "email"; 
+      var targetValue = request.searchValue || request.email;
+      
+      if (!targetValue) return createResponse({ "result": "Error: Missing target value (" + targetKey + ")" });
+
+      if (request.data) {
+        var payloadKeysUpdate = Object.keys(request.data);
+        var addedNewHeadersUpdate = false;
+
+        payloadKeysUpdate.forEach(function(key) {
+          var keyExists = headers.some(function(h) {
+            return String(h).trim().toLowerCase() === String(key).trim().toLowerCase();
+          });
+
+          if (!keyExists) {
+            headers.push(key);
+            addedNewHeadersUpdate = true;
+          }
+        });
+
+        if (addedNewHeadersUpdate) {
+          sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+          allData = sheet.getDataRange().getValues();
+        }
+      }
+
+      var targetColIndex = headers.findIndex(h => String(h).toLowerCase() === String(targetKey).toLowerCase()); 
+
+      if (targetColIndex === -1) return createResponse({ "result": "Error: Column '" + targetKey + "' not found" });
+
+      var updated = false;
+      
+      for (var i = 1; i < allData.length; i++) {
+        if (String(allData[i][targetColIndex]).trim().toLowerCase() === String(targetValue).trim().toLowerCase()) {
+          
+          headers.forEach(function(h, index) {
+            var matchedKey = request.data ? Object.keys(request.data).find(k => String(k).trim().toLowerCase() === String(h).trim().toLowerCase()) : undefined;
+            if (matchedKey !== undefined) {
+              sheet.getRange(i + 1, index + 1).setValue(request.data[matchedKey]);
+            }
+          });
+          
+          updated = true;
+          break; 
+        }
+      }
+      
+      if (updated) {
+        return createResponse({ "result": "Success: Updated" });
+      } else {
+        return createResponse({ "result": "Error: Target " + targetValue + " not found to update" });
+      }
+    }
+
+    // --- المسح (DELETE) ---
+    if (action === "delete") {
+      var targetKey = request.searchKey || "email"; 
+      var targetValue = request.searchValue || request.email;
+      
+      if (!targetValue) return createResponse({ "result": "Error: Missing target value (" + targetKey + ")" });
+
+      var targetColIndex = headers.findIndex(h => String(h).toLowerCase() === String(targetKey).toLowerCase()); 
+
+      if (targetColIndex === -1) return createResponse({ "result": "Error: Column '" + targetKey + "' not found" });
+
+      var deleted = false;
+      
+      for (var i = 1; i < allData.length; i++) {
+        if (String(allData[i][targetColIndex]).trim().toLowerCase() === String(targetValue).trim().toLowerCase()) {
+          sheet.deleteRow(i + 1);
+          deleted = true;
+          break; 
+        }
+      }
+      
+      if (deleted) {
+        return createResponse({ "result": "Success: Deleted" });
+      } else {
+        return createResponse({ "result": "Error: Target " + targetValue + " not found to delete" });
+      }
+    }
+
+    return createResponse({ "result": "Error: Unknown action" });
+
+  } catch (error) {
+    return createResponse({ "result": "Error: " + error.toString() });
+  }
+}
+
+// ==========================================
+// 3. وظيفة مساعدة (Helper) لتجهيز الرد
+// ==========================================
+function createResponse(content) {
+  return ContentService.createTextOutput(JSON.stringify(content))
+    .setMimeType(ContentService.MimeType.JSON);
+}

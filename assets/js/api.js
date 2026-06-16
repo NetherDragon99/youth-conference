@@ -130,21 +130,13 @@ export async function addSpecificData(page, data) {
       body: JSON.stringify(toAPI)
     })
     const res = await response.json();
-    console.log(res);
+    // console.log(res);
     return res;
   } catch (err) {
     console.log(err);
   }
 }
-export const getUserTodayTask = async (page, email, date) => {
-  try {
-    const res = await fetch(`${apiURL}?page=${page}&email=${email}&date=${date}`);
-    const response = res.json();
-    return response;
-  } catch (err) {
-    console.log(err);
-  }
-}
+
 
 // get all users data
 export async function getAllUsersData() {

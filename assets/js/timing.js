@@ -84,3 +84,31 @@ export const timeText = (insertedTime)=>{
   }
   return `${days}/${months}/${years} ${hours}:${minutes} ${timeState}`;
 }
+
+
+export function dayNameDate(date) {
+  try {
+      if (typeof(date)!== 'string') {
+      throw new Error("vaild date is yyyy/mm/dd");
+    }else{
+      let dateF = '';
+      let tempDate = new Date(date.replaceAll('/','-'));
+
+      const day = tempDate.getDay()==0?'الاحد':tempDate.getDay()== 1?'الاثنين':tempDate.getDay()==2?'الثلاثاء':tempDate.getDay()==3?'الاربعاء':tempDate.getDay()==4?'الخميس':tempDate.getDay()==5?'الجمعة':'السبت';
+
+      return dateF = `${day} ${date}`
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+  
+}
+
+// 00:00:00
+export function suitableTime(date, time) {
+  let nowTime = new Date(`${date} ${time}`);
+  !date?date=new Date():date;
+  
+  return `${nowTime.getHours()<10?'0'+nowTime.getHours():nowTime.getHours()}:${nowTime.getMinutes()<10?'0'+nowTime.getMinutes():nowTime.getMinutes()}:${nowTime.getSeconds()<10?'0'+nowTime.getSeconds():nowTime.getSeconds()}`
+}

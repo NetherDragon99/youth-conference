@@ -33,7 +33,9 @@ export const text = {
   dataUpdated: 'تم تحديث البيانات بنجاح',
   userAccountDeleted: `للاسف الاكونت بتاعك الادمن عمل طلب لمسحة
   تقدر تحاول تعمل اكونت تانى او تعرف سبب تبنيد حسابك`,
-  'confirm-cancel-task': `لو انت كاتب حاجة هتروح !!<br>متأكد انك عاوز تكنسل ؟؟<br>دوس تانى فى خلال 5 ثوانى علشان تكنسل`
+  'confirm-cancel-task': `لو انت كاتب حاجة هتروح !!<br>متأكد انك عاوز تكنسل ؟؟<br>دوس تانى فى خلال 5 ثوانى علشان تكنسل`,
+  taskMakeError: `للاسف حصلت مشكلة والتاسك متنفذش`,
+  taskMakeDone: `تمام كدة يا باشا اتعمل`
 }
 
 export const dom = {
@@ -110,7 +112,7 @@ export const dom = {
                   <div class="taskTime">من ${timing.cleanTime(v.startingTime)} <br>لحد ${timing.cleanTime(v.endingTime)}</div>
                   <div class="taskProgress">
                     <div style="width: ${progress}%"></div>
-                    <div class="taskProgressNumber">${Number(progress).toFixed() === '100'?'TimeUp':Number(progress).toFixed() + '%'}</div>
+                    <div class="taskProgressNumber">${Number(progress).toFixed() === '100' ? 'TimeUp' : Number(progress).toFixed() + '%'}</div>
                   </div>
                 </div>
               </div>
@@ -186,7 +188,7 @@ export const dom = {
   requestDOM: (userName, email, img, imgDisplay, gender) =>
     `<div class="request" data-email="${email}">
             <div class="requestDetail">
-              <div id="requestProfilePic" class="icon-user${gender=='m'?'1':'2'}"><img src="${img}" alt="profile picture" ${imgDisplay}>
+              <div id="requestProfilePic" class="icon-user${gender == 'm' ? '1' : '2'}"><img src="${img}" alt="profile picture" ${imgDisplay}>
               </div>
               <div class="requestProfileData">
                 <h4 id="requestUserName">${userName}</h4>
@@ -258,8 +260,8 @@ export const dom = {
           <div id="popUpGenderFiled">
             <label for="popUpGender">gender:</label>
             <select name="gender" id="popUpGender">
-              <option value="m" ${gender=='m'?'selected':''}>Male</option>
-              <option value="f" ${gender=='f'?'selected':''}>Female</option>
+              <option value="m" ${gender == 'm' ? 'selected' : ''}>Male</option>
+              <option value="f" ${gender == 'f' ? 'selected' : ''}>Female</option>
             </select>
           </div>
           <div id="popUpPictureFiled">
@@ -283,6 +285,39 @@ export const dom = {
         <Button id="popUpDelete">Delete Account</Button>
         <Button id="popUpExit">Exit Menue</Button>
       </div>
+    </div>`,
+  taskContainer: (date, tasks) => `
+    <div class="adayTasks" data-state="opened">
+      <div class="adayTaskDate">${date}</div>
+      <div class="adayTasksList">
+        ${tasks}
+      </div>
+    </div>`,
+  tasks: (id, title, desc, time, usersList)=> `
+    <div class="task" data-id="${id}">
+      <div class="taskActionBtn">
+        <button class="icon-edit editTaskBtn"></button>
+        <button class="icon-trash deleteTaskBtn"></button>
+      </div>
+      <div class="taskSummary">
+        <h4>${title}</h4>
+        <p>${desc}</p>
+        <p>${time}</p>
+      </div>
+      <div class="tasksUsersList" data-state="closed">${usersList}</div>
+    </div>`,
+  taskUsers: (name, email, gender, pic, state) => `
+    <div class="taskUser" data-email="${email}" data-state="${state === 'ok'?'finished':'unfinished'}">
+      <div class="taskPic icon-${gender==='m'?'user1':gender==='f'?'user2':'user'}">
+        <img src="${pic}">
+      </div>
+      <div class="taskProfileData">
+        <h4>${name}</h4>
+        <p>${email}</p>
+      </div>
+      <button class="userTaskBtn">
+        <div class="icon-${state==='ok'?'clear':'checkmark'}"></div>
+      </button>
     </div>`
 }
 
