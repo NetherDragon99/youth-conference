@@ -169,10 +169,15 @@
 button#confirmTask{
   background-image: linear-gradient(to right, rgb(141, 121, 5), rgb(196, 171, 34), rgb(109, 93, 2));
 }
+button#confirmTask:hover{
+  background-image: linear-gradient(to right, rgba(141, 121, 5, 0.829), rgba(196, 172, 34, 0.83), rgba(109, 93, 2, 0.816));
+}
 button#cancelTask{
   background-image: linear-gradient(to right, rgb(141, 5, 5), rgb(196, 34, 34), rgb(109, 2, 2));
 }
-
+button#cancelTask:hover{
+  background-image: linear-gradient(to right, rgba(141, 5, 5, 0.801), rgb(196, 34, 34, 0.801), rgb(109, 2, 2, 0.801));
+}
 
 /* tasks history */
 
@@ -236,6 +241,9 @@ section#tasksHistory{
   overflow: hidden;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+.task .taskActionBtn button:hover{
+  background-image: linear-gradient(to right, rgba(112, 96, 4, 0.801), rgba(150, 131, 24, 0.801), rgba(70, 59, 2, 0.801));
 }
 .task .taskActionBtn button{
   font-size: 1.5rem;
@@ -304,11 +312,12 @@ section#tasksHistory{
   border-radius: 15px;
 }
 .taskUser .taskPic{
-  width: 34px;
+  min-width: 34px;
   height: 34px;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 .taskUser .taskPic img{
   width: 100%;
@@ -320,11 +329,18 @@ section#tasksHistory{
 .taskUser .taskProfileData{
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1;
   direction: ltr;
+  overflow: hidden;
+}
+.taskUser .taskProfileData p{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 button.userTaskBtn{
-  width: 34px;
+  min-width: 34px;
   height: 34px;
   border-radius: 50%;
   overflow: hidden;
@@ -333,6 +349,14 @@ button.userTaskBtn{
   font-weight: 900;
   background-color: green;
   cursor: pointer;
+  flex-shrink: 0;
+  transition: 1s;
+}
+button.userTaskBtn:hover{
+  background-color: rgba(0, 128, 0, 0.808);
+}
+.taskUser[data-state="finished"] button.userTaskBtn:hover{
+  background-color: rgba(255, 0, 0, 0.801);
 }
 .taskUser[data-state="finished"] button.userTaskBtn{
   background-color: red;

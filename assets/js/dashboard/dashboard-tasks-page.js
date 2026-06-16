@@ -452,6 +452,7 @@ async function functionSaftyCheacker() {
   prepareFinalTasks();
   editTasks();
   deleteTasks();
+  markTaskforUsers();
 }
 
 
@@ -482,7 +483,7 @@ function prepareFinalTasks(users) {
 
 function prepareUsersDOM(id) {
   let finalDom = ''
-
+  
   let doneTasks = []
   apiUsers.forEach(v => {
     doneTasks.push({ [v.email]: 'no' })
@@ -506,7 +507,7 @@ function prepareUsersDOM(id) {
   }
 
   apiUsers.forEach(v => {
-    finalDom += text.dom.taskUsers(v.userName, v.email, v.gender, v.profilePicture, userState(v.email));
+    finalDom += text.dom.taskUsers(v.userName, v.email, v.gender, v.profilePicture, userState(v.email), id);
     // console.log(userState[v.email]);
 
   })
@@ -596,5 +597,40 @@ function deleteTasks() {
       functionSaftyCheacker();
     }
     }
+  }))
+}
+
+
+
+// mark users task as done or incompleted
+function markTaskforUsers() {
+  let allBtns = document.querySelectorAll('.tasksUsersList .taskUser .userTaskBtn')
+
+  allBtns.forEach(btn => btn.addEventListener('click', async (click) => {
+    let tskId = (click.target.closest('.taskUser')).dataset.tskid;
+    let email = (click.target.closest('.taskUser')).dataset.email;
+    let state = (click.target.closest('.taskUser')).dataset.state;
+    let btnIcon = document.querySelector(`.taskUser[data-email="${email}"][data-tskid="${tskId}"] .userTaskBtn div`);
+    let userState = document.querySelector(`.taskUser[data-email="${email}"][data-tskid="${tskId}"]`);
+    
+
+    if (state === 'unfinished') {
+      await api.updateSpecificData('profileTask','email', email, {[tskId]: 'ok'})  
+      
+      btnIcon.classList.add('icon-clear');
+      btnIcon.classList.remove('icon-checkmark');
+      userState.dataset.state = 'finished'
+
+      dashboard.createAD(text.text.taskMakeDone, 'green')
+    }else{
+      await api.updateSpecificData('profileTask','email', email, {[tskId]: ''})  
+      
+      btnIcon.classList.add('icon-checkmark');
+      btnIcon.classList.remove('icon-clear');
+      userState.dataset.state = 'unfinished'
+
+      dashboard.createAD(text.text.taskMakeDone, 'green')
+    }
+    
   }))
 }

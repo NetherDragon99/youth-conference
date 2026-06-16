@@ -306,8 +306,8 @@ export const dom = {
       </div>
       <div class="tasksUsersList" data-state="closed">${usersList}</div>
     </div>`,
-  taskUsers: (name, email, gender, pic, state) => `
-    <div class="taskUser" data-email="${email}" data-state="${state === 'ok'?'finished':'unfinished'}">
+  taskUsers: (name, email, gender, pic, state, tskId) => `
+    <div class="taskUser" data-email="${email}" data-state="${state === 'ok'?'finished':'unfinished'}" data-tskId="${tskId}">
       <div class="taskPic icon-${gender==='m'?'user1':gender==='f'?'user2':'user'}">
         <img src="${pic}">
       </div>
