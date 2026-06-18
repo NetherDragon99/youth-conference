@@ -80,3 +80,11 @@ export const bibleVerses = [
     verseChapter: { book: "رؤيا", chapter: 3, verse: 20 }
   }
 ];
+
+export const dom = {
+  guessResult: no=>`
+  <div class="verseTextArea" data-wordNo="${no}">
+        <p id="verseWord"></p>
+        <p id="verseNo">${no}</p>
+      </div>`
+}
