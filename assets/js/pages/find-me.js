@@ -32,10 +32,10 @@ document.querySelector('#welcomeMsg button').addEventListener('click', click => 
 
 const verses = text.bibleVerses;
 const versesNo = verses.length;
-console.log(verses, versesNo);
+// console.log(verses, versesNo);
 
 let getPlayerNo = localStorage.getItem('playerNo')
-console.log(getPlayerNo);
+// console.log(getPlayerNo);
 
 if (!getPlayerNo || getPlayerNo === '') {
   getPlayerNo = Math.floor(Math.random() * versesNo);
@@ -44,12 +44,12 @@ if (!getPlayerNo || getPlayerNo === '') {
   console.log(getPlayerNo);
 } else {
   getPlayerNo = Number(getPlayerNo);
-  console.log(getPlayerNo);
+  // console.log(getPlayerNo);
 
 }
 
 const playerVerse = verses[getPlayerNo];
-console.log(playerVerse, playerVerse.verseWords.length);
+// console.log(playerVerse, playerVerse.verseWords.length);
 
 
 // adding word number dom
@@ -82,7 +82,7 @@ function shuffleVerse(verse) {
 
 
 const newVerse = shuffleVerse(playerVerse.verseWords);
-console.log(newVerse);
+// console.log(newVerse);
 
 
 let score = localStorage.getItem('findMeScore') ? localStorage.getItem('findMeScore') : 25;
@@ -93,10 +93,8 @@ let score = localStorage.getItem('findMeScore') ? localStorage.getItem('findMeSc
 
 document.querySelectorAll('#cardSection .card').forEach(v => v.addEventListener('click', click => {
   if (!v.classList.contains('openedCard')) {
-    console.log(v);
     v.classList.add('openedCard');
     const cardValue = v.dataset.wordno;
-    console.log(cardValue);
 
     addWords(cardValue)
   }
@@ -105,7 +103,7 @@ document.querySelectorAll('#cardSection .card').forEach(v => v.addEventListener(
 function addWords(wordValue) {
   let word = newVerse.find(verse => wordValue in verse) ? newVerse.find(verse => wordValue in verse)[wordValue] : 'فاضية';
   const wordI = newVerse.findIndex(verse => wordValue in verse) + 1;
-  console.log(wordI, word);
+  // console.log(wordI, word);
 
   wordI !== 0 ? document.querySelector(`#openedVerseText .verseTextArea[data-wordNo="${wordI}"] #verseWord`).innerHTML = word : null;
   document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;

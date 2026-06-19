@@ -218,9 +218,11 @@ footer a span{
 .loading {
   border-radius: 15px;
   animation: loading 2s infinite forwards;
+  opacity: .7;
 }
 .loadingC{
   animation: loadingC 2s infinite forwards;
+  opacity: .7;
 }
 
 @keyframes loadingC {

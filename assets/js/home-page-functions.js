@@ -178,7 +178,7 @@ export let tempOpenedTaskPosition;
 let taskDescription;
 const taskContainer = document.getElementById('tasks');
 
-function taskFunction() {  
+function taskFunction() {
   tasks.forEach((v) => {
     v.addEventListener('click', () => {
       tasks.forEach((x) => {
@@ -265,7 +265,7 @@ let finishedTasksNo = document.querySelectorAll('.completedTask').length;
 export function tasksTotalPercentage() {
   const totalTasksNo = tasks.length;
   finishedTasksNo = document.querySelectorAll('.completedTask').length;
-  
+
   let finishedTaskspercent = (finishedTasksNo / totalTasksNo) * 100;
   const taskProgressNo = document.querySelector('.tasksProgressNumber');
   const taskProgressLine = document.querySelector('#todayTasksProgress>div:first-child');
@@ -300,45 +300,48 @@ export async function getTodayTasks() {
 
     toAddTasks.push(`${text.dom.tasksDOM(v, icon, progress, displayBtn)}`)
     // console.log(v);
-    
+
   })
-  
-  taskContainer.innerHTML ='';
-  toAddTasks.forEach((v,i)=>{
-    setTimeout(()=>{
+
+  taskContainer.innerHTML = '';
+  toAddTasks.forEach((v, i) => {
+    setTimeout(() => {
       taskContainer.insertAdjacentHTML('beforeend', v);
 
-      if (i == toAddTasks.length-1) {
-      tasks = document.querySelectorAll('.task');
-      taskFunction();     
-    }
-    },i*300)
-  })  
+      if (i == toAddTasks.length - 1) {
+        tasks = document.querySelectorAll('.task');
+        taskFunction();
+      }
+    }, i * 300)
+  })
   userTasks();
 }
 getTodayTasks();
 
-async function userTasks(){
+async function userTasks() {
   const userTasksData = await api.getAccountData('profileTask', JSON.parse(localStorage.getItem('profile')).email, timing.getCurrentDate());
   let completedUserTasks = [];
   console.log(userTasksData);
-  
+
 
   if (userTasksData.length == 0) {
-    api.addSpecificData('profileTask',{email: JSON.parse(localStorage.getItem('profile')).email});
+    api.addSpecificData('profileTask', { email: JSON.parse(localStorage.getItem('profile')).email });
     return
   }
 
   // get completed tasks
-  Object.values(userTasksData[0]).forEach((v,i)=>{
+  Object.values(userTasksData[0]).forEach((v, i) => {
     if (v == 'ok') {
       completedUserTasks.push(Object.keys(userTasksData[0])[i])
-      
+
     }
   })
-  completedUserTasks.forEach((v)=>{    
-    document.querySelector(`.task[data-id="${v}"]`).setAttribute('class','task completedTask');
-    document.querySelector(`.task[data-id="${v}"] .taskIcon>div`).setAttribute('class','icon-done')
+
+  completedUserTasks.forEach((v) => {
+    if (document.querySelector(`.task[data-id="${v}"]`)) {
+      document.querySelector(`.task[data-id="${v}"]`).setAttribute('class', 'task completedTask');
+      document.querySelector(`.task[data-id="${v}"] .taskIcon>div`).setAttribute('class', 'icon-done')
+    }
   })
   tasksTotalPercentage();
   tasksActionBtnF()
@@ -346,11 +349,16 @@ async function userTasks(){
 
 function tasksActionBtnF() {
   const tasksActionsBtn = document.querySelectorAll('.taskActionBtn');
-  
-  tasksActionsBtn.forEach((v)=>{
-    v.addEventListener('click',()=>{
-      let tempID = v.getAttribute('data-btnId');
-      text.tasksActionBtn[tempID]();
+
+  tasksActionsBtn.forEach((v) => {
+    v.addEventListener('click', () => {
+      let tempLink = v.getAttribute('data-buttonLink');
+      if (tempLink.includes('http')) {
+        location.href = tempLink
+      } else {
+        location.href = location.origin + tempLink
+      }
     })
   })
 }
+console.log('https://hello'.includes('https'));

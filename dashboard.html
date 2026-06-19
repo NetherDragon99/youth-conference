@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="assets/css/dashboard/dashboard.css">
-  <script type="module" src="assets/js/dashboard/dashboard.js" defer></script>
+  <!-- <script type="module" src="assets/js/dashboard/dashboard.js" defer></script> -->
   <meta lang="ar">
   <meta dir="rtl">
   <meta name="author" content="steven Mario">
@@ -23,7 +23,7 @@
     <a id="dashboardUser" href="#profile-page">
       <div id="dashboardHeaderName">
         <h4>Admin</h4>
-        <h4 id="dashboardUserName">user name</h4>
+        <h4 id="dashboardUserName"><div class="loading" style="width: 70px; height: 1rem;"></div></h4>
       </div>
       <div id="dashboardProfilePic">
         <span class="icon-user"></span>
@@ -110,15 +110,15 @@
         </div>
         <div id="usersContainer">
           <div class="user">
-            <div class="userProfilePic icon-user1">
+            <div class="userProfilePic loadingC">
               <img src="assets/imgs/picture.ico" alt="profile picture">
             </div>
             <div class="userDetails">
               <div class="upperSection">
-                <p>user name</p>
-                <div id="userState" data-state="active">pending</div>
+                <p class="loading" style="width: 80px; height: 1rem;"></p>
+                <div id="userState" data-state="admin">Admin</div>
               </div>
-              <div class="lowerSection">hello@gmail.com</div>
+              <div class="lowerSection loading" style="width: 200px; height: .7rem;"></div>
             </div>
             <div class="userActions">
               <span class="icon-actionDots"></span>
@@ -141,15 +141,15 @@
             </div>
           </div>
           <div class="user">
-            <div class="userProfilePic icon-user1">
+            <div class="userProfilePic loadingC">
               <img src="assets/imgs/picture.ico" alt="profile picture">
             </div>
             <div class="userDetails">
               <div class="upperSection">
-                <p>user name</p>
-                <div id="userState" data-state="active">pending</div>
+                <p class="loading" style="width: 80px; height: 1rem;"></p>
+                <div id="userState" data-state="pending">Pending</div>
               </div>
-              <div class="lowerSection">hello@gmail.com</div>
+              <div class="lowerSection loading" style="width: 200px; height: .7rem;"></div>
             </div>
             <div class="userActions">
               <span class="icon-actionDots"></span>
@@ -172,15 +172,15 @@
             </div>
           </div>
           <div class="user">
-            <div class="userProfilePic icon-user1">
+            <div class="userProfilePic loadingC">
               <img src="assets/imgs/picture.ico" alt="profile picture">
             </div>
             <div class="userDetails">
               <div class="upperSection">
-                <p>user name</p>
-                <div id="userState" data-state="active">pending</div>
+                <p class="loading" style="width: 80px; height: 1rem;"></p>
+                <div id="userState" data-state="active">Active</div>
               </div>
-              <div class="lowerSection">hello@gmail.com</div>
+              <div class="lowerSection loading" style="width: 200px; height: .7rem;"></div>
             </div>
             <div class="userActions">
               <span class="icon-actionDots"></span>
@@ -330,7 +330,7 @@
         <h2>سجل المهام</h2>
         <div id="tasksHistoryContainer">
           <div class="adayTasks" data-state="opened">
-            <div class="adayTaskDate">الجمعة 12/6/2026</div>
+            <div class="adayTaskDate" style="position: relative;"><div class="loading" style="width: 150px; height: 1rem;"></div></div>
             <div class="adayTasksList">
               <div class="task" data-id="tsk543834">
                 <div class="taskActionBtn">
@@ -338,9 +338,9 @@
                   <button class="icon-trash deleteTaskBtn"></button>
                 </div>
                 <div class="taskSummary">
-                  <h4>روح الملعب</h4>
-                  <p>روح الملعب واعمل كذا وكذا وكذا وابعدها اعمل البتاع دة بعدها اعمل كدة وكدة</p>
-                  <p>الساعة 9:00</p>
+                  <h4 class="loading" style="width: 80px; height: 1.1rem;"></h4>
+                  <p class="loading" style="max-width: 300px; height: .8rem;"></p>
+                  <p class="loading" style="width: 50px; height: .5rem;"></p>
                 </div>
                 <div class="tasksUsersList" data-state="closed">
                   <div class="taskUser">
@@ -405,15 +405,15 @@
                   </div>
                 </div>
               </div>
-              <div class="task" data-id="tsk234987">
+              <div class="task" data-id="tsk543834">
                 <div class="taskActionBtn">
                   <button class="icon-edit editTaskBtn"></button>
                   <button class="icon-trash deleteTaskBtn"></button>
                 </div>
                 <div class="taskSummary">
-                  <h4>روح الملعب</h4>
-                  <p>روح الملعب واعمل كذا وكذا وكذا وابعدها اعمل البتاع دة بعدها اعمل كدة وكدة</p>
-                  <p>الساعة 9:00</p>
+                  <h4 class="loading" style="width: 80px; height: 1.1rem;"></h4>
+                  <p class="loading" style="max-width: 300px; height: .8rem;"></p>
+                  <p class="loading" style="width: 50px; height: .5rem;"></p>
                 </div>
                 <div class="tasksUsersList" data-state="closed">
                   <div class="taskUser">
