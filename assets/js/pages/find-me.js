@@ -198,7 +198,7 @@ document.querySelector('#answerFiled #submit').addEventListener('click',async (c
 
           createAD(`تمام كدة دن<br>الكوكس الى معاك دولقتى ${newCocs}<br> هيتم تحويلك الى الصفحة الرئيسية دولتقى`, 'green');
 
-          setTimeout(()=> location.href = '../../', 10000)
+          setTimeout(()=> location.href = smartLink(''), 10000)
           return
         }
       }
@@ -226,4 +226,18 @@ async function addPoints(points) {
     console.log(error);
     
   }
+}
+
+function smartLink(link){
+  // github pages function
+  if (link.startsWith('http')) {
+    console.log('gloabal link');
+    return link
+  }
+  if (location.includes('NetherDragon99')) {
+    console.log('contains netherdragon99');
+    
+    return `${window.origin}/youth-conference/${link}`;
+  }
+  return `${window.origin}/${link}`
 }

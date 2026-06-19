@@ -352,7 +352,21 @@ function tasksActionBtnF() {
   tasksActionsBtn.forEach((v) => {
     v.addEventListener('click', () => {
       let tempLink = v.getAttribute('data-buttonLink');
-        location.href = tempLink
+        location.href = smartLink(tempLink)
     })
   })
+}
+
+function smartLink(link){
+  // github pages function
+  if (link.startsWith('http')) {
+    console.log('gloabal link');
+    return link
+  }
+  if ((location.origin).includes('NetherDragon99')) {
+    console.log('contains netherdragon99');
+    
+    return `${window.origin}/youth-conference/${link}`;
+  }
+  return `${window.origin}/${link}`
 }

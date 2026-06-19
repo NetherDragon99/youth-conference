@@ -168,6 +168,9 @@
   cursor: pointer;
   margin-top: 20px;
 }
+#btnLink input{
+  direction: ltr;
+}
 
 button#confirmTask{
   background-image: linear-gradient(to right, rgb(141, 121, 5), rgb(196, 171, 34), rgb(109, 93, 2));
