@@ -363,7 +363,7 @@ function smartLink(link){
     console.log('gloabal link');
     return link
   }
-  if ((location.origin).includes('NetherDragon99')) {
+  if ((location.origin).includes('netherdragon99')) {
     console.log('contains netherdragon99');
     
     return `${window.origin}/youth-conference/${link}`;
