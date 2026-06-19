@@ -1,6 +1,12 @@
 import * as text from './text.js';
 import * as api from '../dashboard/dashboard-api.js';
 
+
+if (localStorage.getItem('played') == 'true') {
+  alert('للاسف اللعبة معمولة انها تتلعب مرة واحدة بس بعد ما تكسب مش ها ينفع تعيد تانى');
+  location.href = '../../index.html'
+}
+
 // creating ADs
 let adBannerNumber = 0;
 export function createAD(inputText, inputColor) {
@@ -12,7 +18,6 @@ export function createAD(inputText, inputColor) {
   adBannerNumber += 1;
 
   document.getElementsByClassName('adBanner')[0].insertAdjacentHTML("beforeend", `<div class="adDiv ${color}">${inputText}</div>`);
-  console.log('AD created');
 
 
   removeAD();
@@ -41,7 +46,7 @@ if (!getPlayerNo || getPlayerNo === '') {
   getPlayerNo = Math.floor(Math.random() * versesNo);
   localStorage.setItem('playerNo', getPlayerNo.toString());
   localStorage.setItem('playedVerse', JSON.stringify([]))
-  console.log(getPlayerNo);
+  // console.log(getPlayerNo);
 } else {
   getPlayerNo = Number(getPlayerNo);
   // console.log(getPlayerNo);
@@ -182,17 +187,18 @@ document.querySelector('#answerFiled #submit').addEventListener('click',async (c
   !formData.bibleBooks || formData.bibleBooks == '' ? createAD('اختار السفر') : !formData.chapter || formData.chapter == '' ? createAD('اختار الأصحاح') : !formData.verse || formData.verse == '' ? createAD('اختار رقم الاية') : allGood = true;
 
   if (allGood) {
-    console.log(formData);
+    // console.log(formData);
 
     if (formData.bibleBooks == playerVerse.verseChapter.book) {
       if (Number(formData.chapter) == playerVerse.verseChapter.chapter) {
         if (Number(formData.verse) == playerVerse.verseChapter.verse) {
           createAD('الله ينور يا باباشا الاجابة صح<br>دقيقة بس نحسبلك النقاط', 'green');
           const newCocs = await addPoints(score);
+          localStorage.setItem('played', 'true')
 
           createAD(`تمام كدة دن<br>الكوكس الى معاك دولقتى ${newCocs}<br> هيتم تحويلك الى الصفحة الرئيسية دولتقى`, 'green');
 
-          setTimeout(()=> location.href = location.origin, 10000)
+          setTimeout(()=> location.href = '../../', 10000)
           return
         }
       }
@@ -206,10 +212,14 @@ async function addPoints(points) {
   try {
     const accountData = await api.getSpecificData('accounts', 'email', (JSON.parse(localStorage.getItem('profile'))).email);
     const accountCocs = accountData[0].cocs
-    console.log(accountCocs);
+    // console.log(accountCocs);
     const newScore = Number(accountCocs) + Number(points);
 
     const updateData = await api.updateSpecificData('accounts','email', (JSON.parse(localStorage.getItem('profile'))).email, {'cocs': [newScore]})
+
+    const updateTaskState = await api.updateSpecificData('profileTask','email', (JSON.parse(localStorage.getItem('profile'))).email, {'tsk113489': 'ok'});
+
+    const addNotification = await api.addSpecificData('notifications', text.notificationsdata.findMe(points, (JSON.parse(localStorage.getItem('profile'))).email))  
     
     return newScore
   } catch (error) {

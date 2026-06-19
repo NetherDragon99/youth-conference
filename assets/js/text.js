@@ -309,7 +309,7 @@ export const dom = {
   taskUsers: (name, email, gender, pic, state, tskId) => `
     <div class="taskUser" data-email="${email}" data-state="${state === 'ok'?'finished':'unfinished'}" data-tskId="${tskId}">
       <div class="taskPic icon-${gender==='m'?'user1':gender==='f'?'user2':'user'}">
-        <img src="${pic}">
+        <img src="${pic}" style="display: ${pic === ''?'none':'block'}">
       </div>
       <div class="taskProfileData">
         <h4>${name}</h4>

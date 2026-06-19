@@ -60,8 +60,9 @@
   max-width: 100%;
   min-width: 100%;
   flex: 1;
-  min-height: 50px;
+  min-height: 80px;
   overflow: auto;
+  line-height: 1.5;
 }
 
 #dateFiled {
@@ -75,8 +76,10 @@
 #dateF {
   height: 20px;
   flex: 1;
-  max-width: 70px;
-  margin-right: 5px;
+  width: 70px;
+  max-width: 200px;
+  text-align: end;
+  margin-right: 10px;
 }
 
 .taskAdditions {
@@ -318,6 +321,7 @@ section#tasksHistory{
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
+  font-size: 34px;
 }
 .taskUser .taskPic img{
   width: 100%;

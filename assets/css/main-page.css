@@ -291,6 +291,7 @@
   transition: 1s;
   overflow: hidden;
 }
+.task{cursor: pointer;}
 
 .taskDescription {
   width: 100%;

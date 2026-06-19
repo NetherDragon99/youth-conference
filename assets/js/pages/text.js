@@ -88,3 +88,16 @@ export const dom = {
         <p id="verseNo">${no}</p>
       </div>`
 }
+
+export const notificationsdata = {  
+  findMe: (cocs, email) => ({
+    title: "هدية لعبة Find Me",
+    description: `كسبت ${cocs} COCs`,
+    details: "اللعبة كان فيها مجموعة من الايات والسيستم كان بيختار منهم بشكل عشوائى ويحطلك كلماتهم فى كروت وعليك تفتح اقل عدد من الكروت بحيث تعرف الاية باعلى عدد نقاط ممكن",
+    icon: "icon-gamepad",
+    state: "unreadedNotification",
+    time: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}T${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+    id: `userNotic${Math.floor(Math.random() * 100000)}`,
+    email: `${email}`
+  })
+}

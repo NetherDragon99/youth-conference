@@ -321,8 +321,7 @@ getTodayTasks();
 async function userTasks() {
   const userTasksData = await api.getAccountData('profileTask', JSON.parse(localStorage.getItem('profile')).email, timing.getCurrentDate());
   let completedUserTasks = [];
-  console.log(userTasksData);
-
+  // console.log(userTasksData);
 
   if (userTasksData.length == 0) {
     api.addSpecificData('profileTask', { email: JSON.parse(localStorage.getItem('profile')).email });
@@ -353,12 +352,7 @@ function tasksActionBtnF() {
   tasksActionsBtn.forEach((v) => {
     v.addEventListener('click', () => {
       let tempLink = v.getAttribute('data-buttonLink');
-      if (tempLink.includes('http')) {
         location.href = tempLink
-      } else {
-        location.href = location.origin + tempLink
-      }
     })
   })
 }
-console.log('https://hello'.includes('https'));
