@@ -369,7 +369,7 @@ section option, optgroup{
 
 /* larg screen */
 
-@media (min-width: 450px) {
+@media (min-width: 600px) {
   body{
     grid-template-rows: repeat(5, auto);
     grid-template-columns: repeat(2, auto);
