@@ -283,13 +283,17 @@
   justify-content: space-between;
   align-items: center;
   flex: 1;
+  overflow: hidden;
 }
 
 .rankUserNameRanked {
-  font-size: 1.7rem;
+  font-size: 1rem;
   font-weight: 700;
-  width: 7rem;
   height: 1.7rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 10px;
 }
 
 .rankUserCocsNo {
@@ -298,5 +302,5 @@
   color: gold;
   align-self: flex-end;
   width: 4rem;
-  height: 1rem;
+  height: 1rem;  
 }
