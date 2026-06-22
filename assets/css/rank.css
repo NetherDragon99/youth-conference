@@ -289,18 +289,17 @@
 .rankUserNameRanked {
   font-size: 1rem;
   font-weight: 700;
-  height: 1.7rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 10px;
+  align-self: center;
 }
 
 .rankUserCocsNo {
   font-size: 1rem;
   font-weight: 700;
   color: gold;
-  align-self: flex-end;
   width: 4rem;
   height: 1rem;  
 }
