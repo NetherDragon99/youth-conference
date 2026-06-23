@@ -237,7 +237,7 @@ function openTaskCategory() {
         adayTasks.style.maxHeight = 'calc(1rem + 20px)';
         adayTasks.dataset.state = 'closed'
       } else {
-        adayTasks.style.maxHeight = '50000px';
+        adayTasks.style.maxHeight = '5000px';
         adayTasks.dataset.state = 'opened'
       }
     })
@@ -258,7 +258,7 @@ function openUsersList() {
         tasksListContainer.style.overflow = 'hidden';
         tasksListContainer.dataset.state = 'closed'
       } else {
-        tasksListContainer.style.maxHeight = '500px';
+        tasksListContainer.style.maxHeight = '1000px';
         tasksListContainer.style.overflow = 'scroll';
         tasksListContainer.dataset.state = 'opened';
       }
