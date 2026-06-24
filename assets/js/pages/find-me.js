@@ -31,7 +31,7 @@ function removeAD() {
   }
 }
 
-document.querySelector('#welcomeMsg button').addEventListener('click', click => {document.getElementById('welcomeMsg').style.display ='none'})
+document.querySelector('#welcomeMsg button').addEventListener('click', click => document.getElementById('welcomeMsg').remove())
 
 // the game
 
@@ -63,7 +63,7 @@ for (let index = 1; index <= playerVerse.verseWords.length;) {
   openedTextDom += text.dom.guessResult(index)
   index++;
 }
-document.getElementById('openedVerseText').innerHTML = openedTextDom;
+//document.getElementById('openedVerseText').innerHTML = openedTextDom;
 
 
 function shuffleVerse(verse) {
@@ -180,7 +180,7 @@ function openedPlankCards() {
 document.querySelector('#answerFiled #submit').addEventListener('click',async (click) => {
   click.preventDefault();
 
-    document.querySelector('#answerFiled #submit').style.display = 'none':
+    //document.querySelector('#answerFiled #submit').style.display = 'none':
 
   let formData = Object.fromEntries(new FormData(document.getElementById('answerFiled')));
 
@@ -208,7 +208,7 @@ document.querySelector('#answerFiled #submit').addEventListener('click',async (c
     createAD('للاسف  الاجابة غلط!!<br>حاول تانى')
     
   }
-  document.querySelector('#answerFiled #submit').style.display = 'block':
+  //document.querySelector('#answerFiled #submit').style.display = 'block':
 })
 
 async function addPoints(points) {
