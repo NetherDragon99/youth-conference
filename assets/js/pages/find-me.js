@@ -1,7 +1,7 @@
 import * as text from './text.js';
 import * as api from '../dashboard/dashboard-api.js';
 
-if (localStorage.getItem('played') == 'true') {
+if (localStorage.getItem('played1') == 'true') {
   alert('للاسف اللعبة معمولة انها تتلعب مرة واحدة بس بعد ما تكسب مش ها ينفع تعيد تانى');
   location.href = '../../index.html'
 }
@@ -36,12 +36,12 @@ document.querySelector('#welcomeMsg button').addEventListener('click', click => 
 const verses = text.bibleVerses;
 const versesNo = verses.length;
 
-let getPlayerNo = localStorage.getItem('playerNo')
+let getPlayerNo = localStorage.getItem('playerNo1')
 
 if (!getPlayerNo || getPlayerNo === '') {
   getPlayerNo = Math.floor(Math.random() * versesNo);
-  localStorage.setItem('playerNo', getPlayerNo.toString());
-  localStorage.setItem('playedVerse', JSON.stringify([]))
+  localStorage.setItem('playerNo1', getPlayerNo.toString());
+  localStorage.setItem('playedVerse1', JSON.stringify([]))
 } else {
   getPlayerNo = Number(getPlayerNo);
 }
@@ -80,7 +80,7 @@ function shuffleVerse(verse) {
 const newVerse = shuffleVerse(playerVerse.verseWords);
 
 // ✅ تم الإصلاح: التأكد من إن السكور رقم مش نص
-let score = localStorage.getItem('findMeScore') ? Number(localStorage.getItem('findMeScore')) : 25;
+let score = localStorage.getItem('findMeScore1') ? Number(localStorage.getItem('findMeScore1')) : 25;
 
 
 // card clicked
@@ -101,14 +101,14 @@ function addWords(wordValue) {
   document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;
 
   word !== 'فاضية' ? playedVerse.push(word) : null;
-  localStorage.setItem('playedVerse', JSON.stringify(playedVerse))
+  localStorage.setItem('playedVerse', JSON.stringify(playedVerse1))
 
   score -= 1;
-  localStorage.setItem('findMeScore', score);
+  localStorage.setItem('findMeScore1', score);
   document.querySelector('#points #cocsNo').innerHTML = score;
 }
 
-let playedVerse = localStorage.getItem('playedVerse') ? JSON.parse(localStorage.getItem('playedVerse')) : [];
+let playedVerse = localStorage.getItem('playedVerse1') ? JSON.parse(localStorage.getItem('playedVerse1')) : [];
 
 // open last progress
 function completeProgress(playedVerse) {
@@ -141,7 +141,7 @@ function openedPlankCards() {
     }
   }
 
-  let playedVerseCount = localStorage.getItem('playedVerse') ? JSON.parse(localStorage.getItem('playedVerse')).length : 0;
+  let playedVerseCount = localStorage.getItem('playedVerse1') ? JSON.parse(localStorage.getItem('playedVerse1')).length : 0;
   let openedPlanks = (25 - score) - playedVerseCount;
 
   for (let index = 0; index < openedPlanks; index++) {
@@ -170,7 +170,7 @@ document.getElementById('answerFiled').addEventListener('submit', async (e) => {
         
           createAD('الله ينور يا باشا الاجابة صح<br>دقيقة بس نحسبلك النقاط', 'green');
           const newCocs = await addPoints(score);
-          localStorage.setItem('played', 'true');
+          localStorage.setItem('played1', 'true');
 
           createAD(`تمام كدة دن<br>الكوكس الى معاك دلوقتي ${newCocs}<br> هيتم تحويلك الى الصفحة الرئيسية دلوقتي`, 'green');
 
