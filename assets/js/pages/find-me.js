@@ -1,243 +1,220 @@
 import * as text from './text.js';
 import * as api from '../dashboard/dashboard-api.js';
-//test
 
-if (localStorage.getItem('playeda') == 'true') {
-  alert('للاسف اللعبة معمولة انها تتلعب مرة واحدة بس بعد ما تكسب مش ها ينفع تعيد تانى');
-  location.href = '../../index.html'
+if (localStorage.getItem('played') == 'true') {
+  alert('للاسف اللعبة معمولة انها تتلعب مرة واحدة بس بعد ما تكسب مش ها ينفع تعيد تانى');
+  location.href = '../../index.html'
 }
 
 // creating ADs
 let adBannerNumber = 0;
 export function createAD(inputText, inputColor) {
 
-  let color = 'red';
-  if (inputColor) {
-    color = inputColor
-  }
-  adBannerNumber += 1;
+  let color = 'red';
+  if (inputColor) {
+    color = inputColor
+  }
+  adBannerNumber += 1;
 
-  document.getElementsByClassName('adBanner')[0].insertAdjacentHTML("beforeend", `<div class="adDiv ${color}">${inputText}</div>`);
+  document.getElementsByClassName('adBanner')[0].insertAdjacentHTML("beforeend", `<div class="adDiv ${color}">${inputText}</div>`);
 
-
-  removeAD();
+  removeAD();
 }
-function removeAD() {
-  for (adBannerNumber; adBannerNumber > 0; adBannerNumber--) {
-    setTimeout(() => {
-      document.querySelector('.adDiv:first-child').remove()
-    }, 10000)
 
-  }
+function removeAD() {
+  for (adBannerNumber; adBannerNumber > 0; adBannerNumber--) {
+    setTimeout(() => {
+      document.querySelector('.adDiv:first-child').remove()
+    }, 10000)
+
+  }
 }
 
 document.querySelector('#welcomeMsg button').addEventListener('click', click => document.getElementById('welcomeMsg').remove())
 
 // the game
-
 const verses = text.bibleVerses;
 const versesNo = verses.length;
-// console.log(verses, versesNo);
 
-let getPlayerNo = localStorage.getItem('playerNoa')
-// console.log(getPlayerNo);
+let getPlayerNo = localStorage.getItem('playerNo')
 
 if (!getPlayerNo || getPlayerNo === '') {
-  getPlayerNo = Math.floor(Math.random() * versesNo);
-  localStorage.setItem('playerNoa', getPlayerNo.toString());
-  localStorage.setItem('playedVersea', JSON.stringify([]))
-  // console.log(getPlayerNo);
+  getPlayerNo = Math.floor(Math.random() * versesNo);
+  localStorage.setItem('playerNo', getPlayerNo.toString());
+  localStorage.setItem('playedVerse', JSON.stringify([]))
 } else {
-  getPlayerNo = Number(getPlayerNo);
-  // console.log(getPlayerNo);
-
+  getPlayerNo = Number(getPlayerNo);
 }
 
 const playerVerse = verses[getPlayerNo];
-// console.log(playerVerse, playerVerse.verseWords.length);
-
 
 // adding word number dom
 let openedTextDom = '';
 for (let index = 1; index <= playerVerse.verseWords.length;) {
-  openedTextDom += text.dom.guessResult(index)
-  index++;
+  openedTextDom += text.dom.guessResult(index)
+  index++;
 }
 document.getElementById('openedVerseText').innerHTML = openedTextDom;
 
 
+// ✅ تم الإصلاح: توزيع الأرقام بشكل سليم بدون أخطاء
 function shuffleVerse(verse) {
-  let tempNoS = [];
-  let newVerse = []
+  let tempNoS = [];
+  let newVerse = [];
 
-  verse.forEach(v => {
-    for (let complete = 0; complete !== 1;) {
-      let tempNo = Math.floor(Math.random() * 20)
+  verse.forEach(v => {
+    let complete = false;
+    while (!complete) {
+      let tempNo = Math.floor(Math.random() * 20) + 1;
 
-      if (!(tempNoS.find(check => tempNo === check)) && tempNo !== 0) {
-        complete = 1;
-        newVerse.push({ [tempNo]: v })
-        tempNoS.push(tempNo)
-      }
-
-    }
-  })
-  return newVerse
+      if (!tempNoS.includes(tempNo)) {
+        complete = true;
+        newVerse.push({ [tempNo]: v });
+        tempNoS.push(tempNo);
+      }
+    }
+  });
+  return newVerse;
 }
 
-
 const newVerse = shuffleVerse(playerVerse.verseWords);
-// console.log(newVerse);
 
-
-let score = localStorage.getItem('findMeScorea') ? localStorage.getItem('findMeScorea') : 25;
-// console.log(score);
+// ✅ تم الإصلاح: التأكد من إن السكور رقم مش نص
+let score = localStorage.getItem('findMeScore') ? Number(localStorage.getItem('findMeScore')) : 25;
 
 
 // card clicked
-
 document.querySelectorAll('#cardSection .card').forEach(v => v.addEventListener('click', click => {
-  if (!v.classList.contains('openedCard')) {
-    v.classList.add('openedCard');
-    const cardValue = v.dataset.wordno;
+  if (!v.classList.contains('openedCard')) {
+    v.classList.add('openedCard');
+    const cardValue = v.dataset.wordno;
 
-    addWords(cardValue)
-  }
+    addWords(cardValue)
+  }
 }))
 
 function addWords(wordValue) {
-  let word = newVerse.find(verse => wordValue in verse) ? newVerse.find(verse => wordValue in verse)[wordValue] : 'فاضية';
-  const wordI = newVerse.findIndex(verse => wordValue in verse) + 1;
-  // console.log(wordI, word);
+  let word = newVerse.find(verse => wordValue in verse) ? newVerse.find(verse => wordValue in verse)[wordValue] : 'فاضية';
+  const wordI = newVerse.findIndex(verse => wordValue in verse) + 1;
 
-  wordI !== 0 ? document.querySelector(`#openedVerseText .verseTextArea[data-wordNo="${wordI}"] #verseWord`).innerHTML = word : null;
-  document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;
+  wordI !== 0 ? document.querySelector(`#openedVerseText .verseTextArea[data-wordNo="${wordI}"] #verseWord`).innerHTML = word : null;
+  document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;
 
-  word !== 'فاضية' ? playedVerse.push(word) : null;
-  localStorage.setItem('playedVersea', JSON.stringify(playedVerse))
+  word !== 'فاضية' ? playedVerse.push(word) : null;
+  localStorage.setItem('playedVerse', JSON.stringify(playedVerse))
 
-  score -= 1;
-  localStorage.setItem('findMeScorea', score);
-  document.querySelector('#points #cocsNo').innerHTML = score;
-
+  score -= 1;
+  localStorage.setItem('findMeScore', score);
+  document.querySelector('#points #cocsNo').innerHTML = score;
 }
 
-
-
-let playedVerse = localStorage.getItem('playedVersea') ? JSON.parse(localStorage.getItem('playedVersea')) : [];
-// console.log(playedVerse);
-
-
+let playedVerse = localStorage.getItem('playedVerse') ? JSON.parse(localStorage.getItem('playedVerse')) : [];
 
 // open last progress
 function completeProgress(playedVerse) {
-  playedVerse.forEach(v => {
-    // let wordIndex = newVerse.findIndex(obj => Object.values(obj).includes(v)) + 1;
+  playedVerse.forEach(v => {
+    let wordValue = Object.keys(newVerse.find(obj => Object.values(obj).includes(v)))[0];
 
-    let wordValue = Object.keys(newVerse.find(obj => Object.values(obj).includes(v)))[0];
+    let word = newVerse.find(verse => wordValue in verse) ? newVerse.find(verse => wordValue in verse)[wordValue] : 'فاضية';
+    const wordI = newVerse.findIndex(verse => wordValue in verse) + 1;
 
+    wordI !== 0 ? document.querySelector(`#openedVerseText .verseTextArea[data-wordNo="${wordI}"] #verseWord`).innerHTML = word : null;
+    document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;
 
-    let word = newVerse.find(verse => wordValue in verse) ? newVerse.find(verse => wordValue in verse)[wordValue] : 'فاضية';
-    const wordI = newVerse.findIndex(verse => wordValue in verse) + 1;
-    // console.log(wordI, word);
+    document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"]`).classList.add('openedCard');
 
-    wordI !== 0 ? document.querySelector(`#openedVerseText .verseTextArea[data-wordNo="${wordI}"] #verseWord`).innerHTML = word : null;
-    document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;
+    document.querySelector('#points #cocsNo').innerHTML = score;
+  })
 
-    document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"]`).classList.add('openedCard');
-
-    document.querySelector('#points #cocsNo').innerHTML = score;
-  })
-
-  openedPlankCards();
+  openedPlankCards();
 }
 completeProgress(playedVerse);
 
+// ✅ تم الإصلاح: حل مشكلة اللوب والاندكس 0 في الكروت الفاضية
 function openedPlankCards() {
-  let plankNoS = [];
+  let plankNoS = [];
 
-  for (let temp = 1; temp < 21; temp++) {
+  for (let temp = 1; temp <= 20; temp++) {
+    let exists = newVerse.find(verse => temp in verse);
+    if (!exists) {
+      plankNoS.push(temp);
+    }
+  }
 
-    !(newVerse.find(verse => temp in verse)) ? plankNoS.push(temp) : null;
+  let playedVerseCount = localStorage.getItem('playedVerse') ? JSON.parse(localStorage.getItem('playedVerse')).length : 0;
+  let openedPlanks = (25 - score) - playedVerseCount;
 
-  }
-
-  let openedPlanks = (25 - score) - (JSON.parse(localStorage.getItem('playedVersea'))).length;
-  // console.log(openedPlanks);
-
-  for (let index = 1; index <= openedPlanks;) {
-
-    document.querySelector(`#cardSection .card[data-wordNo="${plankNoS[index]}"]`).classList.add('openedCard');
-    document.querySelector(`#cardSection .card[data-wordNo="${plankNoS[index]}"] .word-text`).innerHTML = 'فاضية';
-
-    index++;
-  }
-
+  for (let index = 0; index < openedPlanks; index++) {
+    let cardTarget = document.querySelector(`#cardSection .card[data-wordNo="${plankNoS[index]}"]`);
+    if(cardTarget) {
+        cardTarget.classList.add('openedCard');
+        cardTarget.querySelector('.word-text').innerHTML = 'فاضية';
+    }
+  }
 }
 
-// answes
+// ✅ تم الإصلاح: منع الريفريش 100% عن طريق استخدام حدث submit للفورم
+document.getElementById('answerFiled').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  document.querySelector('#answerFiled #submit').setAttribute('disabled', 'true');
 
-document.querySelector('#answerFiled #submit').addEventListener('click',async (click) => {
-  click.preventDefault();
+  let formData = Object.fromEntries(new FormData(document.getElementById('answerFiled')));
 
-  let formData = Object.fromEntries(new FormData(document.getElementById('answerFiled')));
+  // checking inserted data
+  let allGood;
+  !formData.bibleBooks || formData.bibleBooks == '' ? createAD('اختار السفر') : !formData.chapter || formData.chapter == '' ? createAD('اختار الأصحاح') : !formData.verse || formData.verse == '' ? createAD('اختار رقم الاية') : allGood = true;
 
-  // checking inserted data
-  let allGood;
-  !formData.bibleBooks || formData.bibleBooks == '' ? createAD('اختار السفر') : !formData.chapter || formData.chapter == '' ? createAD('اختار الأصحاح') : !formData.verse || formData.verse == '' ? createAD('اختار رقم الاية') : allGood = true;
+  if (allGood) {
+    if (formData.bibleBooks == playerVerse.verseChapter.book &&
+        Number(formData.chapter) == playerVerse.verseChapter.chapter &&
+        Number(formData.verse) == playerVerse.verseChapter.verse) {
+        
+          createAD('الله ينور يا باشا الاجابة صح<br>دقيقة بس نحسبلك النقاط', 'green');
+          const newCocs = await addPoints(score);
+          localStorage.setItem('played', 'true');
 
-  if (allGood) {
-    // console.log(formData);
+          createAD(`تمام كدة دن<br>الكوكس الى معاك دلوقتي ${newCocs}<br> هيتم تحويلك الى الصفحة الرئيسية دلوقتي`, 'green');
 
-    if (formData.bibleBooks == playerVerse.verseChapter.book) {
-      if (Number(formData.chapter) == playerVerse.verseChapter.chapter) {
-        if (Number(formData.verse) == playerVerse.verseChapter.verse) {
-          createAD('الله ينور يا باباشا الاجابة صح<br>دقيقة بس نحسبلك النقاط', 'green');
-          const newCocs = await addPoints(score);
-          localStorage.setItem('playeda', 'true')
-
-          createAD(`تمام كدة دن<br>الكوكس الى معاك دولقتى ${newCocs}<br> هيتم تحويلك الى الصفحة الرئيسية دولتقى`, 'green');
-
-          setTimeout(()=> location.href = smartLink(''), 10000)
-          return
-        }
-      }
-    }
-    createAD('للاسف  الاجابة غلط!!<br>حاول تانى')
-    
-  }
-})
+          setTimeout(() => location.href = smartLink(''), 10000);
+          return;
+    }
+    createAD('للاسف الاجابة غلط!!<br>حاول تاني');
+  }
+  document.querySelector('#answerFiled #submit').removeAttribute('disabled');
+});
 
 async function addPoints(points) {
-  try {
-    const accountData = await api.getSpecificData('accounts', 'email', (JSON.parse(localStorage.getItem('profile'))).email);
-    const accountCocs = accountData[0].cocs
-    // console.log(accountCocs);
-    const newScore = Number(accountCocs) + Number(points);
+  try {
+    const accountData = await api.getSpecificData('accounts', 'email', (JSON.parse(localStorage.getItem('profile'))).email);
+    const accountCocs = accountData[0].cocs;
+    
+    const newScore = Number(accountCocs) + Number(points);
 
-    const updateData = await api.updateSpecificData('accounts','email', (JSON.parse(localStorage.getItem('profile'))).email, {'cocs': [newScore]})
+    const updateData = await api.updateSpecificData('accounts','email', (JSON.parse(localStorage.getItem('profile'))).email, {'cocs': [newScore]});
 
-    const updateTaskState = await api.updateSpecificData('profileTask','email', (JSON.parse(localStorage.getItem('profile'))).email, {'tsk113489': 'ok'});
+    const updateTaskState = await api.updateSpecificData('profileTask','email', (JSON.parse(localStorage.getItem('profile'))).email, {'tsk113489': 'ok'});
 
-    const addNotification = await api.addSpecificData('notifications', text.notificationsdata.findMe(points, (JSON.parse(localStorage.getItem('profile'))).email))  
-    
-    return newScore
-  } catch (error) {
-    console.log(error);
-    
-  }
+    const addNotification = await api.addSpecificData('notifications', text.notificationsdata.findMe(points, (JSON.parse(localStorage.getItem('profile'))).email));  
+    
+    return newScore;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function smartLink(link){
-  // github pages function
-  if (link.startsWith('http')) {
-    console.log('gloabal link');
-    return link
-  }
-  if ((location.origin).includes('netherdragon99')) {
-    console.log('contains netherdragon99');
-    
-    return `${window.origin}/youth-conference/${link}`;
-  }
-  return `${window.origin}/${link}`
+  // github pages function
+  if (link.startsWith('http')) {
+    console.log('gloabal link');
+    return link;
+  }
+  if ((location.origin).includes('netherdragon99')) {
+    console.log('contains netherdragon99');
+    
+    return `${window.origin}/youth-conference/${link}`;
+  }
+  return `${window.origin}/${link}`;
 }
+
+
+شوف كده هل فى مشاكل
