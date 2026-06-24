@@ -31,7 +31,7 @@ function removeAD() {
   }
 }
 
-document.querySelector('#welcomeMsg button').addEventListener('click', click => document.getElementById('welcomeMsg').remove())
+document.querySelector('#welcomeMsg button').addEventListener('click', click => document.getElementById('welcomeMsg').style.display ='none')
 
 // the game
 
