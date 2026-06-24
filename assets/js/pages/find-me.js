@@ -156,6 +156,8 @@ function openedPlankCards() {
 // ✅ تم الإصلاح: منع الريفريش 100% عن طريق استخدام حدث submit للفورم
 document.getElementById('answerFiled').addEventListener('submit', async (e) => {
   e.preventDefault();
+  e.setAttribute('disabled', 'true')
+  
 
   let formData = Object.fromEntries(new FormData(document.getElementById('answerFiled')));
 
@@ -179,6 +181,7 @@ document.getElementById('answerFiled').addEventListener('submit', async (e) => {
     }
     createAD('للاسف الاجابة غلط!!<br>حاول تاني');
   }
+  e.removeAttribute('disabled')
 });
 
 async function addPoints(points) {
