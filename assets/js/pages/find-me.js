@@ -1,7 +1,6 @@
 import * as text from './text.js';
 import * as api from '../dashboard/dashboard-api.js';
 
-
 if (localStorage.getItem('played') == 'true') {
   alert('للاسف اللعبة معمولة انها تتلعب مرة واحدة بس بعد ما تكسب مش ها ينفع تعيد تانى');
   location.href = '../../index.html'
@@ -19,9 +18,9 @@ export function createAD(inputText, inputColor) {
 
   document.getElementsByClassName('adBanner')[0].insertAdjacentHTML("beforeend", `<div class="adDiv ${color}">${inputText}</div>`);
 
-
   removeAD();
 }
+
 function removeAD() {
   for (adBannerNumber; adBannerNumber > 0; adBannerNumber--) {
     setTimeout(() => {
@@ -34,28 +33,20 @@ function removeAD() {
 document.querySelector('#welcomeMsg button').addEventListener('click', click => document.getElementById('welcomeMsg').remove())
 
 // the game
-
 const verses = text.bibleVerses;
 const versesNo = verses.length;
-// console.log(verses, versesNo);
 
 let getPlayerNo = localStorage.getItem('playerNo')
-// console.log(getPlayerNo);
 
 if (!getPlayerNo || getPlayerNo === '') {
   getPlayerNo = Math.floor(Math.random() * versesNo);
   localStorage.setItem('playerNo', getPlayerNo.toString());
   localStorage.setItem('playedVerse', JSON.stringify([]))
-  // console.log(getPlayerNo);
 } else {
   getPlayerNo = Number(getPlayerNo);
-  // console.log(getPlayerNo);
-
 }
 
 const playerVerse = verses[getPlayerNo];
-// console.log(playerVerse, playerVerse.verseWords.length);
-
 
 // adding word number dom
 let openedTextDom = '';
@@ -66,36 +57,33 @@ for (let index = 1; index <= playerVerse.verseWords.length;) {
 document.getElementById('openedVerseText').innerHTML = openedTextDom;
 
 
+// ✅ تم الإصلاح: توزيع الأرقام بشكل سليم بدون أخطاء
 function shuffleVerse(verse) {
   let tempNoS = [];
-  let newVerse = []
+  let newVerse = [];
 
   verse.forEach(v => {
-    for (let complete = 0; complete !== 1;) {
-      let tempNo = Math.floor(Math.random() * 20)
+    let complete = false;
+    while (!complete) {
+      let tempNo = Math.floor(Math.random() * 20) + 1;
 
-      if (!(tempNoS.find(check => tempNo === check)) && tempNo !== 0) {
-        complete = 1;
-        newVerse.push({ [tempNo]: v })
-        tempNoS.push(tempNo)
+      if (!tempNoS.includes(tempNo)) {
+        complete = true;
+        newVerse.push({ [tempNo]: v });
+        tempNoS.push(tempNo);
       }
-
     }
-  })
-  return newVerse
+  });
+  return newVerse;
 }
 
-
 const newVerse = shuffleVerse(playerVerse.verseWords);
-// console.log(newVerse);
 
-
-let score = localStorage.getItem('findMeScore') ? localStorage.getItem('findMeScore') : 25;
-// console.log(score);
+// ✅ تم الإصلاح: التأكد من إن السكور رقم مش نص
+let score = localStorage.getItem('findMeScore') ? Number(localStorage.getItem('findMeScore')) : 25;
 
 
 // card clicked
-
 document.querySelectorAll('#cardSection .card').forEach(v => v.addEventListener('click', click => {
   if (!v.classList.contains('openedCard')) {
     v.classList.add('openedCard');
@@ -108,7 +96,6 @@ document.querySelectorAll('#cardSection .card').forEach(v => v.addEventListener(
 function addWords(wordValue) {
   let word = newVerse.find(verse => wordValue in verse) ? newVerse.find(verse => wordValue in verse)[wordValue] : 'فاضية';
   const wordI = newVerse.findIndex(verse => wordValue in verse) + 1;
-  // console.log(wordI, word);
 
   wordI !== 0 ? document.querySelector(`#openedVerseText .verseTextArea[data-wordNo="${wordI}"] #verseWord`).innerHTML = word : null;
   document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;
@@ -119,27 +106,17 @@ function addWords(wordValue) {
   score -= 1;
   localStorage.setItem('findMeScore', score);
   document.querySelector('#points #cocsNo').innerHTML = score;
-
 }
 
-
-
 let playedVerse = localStorage.getItem('playedVerse') ? JSON.parse(localStorage.getItem('playedVerse')) : [];
-// console.log(playedVerse);
-
-
 
 // open last progress
 function completeProgress(playedVerse) {
   playedVerse.forEach(v => {
-    // let wordIndex = newVerse.findIndex(obj => Object.values(obj).includes(v)) + 1;
-
     let wordValue = Object.keys(newVerse.find(obj => Object.values(obj).includes(v)))[0];
-
 
     let word = newVerse.find(verse => wordValue in verse) ? newVerse.find(verse => wordValue in verse)[wordValue] : 'فاضية';
     const wordI = newVerse.findIndex(verse => wordValue in verse) + 1;
-    // console.log(wordI, word);
 
     wordI !== 0 ? document.querySelector(`#openedVerseText .verseTextArea[data-wordNo="${wordI}"] #verseWord`).innerHTML = word : null;
     document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;
@@ -153,32 +130,32 @@ function completeProgress(playedVerse) {
 }
 completeProgress(playedVerse);
 
+// ✅ تم الإصلاح: حل مشكلة اللوب والاندكس 0 في الكروت الفاضية
 function openedPlankCards() {
   let plankNoS = [];
 
-  for (let temp = 1; temp < 21; temp++) {
-
-    !(newVerse.find(verse => temp in verse)) ? plankNoS.push(temp) : null;
-
+  for (let temp = 1; temp <= 20; temp++) {
+    let exists = newVerse.find(verse => temp in verse);
+    if (!exists) {
+      plankNoS.push(temp);
+    }
   }
 
-  let openedPlanks = (25 - score) - (JSON.parse(localStorage.getItem('playedVerse'))).length;
-  // console.log(openedPlanks);
+  let playedVerseCount = localStorage.getItem('playedVerse') ? JSON.parse(localStorage.getItem('playedVerse')).length : 0;
+  let openedPlanks = (25 - score) - playedVerseCount;
 
-  for (let index = 1; index <= openedPlanks;) {
-
-    document.querySelector(`#cardSection .card[data-wordNo="${plankNoS[index]}"]`).classList.add('openedCard');
-    document.querySelector(`#cardSection .card[data-wordNo="${plankNoS[index]}"] .word-text`).innerHTML = 'فاضية';
-
-    index++;
+  for (let index = 0; index < openedPlanks; index++) {
+    let cardTarget = document.querySelector(`#cardSection .card[data-wordNo="${plankNoS[index]}"]`);
+    if(cardTarget) {
+        cardTarget.classList.add('openedCard');
+        cardTarget.querySelector('.word-text').innerHTML = 'فاضية';
+    }
   }
-
 }
 
-// answes
-
-document.querySelector('#answerFiled #submit').addEventListener('click',async (click) => {
-  click.preventDefault();
+// ✅ تم الإصلاح: منع الريفريش 100% عن طريق استخدام حدث submit للفورم
+document.getElementById('answerFiled').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
   let formData = Object.fromEntries(new FormData(document.getElementById('answerFiled')));
 
@@ -187,44 +164,39 @@ document.querySelector('#answerFiled #submit').addEventListener('click',async (c
   !formData.bibleBooks || formData.bibleBooks == '' ? createAD('اختار السفر') : !formData.chapter || formData.chapter == '' ? createAD('اختار الأصحاح') : !formData.verse || formData.verse == '' ? createAD('اختار رقم الاية') : allGood = true;
 
   if (allGood) {
-    // console.log(formData);
-
-    if (formData.bibleBooks == playerVerse.verseChapter.book) {
-      if (Number(formData.chapter) == playerVerse.verseChapter.chapter) {
-        if (Number(formData.verse) == playerVerse.verseChapter.verse) {
-          createAD('الله ينور يا باباشا الاجابة صح<br>دقيقة بس نحسبلك النقاط', 'green');
+    if (formData.bibleBooks == playerVerse.verseChapter.book &&
+        Number(formData.chapter) == playerVerse.verseChapter.chapter &&
+        Number(formData.verse) == playerVerse.verseChapter.verse) {
+        
+          createAD('الله ينور يا باشا الاجابة صح<br>دقيقة بس نحسبلك النقاط', 'green');
           const newCocs = await addPoints(score);
-          localStorage.setItem('played', 'true')
+          localStorage.setItem('played', 'true');
 
-          createAD(`تمام كدة دن<br>الكوكس الى معاك دولقتى ${newCocs}<br> هيتم تحويلك الى الصفحة الرئيسية دولتقى`, 'green');
+          createAD(`تمام كدة دن<br>الكوكس الى معاك دلوقتي ${newCocs}<br> هيتم تحويلك الى الصفحة الرئيسية دلوقتي`, 'green');
 
-          setTimeout(()=> location.href = smartLink(''), 10000)
-          return
-        }
-      }
+          setTimeout(() => location.href = smartLink(''), 10000);
+          return;
     }
-    createAD('للاسف  الاجابة غلط!!<br>حاول تانى')
-    
+    createAD('للاسف الاجابة غلط!!<br>حاول تاني');
   }
-})
+});
 
 async function addPoints(points) {
   try {
     const accountData = await api.getSpecificData('accounts', 'email', (JSON.parse(localStorage.getItem('profile'))).email);
-    const accountCocs = accountData[0].cocs
-    // console.log(accountCocs);
+    const accountCocs = accountData[0].cocs;
+    
     const newScore = Number(accountCocs) + Number(points);
 
-    const updateData = await api.updateSpecificData('accounts','email', (JSON.parse(localStorage.getItem('profile'))).email, {'cocs': [newScore]})
+    const updateData = await api.updateSpecificData('accounts','email', (JSON.parse(localStorage.getItem('profile'))).email, {'cocs': [newScore]});
 
     const updateTaskState = await api.updateSpecificData('profileTask','email', (JSON.parse(localStorage.getItem('profile'))).email, {'tsk113489': 'ok'});
 
-    const addNotification = await api.addSpecificData('notifications', text.notificationsdata.findMe(points, (JSON.parse(localStorage.getItem('profile'))).email))  
+    const addNotification = await api.addSpecificData('notifications', text.notificationsdata.findMe(points, (JSON.parse(localStorage.getItem('profile'))).email));  
     
-    return newScore
+    return newScore;
   } catch (error) {
     console.log(error);
-    
   }
 }
 
@@ -232,12 +204,12 @@ function smartLink(link){
   // github pages function
   if (link.startsWith('http')) {
     console.log('gloabal link');
-    return link
+    return link;
   }
   if ((location.origin).includes('netherdragon99')) {
     console.log('contains netherdragon99');
     
     return `${window.origin}/youth-conference/${link}`;
   }
-  return `${window.origin}/${link}`
+  return `${window.origin}/${link}`;
 }
