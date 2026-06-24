@@ -180,6 +180,8 @@ function openedPlankCards() {
 document.querySelector('#answerFiled #submit').addEventListener('click',async (click) => {
   click.preventDefault();
 
+  document.querySelector('#answerFiled #submit').setAttribute('disabled', 'true');
+
   let formData = Object.fromEntries(new FormData(document.getElementById('answerFiled')));
 
   // checking inserted data
@@ -206,6 +208,7 @@ document.querySelector('#answerFiled #submit').addEventListener('click',async (c
     createAD('للاسف  الاجابة غلط!!<br>حاول تانى')
     
   }
+  document.querySelector('#answerFiled #submit').removeAttribute('disabled');
 })
 
 async function addPoints(points) {
