@@ -335,6 +335,7 @@
   height: 70%;
   top: 50%;
   transform: translateY(-50%)
+  overflow: scroll;
 }
 
 #openedTask {
