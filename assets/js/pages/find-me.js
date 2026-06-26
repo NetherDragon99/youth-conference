@@ -2,7 +2,7 @@ import * as text from './text.js';
 import * as api from '../dashboard/dashboard-api.js';
 
 
-if (localStorage.getItem('playeda') == 'true') {
+if (localStorage.getItem('playedb') == 'true') {
   alert('للاسف اللعبة معمولة انها تتلعب مرة واحدة بس بعد ما تكسب مش ها ينفع تعيد تانى');
   location.href = '../../index.html'
 }
@@ -39,13 +39,13 @@ const verses = text.bibleVerses;
 const versesNo = verses.length;
 // console.log(verses, versesNo);
 
-let getPlayerNo = localStorage.getItem('playerNoa')
+let getPlayerNo = localStorage.getItem('playerNob')
 // console.log(getPlayerNo);
 
 if (!getPlayerNo || getPlayerNo === '') {
   getPlayerNo = Math.floor(Math.random() * versesNo);
-  localStorage.setItem('playerNoa', getPlayerNo.toString());
-  localStorage.setItem('playedVersea', JSON.stringify([]))
+  localStorage.setItem('playerNob', getPlayerNo.toString());
+  localStorage.setItem('playedVerseb', JSON.stringify([]))
   // console.log(getPlayerNo);
 } else {
   getPlayerNo = Number(getPlayerNo);
@@ -90,7 +90,7 @@ const newVerse = shuffleVerse(playerVerse.verseWords);
 // console.log(newVerse);
 
 
-let score = localStorage.getItem('findMeScorea') ? localStorage.getItem('findMeScorea') : 25;
+let score = localStorage.getItem('findMeScoreb') ? localStorage.getItem('findMeScoreb') : 25;
 // console.log(score);
 
 
@@ -114,17 +114,17 @@ function addWords(wordValue) {
   document.querySelector(`#cardSection .card[data-wordNo="${wordValue}"] .word-text`).innerHTML = word;
 
   word !== 'فاضية' ? playedVerse.push(word) : null;
-  localStorage.setItem('playedVersea', JSON.stringify(playedVerse))
+  localStorage.setItem('playedVerseb', JSON.stringify(playedVerse))
 
   score -= 1;
-  localStorage.setItem('findMeScorea', score);
+  localStorage.setItem('findMeScoreb', score);
   document.querySelector('#points #cocsNo').innerHTML = score;
 
 }
 
 
 
-let playedVerse = localStorage.getItem('playedVersea') ? JSON.parse(localStorage.getItem('playedVersea')) : [];
+let playedVerse = localStorage.getItem('playedVerseb') ? JSON.parse(localStorage.getItem('playedVerseb')) : [];
 // console.log(playedVerse);
 
 
@@ -162,7 +162,7 @@ function openedPlankCards() {
 
   }
 
-  let openedPlanks = (25 - score) - (JSON.parse(localStorage.getItem('playedVersea'))).length;
+  let openedPlanks = (25 - score) - (JSON.parse(localStorage.getItem('playedVerseb'))).length;
   // console.log(openedPlanks);
 
   for (let index = 1; index <= openedPlanks;) {
@@ -194,7 +194,7 @@ document.querySelector('#answerFiled #submit').addEventListener('click',async (c
         if (Number(formData.verse) == playerVerse.verseChapter.verse) {
           createAD('الله ينور يا باباشا الاجابة صح<br>دقيقة بس نحسبلك النقاط', 'green');
           const newCocs = await addPoints(score);
-          localStorage.setItem('playeda', 'true')
+          localStorage.setItem('playedb', 'true')
 
           createAD(`تمام كدة دن<br>الكوكس الى معاك دولقتى ${newCocs}<br> هيتم تحويلك الى الصفحة الرئيسية دولتقى`, 'green');
 
