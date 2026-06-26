@@ -291,6 +291,7 @@
   transition: 1s;
   overflow: hidden;
 }
+#openedTask{overflow: scroll;}
 .task{cursor: pointer;}
 
 .taskDescription {
@@ -345,6 +346,7 @@
   animation: none;
   transition: 2s ease-in-out;
   transform: unset;
+  overflow: scroll;
 }
 
 @keyframes taskIntro {
